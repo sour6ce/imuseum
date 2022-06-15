@@ -27,7 +27,7 @@ public class SqliteDbArtworksRepository : IArtworksRepository
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            return await iMuseumDbContext.Artworks.FirstOrDefaultAsync(artwork => artwork.ArtworkId == id);
+            return await iMuseumDbContext.Artworks.FirstOrDefaultAsync(artwork => artwork.Id == id);
         }
     }
 
@@ -46,11 +46,11 @@ public class SqliteDbArtworksRepository : IArtworksRepository
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var oldArtwork = await iMuseumDbContext.Artworks.FirstOrDefaultAsync(oldArtwork => artwork.ArtworkId == oldArtwork.ArtworkId);
+            var oldArtwork = await iMuseumDbContext.Artworks.FirstOrDefaultAsync(oldArtwork => artwork.Id == oldArtwork.Id);
             oldArtwork.Title = artwork.Title;
             oldArtwork.Author = artwork.Author;
             oldArtwork.CreationDate = artwork.CreationDate;
-            oldArtwork.AddDate = artwork.AddDate;
+            oldArtwork.IncorporatedDate = artwork.IncorporatedDate;
             oldArtwork.Period = artwork.Period;
             oldArtwork.Assessment = artwork.Assessment;
 
@@ -63,7 +63,7 @@ public class SqliteDbArtworksRepository : IArtworksRepository
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            iMuseumDbContext.Artworks.Remove(await iMuseumDbContext.Artworks.FirstOrDefaultAsync(artwork => artwork.ArtworkId == id));
+            iMuseumDbContext.Artworks.Remove(await iMuseumDbContext.Artworks.FirstOrDefaultAsync(artwork => artwork.Id == id));
             await iMuseumDbContext.SaveChangesAsync();
         }
     }

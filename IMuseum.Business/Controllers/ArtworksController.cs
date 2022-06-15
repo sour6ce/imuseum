@@ -23,7 +23,7 @@ public class ArtworksController : ControllerBase
 
     //GET /artworks
     [HttpGet]
-    public async Task<IEnumerable<ArtworkDto>> GetArtworksAsync()
+    public async Task<IEnumerable<InternalArtworkDto>> GetArtworksAsync()
     {
         var artworks = (await repository.GetArtworksAsync())
                         .Select(artwork => artwork.AsDto());
@@ -35,7 +35,7 @@ public class ArtworksController : ControllerBase
 
     //GET /artworks/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<ArtworkDto>> GetArtworkAsync(Guid id)
+    public async Task<ActionResult<InternalArtworkDto>> GetArtworkAsync(Guid id)
     {
         var artwork = await repository.GetArtworkAsync(id);
 
@@ -47,26 +47,25 @@ public class ArtworksController : ControllerBase
 
     //POST /items
     [HttpPost]
-    public async Task<ActionResult<ArtworkDto>> CreateArtworkAsync(CreateArtworkDto artworkDto)
+    public async Task<ActionResult<InternalArtworkDto>> CreateArtworkAsync(CreateInternalArtworkDto InternalArtworkDto)
     {
         Artwork artwork = new()
         {
-            ArtworkId = Guid.NewGuid(),
-            Title = artworkDto.Title,
-            Author = artworkDto.Author,
-            CreationDate = artworkDto.CreationDate,
-            AddDate = artworkDto.AddDate,
-            Period = artworkDto.Period,
-            Assessment = artworkDto.Assessment
+            Title = InternalArtworkDto.Title,
+            Author = InternalArtworkDto.Author,
+            CreationDate = InternalArtworkDto.CreationDate,
+            IncorporatedDate = InternalArtworkDto.AddDate,
+            Period = InternalArtworkDto.Period,
+            Assessment = InternalArtworkDto.Assessment
         };
 
         await repository.CreateArtworkAsync(artwork);
-        return CreatedAtAction(nameof(CreateArtworkAsync), new { id = artwork.ArtworkId }, artwork.AsDto());
+        return CreatedAtAction(nameof(CreateArtworkAsync), new { id = artwork.Id }, artwork.AsDto());
     }
 
     //PUT /artworks/{id}
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateArtworkAsync(Guid id, UpdateArtworkDto artworkDto)
+    public async Task<ActionResult> UpdateArtworkAsync(Guid id, UpdateInternalArtworkDto InternalArtworkDto)
     {
         var existingArtwork = await repository.GetArtworkAsync(id);
 
@@ -75,12 +74,12 @@ public class ArtworksController : ControllerBase
 
         Artwork updatedArtwork = existingArtwork with
         {
-            Title = artworkDto.Title,
-            Author = artworkDto.Author,
-            CreationDate = artworkDto.CreationDate,
-            AddDate = artworkDto.AddDate,
-            Period = artworkDto.Period,
-            Assessment = artworkDto.Assessment
+            Title = InternalArtworkDto.Title,
+            Author = InternalArtworkDto.Author,
+            CreationDate = InternalArtworkDto.CreationDate,
+            IncorporatedDate = InternalArtworkDto.AddDate,
+            Period = InternalArtworkDto.Period,
+            Assessment = InternalArtworkDto.Assessment
         };
 
         await repository.UpdateArtworkAsync(updatedArtwork);

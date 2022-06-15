@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IMuseum.Business.Dtos;
 
-public record CreateArtworkDto
+public record CreateInternalArtworkDto
 {
     [Required]
     public string Title { get; set; }
     [Required]
     public string Author { get; set; }
     [Required]
-    public DateTime CreationDate { get; set; }
+    public DateOnly CreationDate { get; set; }
     [Required]
     public DateTime AddDate { get; set; }
     [Required]

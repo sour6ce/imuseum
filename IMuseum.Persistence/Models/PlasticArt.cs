@@ -1,6 +1,10 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace IMuseum.Persistence.Models;
 
-public record PlasticArt : ArtworkInPosess
+
+[Table("PlasticArt")]
+public record PlasticArt : Artwork
 {
     public string Style;
 }

@@ -4,6 +4,7 @@ namespace IMuseum.Persistence.Models;
 
 public class IMuseumContext : DbContext
 {
+    // public DbSet<DatabaseModel> DbModels { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Restoration> Restorations { get; set; }
     public DbSet<Painting> Paintings { get; set; }
@@ -11,9 +12,8 @@ public class IMuseumContext : DbContext
     public DbSet<PlasticArt> PlasticArts { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<Loan> Loans { get; set; }
-    public DbSet<FriendMuseum> FriendMuseums { get; set; }
+    public DbSet<Museum> Museums { get; set; }
     public DbSet<Artwork> Artworks { get; set; }
-    public DbSet<ArtworkInPosess> ArtworksInPosess { get; set; }
 
     public string DbPath { get; }
 
@@ -27,32 +27,33 @@ public class IMuseumContext : DbContext
     //The following configures the model's inheritances and foreign relationships
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //Inheritance implemented with Table-per-type configuration
-        modelBuilder.Entity<Artwork>().ToTable("Artwork");
-        modelBuilder.Entity<ArtworkInPosess>().ToTable("ArtworkInPosess ");
-        modelBuilder.Entity<PlasticArt>().ToTable("PlasticArt ");
-        modelBuilder.Entity<Painting>().ToTable("Painting ");
-        modelBuilder.Entity<Sculpture>().ToTable("Sculpture ");
+        //Artwork => Museum is a many to one relationship
+        modelBuilder.Entity<Artwork>()
+            .HasOne<Museum>(x => x.Museum);
 
-        //Room => ArtworkInPosess is a one to many relationship
+        //Room => Artwork is a one to many relationship
         modelBuilder.Entity<Room>()
-            .HasMany(r => r.Artworks);
+            .HasMany<Artwork>(r => r.Artworks);
 
-        //Restoration => ArtworkInPosess is a one to one relationship
+        //Restoration => Artwork is a one to one relationship
         modelBuilder.Entity<Restoration>()
-            .HasOne(r => r.Artwork);
+            .HasOne<Artwork>(r => r.Artwork);
 
-        //Loan => LoanApplication is a one to one relationship
+        //Loan => LoanApplication is a many to one relationship
         modelBuilder.Entity<Loan>()
-            .HasOne(l => l.Application);
+            .HasOne<LoanApplication>(l => l.Application);
 
-        //LoanApplication => FriendMuseum is a one to one relationship
+        //LoanApplication => Museum is a many to one relationship
         modelBuilder.Entity<LoanApplication>()
-            .HasOne(la => la.Museum);
+            .HasOne<Museum>(la => la.RelatedMuseum);
 
-        //LoanApplication => ArtworkInPosess is a one to one relationship
+        //LoanApplication => Artwork is a many to one relationship
         modelBuilder.Entity<LoanApplication>()
-            .HasOne(la => la.Artwork);
+            .HasOne<Artwork>(la => la.Artwork);
+
+        //User
+        modelBuilder.Entity<User>()
+            .HasMany<Role>(x => x.Roles);
     }
 
     // The following configures EF to create a Sqlite database file in the
