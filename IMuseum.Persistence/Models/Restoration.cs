@@ -1,10 +1,17 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace IMuseum.Persistence.Models;
 
-public record Restoration
+[Table("Restorations")]
+public record Restoration : DatabaseModel
 {
+    /// <summary>
+    /// Auto-generated ID for the restoration.
+    /// </summary>
+    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public Guid RestorationId { get; set; }
     public string Type { get; set; }
     public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public ArtworkInPosess Artwork { get; set; }
+    public DateTime? EndDate { get; set; }
+    public Artwork Artwork { get; set; }
 }
