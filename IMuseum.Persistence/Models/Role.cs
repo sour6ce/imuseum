@@ -10,6 +10,8 @@ namespace IMuseum.Persistence.Models;
 [Table("Roles")]
 public record Role : DatabaseModel
 {
+    // FIXME: Delete Id field
+    // FIXME: Change Account field name to Name
     /// <summary>
     /// Auto-generated ID for the role.
     /// </summary>

@@ -5,6 +5,7 @@ namespace IMuseum.Persistence.Models;
 [Table("Restorations")]
 public record Restoration : DatabaseModel
 {
+    // FIXME: Delete Id field
     /// <summary>
     /// Auto-generated ID for the restoration.
     /// </summary>
