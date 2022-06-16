@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMuseum.Persistence.Migrations
 {
     [DbContext(typeof(IMuseumContext))]
-    [Migration("20220616134329_RepoUpdate")]
-    partial class RepoUpdate
+    [Migration("20220616184727_Automated")]
+    partial class Automated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,9 +88,6 @@ namespace IMuseum.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("ApplicationDate")
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid>("ApplicationId")
                         .HasColumnType("TEXT");
 
@@ -101,6 +98,9 @@ namespace IMuseum.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("PaymentAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -139,14 +139,6 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("LoanApplicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<Guid>("RelatedMuseumId")
                         .HasColumnType("TEXT");
 
@@ -180,10 +172,6 @@ namespace IMuseum.Persistence.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("MuseumId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -221,10 +209,6 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RestorationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
@@ -249,10 +233,6 @@ namespace IMuseum.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Account")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("AddTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
@@ -263,8 +243,8 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RoleId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -301,10 +281,6 @@ namespace IMuseum.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RoomId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime?>("UpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
@@ -338,10 +314,6 @@ namespace IMuseum.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -355,6 +327,10 @@ namespace IMuseum.Persistence.Migrations
                 {
                     b.HasBaseType("IMuseum.Persistence.Models.Artwork");
 
+                    b.Property<string>("Style")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.ToTable("PlasticArt");
                 });
 
@@ -362,12 +338,20 @@ namespace IMuseum.Persistence.Migrations
                 {
                     b.HasBaseType("IMuseum.Persistence.Models.PlasticArt");
 
+                    b.Property<string>("Media")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.ToTable("Paintings");
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Sculpture", b =>
                 {
                     b.HasBaseType("IMuseum.Persistence.Models.PlasticArt");
+
+                    b.Property<string>("Material")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.ToTable("Sculpture");
                 });

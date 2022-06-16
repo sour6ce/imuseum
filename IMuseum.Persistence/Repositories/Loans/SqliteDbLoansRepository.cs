@@ -24,7 +24,7 @@ public class SqliteDbLoansRepository : SqliteDbRepository<Loan>, ILoansRepositor
             }
             //Code to change each field
             old.Application = item.Application;
-            old.ApplicationDate = item.ApplicationDate;
+            old.StartDate = item.StartDate;
             old.PaymentAmount = item.PaymentAmount;
 
             //Save changes

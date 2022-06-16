@@ -23,7 +23,7 @@ public class SqliteDbRolesRepository : SqliteDbRepository<Role>, IRolesRepositor
                 return;
             }
             //Code to change each field
-            old.Account = item.Account;
+            old.Name = item.Name;
 
             //Save changes
             await iMuseumDbContext.SaveChangesAsync();
