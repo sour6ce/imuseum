@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories;
 
-public class SqliteDbRepository<T> : IRepository<T> where T : DatabaseModel
+public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseModel
 {
     protected readonly IServiceProvider serviceProvider;
 
@@ -218,4 +218,6 @@ public class SqliteDbRepository<T> : IRepository<T> where T : DatabaseModel
             return tempset.FirstOrDefault();
         }
     }
+
+    public abstract Task UpdateObjectAsync(T item);
 }

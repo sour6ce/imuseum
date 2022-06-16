@@ -8,7 +8,7 @@ public class SqliteDbRestorationsRepository : SqliteDbRepository<Restoration>, I
 {
     public SqliteDbRestorationsRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public async Task UpdateRestorationAsync(Restoration item)
+    public override async Task UpdateObjectAsync(Restoration item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())

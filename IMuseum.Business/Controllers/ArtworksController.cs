@@ -84,7 +84,7 @@ public class ArtworksController : ControllerBase
             Assessment = InternalArtworkDto.Assessment
         };
 
-        await repository.UpdateArtworkAsync(updatedArtwork);
+        await repository.UpdateObjectAsync(updatedArtwork);
 
         return NoContent();
     }

@@ -8,7 +8,7 @@ public class SqliteDbLoansRepository : SqliteDbRepository<Loan>, ILoansRepositor
 {
     public SqliteDbLoansRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public async Task UpdateLoanAsync(Loan item)
+    public override async Task UpdateObjectAsync(Loan item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())

@@ -8,7 +8,7 @@ public class SqliteDbSculpturesRepository : SqliteDbRepository<Sculpture>, IScul
 {
     public SqliteDbSculpturesRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public async Task UpdateSculptureAsync(Sculpture item)
+    public override async Task UpdateObjectAsync(Sculpture item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())

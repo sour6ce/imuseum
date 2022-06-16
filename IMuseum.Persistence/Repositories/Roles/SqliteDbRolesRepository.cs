@@ -8,7 +8,7 @@ public class SqliteDbRolesRepository : SqliteDbRepository<Role>, IRolesRepositor
 {
     public SqliteDbRolesRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public async Task UpdateRoleAsync(Role item)
+    public override async Task UpdateObjectAsync(Role item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
