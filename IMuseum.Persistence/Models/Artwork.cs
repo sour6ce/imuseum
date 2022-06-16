@@ -11,7 +11,7 @@ public record Artwork : DatabaseModel
     /// <summary>
     /// Date the artwork was created by the artist.
     /// </summary>
-    public DateOnly CreationDate { get; set; }
+    public DateTime CreationDate { get; set; }
     /// <summary>
     /// Date and Time the artwork was incorporated to the Museum. In case
     /// of an external artwork this can be the time it arrives to the museum.

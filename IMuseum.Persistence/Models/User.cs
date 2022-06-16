@@ -18,5 +18,5 @@ public record User : DatabaseModel
     /// Encrypted password of the user
     /// </summary>
     public string Password { get; set; }
-    public IQueryable<Role> Roles { get; set; }
+    public ICollection<Role> Roles { get; set; }
 }

@@ -14,5 +14,5 @@ public record Room : DatabaseModel
     /// <summary>
     /// Artworks on display in te room.
     /// </summary>
-    public IQueryable<Artwork> Artworks { get; set; }
+    public ICollection<Artwork> Artworks { get; set; }
 }

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using IMuseum.Persistence.Models;
-using IMuseum.Persistence.Repositories;
+using IMuseum.Persistence.Repositories.Artworks;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMuseum.Persistence;
