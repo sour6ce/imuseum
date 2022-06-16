@@ -34,7 +34,7 @@ namespace IMuseum.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("CreationDate")
+                    b.Property<DateTime>("CreationDate")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Deleted")

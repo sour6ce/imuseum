@@ -5,10 +5,6 @@ namespace IMuseum.Persistence.Models;
 
 public record DatabaseModel
 {
-    /// <summary>
-    /// Auto-generated ID for the model.
-    /// </summary>
-    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime AddTime { get; set; } = DateTime.Now;

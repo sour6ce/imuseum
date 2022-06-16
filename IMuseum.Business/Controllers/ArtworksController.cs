@@ -1,5 +1,5 @@
 using IMuseum.Persistence.Models;
-using IMuseum.Persistence.Repositories;
+using IMuseum.Persistence.Repositories.Artworks;
 using IMuseum.Business.Dtos;
 using IMuseum.Business;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +25,7 @@ public class ArtworksController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<InternalArtworkDto>> GetArtworksAsync()
     {
-        var artworks = (await repository.GetArtworksAsync())
+        var artworks = (await repository.GetObjectsAsync())
                         .Select(artwork => artwork.AsDto());
 
         logger.LogInformation($"{DateTime.UtcNow.ToString("hh:mm:ss")}: Retrieved {artworks.Count()} items");
@@ -37,7 +37,7 @@ public class ArtworksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<InternalArtworkDto>> GetArtworkAsync(Guid id)
     {
-        var artwork = await repository.GetArtworkAsync(id);
+        var artwork = await repository.GetObjectAsync(id);
 
         if (artwork is null)
             return NotFound();
@@ -51,6 +51,7 @@ public class ArtworksController : ControllerBase
     {
         Artwork artwork = new()
         {
+            Id = Guid.NewGuid(),
             Title = InternalArtworkDto.Title,
             Author = InternalArtworkDto.Author,
             CreationDate = InternalArtworkDto.CreationDate,
@@ -59,7 +60,8 @@ public class ArtworksController : ControllerBase
             Assessment = InternalArtworkDto.Assessment
         };
 
-        await repository.CreateArtworkAsync(artwork);
+        await repository.AddAsync(artwork);
+
         return CreatedAtAction(nameof(CreateArtworkAsync), new { id = artwork.Id }, artwork.AsDto());
     }
 
@@ -67,7 +69,7 @@ public class ArtworksController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateArtworkAsync(Guid id, UpdateInternalArtworkDto InternalArtworkDto)
     {
-        var existingArtwork = await repository.GetArtworkAsync(id);
+        var existingArtwork = await repository.GetObjectAsync(id);
 
         if (existingArtwork is null)
             return NotFound();
@@ -91,12 +93,12 @@ public class ArtworksController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult> DeleteArtworkAsync(Guid id)
     {
-        var existingArtwork = await repository.GetArtworkAsync(id);
+        var existingArtwork = await repository.GetObjectAsync(id);
 
         if (existingArtwork is null)
             return NotFound();
 
-        await repository.DeleteArtworkAsync(id);
+        await repository.RemoveAsync(id);
 
         return NoContent();
     }

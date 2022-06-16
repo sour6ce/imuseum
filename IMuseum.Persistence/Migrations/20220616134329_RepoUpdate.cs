@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMuseum.Persistence.Migrations
 {
-    public partial class ModelsUpdated : Migration
+    public partial class RepoUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,7 +68,7 @@ namespace IMuseum.Persistence.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Author = table.Column<string>(type: "TEXT", nullable: false),
-                    CreationDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IncorporatedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Period = table.Column<string>(type: "TEXT", nullable: false),
                     Assessment = table.Column<decimal>(type: "TEXT", nullable: false),

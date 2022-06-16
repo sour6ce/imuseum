@@ -10,7 +10,7 @@ public record UpdateInternalArtworkDto
     [Required]
     public string Author { get; set; }
     [Required]
-    public DateOnly CreationDate { get; set; }
+    public DateTime CreationDate { get; set; }
     [Required]
     public DateTime AddDate { get; set; }
     [Required]
