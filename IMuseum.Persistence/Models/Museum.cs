@@ -9,11 +9,5 @@ namespace IMuseum.Persistence.Models;
 [Table("Museums")]
 public record Museum : DatabaseModel
 {
-    // FIXME: Delete Id field
-    /// <summary>
-    /// Auto-generated ID for the museum.
-    /// </summary>
-    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-    public Guid MuseumId { get; set; }
     public string Name { get; set; }
 }

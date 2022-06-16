@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMuseum.Persistence.Migrations
 {
-    public partial class RepoUpdate : Migration
+    public partial class Automated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,6 @@ namespace IMuseum.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    MuseumId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     AddTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -31,7 +30,6 @@ namespace IMuseum.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    RoomId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     AddTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -48,7 +46,6 @@ namespace IMuseum.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: false),
                     AddTime = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -100,8 +97,7 @@ namespace IMuseum.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Account = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     UserId = table.Column<Guid>(type: "TEXT", nullable: true),
                     AddTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -123,8 +119,6 @@ namespace IMuseum.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LoanApplicationId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     ApplicationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Duration = table.Column<int>(type: "INTEGER", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
@@ -156,7 +150,8 @@ namespace IMuseum.Persistence.Migrations
                 name: "PlasticArt",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Style = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,7 +169,6 @@ namespace IMuseum.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    RestorationId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Type = table.Column<string>(type: "TEXT", nullable: false),
                     StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     EndDate = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -200,7 +194,7 @@ namespace IMuseum.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ApplicationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     PaymentAmount = table.Column<decimal>(type: "TEXT", nullable: false),
                     ApplicationId = table.Column<Guid>(type: "TEXT", nullable: false),
                     AddTime = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -223,7 +217,8 @@ namespace IMuseum.Persistence.Migrations
                 name: "Paintings",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Media = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -240,7 +235,8 @@ namespace IMuseum.Persistence.Migrations
                 name: "Sculpture",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Material = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

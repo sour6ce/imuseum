@@ -8,12 +8,11 @@ namespace IMuseum.Persistence.Models;
 [Table("Loans")]
 public record Loan : DatabaseModel
 {
-    // FIXME: Change name of ApplicationDate to StartDate
     /// <summary>
     /// Date and Time the application was accepted and the loan
     /// actually started.
     /// </summary>
-    public DateTime ApplicationDate { get; set; }
+    public DateTime StartDate { get; set; }
     public decimal PaymentAmount { get; set; }
     /// <summary>
     /// Aplication related to this loan.

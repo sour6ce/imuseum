@@ -8,12 +8,6 @@ namespace IMuseum.Persistence.Models;
 [Table("User")]
 public record User : DatabaseModel
 {
-    // FIXME: Delete Id field
-    /// <summary>
-    /// Auto-generated ID for the user.
-    /// </summary>
-    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-    public Guid UserId { get; set; }
     public string Username { get; set; }
     /// <summary>
     /// Encrypted password of the user
