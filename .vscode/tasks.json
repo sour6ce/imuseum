@@ -36,6 +36,37 @@
         "${workspaceFolder}/IMuseum.Presentation/IMuseum.Presentation.csproj"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "migrate task",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "ef",
+        "migrations",
+        "add",
+        "Automated",
+        "--project",
+        "${workspaceFolder}/IMuseum.Persistence/IMuseum.Persistence.csproj",
+        "--startup-project",
+        "${workspaceFolder}/IMuseum.Presentation/IMuseum.Presentation.csproj"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "datbase update task",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "ef",
+        "database",
+        "update",
+        "--project",
+        "${workspaceFolder}/IMuseum.Persistence/IMuseum.Persistence.csproj",
+        "--startup-project",
+        "${workspaceFolder}/IMuseum.Presentation/IMuseum.Presentation.csproj"
+      ],
+      "problemMatcher": []
     }
   ]
 }
