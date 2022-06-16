@@ -21,4 +21,5 @@ public interface IRepository<T> where T : DatabaseModel
     Task<IEnumerable<T>> GetObjectsAsync();
     T? GetObject(Guid id);
     Task<T?> GetObjectAsync(Guid id);
+    Task UpdateObjectAsync(T item);
 }

@@ -8,6 +8,8 @@ namespace IMuseum.Persistence.Models;
 [Table("LoanApplications")]
 public record LoanApplication : DatabaseModel
 {
+    // FIXME: Delete Id field
+    // FIXME: Delete Name field
     /// <summary>
     /// Auto-generated ID for the loan application.
     /// </summary>

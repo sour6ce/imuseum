@@ -8,7 +8,7 @@ public class SqliteDbArtworksRepository : SqliteDbRepository<Artwork>, IArtworks
 {
     public SqliteDbArtworksRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public async Task UpdateArtworkAsync(Artwork artwork)
+    public override async Task UpdateObjectAsync(Artwork artwork)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())

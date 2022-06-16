@@ -9,6 +9,7 @@ namespace IMuseum.Persistence.Models;
 [Table("Museums")]
 public record Museum : DatabaseModel
 {
+    // FIXME: Delete Id field
     /// <summary>
     /// Auto-generated ID for the museum.
     /// </summary>
