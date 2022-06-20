@@ -32,4 +32,6 @@ public record Artwork : DatabaseModel
     /// field must be <c>null</c>.
     /// </summary>
     public Museum? Museum { get; set; } = null;
+    public List<Image> Images { get; set; }
+    public string Description { get; set; }
 }

@@ -2,19 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using IMuseum.Persistence.Models;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IMuseum.Persistence.Repositories.Users;
+namespace IMuseum.Persistence.Repositories.Images;
 
-public class SqliteDbUsersRepository : SqliteDbRepository<User>, IUsersRepository
+public class SqliteDbImagesRepository : SqliteDbRepository<Image>, IImagesRepository
 {
-    public SqliteDbUsersRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public SqliteDbImagesRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public override async Task UpdateObjectAsync(User item)
+    public override async Task UpdateObjectAsync(Image item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var old = await iMuseumDbContext.Set<User>().FirstOrDefaultAsync(old => item.Id == old.Id);
+            var old = await iMuseumDbContext.Images.FirstOrDefaultAsync(old => item.Id == old.Id);
             //Check if actually exists an item with that id
             if (old == null)
             {
@@ -23,10 +23,11 @@ public class SqliteDbUsersRepository : SqliteDbRepository<User>, IUsersRepositor
                 return;
             }
             //Code to change each field
-            old.Password = item.Password;
-            old.Roles = item.Roles;
-            old.Username = item.Username;
-            old.Email = item.Email;
+            old.Title = item.Title;
+            old.Bytes = item.Bytes;
+            old.Description = item.Description;
+            old.FileExtension = item.FileExtension;
+            old.Size = item.Size;
 
             //Save changes
             await iMuseumDbContext.SaveChangesAsync();

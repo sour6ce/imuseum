@@ -14,6 +14,7 @@ public class IMuseumContext : DbContext
     public DbSet<Loan> Loans { get; set; }
     public DbSet<Museum> Museums { get; set; }
     public DbSet<Artwork> Artworks { get; set; }
+    public DbSet<Image> Images { get; set; }
 
     public string DbPath { get; }
 
@@ -50,6 +51,10 @@ public class IMuseumContext : DbContext
         //LoanApplication => Artwork is a many to one relationship
         modelBuilder.Entity<LoanApplication>()
             .HasOne<Artwork>(la => la.Artwork);
+
+        //Artwork => Image is a one to many relationship
+        modelBuilder.Entity<Artwork>()
+            .HasMany<Image>(i => i.Images);
 
         //User
         modelBuilder.Entity<User>()

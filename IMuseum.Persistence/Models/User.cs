@@ -13,5 +13,6 @@ public record User : DatabaseModel
     /// Encrypted password of the user
     /// </summary>
     public string Password { get; set; }
+    public string Email { get; set; }
     public ICollection<Role> Roles { get; set; }
 }
