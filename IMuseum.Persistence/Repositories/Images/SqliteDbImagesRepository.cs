@@ -25,7 +25,6 @@ public class SqliteDbImagesRepository : SqliteDbRepository<Image>, IImagesReposi
             //Code to change each field
             old.Title = item.Title;
             old.Bytes = item.Bytes;
-            old.Description = item.Description;
             old.FileExtension = item.FileExtension;
             old.Size = item.Size;
 
