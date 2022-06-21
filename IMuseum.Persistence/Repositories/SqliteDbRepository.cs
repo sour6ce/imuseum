@@ -254,7 +254,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public C ExecuteOnDbAsync<C>(Func<IQueryable<T>, C> func)
+    public C ExecuteOnDb<C>(Func<IQueryable<T>, C> func)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
