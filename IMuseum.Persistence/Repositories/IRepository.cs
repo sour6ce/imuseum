@@ -22,4 +22,8 @@ public interface IRepository<T> where T : DatabaseModel
     T? GetObject(Guid id);
     Task<T?> GetObjectAsync(Guid id);
     Task UpdateObjectAsync(T item);
+    Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, IMuseumContext, Task<C>> asyncFunc);
+    Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, Task<C>> asyncFunc);
+    C ExecuteOnDb<C>(Func<IQueryable<T>, IMuseumContext, C> func);
+    C ExecuteOnDbAsync<C>(Func<IQueryable<T>, C> func);
 }

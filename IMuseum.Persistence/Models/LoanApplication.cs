@@ -22,4 +22,8 @@ public record LoanApplication : DatabaseModel
     /// march to the museum pointed in the Artwork data.
     /// </summary>
     public Museum RelatedMuseum { get; set; }
+    /// <summary>
+    /// Loan details. Null if they haven't been accepted. (Related from relation to Loans)
+    /// </summary>
+    public Loan? LoanRelated { get; set; }
 }

@@ -220,4 +220,48 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     }
 
     public abstract Task UpdateObjectAsync(T item);
+
+    public async Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, IMuseumContext, Task<C>> asyncFunc)
+    {
+        using (var scope = this.serviceProvider.CreateScope())
+        {
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            DbSet<T> tempset = iMuseumDbContext.Set<T>();
+            var result = await asyncFunc(tempset, iMuseumDbContext);
+            return result;
+        }
+    }
+
+    public async Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, Task<C>> asyncFunc)
+    {
+        using (var scope = this.serviceProvider.CreateScope())
+        {
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            DbSet<T> tempset = iMuseumDbContext.Set<T>();
+            var result = await asyncFunc(tempset);
+            return result;
+        }
+    }
+
+    public C ExecuteOnDb<C>(Func<IQueryable<T>, IMuseumContext, C> func)
+    {
+        using (var scope = this.serviceProvider.CreateScope())
+        {
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            DbSet<T> tempset = iMuseumDbContext.Set<T>();
+            var result = func(tempset, iMuseumDbContext);
+            return result;
+        }
+    }
+
+    public C ExecuteOnDbAsync<C>(Func<IQueryable<T>, C> func)
+    {
+        using (var scope = this.serviceProvider.CreateScope())
+        {
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            DbSet<T> tempset = iMuseumDbContext.Set<T>();
+            var result = func(tempset);
+            return result;
+        }
+    }
 }
