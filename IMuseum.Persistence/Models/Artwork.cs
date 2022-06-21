@@ -34,4 +34,16 @@ public record Artwork : DatabaseModel
     public Museum? Museum { get; set; } = null;
     public ICollection<Image> Images { get; set; }
     public string Description { get; set; }
+    /// <summary>
+    /// Room in wich the Artwork is displayed. (Related from relation to Rooms)
+    /// </summary>
+    public Room? Room { get; set; }
+    /// <summary>
+    /// All the restorations of the Artwork. (Related from relation to Restorations)
+    /// </summary>
+    public ICollection<Restoration> Restorations { get; set; }
+    /// <summary>
+    /// All loan applications of this Artwork. (Related from relation to Loan Applications)
+    /// </summary>
+    public ICollection<LoanApplication> LoanApplications { get; set; }
 }

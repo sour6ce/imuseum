@@ -30,35 +30,43 @@ public class IMuseumContext : DbContext
     {
         //Artwork => Museum is a many to one relationship
         modelBuilder.Entity<Artwork>()
-            .HasOne<Museum>(x => x.Museum);
+            .HasOne<Museum>(x => x.Museum)
+            .WithMany(x => x.Artworks);
 
         //Room => Artwork is a one to many relationship
         modelBuilder.Entity<Room>()
-            .HasMany<Artwork>(r => r.Artworks);
+            .HasMany<Artwork>(r => r.Artworks)
+            .WithOne(x => x.Room);
 
         //Restoration => Artwork is a one to one relationship
         modelBuilder.Entity<Restoration>()
-            .HasOne<Artwork>(r => r.Artwork);
+            .HasOne<Artwork>(r => r.Artwork)
+            .WithMany(x => x.Restorations);
 
         //Loan => LoanApplication is a many to one relationship
         modelBuilder.Entity<Loan>()
-            .HasOne<LoanApplication>(l => l.Application);
+            .HasOne<LoanApplication>(l => l.Application)
+            .WithOne(x => x.LoanRelated);
 
         //LoanApplication => Museum is a many to one relationship
         modelBuilder.Entity<LoanApplication>()
-            .HasOne<Museum>(la => la.RelatedMuseum);
+            .HasOne<Museum>(la => la.RelatedMuseum)
+            .WithMany(x => x.LoanApplications);
 
         //LoanApplication => Artwork is a many to one relationship
         modelBuilder.Entity<LoanApplication>()
-            .HasOne<Artwork>(la => la.Artwork);
+            .HasOne<Artwork>(la => la.Artwork)
+            .WithMany(x => x.LoanApplications);
 
         //Artwork => Image is a one to many relationship
         modelBuilder.Entity<Artwork>()
-            .HasMany<Image>(i => i.Images);
+            .HasMany<Image>(i => i.Images)
+            .WithOne(x => x.Artwork);
 
         //User
         modelBuilder.Entity<User>()
-            .HasMany<Role>(x => x.Roles);
+            .HasMany<Role>(x => x.Roles)
+            .WithMany(x => x.RelatedUsers);
     }
 
     // The following configures EF to create a Sqlite database file in the

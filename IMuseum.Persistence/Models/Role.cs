@@ -11,4 +11,8 @@ namespace IMuseum.Persistence.Models;
 public record Role : DatabaseModel
 {
     public string Name { get; set; }
+    /// <summary>
+    /// Users with this role. (Related from relation to Users)
+    /// </summary>
+    public ICollection<User> RelatedUsers { get; set; }
 }
