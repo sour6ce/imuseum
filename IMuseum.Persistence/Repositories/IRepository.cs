@@ -25,5 +25,5 @@ public interface IRepository<T> where T : DatabaseModel
     Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, IMuseumContext, Task<C>> asyncFunc);
     Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, Task<C>> asyncFunc);
     C ExecuteOnDb<C>(Func<IQueryable<T>, IMuseumContext, C> func);
-    C ExecuteOnDbAsync<C>(Func<IQueryable<T>, C> func);
+    C ExecuteOnDb<C>(Func<IQueryable<T>, C> func);
 }
