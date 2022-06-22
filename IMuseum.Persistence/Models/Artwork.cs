@@ -6,7 +6,6 @@ namespace IMuseum.Persistence.Models;
 [Table("Artworks")]
 public record Artwork : DatabaseModel
 {
-
     /// <summary>
     /// Status of an stored artwork.
     /// </summary>
@@ -67,12 +66,18 @@ public record Artwork : DatabaseModel
     /// The museum owner of the artwork, in case of an internal artwork this
     /// field must be <c>null</c>.
     /// </summary>
+    [ForeignKey("Museum")]
+    public Guid MuseumId{get; set;}
     public Museum? Museum { get; set; } = null;
+
     public ICollection<Image> Images { get; set; }
     public string Description { get; set; }
+
     /// <summary>
     /// Room in wich the Artwork is displayed. (Related from relation to Rooms)
     /// </summary>
+    [ForeignKey("Room")]
+    public Guid RoomId{get;set;}
     public Room? Room { get; set; }
     /// <summary>
     /// All the restorations of the Artwork. (Related from relation to Restorations)

@@ -38,16 +38,24 @@ public record LoanApplication : DatabaseModel
     public DateTime ApplicationDate { get; set; }
     public int Duration { get; set; }
     public Status CurrentStatus { get; set; } = Status.OnWait;
+    [ForeignKey("Artwork")]
+    public Guid ArtworkId { get; set;}
     public Artwork Artwork { get; set; }
+
     /// <summary>
     /// Related museum to the loan. In case of internal artworks
     /// stores the museum that request the artwork. For external
     /// artworks should be the museum taht owns the artwork and then
     /// march to the museum pointed in the Artwork data.
     /// </summary>
+    [ForeignKey("Museum")]
+    public Guid MuseumId{ get; set;}
     public Museum RelatedMuseum { get; set; }
+
     /// <summary>
     /// Loan details. Null if they haven't been accepted. (Related from relation to Loans)
     /// </summary>
+    [ForeignKey("Loan")]
+    public Guid LoanId{get;set;}
     public Loan? LoanRelated { get; set; }
 }

@@ -3,6 +3,7 @@ using System;
 using IMuseum.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMuseum.Persistence.Migrations
 {
     [DbContext(typeof(IMuseumContext))]
-    partial class IMuseumContextModelSnapshot : ModelSnapshot
+    [Migration("20220622112255_Seeding-Museum-Role")]
+    partial class SeedingMuseumRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -141,9 +143,6 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("LoanAplicationId")
-                        .HasColumnType("TEXT");
-
                     b.Property<decimal>("PaymentAmount")
                         .HasColumnType("TEXT");
 
@@ -190,7 +189,7 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<Guid>("LoanId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("MuseumId")
+                    b.Property<Guid>("RelatedMuseumId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -204,7 +203,7 @@ namespace IMuseum.Persistence.Migrations
                     b.HasIndex("LoanId")
                         .IsUnique();
 
-                    b.HasIndex("MuseumId");
+                    b.HasIndex("RelatedMuseumId");
 
                     b.ToTable("LoanApplications");
                 });
@@ -240,50 +239,50 @@ namespace IMuseum.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("19de75f6-06a4-4e5b-b1d5-fb820825302e"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(2910),
+                            Id = new Guid("1bc1d70e-68e9-40d1-82fb-f6ae3102d277"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5726),
                             Deleted = false,
                             Name = "Louvre Museum"
                         },
                         new
                         {
-                            Id = new Guid("bcb63fb6-0cc0-4e65-85ca-2fa07fbc4e45"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(2980),
+                            Id = new Guid("b116223d-f86a-4716-98ca-c72db7967338"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5797),
                             Deleted = false,
                             Name = "British Museum"
                         },
                         new
                         {
-                            Id = new Guid("9aa06adb-b590-42b1-9301-aae7f599f42c"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(2984),
+                            Id = new Guid("9d482011-47e9-4b22-9c64-f12531b3f309"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5800),
                             Deleted = false,
                             Name = "London Arqueology Museum"
                         },
                         new
                         {
-                            Id = new Guid("c8f4bc33-e646-4feb-8ff3-27fc19f4acff"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(2986),
+                            Id = new Guid("3ab3aac9-eceb-4fa4-a237-aaab8fec8e65"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5803),
                             Deleted = false,
                             Name = "New York Museum"
                         },
                         new
                         {
-                            Id = new Guid("ab27caf7-d060-4736-a7c7-d568acaa6e85"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3026),
+                            Id = new Guid("03b3a8ff-64c7-4479-97f1-c969f911c0e4"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5805),
                             Deleted = false,
                             Name = "Vatican City Museum"
                         },
                         new
                         {
-                            Id = new Guid("0abd4e03-0f0f-479a-adf8-8367925e0609"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3029),
+                            Id = new Guid("88c9f40e-0cea-4429-9a59-c6ddab2b1c9a"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5808),
                             Deleted = false,
                             Name = "Kiko's Gallery"
                         },
                         new
                         {
-                            Id = new Guid("96d7e326-9e23-411c-840c-66589a001952"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3032),
+                            Id = new Guid("1f2b9e19-12f0-48dd-8195-0461f8f1c85e"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5810),
                             Deleted = false,
                             Name = "LeTize Museum"
                         });
@@ -360,50 +359,50 @@ namespace IMuseum.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b891fb2d-fd53-4d09-816e-ef6562d6af2f"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3155),
+                            Id = new Guid("05fae288-f85a-4819-832d-94ef6fcdb0cb"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5937),
                             Deleted = false,
                             Name = "Role 1"
                         },
                         new
                         {
-                            Id = new Guid("1d9cde8f-5014-44c4-b66d-1acce9066272"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3171),
+                            Id = new Guid("8ff89b90-7276-4d48-a4fb-a9699e63d8df"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5952),
                             Deleted = false,
                             Name = "Role 2"
                         },
                         new
                         {
-                            Id = new Guid("6a3cea16-99c3-403a-b8d4-6380de99ecc2"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3174),
+                            Id = new Guid("4d81b283-eeda-4074-86a9-c588d7288b2b"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5955),
                             Deleted = false,
                             Name = "Role 3"
                         },
                         new
                         {
-                            Id = new Guid("47eb910a-26cc-40e7-933b-4f421c4f53f4"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3177),
+                            Id = new Guid("750f1c9f-686e-499d-9d47-c11908b7148d"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5957),
                             Deleted = false,
                             Name = "Role 4"
                         },
                         new
                         {
-                            Id = new Guid("e8ce3c0f-7314-417e-856e-65c76a615dc7"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3179),
+                            Id = new Guid("82097ae9-7cc6-46ef-b222-8f257920098a"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(5960),
                             Deleted = false,
                             Name = "Role 5"
                         },
                         new
                         {
-                            Id = new Guid("f17acb1c-501e-44e2-9f51-54a0d6923ba5"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3182),
+                            Id = new Guid("19679ee9-7236-4d68-a0f6-ac44ea1f7499"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(6002),
                             Deleted = false,
                             Name = "Role 6"
                         },
                         new
                         {
-                            Id = new Guid("c691b205-77dc-4cba-a5a3-4cc344dd0ab3"),
-                            AddTime = new DateTime(2022, 6, 22, 13, 34, 14, 118, DateTimeKind.Local).AddTicks(3184),
+                            Id = new Guid("d73b35cb-d5b6-47a2-bffb-7226c3abc8a9"),
+                            AddTime = new DateTime(2022, 6, 22, 13, 22, 54, 774, DateTimeKind.Local).AddTicks(6005),
                             Deleted = false,
                             Name = "Role 7"
                         });
@@ -569,7 +568,7 @@ namespace IMuseum.Persistence.Migrations
 
                     b.HasOne("IMuseum.Persistence.Models.Museum", "RelatedMuseum")
                         .WithMany("LoanApplications")
-                        .HasForeignKey("MuseumId")
+                        .HasForeignKey("RelatedMuseumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
