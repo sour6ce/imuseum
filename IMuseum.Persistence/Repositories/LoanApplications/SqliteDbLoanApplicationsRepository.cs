@@ -27,7 +27,7 @@ public class SqliteDbLoanApplicationsRepository : SqliteDbRepository<LoanApplica
             old.Artwork = item.Artwork;
             old.Duration = item.Duration;
             old.RelatedMuseum = item.RelatedMuseum;
-            old.Status = item.Status;
+            old.CurrentStatus = item.CurrentStatus;
 
             //Save changes
             await iMuseumDbContext.SaveChangesAsync();

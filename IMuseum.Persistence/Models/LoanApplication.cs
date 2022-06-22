@@ -9,11 +9,35 @@ namespace IMuseum.Persistence.Models;
 public record LoanApplication : DatabaseModel
 {
     /// <summary>
+    /// Status of an loan application
+    /// </summary>
+    public enum Status
+    {
+        /// <summary>
+        /// The artwork was requested but not yet approved
+        /// </summary>
+        OnWait,
+        /// <summary>
+        /// The loan was approved and the artwork is curently
+        /// on loan
+        /// </summary>
+        OnLoan,
+        /// <summary>
+        /// The application was approved and the loan time 
+        /// finished
+        /// </summary>
+        Finished,
+        /// <summary>
+        /// The application was denied.
+        /// </summary>
+        Denied,
+    }
+    /// <summary>
     /// Date the application for a loan was sended.
     /// </summary>
     public DateTime ApplicationDate { get; set; }
     public int Duration { get; set; }
-    public LoanStatus Status { get; set; } = LoanStatus.OnWait;
+    public Status CurrentStatus { get; set; } = Status.OnWait;
     public Artwork Artwork { get; set; }
     /// <summary>
     /// Related museum to the loan. In case of internal artworks

@@ -27,6 +27,7 @@ public class SqliteDbArtworksRepository : SqliteDbRepository<Artwork>, IArtworks
             oldArtwork.Period = artwork.Period;
             oldArtwork.Assessment = artwork.Assessment;
             oldArtwork.Description = artwork.Description;
+            oldArtwork.CurrentSatus = artwork.CurrentSatus;
 
             await iMuseumDbContext.SaveChangesAsync();
         }
