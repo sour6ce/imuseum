@@ -1,16 +1,18 @@
 using Quartz;
 using System.Net;
 using System.Net.Mail;
+using Microsoft.Extensions.Logging;
 using IMuseum.Persistence.Repositories.Users;
 using IMuseum.Persistence.Repositories.Artworks;
 using IMuseum.Persistence.Repositories.Loans;
 using IMuseum.Persistence.Repositories.Restorations;
 using IMuseum.Persistence.Repositories;
 using IMuseum.Persistence.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace IMuseum.Scheduling;
 
-class SendMailJob : IJob
+public class SendMailJob : IJob
 {
     private readonly ILogger logger;
     private readonly IConfiguration configuration;
@@ -51,7 +53,6 @@ class SendMailJob : IJob
             //Sending email
             await SendEmail(museumBoss.Email, "Loans Tasks", messageMuseumBoss);
         }
-        
     }
 
     public async Task SendEmail(string toEmail, string subject, string body)

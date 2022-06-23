@@ -21,6 +21,10 @@
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <ProjectReference Include="../IMuseum.Business/IMuseum.Business.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Quartz" Version="3.4.0" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.4.0" />
+    <ProjectReference Include="../IMuseum.Scheduling/IMuseum.Scheduling.csproj" />
   </ItemGroup>
 
   <ItemGroup>
