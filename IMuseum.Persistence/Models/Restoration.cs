@@ -10,6 +10,6 @@ public record Restoration : DatabaseModel
     public DateTime? EndDate { get; set; }
 
     [ForeignKey("Artwork")]
-    public Guid ArtworkId { get; set;}
+    public int ArtworkId { get; set;}
     public Artwork Artwork { get; set; }
 }
