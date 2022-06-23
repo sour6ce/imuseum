@@ -28,14 +28,14 @@ public class ArtworksController : ControllerBase
         this.logger = logger;
     }
 
-    public async Task<bool> IsSculpture(int artId)
+    internal async Task<bool> IsSculpture(int artId)
     {
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
             return false;
         return await this.sculpturesRepository.ContainsAsync(artId);
     }
-    public async Task<bool> IsPainting(int artId)
+    internal async Task<bool> IsPainting(int artId)
     {
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
@@ -43,7 +43,7 @@ public class ArtworksController : ControllerBase
         return await this.paintsRepository.ContainsAsync(artId);
     }
 
-    public async Task<ArtworkType?> ArtType(int artId)
+    internal async Task<ArtworkType?> ArtType(int artId)
     {
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
@@ -54,7 +54,7 @@ public class ArtworksController : ControllerBase
                 ArtworkType.Other;
     }
 
-    public async Task<ArtworkGeneralDto> ArtworkAsDto(Artwork art)
+    internal async Task<ArtworkGeneralDto> ArtworkAsDto(Artwork art)
     {
         var sc = sculpturesRepository.GetObjectAsync(art.Id);
         var pnt = paintsRepository.GetObjectAsync(art.Id);
@@ -70,7 +70,7 @@ public class ArtworksController : ControllerBase
             Period = art.Period,
             Assessment = art.Assessment,
             Status = art.CurrentSatus,
-            Type = ArtType(art.Id).Result
+            Type = ArtType(art.Id).Result.Value
         };
 
         switch (dto.Type)
@@ -91,16 +91,63 @@ public class ArtworksController : ControllerBase
         return dto;
     }
 
+    internal Artwork ArtworkFromDto(ArtworkGeneralDto dto)
+    {
+        switch (dto.Type)
+        {
+            case ArtworkType.Sculpture:
+                var sc = new Sculpture()
+                {
+                    Title = dto.Title,
+                    Author = dto.Author,
+                    Description = dto.Description,
+                    CreationDate = dto.CreationDate,
+                    IncorporatedDate = dto.IncorporatedDate,
+                    Period = dto.Period,
+                    Assessment = dto.Assessment,
+                    Style = dto.Style,
+                    Material = dto.Material
+                };
+                return sc;
+            case ArtworkType.Painting:
+                var pnt = new Painting()
+                {
+                    Title = dto.Title,
+                    Author = dto.Author,
+                    Description = dto.Description,
+                    CreationDate = dto.CreationDate,
+                    IncorporatedDate = dto.IncorporatedDate,
+                    Period = dto.Period,
+                    Assessment = dto.Assessment,
+                    Style = dto.Style,
+                    Media = dto.Media
+                };
+                return pnt;
+            default:
+                var art = new Artwork()
+                {
+                    Title = dto.Title,
+                    Author = dto.Author,
+                    Description = dto.Description,
+                    CreationDate = dto.CreationDate,
+                    IncorporatedDate = dto.IncorporatedDate,
+                    Period = dto.Period,
+                    Assessment = dto.Assessment
+                };
+                return art;
+        }
+    }
+
     //GET /artworks
     [HttpGet]
-    public async Task<ArtworkGetReturnDto> GetArtworksAsync(ArtworkGetParamDto args)
+    public async Task<ArtworkGetReturnDto> GetArtworksAsync([FromQuery] ArtworkGetParamDto args)
     {
         var filtered = (DbSet<Artwork> all) =>
         {
             return
-            all.Where((x) => args.Author.Length == 0 || args.Author.Contains(x.Author))
-            .Where((x) => args.Statuses.Length == 0 || args.Statuses.Contains(x.CurrentSatus))
-            .Where((x) => args.Type.Length == 0 || args.Type.Contains(ArtType(x.Id).Result.Value))
+            all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Contains(x.Author))
+            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(x.CurrentSatus))
+            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains(ArtType(x.Id).Result.Value))
             .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
         };
         var count = (artRepository.ExecuteOnDbAsync(async (all) =>
@@ -119,5 +166,26 @@ public class ArtworksController : ControllerBase
             Artworks = (artworks).Select((x) => this.ArtworkAsDto(x).Result).ToArray(),
             Count = (await count)
         };
+    }
+
+    //POST /artworks
+    [HttpPost]
+    public async Task<ActionResult<ArtworkGeneralDto>> CreateArtworkAsync(ArtworkGeneralDto artworkDto)
+    {
+        switch (artworkDto.Type)
+        {
+            case ArtworkType.Sculpture:
+                var sc = (Sculpture)ArtworkFromDto(artworkDto);
+                await sculpturesRepository.AddAsync(sc);
+                return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = sc.Id }, sc);
+            case ArtworkType.Painting:
+                var pnt = (Painting)ArtworkFromDto(artworkDto);
+                await paintsRepository.AddAsync(pnt);
+                return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = pnt.Id }, pnt);
+            default:
+                var art = ArtworkFromDto(artworkDto);
+                await artRepository.AddAsync(art);
+                return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = art.Id }, art);
+        }
     }
 }
