@@ -24,14 +24,14 @@ public static class Extensions
     public static void AddRepositories(this IServiceCollection sc)
     {
         // NOTE: Any dependency inyection related to repositories goes here
-        sc.AddSingleton<IArtworksRepository, SqliteDbArtworksRepository>();
-        sc.AddSingleton<IImagesRepository, SqliteDbImagesRepository>();
-        sc.AddSingleton<ILoansRepository, SqliteDbLoansRepository>();
-        sc.AddSingleton<ILoanApplicationsRepository, SqliteDbLoanApplicationsRepository>();
-        sc.AddSingleton<IMuseumsRepository, SqliteDbMuseumsRepository>();
-        sc.AddSingleton<IPaintingsRepository, SqliteDbPaintingsRepository>();
-        sc.AddSingleton<IRestorationsRepository, SqliteDbRestorationsRepository>();
-        sc.AddSingleton<ISculpturesRepository, SqliteDbSculpturesRepository>();
-        sc.AddSingleton<IUsersRepository, SqliteDbUsersRepository>();
+        sc.AddSingleton<IArtworksRepository, DbArtworksRepository>();
+        sc.AddSingleton<IImagesRepository, DbImagesRepository>();
+        sc.AddSingleton<ILoansRepository, DbLoansRepository>();
+        sc.AddSingleton<ILoanApplicationsRepository, DbLoanApplicationsRepository>();
+        sc.AddSingleton<IMuseumsRepository, DbMuseumsRepository>();
+        sc.AddSingleton<IPaintingsRepository, DbPaintingsRepository>();
+        sc.AddSingleton<IRestorationsRepository, DbRestorationsRepository>();
+        sc.AddSingleton<ISculpturesRepository, DbSculpturesRepository>();
+        sc.AddSingleton<IUsersRepository, DbUsersRepository>();
     }
 }

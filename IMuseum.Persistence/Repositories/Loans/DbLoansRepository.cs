@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories.Loans;
 
-public class SqliteDbLoansRepository : SqliteDbRepository<Loan>, ILoansRepository
+public class DbLoansRepository : DbRepository<Loan>, ILoansRepository
 {
-    public SqliteDbLoansRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbLoansRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
     public override async Task UpdateObjectAsync(Loan item)
     {

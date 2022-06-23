@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories;
 
-public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseModel
+public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
 {
     protected readonly IServiceProvider serviceProvider;
 
@@ -34,7 +34,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
 
     public virtual bool IsReadOnly => false;
 
-    public SqliteDbRepository(IServiceProvider serviceProvider)
+    public DbRepository(IServiceProvider serviceProvider)
     {
         this.serviceProvider = serviceProvider;
     }

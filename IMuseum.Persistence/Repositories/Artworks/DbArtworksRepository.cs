@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories.Artworks;
 
-public class SqliteDbArtworksRepository : SqliteDbRepository<Artwork>, IArtworksRepository
+public class DbArtworksRepository : DbRepository<Artwork>, IArtworksRepository
 {
-    public SqliteDbArtworksRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbArtworksRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
     public override async Task UpdateObjectAsync(Artwork artwork)
     {

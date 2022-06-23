@@ -2,19 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using IMuseum.Persistence.Models;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IMuseum.Persistence.Repositories.Paintings;
+namespace IMuseum.Persistence.Repositories.Sculptures;
 
-public class SqliteDbPaintingsRepository : SqliteDbRepository<Painting>, IPaintingsRepository
+public class DbSculpturesRepository : DbRepository<Sculpture>, ISculpturesRepository
 {
-    public SqliteDbPaintingsRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbSculpturesRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public override async Task UpdateObjectAsync(Painting item)
+    public override async Task UpdateObjectAsync(Sculpture item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var old = await iMuseumDbContext.Paintings.FirstOrDefaultAsync(old => item.Id == old.Id);
+            var old = await iMuseumDbContext.Sculptures.FirstOrDefaultAsync(old => item.Id == old.Id);
             //Check if actually exists an item with that id
             if (old == null)
             {
@@ -29,8 +29,8 @@ public class SqliteDbPaintingsRepository : SqliteDbRepository<Painting>, IPainti
             old.IncorporatedDate = item.IncorporatedDate;
             old.Period = item.Period;
             old.Assessment = item.Assessment;
-            old.Media = item.Media;
             old.Style = item.Style;
+            old.Material = item.Material;
 
             //Save changes
             await iMuseumDbContext.SaveChangesAsync();
