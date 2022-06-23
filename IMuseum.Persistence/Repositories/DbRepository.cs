@@ -221,7 +221,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
 
     public abstract Task UpdateObjectAsync(T item);
 
-    public async Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, IMuseumContext, Task<C>> asyncFunc)
+    public async Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, DbContext, Task<C>> asyncFunc)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -243,7 +243,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
         }
     }
 
-    public C ExecuteOnDb<C>(Func<DbSet<T>, IMuseumContext, C> func)
+    public C ExecuteOnDb<C>(Func<DbSet<T>, DbContext, C> func)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {

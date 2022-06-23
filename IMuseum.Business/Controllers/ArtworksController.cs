@@ -28,21 +28,14 @@ public class ArtworksController : ControllerBase
         this.logger = logger;
     }
 
-    public async Task<bool> IsSculpture(Guid artId)
+    public async Task<bool> IsSculpture(int artId)
     {
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
             return false;
         return await this.sculpturesRepository.ContainsAsync(artId);
     }
-<<<<<<< HEAD
-    public async Task<bool> IsPainting(Guid artId)
-=======
-
-    //GET /artworks/{id}
-    [HttpGet("{id}")]
-    public async Task<ActionResult<InternalArtworkDto>> GetArtworkAsync(int id)
->>>>>>> origin/main
+    public async Task<bool> IsPainting(int artId)
     {
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
@@ -50,7 +43,7 @@ public class ArtworksController : ControllerBase
         return await this.paintsRepository.ContainsAsync(artId);
     }
 
-    public async Task<ArtworkType?> ArtType(Guid artId)
+    public async Task<ArtworkType?> ArtType(int artId)
     {
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
