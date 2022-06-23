@@ -1,4 +1,5 @@
 using IMuseum.Persistence.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMuseum.Persistence.Repositories;
 
@@ -10,20 +11,20 @@ public interface IRepository<T> where T : DatabaseModel
     void Add(T item);
     Task AddAsync(T item);
     bool Contains(T item);
-    bool Contains(Guid id);
+    bool Contains(int id);
     Task<bool> ContainsAsync(T item);
-    Task<bool> ContainsAsync(Guid id);
+    Task<bool> ContainsAsync(int id);
     bool Remove(T item);
-    bool Remove(Guid id);
+    bool Remove(int id);
     Task<bool> RemoveAsync(T item);
-    Task<bool> RemoveAsync(Guid id);
+    Task<bool> RemoveAsync(int id);
     IEnumerable<T> GetObjects();
     Task<IEnumerable<T>> GetObjectsAsync();
-    T? GetObject(Guid id);
-    Task<T?> GetObjectAsync(Guid id);
+    T? GetObject(int id);
+    Task<T?> GetObjectAsync(int id);
     Task UpdateObjectAsync(T item);
-    Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, IMuseumContext, Task<C>> asyncFunc);
-    Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, Task<C>> asyncFunc);
-    C ExecuteOnDb<C>(Func<IQueryable<T>, IMuseumContext, C> func);
-    C ExecuteOnDb<C>(Func<IQueryable<T>, C> func);
+    Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, IMuseumContext, Task<C>> asyncFunc);
+    Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, Task<C>> asyncFunc);
+    C ExecuteOnDb<C>(Func<DbSet<T>, IMuseumContext, C> func);
+    C ExecuteOnDb<C>(Func<DbSet<T>, C> func);
 }

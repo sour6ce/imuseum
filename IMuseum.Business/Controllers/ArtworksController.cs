@@ -35,7 +35,7 @@ public class ArtworksController : ControllerBase
 
     //GET /artworks/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<InternalArtworkDto>> GetArtworkAsync(Guid id)
+    public async Task<ActionResult<InternalArtworkDto>> GetArtworkAsync(int id)
     {
         var artwork = await repository.GetObjectAsync(id);
 
@@ -51,7 +51,6 @@ public class ArtworksController : ControllerBase
     {
         Artwork artwork = new()
         {
-            Id = Guid.NewGuid(),
             Title = InternalArtworkDto.Title,
             Author = InternalArtworkDto.Author,
             CreationDate = InternalArtworkDto.CreationDate,
@@ -67,7 +66,7 @@ public class ArtworksController : ControllerBase
 
     //PUT /artworks/{id}
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateArtworkAsync(Guid id, UpdateInternalArtworkDto InternalArtworkDto)
+    public async Task<ActionResult> UpdateArtworkAsync(int id, UpdateInternalArtworkDto InternalArtworkDto)
     {
         var existingArtwork = await repository.GetObjectAsync(id);
 
@@ -91,7 +90,7 @@ public class ArtworksController : ControllerBase
 
     //DELETE /artworks/{id}
     [HttpDelete]
-    public async Task<ActionResult> DeleteArtworkAsync(Guid id)
+    public async Task<ActionResult> DeleteArtworkAsync(int id)
     {
         var existingArtwork = await repository.GetObjectAsync(id);
 

@@ -2,19 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using IMuseum.Persistence.Models;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IMuseum.Persistence.Repositories.Roles;
+namespace IMuseum.Persistence.Repositories.Museums;
 
-public class SqliteDbRolesRepository : SqliteDbRepository<Role>, IRolesRepository
+public class DbMuseumsRepository : DbRepository<Museum>, IMuseumsRepository
 {
-    public SqliteDbRolesRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbMuseumsRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public override async Task UpdateObjectAsync(Role item)
+    public override async Task UpdateObjectAsync(Museum item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var old = await iMuseumDbContext.Set<Role>().FirstOrDefaultAsync(old => item.Id == old.Id);
+            var old = await iMuseumDbContext.Set<Museum>().FirstOrDefaultAsync(old => item.Id == old.Id);
             //Check if actually exists an item with that id
             if (old == null)
             {

@@ -2,19 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using IMuseum.Persistence.Models;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IMuseum.Persistence.Repositories.Loans;
+namespace IMuseum.Persistence.Repositories.Users;
 
-public class SqliteDbLoansRepository : SqliteDbRepository<Loan>, ILoansRepository
+public class DbUsersRepository : DbRepository<User>, IUsersRepository
 {
-    public SqliteDbLoansRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbUsersRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public override async Task UpdateObjectAsync(Loan item)
+    public override async Task UpdateObjectAsync(User item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var old = await iMuseumDbContext.Loans.FirstOrDefaultAsync(old => item.Id == old.Id);
+            var old = await iMuseumDbContext.Set<User>().FirstOrDefaultAsync(old => item.Id == old.Id);
             //Check if actually exists an item with that id
             if (old == null)
             {
@@ -23,9 +23,10 @@ public class SqliteDbLoansRepository : SqliteDbRepository<Loan>, ILoansRepositor
                 return;
             }
             //Code to change each field
-            old.Application = item.Application;
-            old.StartDate = item.StartDate;
-            old.PaymentAmount = item.PaymentAmount;
+            old.Password = item.Password;
+            old.Roles = item.Roles;
+            old.Username = item.Username;
+            old.Email = item.Email;
 
             //Save changes
             await iMuseumDbContext.SaveChangesAsync();

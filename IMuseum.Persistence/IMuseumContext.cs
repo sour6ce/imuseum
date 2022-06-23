@@ -1,21 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-namespace IMuseum.Persistence.Models;
+using IMuseum.Persistence.Models;
+
+namespace IMuseum.Persistence;
 
 using IMuseum.Persistence.DataSeeding;
 public class IMuseumContext : DbContext
 {
-    // public DbSet<DatabaseModel> DbModels { get; set; }
-    public DbSet<User> Users { get; set; }
-    public DbSet<Restoration> Restorations { get; set; }
-    public DbSet<Painting> Paintings { get; set; }
-    public DbSet<Sculpture> Sculptures { get; set; }
-    public DbSet<PlasticArt> PlasticArts { get; set; }
-    public DbSet<Room> Rooms { get; set; }
-    public DbSet<Loan> Loans { get; set; }
-    public DbSet<Museum> Museums { get; set; }
-    public DbSet<Artwork> Artworks { get; set; }
-    public DbSet<Image> Images { get; set; }
-
     public string DbPath { get; }
 
     public IMuseumContext(DbContextOptions<IMuseumContext> options) : base(options)

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories;
 
-public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseModel
+public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
 {
     protected readonly IServiceProvider serviceProvider;
 
@@ -34,7 +34,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
 
     public virtual bool IsReadOnly => false;
 
-    public SqliteDbRepository(IServiceProvider serviceProvider)
+    public DbRepository(IServiceProvider serviceProvider)
     {
         this.serviceProvider = serviceProvider;
     }
@@ -145,7 +145,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public virtual async Task<T?> GetObjectAsync(Guid id)
+    public virtual async Task<T?> GetObjectAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -154,7 +154,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public bool Contains(Guid id)
+    public bool Contains(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -164,7 +164,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public async Task<bool> ContainsAsync(Guid id)
+    public async Task<bool> ContainsAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -174,7 +174,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public bool Remove(Guid id)
+    public bool Remove(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -192,7 +192,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public async Task<bool> RemoveAsync(Guid id)
+    public async Task<bool> RemoveAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -210,7 +210,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public T? GetObject(Guid id)
+    public T? GetObject(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -221,7 +221,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
 
     public abstract Task UpdateObjectAsync(T item);
 
-    public async Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, IMuseumContext, Task<C>> asyncFunc)
+    public async Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, IMuseumContext, Task<C>> asyncFunc)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -232,7 +232,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public async Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, Task<C>> asyncFunc)
+    public async Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, Task<C>> asyncFunc)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -243,7 +243,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public C ExecuteOnDb<C>(Func<IQueryable<T>, IMuseumContext, C> func)
+    public C ExecuteOnDb<C>(Func<DbSet<T>, IMuseumContext, C> func)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -254,7 +254,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public C ExecuteOnDb<C>(Func<IQueryable<T>, C> func)
+    public C ExecuteOnDb<C>(Func<DbSet<T>, C> func)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {

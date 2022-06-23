@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories.Paintings;
 
-public class SqliteDbPaintingsRepository : SqliteDbRepository<Painting>, IPaintingsRepository
+public class DbPaintingsRepository : DbRepository<Painting>, IPaintingsRepository
 {
-    public SqliteDbPaintingsRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbPaintingsRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
     public override async Task UpdateObjectAsync(Painting item)
     {
@@ -14,7 +14,7 @@ public class SqliteDbPaintingsRepository : SqliteDbRepository<Painting>, IPainti
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var old = await iMuseumDbContext.Paintings.FirstOrDefaultAsync(old => item.Id == old.Id);
+            var old = await iMuseumDbContext.Set<Painting>().FirstOrDefaultAsync(old => item.Id == old.Id);
             //Check if actually exists an item with that id
             if (old == null)
             {

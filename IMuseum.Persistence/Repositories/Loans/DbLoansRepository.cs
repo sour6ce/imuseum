@@ -2,19 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using IMuseum.Persistence.Models;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IMuseum.Persistence.Repositories.LoanApplications;
+namespace IMuseum.Persistence.Repositories.Loans;
 
-public class SqliteDbLoanApplicationsRepository : SqliteDbRepository<LoanApplication>, ILoanApplicationsRepository
+public class DbLoansRepository : DbRepository<Loan>, ILoansRepository
 {
-    public SqliteDbLoanApplicationsRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbLoansRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
-    public override async Task UpdateObjectAsync(LoanApplication item)
+    public override async Task UpdateObjectAsync(Loan item)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
             var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var old = await iMuseumDbContext.Set<LoanApplication>().FirstOrDefaultAsync(old => item.Id == old.Id);
+            var old = await iMuseumDbContext.Set<Loan>().FirstOrDefaultAsync(old => item.Id == old.Id);
             //Check if actually exists an item with that id
             if (old == null)
             {
@@ -23,11 +23,9 @@ public class SqliteDbLoanApplicationsRepository : SqliteDbRepository<LoanApplica
                 return;
             }
             //Code to change each field
-            old.ApplicationDate = item.ApplicationDate;
-            old.Artwork = item.Artwork;
-            old.Duration = item.Duration;
-            old.RelatedMuseum = item.RelatedMuseum;
-            old.CurrentStatus = item.CurrentStatus;
+            old.Application = item.Application;
+            old.StartDate = item.StartDate;
+            old.PaymentAmount = item.PaymentAmount;
 
             //Save changes
             await iMuseumDbContext.SaveChangesAsync();
