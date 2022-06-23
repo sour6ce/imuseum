@@ -4,17 +4,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories.Artworks;
 
-public class SqliteDbArtworksRepository : SqliteDbRepository<Artwork>, IArtworksRepository
+public class DbArtworksRepository : DbRepository<Artwork>, IArtworksRepository
 {
-    public SqliteDbArtworksRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
+    public DbArtworksRepository(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
     public override async Task UpdateObjectAsync(Artwork artwork)
     {
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var oldArtwork = await iMuseumDbContext.Artworks.FirstOrDefaultAsync(oldArtwork => artwork.Id == oldArtwork.Id);
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var oldArtwork = await iMuseumDbContext.Set<Artwork>().FirstOrDefaultAsync(oldArtwork => artwork.Id == oldArtwork.Id);
             if (oldArtwork == null)
             {
                 await this.AddAsync(artwork);

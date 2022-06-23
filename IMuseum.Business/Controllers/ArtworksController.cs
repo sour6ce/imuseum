@@ -35,7 +35,14 @@ public class ArtworksController : ControllerBase
             return false;
         return await this.sculpturesRepository.ContainsAsync(artId);
     }
+<<<<<<< HEAD
     public async Task<bool> IsPainting(Guid artId)
+=======
+
+    //GET /artworks/{id}
+    [HttpGet("{id}")]
+    public async Task<ActionResult<InternalArtworkDto>> GetArtworkAsync(int id)
+>>>>>>> origin/main
     {
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMuseum.Persistence.Repositories;
 
-public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseModel
+public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
 {
     protected readonly IServiceProvider serviceProvider;
 
@@ -12,7 +12,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             return await iMuseumDbContext.Set<T>().CountAsync(cancellationToken);
         }
     }
@@ -24,7 +24,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
             {
                 using (var scope = this.serviceProvider.CreateScope())
                 {
-                    var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+                    var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
                     return iMuseumDbContext.Set<T>().Count();
                 }
 
@@ -34,7 +34,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
 
     public virtual bool IsReadOnly => false;
 
-    public SqliteDbRepository(IServiceProvider serviceProvider)
+    public DbRepository(IServiceProvider serviceProvider)
     {
         this.serviceProvider = serviceProvider;
     }
@@ -43,7 +43,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = await tempset.ContainsAsync(item);
             if (!chck)
@@ -56,7 +56,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return await tempset.ContainsAsync(item);
         }
@@ -66,7 +66,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = await tempset.ContainsAsync(item);
             if (!chck)
@@ -86,7 +86,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = tempset.ContainsAsync(item);
             if (!chck.Result)
@@ -99,7 +99,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return tempset.Contains(item);
         }
@@ -109,7 +109,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = tempset.ContainsAsync(item);
             if (!chck.Result)
@@ -127,7 +127,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             foreach (var item in tempset)
             {
@@ -140,45 +140,45 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             return await iMuseumDbContext.Set<T>().ToListAsync<T>();
         }
     }
 
-    public virtual async Task<T?> GetObjectAsync(Guid id)
+    public virtual async Task<T?> GetObjectAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var tempset = scope.ServiceProvider.GetRequiredService<IMuseumContext>().Set<T>();
+            var tempset = scope.ServiceProvider.GetRequiredService<DbContext>().Set<T>();
             return await tempset.FirstOrDefaultAsync();
         }
     }
 
-    public bool Contains(Guid id)
+    public bool Contains(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return tempset.Find(id) != null;
         }
     }
 
-    public async Task<bool> ContainsAsync(Guid id)
+    public async Task<bool> ContainsAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return (await tempset.FindAsync(id)) != null;
         }
     }
 
-    public bool Remove(Guid id)
+    public bool Remove(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = this.ContainsAsync(id);
             if (!chck.Result)
@@ -192,11 +192,11 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public async Task<bool> RemoveAsync(Guid id)
+    public async Task<bool> RemoveAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = this.ContainsAsync(id);
             if (await chck)
@@ -210,11 +210,11 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public T? GetObject(Guid id)
+    public T? GetObject(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var tempset = scope.ServiceProvider.GetRequiredService<IMuseumContext>().Set<T>();
+            var tempset = scope.ServiceProvider.GetRequiredService<DbContext>().Set<T>();
             return tempset.FirstOrDefault();
         }
     }
@@ -225,7 +225,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = await asyncFunc(tempset, iMuseumDbContext);
             return result;
@@ -236,7 +236,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = await asyncFunc(tempset);
             return result;
@@ -247,7 +247,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = func(tempset, iMuseumDbContext);
             return result;
@@ -258,7 +258,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = func(tempset);
             return result;

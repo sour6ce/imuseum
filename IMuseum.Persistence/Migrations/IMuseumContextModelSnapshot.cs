@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IMuseum.Persistence.Migrations
 {
-    [DbContext(typeof(IMuseumContext))]
+    [DbContext(typeof(SqliteIMuseumContext))]
     partial class IMuseumContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
