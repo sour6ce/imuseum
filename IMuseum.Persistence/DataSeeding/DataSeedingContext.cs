@@ -10,28 +10,28 @@ public static class Seeding
     {
         modelBuilder.Entity<Museum>()
               .HasData(
-               new Museum { Id = new Guid("1"), Name = "Louvre Museum" },
-               new Museum { Id = new Guid("2"), Name = "British Museum" },
-               new Museum { Id = new Guid("3"), Name = "London Arqueology Museum" },
-               new Museum { Id = new Guid("4"), Name = "New York Museum" },
-               new Museum { Id = new Guid("5"), Name = "Vatican City Museum" },
-               new Museum { Id = new Guid("6"), Name = "Kiko's Gallery" },
-               new Museum { Id = new Guid("7"), Name = "LeTize Museum" });
+               new Museum { Id = 1, Name = "Louvre Museum" },
+               new Museum { Id = 2, Name = "British Museum" },
+               new Museum { Id = 3, Name = "London Arqueology Museum" },
+               new Museum { Id = 4, Name = "New York Museum" },
+               new Museum { Id = 5, Name = "Vatican City Museum" },
+               new Museum { Id = 6, Name = "Kiko's Gallery" },
+               new Museum { Id = 7, Name = "LeTize Museum" });
 
         modelBuilder.Entity<Role>()
               .HasData(
-               new Role { Id = new Guid("8"), Name = "Role 1" },
-               new Role { Id = new Guid("9"), Name = "Role 2" },
-               new Role { Id = new Guid("10"), Name = "Role 3" },
-               new Role { Id = new Guid("11"), Name = "Role 4" },
-               new Role { Id = new Guid("12"), Name = "Role 5" },
-               new Role { Id = new Guid("13"), Name = "Role 6" },
-               new Role { Id = new Guid("14"), Name = "Role 7" });
+               new Role { Id = 8, Name = "Role 1" },
+               new Role { Id = 9, Name = "Role 2" },
+               new Role { Id = 10, Name = "Role 3" },
+               new Role { Id = 11, Name = "Role 4" },
+               new Role { Id = 12, Name = "Role 5" },
+               new Role { Id = 13, Name = "Role 6" },
+               new Role { Id = 14, Name = "Role 7" });
 
         modelBuilder.Entity<Painting>()
                 .HasData(
                 new Painting { 
-                    Id = new Guid("15"), 
+                    Id = 15, 
                     Media = "address",
                     Title = "Monalisa",
                     Author = "Leonardo da Vinci",
@@ -48,7 +48,7 @@ public static class Seeding
                     //LoanApplications=,                  
                     },
                 new Painting { 
-                    Id = new Guid("16"), 
+                    Id = 16, 
                     Media = "address",
                     Title = "School of Athens",
                     Author = "Raphael",
@@ -65,7 +65,7 @@ public static class Seeding
                     //LoanApplications=, 
                     },
                 new Painting { 
-                    Id = new Guid("17"), 
+                    Id = 17, 
                     Media = "address",                    
                     Title = "Night Watch",
                     Author = "Rembrandt",
@@ -82,7 +82,7 @@ public static class Seeding
                     //LoanApplications=, 
                     },
                 new Painting { 
-                    Id = new Guid("18"), 
+                    Id = 18, 
                     Media = "address",
                     Title = "Beheading of Saint John the Baptist",
                     Author = "Caravaggio",
@@ -99,7 +99,7 @@ public static class Seeding
                     //LoanApplications=, 
                      },
                 new Painting { 
-                    Id = new Guid("19"), 
+                    Id = 19, 
                     Media = "address",
                     Title = "The Last Supper",
                     Author = "Leonardo da Vinci",
@@ -116,7 +116,7 @@ public static class Seeding
                     //LoanApplications=, 
                      },
                 new Painting { 
-                    Id = new Guid("20"), 
+                    Id = 20, 
                     Media = "address",
                     Title = "The Starry Night",
                     Author = "Vincent van Gogh",
@@ -133,7 +133,7 @@ public static class Seeding
                     //LoanApplications=, 
                      },
                 new Painting { 
-                    Id = new Guid("21"), 
+                    Id = 21, 
                     Media = "address",
                     Title = "The Scream",
                     Author = "Edvard Munch",
@@ -152,15 +152,15 @@ public static class Seeding
 
         modelBuilder.Entity<Room>()
               .HasData(
-               new Room { Id = new Guid("22"), Name = "Davinci" },
-               new Room { Id = new Guid("23"), Name = "Gallery" },
-               new Room { Id = new Guid("24"), Name = "Galileo" });
+               new Room { Id = 22, Name = "Davinci" },
+               new Room { Id = 23, Name = "Gallery" },
+               new Room { Id = 24, Name = "Galileo" });
 
 
         modelBuilder.Entity<Sculpture>()
                 .HasData(
                 new Sculpture { 
-                    Id = new Guid("15"), 
+                    Id = 15, 
                     Material = "Gold",
                     Style = "Style",
                     Title = "Monalisa",
@@ -178,7 +178,7 @@ public static class Seeding
                     //LoanApplications=,                  
                     },
                 new Sculpture { 
-                    Id = new Guid("16"), 
+                    Id = 16, 
                     Material = "Iron",
                     Style = "Style",
                     Title = "School of Athens",
@@ -196,7 +196,7 @@ public static class Seeding
                     //LoanApplications=, 
                     },
                 new Sculpture { 
-                    Id = new Guid("17"), 
+                    Id = 17, 
                     Material = "Wood",
                     Style = "Style",                    
                     Title = "Night Watch",
@@ -214,7 +214,7 @@ public static class Seeding
                     //LoanApplications=, 
                     },
                 new Sculpture { 
-                    Id = new Guid("18"), 
+                    Id = 18, 
                     Material = "Glass",
                     Style = "Style",
                     Title = "Beheading of Saint John the Baptist",
@@ -232,7 +232,7 @@ public static class Seeding
                     //LoanApplications=, 
                      },
                 new Sculpture { 
-                    Id = new Guid("19"),
+                    Id = 19,
                     Style = "Style",
                     Material = "Ice",
                     Title = "The Last Supper",
