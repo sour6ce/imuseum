@@ -13,8 +13,8 @@ public class DbArtworksRepository : DbRepository<Artwork>, IArtworksRepository
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
-            var oldArtwork = await iMuseumDbContext.Artworks.FirstOrDefaultAsync(oldArtwork => artwork.Id == oldArtwork.Id);
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var oldArtwork = await iMuseumDbContext.Set<Artwork>().FirstOrDefaultAsync(oldArtwork => artwork.Id == oldArtwork.Id);
             if (oldArtwork == null)
             {
                 await this.AddAsync(artwork);

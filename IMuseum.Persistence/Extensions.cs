@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using IMuseum.Persistence.Models;
 using IMuseum.Persistence.Repositories.Artworks;
 using IMuseum.Persistence.Repositories.Images;
 using IMuseum.Persistence.Repositories.Loans;
@@ -19,7 +18,7 @@ public static class Extensions
     public static void AddDatabaseConnector(this IServiceCollection sc, ConfigurationManager cm)
     {
         // NOTE: Any dependency inyection related to Database goes here
-        sc.AddDbContext<IMuseumContext>(options => options.UseSqlite(cm.GetConnectionString("IMuseumDB")));
+        sc.AddDbContext<SqliteIMuseumContext>(options => options.UseSqlite(cm.GetConnectionString("IMuseumDB")));
     }
     public static void AddRepositories(this IServiceCollection sc)
     {

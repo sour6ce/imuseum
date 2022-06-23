@@ -13,7 +13,7 @@ public class DbUsersRepository : DbRepository<User>, IUsersRepository
 #pragma warning disable 8603
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
             var old = await iMuseumDbContext.Set<User>().FirstOrDefaultAsync(old => item.Id == old.Id);
             //Check if actually exists an item with that id
             if (old == null)
