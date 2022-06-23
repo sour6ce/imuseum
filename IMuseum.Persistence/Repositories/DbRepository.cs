@@ -232,7 +232,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
         }
     }
 
-    public async Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, Task<C>> asyncFunc)
+    public async Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, Task<C>> asyncFunc)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -254,7 +254,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
         }
     }
 
-    public C ExecuteOnDb<C>(Func<IQueryable<T>, C> func)
+    public C ExecuteOnDb<C>(Func<DbSet<T>, C> func)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
