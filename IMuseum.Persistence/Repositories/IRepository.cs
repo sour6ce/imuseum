@@ -1,4 +1,5 @@
 using IMuseum.Persistence.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMuseum.Persistence.Repositories;
 
@@ -22,8 +23,8 @@ public interface IRepository<T> where T : DatabaseModel
     T? GetObject(Guid id);
     Task<T?> GetObjectAsync(Guid id);
     Task UpdateObjectAsync(T item);
-    Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, IMuseumContext, Task<C>> asyncFunc);
-    Task<C> ExecuteOnDbAsync<C>(Func<IQueryable<T>, Task<C>> asyncFunc);
-    C ExecuteOnDb<C>(Func<IQueryable<T>, IMuseumContext, C> func);
-    C ExecuteOnDb<C>(Func<IQueryable<T>, C> func);
+    Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, IMuseumContext, Task<C>> asyncFunc);
+    Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, Task<C>> asyncFunc);
+    C ExecuteOnDb<C>(Func<DbSet<T>, IMuseumContext, C> func);
+    C ExecuteOnDb<C>(Func<DbSet<T>, C> func);
 }
