@@ -1,24 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using IMuseum.Persistence.Models;
 
-namespace IMuseum.Persistence.Models;
+namespace IMuseum.Persistence;
 
-public class IMuseumContext : DbContext
+public class SqliteIMuseumContext : DbContext
 {
-    // public DbSet<DatabaseModel> DbModels { get; set; }
-    public DbSet<User> Users { get; set; }
-    public DbSet<Restoration> Restorations { get; set; }
-    public DbSet<Painting> Paintings { get; set; }
-    public DbSet<Sculpture> Sculptures { get; set; }
-    public DbSet<PlasticArt> PlasticArts { get; set; }
-    public DbSet<Room> Rooms { get; set; }
-    public DbSet<Loan> Loans { get; set; }
-    public DbSet<Museum> Museums { get; set; }
-    public DbSet<Artwork> Artworks { get; set; }
-    public DbSet<Image> Images { get; set; }
-
     public string DbPath { get; }
 
-    public IMuseumContext(DbContextOptions<IMuseumContext> options) : base(options)
+    public SqliteIMuseumContext(DbContextOptions<SqliteIMuseumContext> options) : base(options)
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);

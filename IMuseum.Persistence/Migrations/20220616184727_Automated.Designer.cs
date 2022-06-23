@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IMuseum.Persistence.Migrations
 {
-    [DbContext(typeof(IMuseumContext))]
+    [DbContext(typeof(SqliteIMuseumContext))]
     [Migration("20220616184727_Automated")]
     partial class Automated
     {
