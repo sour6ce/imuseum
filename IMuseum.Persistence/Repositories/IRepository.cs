@@ -23,8 +23,8 @@ public interface IRepository<T> where T : DatabaseModel
     T? GetObject(int id);
     Task<T?> GetObjectAsync(int id);
     Task UpdateObjectAsync(T item);
-    Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, DbContext, Task<C>> asyncFunc);
+    Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, IMuseumContext, Task<C>> asyncFunc);
     Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, Task<C>> asyncFunc);
-    C ExecuteOnDb<C>(Func<DbSet<T>, DbContext, C> func);
+    C ExecuteOnDb<C>(Func<DbSet<T>, IMuseumContext, C> func);
     C ExecuteOnDb<C>(Func<DbSet<T>, C> func);
 }

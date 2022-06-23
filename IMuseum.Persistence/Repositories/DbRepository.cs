@@ -12,7 +12,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             return await iMuseumDbContext.Set<T>().CountAsync(cancellationToken);
         }
     }
@@ -24,7 +24,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
             {
                 using (var scope = this.serviceProvider.CreateScope())
                 {
-                    var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+                    var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
                     return iMuseumDbContext.Set<T>().Count();
                 }
 
@@ -43,7 +43,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = await tempset.ContainsAsync(item);
             if (!chck)
@@ -56,7 +56,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return await tempset.ContainsAsync(item);
         }
@@ -66,7 +66,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = await tempset.ContainsAsync(item);
             if (!chck)
@@ -86,7 +86,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = tempset.ContainsAsync(item);
             if (!chck.Result)
@@ -99,7 +99,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return tempset.Contains(item);
         }
@@ -109,7 +109,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = tempset.ContainsAsync(item);
             if (!chck.Result)
@@ -127,7 +127,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             foreach (var item in tempset)
             {
@@ -140,7 +140,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             return await iMuseumDbContext.Set<T>().ToListAsync<T>();
         }
     }
@@ -149,7 +149,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var tempset = scope.ServiceProvider.GetRequiredService<DbContext>().Set<T>();
+            var tempset = scope.ServiceProvider.GetRequiredService<IMuseumContext>().Set<T>();
             return await tempset.FirstOrDefaultAsync();
         }
     }
@@ -158,7 +158,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return tempset.Find(id) != null;
         }
@@ -168,7 +168,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             return (await tempset.FindAsync(id)) != null;
         }
@@ -178,7 +178,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = this.ContainsAsync(id);
             if (!chck.Result)
@@ -196,7 +196,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var chck = this.ContainsAsync(id);
             if (await chck)
@@ -214,18 +214,18 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var tempset = scope.ServiceProvider.GetRequiredService<DbContext>().Set<T>();
+            var tempset = scope.ServiceProvider.GetRequiredService<IMuseumContext>().Set<T>();
             return tempset.FirstOrDefault();
         }
     }
 
     public abstract Task UpdateObjectAsync(T item);
 
-    public async Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, DbContext, Task<C>> asyncFunc)
+    public async Task<C> ExecuteOnDbAsync<C>(Func<DbSet<T>, IMuseumContext, Task<C>> asyncFunc)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = await asyncFunc(tempset, iMuseumDbContext);
             return result;
@@ -236,18 +236,18 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = await asyncFunc(tempset);
             return result;
         }
     }
 
-    public C ExecuteOnDb<C>(Func<DbSet<T>, DbContext, C> func)
+    public C ExecuteOnDb<C>(Func<DbSet<T>, IMuseumContext, C> func)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = func(tempset, iMuseumDbContext);
             return result;
@@ -258,7 +258,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
-            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
             DbSet<T> tempset = iMuseumDbContext.Set<T>();
             var result = func(tempset);
             return result;
