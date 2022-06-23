@@ -145,7 +145,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public virtual async Task<T?> GetObjectAsync(Guid id)
+    public virtual async Task<T?> GetObjectAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -154,7 +154,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public bool Contains(Guid id)
+    public bool Contains(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -164,7 +164,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public async Task<bool> ContainsAsync(Guid id)
+    public async Task<bool> ContainsAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -174,7 +174,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public bool Remove(Guid id)
+    public bool Remove(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -192,7 +192,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public async Task<bool> RemoveAsync(Guid id)
+    public async Task<bool> RemoveAsync(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
@@ -210,7 +210,7 @@ public abstract class SqliteDbRepository<T> : IRepository<T> where T : DatabaseM
         }
     }
 
-    public T? GetObject(Guid id)
+    public T? GetObject(int id)
     {
         using (var scope = this.serviceProvider.CreateScope())
         {
