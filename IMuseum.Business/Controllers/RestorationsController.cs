@@ -53,9 +53,9 @@ public class RestorationsController : ControllerBase
         return dto;
     }
 
-    //GET /artworks
+    //GET /restorations
     [HttpGet]
-    public async Task<RestorationGetReturnDto> GetArtworksAsync([FromQuery] RestorationGetParamDto args)
+    public async Task<RestorationGetReturnDto> GetRestorationsAsync([FromQuery] RestorationGetParamDto args)
     {
         var filtered = (DbSet<Restoration> all) =>
         {
