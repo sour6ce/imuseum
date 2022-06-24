@@ -172,6 +172,7 @@ public class ArtworksController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ArtworkGeneralDto>> CreateArtworkAsync(ArtworkGeneralDto artworkDto)
     {
+        // TODO: Add update redirecting in case it exist
         switch (artworkDto.Type)
         {
             case ArtworkType.Sculpture:
@@ -186,6 +187,61 @@ public class ArtworksController : ControllerBase
                 var art = ArtworkFromDto(artworkDto);
                 await artRepository.AddAsync(art);
                 return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = art.Id }, art);
+        }
+    }
+
+    //GET /artworks/[id]
+    [HttpGet]
+    [Route("/artworks/{id}")]
+    public async Task<ActionResult<ArtworkGeneralDto>> GetArtworkAsync(int id)
+    {
+        var ret = await artRepository.GetObjectAsync(id);
+        if (ret == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return await ArtworkAsDto(ret);
+        }
+    }
+
+    [HttpDelete]
+    [Route("/artworks/{id}")]
+    public async Task<ActionResult> DeleteArtwork(int id)
+    {
+        var success = await artRepository.RemoveAsync(id);
+        if (!success)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return new OkResult();
+        }
+    }
+
+    [HttpPut]
+    [Route("/artworks/{id}")]
+    public async Task<ActionResult> UpdateArtwork(int id, ArtworkGeneralDto dto)
+    {
+        var art = ArtworkFromDto(dto); // TODO: Check Status workflow
+
+        var found = await artRepository.GetObjectAsync(id);
+
+        if (found == null)
+            return NotFound();
+        switch (dto.Type)
+        {
+            case ArtworkType.Sculpture:
+                await sculpturesRepository.UpdateObjectAsync(art as Sculpture);
+                return AcceptedAtAction(nameof(UpdateArtwork), art as Sculpture);
+            case ArtworkType.Painting:
+                await paintsRepository.UpdateObjectAsync(art as Painting);
+                return AcceptedAtAction(nameof(UpdateArtwork), art as Painting);
+            default:
+                await artRepository.UpdateObjectAsync(art);
+                return AcceptedAtAction(nameof(UpdateArtwork), art);
         }
     }
 }
