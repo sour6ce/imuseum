@@ -22,32 +22,63 @@ public class RestorationsController : ControllerBase
         this.restRepository = restRepository;
     }
 
+    internal async Task<RestorationType?> RestType(int restId)
+    {
+        Restoration restoration = await restRepository.GetObjectAsync(restId);
+        if(restoration is null)
+            return null;
+        // NOTE: Here goes analysis to get a string that identifies the type of the restoration
+        switch(restoration.Type)
+        {
+            case Restoration.RestorationType.AestheticFunctional:
+                return RestorationType.Commercial;
+            case Restoration.RestorationType.Commercial:
+                return RestorationType.AestheticFunctional;
+            case Restoration.RestorationType.Scientific:
+                return RestorationType.Scientific;
+            default:
+                return RestorationType.Other;
+        }
+    }
+
+    internal async Task<RestorationReturnDto> RestorationAsDto(Restoration restoration)
+    {
+        var dto = new RestorationReturnDto()
+        {
+            StartDate = restoration.StartDate,
+            DueDate = restoration.EndDate,
+            RestorationType = RestType(restoration.Id).Result.Value,
+            RestorationStatus = restoration.EndDate == null ? RestorationStatus.Opened : RestorationStatus.Closed
+        };
+        return dto;
+    }
+
     //GET /artworks
     [HttpGet]
-    public async Task<RestorationReturnDto> GetArtworksAsync([FromQuery] RestorationParamDto args)
+    public async Task<RestorationGetReturnDto> GetArtworksAsync([FromQuery] RestorationGetParamDto args)
     {
-        var filtered = (DbSet<Artwork> all) =>
+        var filtered = (DbSet<Restoration> all) =>
         {
             return
-            all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Contains(x.Author))
-            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(x.CurrentSatus))
-            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains(ArtType(x.Id).Result.Value))
-            .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
+            all.Where((x) => args.ArtworksIds == null || args.ArtworksIds.Length == 0 || args.ArtworksIds.Contains(x.Artwork.Id))
+            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(RestorationStatus.Opened) || args.Statuses.Contains(RestorationStatus.Closed))
+            .Where((x) => x.StartDate >= args.StartDateA && x.StartDate <= args.StartDateB)
+            .Where((x) => (x.EndDate == null) || (x.EndDate >= args.EndDateA && x.EndDate <= args.EndDateB));
         };
-        var count = (artRepository.ExecuteOnDbAsync(async (all) =>
+        var count = (restRepository.ExecuteOnDbAsync(async (all) =>
         {
             return
             await filtered(all).CountAsync();
         }));
-        var artworks = (artRepository.ExecuteOnDb((all) =>
+        var restorations = (restRepository.ExecuteOnDb((all) =>
         {
             return
             filtered(all).Skip(args.PageSize * (args.Page - 1))
             .Take(args.PageSize);
         }));
-        return new ArtworkGetReturnDto()
+        return new RestorationGetReturnDto()
         {
-            Artworks = (artworks).Select((x) => this.ArtworkAsDto(x).Result).ToArray(),
+            Restorations = (restorations).Select((x) => this.RestorationAsDto(x).Result).ToArray(),
             Count = (await count)
         };
     }

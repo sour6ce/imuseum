@@ -5,7 +5,14 @@ namespace IMuseum.Persistence.Models;
 [Table("Restorations")]
 public record Restoration : DatabaseModel
 {
-    public string Type { get; set; }
+    public enum RestorationType
+    {
+        Scientific,
+        AestheticFunctional,
+        Commercial,
+        Other
+    }
+    public RestorationType Type { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public Artwork Artwork { get; set; }

@@ -12,5 +12,8 @@ public record RestorationReturnDto
     public ArtworkIdDto? Artwork { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? DueDate { get; set; } = null;
-    public Persistence.Models.Artwork.Status? Status { get; set; }
+
+    public RestorationStatus? RestorationStatus { get; set; }
+
+    public RestorationType? RestorationType { get; set; }
 }
