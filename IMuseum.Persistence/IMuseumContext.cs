@@ -3,6 +3,7 @@ using IMuseum.Persistence.Models;
 
 namespace IMuseum.Persistence;
 
+using IMuseum.Persistence.DataSeeding;
 public class IMuseumContext : DbContext
 {
     public string DbPath { get; }
@@ -56,6 +57,8 @@ public class IMuseumContext : DbContext
         modelBuilder.Entity<User>()
             .HasMany<Role>(x => x.Roles)
             .WithMany(x => x.RelatedUsers);
+        
+        modelBuilder.DataSeeding();
     }
 
     // The following configures EF to create a Sqlite database file in the

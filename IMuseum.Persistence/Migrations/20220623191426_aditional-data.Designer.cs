@@ -3,6 +3,7 @@ using System;
 using IMuseum.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMuseum.Persistence.Migrations
 {
     [DbContext(typeof(IMuseumContext))]
-    partial class IMuseumContextModelSnapshot : ModelSnapshot
+    [Migration("20220623191426_aditional-data")]
+    partial class aditionaldata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");

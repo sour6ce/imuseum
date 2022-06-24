@@ -3,6 +3,7 @@ using System;
 using IMuseum.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMuseum.Persistence.Migrations
 {
     [DbContext(typeof(IMuseumContext))]
-    partial class IMuseumContextModelSnapshot : ModelSnapshot
+    [Migration("20220623183903_Initial-database")]
+    partial class Initialdatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -78,24 +80,6 @@ namespace IMuseum.Persistence.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Artworks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9439),
-                            Assessment = 10m,
-                            Author = "Unknown",
-                            CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "It is just a simple tapice.",
-                            IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 1,
-                            Period = "ooold",
-                            RoomId = 1,
-                            Title = "The tapice"
-                        });
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Image", b =>
@@ -175,26 +159,6 @@ namespace IMuseum.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Loans");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9400),
-                            Deleted = false,
-                            LoanAplicationId = 1,
-                            PaymentAmount = 10m,
-                            StartDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9405),
-                            Deleted = false,
-                            LoanAplicationId = 2,
-                            PaymentAmount = 20m,
-                            StartDate = new DateTime(2022, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.LoanApplication", b =>
@@ -245,32 +209,6 @@ namespace IMuseum.Persistence.Migrations
                     b.HasIndex("MuseumId");
 
                     b.ToTable("LoanApplications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9417),
-                            ApplicationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ArtworkId = 1,
-                            CurrentStatus = 0,
-                            Deleted = false,
-                            Duration = 10,
-                            LoanId = 1,
-                            MuseumId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9421),
-                            ApplicationDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ArtworkId = 1,
-                            CurrentStatus = 0,
-                            Deleted = false,
-                            Duration = 10,
-                            LoanId = 2,
-                            MuseumId = 1
-                        });
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Museum", b =>
@@ -305,49 +243,49 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9223),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6090),
                             Deleted = false,
                             Name = "Louvre Museum"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9259),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6126),
                             Deleted = false,
                             Name = "British Museum"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9261),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6128),
                             Deleted = false,
                             Name = "London Arqueology Museum"
                         },
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9263),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6129),
                             Deleted = false,
                             Name = "New York Museum"
                         },
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9264),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6131),
                             Deleted = false,
                             Name = "Vatican City Museum"
                         },
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9266),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6133),
                             Deleted = false,
                             Name = "Kiko's Gallery"
                         },
                         new
                         {
                             Id = 7,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9268),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6134),
                             Deleted = false,
                             Name = "LeTize Museum"
                         });
@@ -425,49 +363,49 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 8,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9368),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6230),
                             Deleted = false,
                             Name = "Role 1"
                         },
                         new
                         {
                             Id = 9,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9371),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6234),
                             Deleted = false,
                             Name = "Role 2"
                         },
                         new
                         {
                             Id = 10,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9373),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6235),
                             Deleted = false,
                             Name = "Role 3"
                         },
                         new
                         {
                             Id = 11,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9375),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6237),
                             Deleted = false,
                             Name = "Role 4"
                         },
                         new
                         {
                             Id = 12,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9377),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6239),
                             Deleted = false,
                             Name = "Role 5"
                         },
                         new
                         {
                             Id = 13,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9378),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6240),
                             Deleted = false,
                             Name = "Role 6"
                         },
                         new
                         {
                             Id = 14,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9380),
+                            AddTime = new DateTime(2022, 6, 23, 20, 39, 3, 471, DateTimeKind.Local).AddTicks(6242),
                             Deleted = false,
                             Name = "Role 7"
                         });
@@ -500,29 +438,6 @@ namespace IMuseum.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9455),
-                            Deleted = false,
-                            Name = "Davinci"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9457),
-                            Deleted = false,
-                            Name = "Gallery"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddTime = new DateTime(2022, 6, 23, 21, 14, 26, 475, DateTimeKind.Local).AddTicks(9459),
-                            Deleted = false,
-                            Name = "Galileo"
-                        });
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.User", b =>
