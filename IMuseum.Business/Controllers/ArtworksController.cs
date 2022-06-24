@@ -2,7 +2,9 @@ using IMuseum.Persistence.Models;
 using IMuseum.Persistence.Repositories.Artworks;
 using IMuseum.Persistence.Repositories.Paintings;
 using IMuseum.Persistence.Repositories.Sculptures;
+using IMuseum.Persistence.Repositories.Restorations;
 using IMuseum.Business.Dtos.Artworks;
+using IMuseum.Business.Dtos.Restorations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +19,16 @@ public class ArtworksController : ControllerBase
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
     private readonly IArtworksRepository artRepository;
+    private readonly IRestorationsRepository restRepository;
     private readonly ILogger<ArtworksController> logger;
 
     public ArtworksController(IArtworksRepository artworks, ISculpturesRepository sculptures,
-     IPaintingsRepository paints, ILogger<ArtworksController> logger)
+     IPaintingsRepository paints, IRestorationsRepository restorations, ILogger<ArtworksController> logger)
     {
         this.artRepository = artworks;
         this.sculpturesRepository = sculptures;
         this.paintsRepository = paints;
+        this.restRepository = restorations;
         this.logger = logger;
     }
 
@@ -187,5 +191,51 @@ public class ArtworksController : ControllerBase
                 await artRepository.AddAsync(art);
                 return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = art.Id }, art);
         }
+    }
+
+    //POST /artworks/{id}/start-restoration
+    [HttpPut("{id}/start-restoration")]
+    public async Task<RestorationReturnDto> StartArtworkRestorationAsync(int artId, [FromQuery] RestorationParamDto args)
+    {
+        bool isArt = await this.artRepository.ContainsAsync(artId);
+        if (!isArt)
+            return new RestorationReturnDto() 
+            {
+                Artwork = null,
+                StartDate = null,
+                DueDate = null,
+                Status = null
+            };
+        
+        var filtered = (DbSet<Artwork> all) =>
+        {
+            return
+            all.Where((x) => x.Id == artId);
+        };
+
+        
+    }
+
+    //POST /artworks/{id}/end-restoration
+    [HttpPut("{id}/end-restoration")]
+    public async Task<RestorationReturnDto> EndArtworkRestorationAsync(int artId, [FromQuery] RestorationParamDto args)
+    {
+        bool isArt = await this.artRepository.ContainsAsync(artId);
+        if (!isArt)
+            return new RestorationReturnDto() 
+            {
+                Artwork = null,
+                StartDate = null,
+                DueDate = null,
+                Status = null
+            };
+        
+        var filtered = (DbSet<Artwork> all) =>
+        {
+            return
+            all.Where((x) => x.Id == artId);
+        };
+
+        
     }
 }
