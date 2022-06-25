@@ -18,7 +18,7 @@ if [ $choice -eq 1 ]
 elif [ $choice -eq 2 ]
   then
     echo "Starting frontend only"
-    cd .IMuseum.Presentation/ClientApp
+    cd ./IMuseum.Presentation/ClientApp
     npm start
 elif [ $choice -eq 3 ]
   then
