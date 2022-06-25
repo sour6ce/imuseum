@@ -12,7 +12,7 @@ public record Restoration : DatabaseModel
         Commercial,
         Other
     }
-    public RestorationType Type { get; set; }
+    public RestorationType? Type { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
 

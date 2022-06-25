@@ -15,5 +15,5 @@ public record RestorationReturnDto
 
     public RestorationStatus? RestorationStatus { get; set; }
 
-    public RestorationType? RestorationType { get; set; }
+    public IMuseum.Persistence.Models.Restoration.RestorationType? RestorationType { get; set; }
 }

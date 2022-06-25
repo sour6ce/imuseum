@@ -22,32 +22,13 @@ public class RestorationsController : ControllerBase
         this.restRepository = restRepository;
     }
 
-    internal async Task<RestorationType?> RestType(int restId)
-    {
-        Restoration restoration = await restRepository.GetObjectAsync(restId);
-        if(restoration is null)
-            return null;
-        // NOTE: Here goes analysis to get a string that identifies the type of the restoration
-        switch(restoration.Type)
-        {
-            case Restoration.RestorationType.AestheticFunctional:
-                return RestorationType.Commercial;
-            case Restoration.RestorationType.Commercial:
-                return RestorationType.AestheticFunctional;
-            case Restoration.RestorationType.Scientific:
-                return RestorationType.Scientific;
-            default:
-                return RestorationType.Other;
-        }
-    }
-
     internal async Task<RestorationReturnDto> RestorationAsDto(Restoration restoration)
     {
         var dto = new RestorationReturnDto()
         {
             StartDate = restoration.StartDate,
             DueDate = restoration.EndDate,
-            RestorationType = RestType(restoration.Id).Result.Value,
+            RestorationType = restoration.Type,
             RestorationStatus = restoration.EndDate == null ? RestorationStatus.Opened : RestorationStatus.Closed
         };
         return dto;

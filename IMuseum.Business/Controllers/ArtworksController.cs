@@ -144,41 +144,15 @@ public class ArtworksController : ControllerBase
 
     internal Restoration RestorationFromDto(RestorationReturnDto dto)
     {
-        switch(dto.RestorationType)
+        Restoration restoration = new Restoration()
         {
-            case RestorationType.Scientific:
-                var restS = new Restoration(){
-                    Artwork = new Artwork(){Id = dto.Artwork.Id},
-                    StartDate = (DateTime)dto.StartDate,
-                    EndDate = dto.DueDate,
-                    Type = Restoration.RestorationType.Scientific
-                };
-                return restS;
-            case RestorationType.AestheticFunctional:
-                var restA = new Restoration(){
-                    Artwork = new Artwork(){Id = dto.Artwork.Id},
-                    StartDate = (DateTime)dto.StartDate,
-                    EndDate = dto.DueDate,
-                    Type = Restoration.RestorationType.AestheticFunctional
-                };
-                return restA;
-            case RestorationType.Commercial:
-                var restC = new Restoration(){
-                    Artwork = new Artwork(){Id = dto.Artwork.Id},
-                    StartDate = (DateTime)dto.StartDate,
-                    EndDate = dto.DueDate,
-                    Type = Restoration.RestorationType.Commercial
-                };
-                return restC;
-            default:
-                var restO = new Restoration(){
-                    Artwork = new Artwork(){Id = dto.Artwork.Id},
-                    StartDate = (DateTime)dto.StartDate,
-                    EndDate = dto.DueDate,
-                    Type = Restoration.RestorationType.Other
-                };
-                return restO;
-        }
+            Artwork = new Artwork() { Id = dto.Artwork.Id },
+            StartDate = (DateTime)dto.StartDate,
+            EndDate = dto.DueDate,
+            Type = dto.RestorationType
+        };
+
+        return restoration;
     }
 
     //GET /artworks
@@ -238,9 +212,9 @@ public class ArtworksController : ControllerBase
     public async Task<RestorationReturnDto> StartArtworkRestorationAsync(int artId, RestorationParamDto args)
     {
         Artwork? artwork = await artRepository.GetObjectAsync(artId);
-        if(artwork is null)
+        if (artwork is null)
         {
-            return new RestorationReturnDto() 
+            return new RestorationReturnDto()
             {
                 Artwork = null,
                 StartDate = null,
@@ -249,11 +223,12 @@ public class ArtworksController : ControllerBase
                 RestorationType = null
             };
         }
-        artwork.CurrentSatus = Artwork.Status.InRestoration;  
+        artwork.CurrentSatus = Artwork.Status.InRestoration;
         DateTime addDate = DateTime.UtcNow;
-        await artRepository.UpdateObjectAsync(artwork); 
-        RestorationReturnDto returnRestoration = new RestorationReturnDto(){
-            Artwork = new ArtworkIdDto(){ Id = artId},
+        await artRepository.UpdateObjectAsync(artwork);
+        RestorationReturnDto returnRestoration = new RestorationReturnDto()
+        {
+            Artwork = new ArtworkIdDto() { Id = artId },
             StartDate = DateTime.UtcNow,
             DueDate = null,
             RestorationStatus = RestorationStatus.Opened,
@@ -268,9 +243,9 @@ public class ArtworksController : ControllerBase
     public async Task<RestorationReturnDto> EndArtworkRestorationAsync(int artId, RestorationParamDto args)
     {
         Artwork? artwork = await artRepository.GetObjectAsync(artId);
-        if(artwork is null)
+        if (artwork is null)
         {
-            return new RestorationReturnDto() 
+            return new RestorationReturnDto()
             {
                 Artwork = null,
                 StartDate = null,
@@ -279,11 +254,12 @@ public class ArtworksController : ControllerBase
                 RestorationType = null
             };
         }
-        artwork.CurrentSatus = Artwork.Status.InRestoration;  
+        artwork.CurrentSatus = Artwork.Status.InRestoration;
         DateTime endDate = DateTime.UtcNow;
-        await artRepository.UpdateObjectAsync(artwork); 
-        RestorationReturnDto returnRestoration = new RestorationReturnDto(){
-            Artwork = new ArtworkIdDto(){ Id = artId},
+        await artRepository.UpdateObjectAsync(artwork);
+        RestorationReturnDto returnRestoration = new RestorationReturnDto()
+        {
+            Artwork = new ArtworkIdDto() { Id = artId },
             StartDate = DateTime.UtcNow,
             DueDate = endDate,
             RestorationStatus = RestorationStatus.Closed,
