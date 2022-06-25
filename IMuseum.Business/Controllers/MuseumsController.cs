@@ -21,7 +21,7 @@ public class MuseumsController : ControllerBase
 
     //GET /museums
     [HttpGet]
-    public async Task<MuseumGetReturnDto> GetUsersAsync()
+    public async Task<MuseumGetReturnDto> GetMuseumsAsync()
     {
         var filtered = (DbSet<Museum> all) =>
         {

@@ -24,7 +24,15 @@ public class UsersController : ControllerBase
         this.usersRepository = usersRepository;
     }
 
-
+    internal User UserFromDto(UserPostAndPutDto dto)
+    {
+        return new User(){
+            Username = dto.FirstName + " " + dto.LastName,
+            Email = dto.Email,
+            Roles = dto.Roles,
+            Password = (new Guid()).ToString()
+        };
+    }
 
     //GET /users
     [HttpGet]
@@ -52,6 +60,28 @@ public class UsersController : ControllerBase
         };
     }
 
-    // TODO: [Hacer el Post de los users. Usar el Dto de UserPostAndPutDto, es trivial aplicando los mismos pasos del Post de los demas controladores]
-    // TODO: [Hacer el Put de los users guiandose por el Put de los demas controladores, usar el mismo Dto de UserPostAndPutDto]
+    //POST /users
+    [HttpPost]
+    public async Task<ActionResult<User>> CreateUserAsync(UserPostAndPutDto userDto)
+    {
+        var user = UserFromDto(userDto);
+        await usersRepository.AddAsync(user);
+        return CreatedAtAction(nameof(CreateUserAsync), new { Id = user.Id }, user);
+    }
+
+    //PUT /users/[id]
+    [HttpPut]
+    [Route("/users/{id}")]
+    public async Task<User> UpdateUserAsync(int id, UserPostAndPutDto dto)
+    {
+        User user = await usersRepository.GetObjectAsync(id);
+        if(user is null)
+            return null;
+        
+        user.Roles = dto.Roles;
+        user.Username = dto.FirstName + " " + dto.LastName;
+        user.Email = dto.Email;
+        await usersRepository.UpdateObjectAsync(user);
+        return user;
+    }
 }
