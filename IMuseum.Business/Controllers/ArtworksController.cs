@@ -234,7 +234,7 @@ public class ArtworksController : ControllerBase
     }
 
     //POST /artworks/{id}/start-restoration
-    [HttpPut("{id}/start-restoration")]
+    [HttpPost("{id}/start-restoration")]
     public async Task<RestorationReturnDto> StartArtworkRestorationAsync(int artId, RestorationParamDto args)
     {
         Artwork? artwork = await artRepository.GetObjectAsync(artId);
@@ -264,7 +264,7 @@ public class ArtworksController : ControllerBase
     }
 
     //POST /artworks/{id}/end-restoration
-    [HttpPut("{id}/end-restoration")]
+    [HttpPost("{id}/end-restoration")]
     public async Task<RestorationReturnDto> EndArtworkRestorationAsync(int artId, RestorationParamDto args)
     {
         Artwork? artwork = await artRepository.GetObjectAsync(artId);
