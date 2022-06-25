@@ -26,7 +26,7 @@ public class ArtistsController : ControllerBase
 
     //GET /artists
     [HttpGet]
-    public async Task<ArtistsGetReturnDto> GetArtistsAsync()
+    public async Task<ArtistGetReturnDto> GetArtistsAsync()
     {
         IEnumerable<Artwork> artworks = await artRepository.GetObjectsAsync();
         List<string> artists = new List<string>();
@@ -37,7 +37,7 @@ public class ArtistsController : ControllerBase
                 artists.Add(art.Author);
         }
 
-        return new ArtistsGetReturnDto()
+        return new ArtistGetReturnDto()
         {
             Artists = artists.ToArray(),
             Count = artists.Count
