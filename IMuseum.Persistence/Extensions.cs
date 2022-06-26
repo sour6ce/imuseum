@@ -18,7 +18,7 @@ public static class Extensions
     public static void AddDatabaseConnector(this IServiceCollection sc, ConfigurationManager cm)
     {
         // NOTE: Any dependency inyection related to Database goes here
-        sc.AddDbContext<SqliteIMuseumContext>(options => options.UseSqlite(cm.GetConnectionString("IMuseumDB")));
+        sc.AddDbContext<IMuseumContext>(options => options.UseSqlite(cm.GetConnectionString("IMuseumDB")));
     }
     public static void AddRepositories(this IServiceCollection sc)
     {

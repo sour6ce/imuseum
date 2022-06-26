@@ -3,11 +3,12 @@ using IMuseum.Persistence.Models;
 
 namespace IMuseum.Persistence;
 
-public class SqliteIMuseumContext : DbContext
+using IMuseum.Persistence.DataSeeding;
+public class IMuseumContext : DbContext
 {
     public string DbPath { get; }
 
-    public SqliteIMuseumContext(DbContextOptions<SqliteIMuseumContext> options) : base(options)
+    public IMuseumContext(DbContextOptions<IMuseumContext> options) : base(options)
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
@@ -56,6 +57,8 @@ public class SqliteIMuseumContext : DbContext
         modelBuilder.Entity<User>()
             .HasMany<Role>(x => x.Roles)
             .WithMany(x => x.RelatedUsers);
+        
+        modelBuilder.DataSeeding();
     }
 
     // The following configures EF to create a Sqlite database file in the

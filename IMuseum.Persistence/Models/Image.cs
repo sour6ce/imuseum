@@ -12,5 +12,7 @@ public record Image : DatabaseModel
     /// <summary>
     /// Artwork of this image. (Related from relation to artworks)
     /// </summary>
+    [ForeignKey("Artwork")]
+    public int ArtworkId{ get; set;}
     public Artwork Artwork { get; set; }
 }
