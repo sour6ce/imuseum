@@ -269,7 +269,7 @@ public class ArtworksController : ControllerBase
         return returnRestoration;
     }
 
-    //GET /artworks/[id]
+    //GET /artworks/{id}
     [HttpGet]
     [Route("/artworks/{id}")]
     public async Task<ActionResult<ArtworkGeneralDto>> GetArtworkAsync(int id)

@@ -42,4 +42,47 @@ public class MuseumsController : ControllerBase
             Count = (await count)
         };
     }
+
+    //POST /museums
+    [HttpPost]
+    public async Task<ActionResult<Museum>> CreateMuseumAsync(MuseumParamDto museumDto)
+    {
+        Museum museum = new Museum(){
+            Name = museumDto.Name
+        };
+        await museumsRepository.AddAsync(museum);
+        return museum;
+    }
+
+    [HttpDelete]
+    [Route("/museums/{id}")]
+    public async Task<ActionResult> DeleteMuseum(int id)
+    {
+        var success = await museumsRepository.RemoveAsync(id);
+        if (!success)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return new OkResult();
+        }
+    }
+
+    [HttpPut]
+    [Route("/museums/{id}")]
+    public async Task<ActionResult> UpdateMuseum(int id, MuseumParamDto dto)
+    {
+        Museum museum = new Museum(){
+            Name = dto.Name
+        };
+
+        var found = await museumsRepository.GetObjectAsync(id);
+
+        if (found == null)
+            return NotFound();
+        
+        await museumsRepository.UpdateObjectAsync(museum);
+        return AcceptedAtAction(nameof(UpdateMuseum), museum);
+    }
 }
