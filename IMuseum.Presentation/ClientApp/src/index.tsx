@@ -3,6 +3,8 @@ import './index.css';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { BasicComponent } from './components/BasicComponents';
+import { DashboardLayout } from './ui-components/layouts/DashboardLayout';
+import { HomePage } from './pages/HomePage';
 
 
 const root = ReactDOM.createRoot(
@@ -12,12 +14,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/home' element={<BasicComponent text='Home'/>}/>
+      <Route path='/home' element={<HomePage/>}/>
       
       <Route path='/gallery' element={<BasicComponent text='Gallery'/>}/>
       <Route path='/gallery/:artworkId/*' element={<BasicComponent text='Artwork Gallery'/>}/>
 
-      <Route path='/' element={<BasicComponent text='Main Layout'/>}>
+      <Route path='/' element={<DashboardLayout/>}>
         <Route path='dashboard' element={<BasicComponent text='Dashboard'/>}/>
         
         <Route path='users' element={<BasicComponent text='Users'/>}/>
