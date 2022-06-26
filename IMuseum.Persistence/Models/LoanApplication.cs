@@ -11,7 +11,7 @@ public record LoanApplication : DatabaseModel
     /// <summary>
     /// Status of an loan application
     /// </summary>
-    public enum Status
+    public enum LoanApplicationStatus
     {
         /// <summary>
         /// The artwork was requested but not yet approved
@@ -37,7 +37,7 @@ public record LoanApplication : DatabaseModel
     /// </summary>
     public DateTime ApplicationDate { get; set; }
     public int Duration { get; set; }
-    public Status CurrentStatus { get; set; } = Status.OnWait;
+    public LoanApplicationStatus CurrentStatus { get; set; } = LoanApplicationStatus.OnWait;
     [ForeignKey("Artwork")]
     public int ArtworkId { get; set;} = 0;
     public Artwork? Artwork { get; set; }

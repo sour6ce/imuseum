@@ -49,7 +49,7 @@ public static class Seeding
                 Id = 1, 
                 ApplicationDate = new DateTime(2022,6,23),
                 Duration = 10,
-                CurrentStatus = LoanApplication.Status.OnWait,
+                CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
                 ArtworkId = 1,
                 MuseumId = 1,
                 LoanId = 1 },
@@ -57,7 +57,7 @@ public static class Seeding
                 Id = 2, 
                 ApplicationDate = new DateTime(2022,1,1),
                 Duration = 10,
-                CurrentStatus = LoanApplication.Status.OnWait,
+                CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
                 ArtworkId = 1,
                 MuseumId = 1,
                 LoanId = 2 }
@@ -74,7 +74,7 @@ public static class Seeding
                 IncorporatedDate = new DateTime(2022,6,23),
                 Period = "ooold",
                 Assessment = 10,
-                CurrentSatus=Artwork.Status.OnDisplay, 
+                CurrentSatus=Artwork.ArtworkStatus.OnDisplay, 
                 MuseumId = 1,
                 Description = "It is just a simple tapice.",
                 RoomId=1}

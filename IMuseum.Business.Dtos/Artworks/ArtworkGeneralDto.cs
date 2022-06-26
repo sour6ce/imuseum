@@ -12,7 +12,7 @@ public record ArtworkGeneralDto
     public DateTime? IncorporatedDate { get; set; }
     public string Period { get; set; }
     public decimal Assessment { get; set; }
-    public Persistence.Models.Artwork.Status Status { get; set; }
+    public Persistence.Models.Artwork.ArtworkStatus Status { get; set; }
     public ArtworkType Type { get; set; }
     public string? Style { get; set; }
     public string? Media { get; set; }

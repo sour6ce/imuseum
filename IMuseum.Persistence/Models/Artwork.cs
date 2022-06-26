@@ -9,7 +9,7 @@ public record Artwork : DatabaseModel
     /// <summary>
     /// Status of an stored artwork.
     /// </summary>
-    public enum Status
+    public enum ArtworkStatus
     {
         /// <summary>
         /// Internal artwork that was loaned to another
@@ -61,7 +61,7 @@ public record Artwork : DatabaseModel
     /// <summary>
     /// Status of the artwork inside or outside the museum.
     /// </summary>
-    public Status CurrentSatus { get; set; } = Status.InStorage;
+    public ArtworkStatus CurrentSatus { get; set; } = ArtworkStatus.InStorage;
     /// <summary>
     /// The museum owner of the artwork, in case of an internal artwork this
     /// field must be <c>null</c>.

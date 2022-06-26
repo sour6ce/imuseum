@@ -35,13 +35,13 @@ public class TotalsController : ControllerBase
 
         foreach(Artwork art in artworks)
         {
-            if(art.CurrentSatus == Artwork.Status.OnLoan)
+            if(art.CurrentSatus == Artwork.ArtworkStatus.OnLoan)
                 countOnLoan++;
-            else if(art.CurrentSatus == Artwork.Status.InRestoration)
+            else if(art.CurrentSatus == Artwork.ArtworkStatus.InRestoration)
                 countInRestoration++;
-            else if(art.CurrentSatus == Artwork.Status.InStorage)
+            else if(art.CurrentSatus == Artwork.ArtworkStatus.InStorage)
                 countInStorage++;
-            else if(art.CurrentSatus == Artwork.Status.OnDisplay)
+            else if(art.CurrentSatus == Artwork.ArtworkStatus.OnDisplay)
                 countOnDisplay++;
         }
 

@@ -223,7 +223,7 @@ public class ArtworksController : ControllerBase
                 RestorationType = null
             };
         }
-        artwork.CurrentSatus = Artwork.Status.InRestoration;
+        artwork.CurrentSatus = Artwork.ArtworkStatus.InRestoration;
         DateTime addDate = DateTime.UtcNow;
         await artRepository.UpdateObjectAsync(artwork);
         RestorationReturnDto returnRestoration = new RestorationReturnDto()
@@ -254,7 +254,7 @@ public class ArtworksController : ControllerBase
                 RestorationType = null
             };
         }
-        artwork.CurrentSatus = Artwork.Status.InRestoration;
+        artwork.CurrentSatus = Artwork.ArtworkStatus.InRestoration;
         DateTime endDate = DateTime.UtcNow;
         await artRepository.UpdateObjectAsync(artwork);
         RestorationReturnDto returnRestoration = new RestorationReturnDto()
