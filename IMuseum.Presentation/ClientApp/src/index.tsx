@@ -19,7 +19,7 @@ root.render(
       <Route path='/gallery' element={<BasicComponent text='Gallery'/>}/>
       <Route path='/gallery/:artworkId/*' element={<BasicComponent text='Artwork Gallery'/>}/>
 
-      <Route path='/' element={<DashboardLayout/>}>
+      <Route path='/' element={<DashboardLayout activeItem=''/>}>
         <Route path='dashboard' element={<BasicComponent text='Dashboard'/>}/>
         
         <Route path='users' element={<BasicComponent text='Users'/>}/>
