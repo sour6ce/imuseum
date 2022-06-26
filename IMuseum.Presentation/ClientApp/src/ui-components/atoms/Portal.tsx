@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-export const Portal: React.FC<{ portalName: string }> = ({
+export const Portal: React.FC<{ portalName: string, children: React.ReactNode }> = ({
   children,
   portalName,
 }) => {

@@ -9,7 +9,7 @@ export interface BreadcrumbProps {
 export const Breadcrumb = (props: BreadcrumbProps) => {
   return (
     <>
-      <Link to="/" className="text-gray-200 hover:text-primary">
+      <Link to="/home" className="text-gray-200 hover:text-primary-light self-center">
         <Icon name="house" family='fontawesome' />
       </Link>
       <ul className="list-none flex flex-row gap-2 font-bold text-xl my-1">

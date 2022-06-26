@@ -46,7 +46,7 @@ export const Popover: React.FC<PopoverProps> = (props) => {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <P.Panel as='div' className={`absolute z-40 ${props.position === 'left' ? 'left-0' : 'right-0'} z-50 bg-gray-700 mt-1 w-screen shadow-xl ring-2 ring-gray-950 ring-opacity-5 rounded-lg max-w-md px-4 sm:px-0`}>
+            <P.Panel as='div' className={`absolute z-40 ${props.position === 'left' ? 'left-0' : 'right-0'} z-50 bg-gray-800 mt-1 w-screen shadow-xl ring-2 ring-gray-950 ring-opacity-5 rounded-lg max-w-md px-4 sm:px-0`}>
               <div className={props.className}>
                 {props.render({open,close})}
               </div>
