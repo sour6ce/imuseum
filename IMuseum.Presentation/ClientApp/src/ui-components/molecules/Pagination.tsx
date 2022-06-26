@@ -20,10 +20,10 @@ export interface PaginationProps extends Pagination {
 export const initialPaginationState: Pagination = {
   page: 0,
   pageSize: 5,
-  maxPages: 3,
+  maxPages: 10,
 };
 
-export const Pagination = (props: PaginationProps) => {
+export const PaginationComponent = (props: PaginationProps) => {
   const [paginationState, setPaginationState] = useState<Pagination>({
     ...initialPaginationState,
   });
@@ -39,11 +39,11 @@ export const Pagination = (props: PaginationProps) => {
   );
 
   const pagesCount = useMemo(
-    () => Math.ceil(pagination.total / pagination.pageSize),
+    () => Math.ceil((pagination.total ?? 0) / (pagination.pageSize ?? 1)),
     [pagination]
   );
   const pageOffset = useMemo(
-    () => Math.floor(pagination.maxPages / 2),
+    () => Math.floor((pagination.maxPages ?? 10) / 2),
     [pagination]
   );
 
@@ -53,19 +53,19 @@ export const Pagination = (props: PaginationProps) => {
     const start = pagination.page;
 
     let end =
-      pagination.page +
+      (pagination.page ?? 0) +
       pageOffset +
-      Math.max(0, pagination.maxPages - start - pageOffset);
+      Math.max(0, (pagination.maxPages ?? 0) - (start ?? 0) - pageOffset);
     end = Math.min(end, pagesCount - 1);
 
-    const preStart = Math.max(0, start - pagination.maxPages + (end - start));
-    const preEnd = Math.max(0, start);
+    const preStart = Math.max(0, (start ?? 0) - (pagination.maxPages ?? 0) + (end - (start ?? 0)));
+    const preEnd = Math.max(0, (start ?? 0));
 
     for (let i = preStart; i < preEnd; i++) {
       p.push(i);
     }
 
-    for (let i = start; i <= end; i++) {
+    for (let i = (start ?? 0); i <= end; i++) {
       p.push(i);
     }
 
@@ -82,14 +82,14 @@ export const Pagination = (props: PaginationProps) => {
   const handleNextPage = () => {
     handlePaginationChange({
       ...pagination,
-      page: pagination.page + 1,
+      page: (pagination.page ?? 0) + 1,
     });
   };
 
   const handlePreviousPage = () => {
     handlePaginationChange({
       ...pagination,
-      page: pagination.page - 1,
+      page: (pagination.page ?? 0) - 1,
     });
   };
 

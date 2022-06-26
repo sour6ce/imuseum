@@ -7,11 +7,11 @@ export interface BreadcrumbItemProps {
 }
 export const BreadcrumbItem = (props: BreadcrumbItemProps) => {
   return (
-    <li className="breadcrumb-item">
-      <div className="bullet bg-gray-300 w-5px h-2px mx-3" />
-      <div className="text-muted">
+    <li className="list-item">
+      <div className="bg-gray-300 w-[5px] h-[2px] mx-3" />
+      <div className="text-gray-300">
         {!props.disable ? (
-          <Link href={props.path} className="text-muted text-hover-primary">
+          <Link to={props.path} className="text-gray-300 hover:text-primary">
             {props.name}
           </Link>
         ) : (

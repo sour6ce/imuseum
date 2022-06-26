@@ -9,7 +9,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
+.scrollbar::-webkit-scrollbar {
   width: 11px;
 }
 .scrollbar {

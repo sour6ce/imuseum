@@ -9,10 +9,10 @@ export interface BreadcrumbProps {
 export const Breadcrumb = (props: BreadcrumbProps) => {
   return (
     <>
-      <Link href="/" className="text-muted text-hover-primary">
-        <Icon name="house" />
+      <Link to="/" className="text-gray-200 hover:text-primary">
+        <Icon name="house" family='fontawesome' />
       </Link>
-      <ul className="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+      <ul className="list-none flex flex-row gap-2 font-bold text-xl my-1">
         {props.items.map((br, index) => (
           <BreadcrumbItem {...br} key={index} />
         ))}
