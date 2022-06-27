@@ -26,18 +26,4 @@ public class UserService : IUserService
             return user;
         }
     }
-
-    // public async Task<IEnumerable<User>> GetAll()
-    // {
-    //     DbContextOptions<IMuseumContext> dbContextOptions = new DbContextOptions<IMuseumContext>();
-    //     var context = new DbUsersRepository();
-    //     {
-    //         // wrapped in "await Task.Run" to mimic fetching user from a db
-    //         var users = await Task.Run(() => context.Set<User>().g);
-
-    //         // on auth fail: null is returned because user is not found
-    //         // on auth success: user object is returned
-    //         return users;
-    //     }
-    // }
 }
