@@ -4,10 +4,13 @@ using IMuseum.Business.Dtos.Museums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using IMuseum.Auth.Authorization;
 
 namespace IMuseum.Business.Controllers;
 
+
 //GET /museums
+[Director]
 [ApiController]
 [Route("museums")]
 public class MuseumsController : ControllerBase

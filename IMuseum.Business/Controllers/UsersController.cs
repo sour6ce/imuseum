@@ -1,3 +1,4 @@
+﻿
 using IMuseum.Persistence.Models;
 using IMuseum.Persistence.Repositories.Artworks;
 using IMuseum.Persistence.Repositories.Paintings;
@@ -9,19 +10,36 @@ using IMuseum.Business.Dtos.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using IMuseum.Persistence.Services;
+using IMuseum.Auth.Authorization;
 
 namespace IMuseum.Business.Controllers;
 
 //GET /users
+[Admin]
 [ApiController]
 [Route("users")]
 public class UsersController : ControllerBase
 {
+    private readonly IUserService _userService;
     private readonly IUsersRepository usersRepository;
 
-    public UsersController(IUsersRepository usersRepository)
+    public UsersController(IUserService userService, IUsersRepository usersRepository)
     {
+        this._userService = userService;
         this.usersRepository = usersRepository;
+    }
+
+    [AllowAnonymous]
+    [HttpPost("authenticate")]
+    public async Task<IActionResult> Authenticate([FromBody]AuthenticateModel model)
+    {
+        var user = await _userService.Authenticate(model.Username, model.Password);
+
+        if (user == null)
+            return BadRequest(new { message = "Username or password is incorrect" });
+
+        return Ok(user);
     }
 
     internal User UserFromDto(UserPostAndPutDto dto)

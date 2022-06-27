@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using IMuseum.Persistence.Repositories.Artworks;
-using IMuseum.Persistence.Repositories.Images;
 using IMuseum.Persistence.Repositories.Loans;
 using IMuseum.Persistence.Repositories.LoanApplications;
 using IMuseum.Persistence.Repositories.Museums;
@@ -25,7 +24,6 @@ public static class Extensions
     {
         // NOTE: Any dependency inyection related to repositories goes here
         sc.AddSingleton<IArtworksRepository, DbArtworksRepository>();
-        sc.AddSingleton<IImagesRepository, DbImagesRepository>();
         sc.AddSingleton<ILoansRepository, DbLoansRepository>();
         sc.AddSingleton<ILoanApplicationsRepository, DbLoanApplicationsRepository>();
         sc.AddSingleton<IMuseumsRepository, DbMuseumsRepository>();

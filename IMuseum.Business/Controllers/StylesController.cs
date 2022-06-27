@@ -8,10 +8,12 @@ using IMuseum.Business.Dtos.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using IMuseum.Auth.Authorization;
 
 namespace IMuseum.Business.Controllers;
 
 //GET /styles
+[CatalogManager]
 [ApiController]
 [Route("styles")]
 public class StylesController : ControllerBase

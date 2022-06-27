@@ -6,10 +6,12 @@ using IMuseum.Business.Dtos.Totals;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using IMuseum.Auth.Authorization;
 
 namespace IMuseum.Business.Controllers;
 
 //GET /totals
+[Admin]
 [ApiController]
 [Route("totals")]
 public class TotalsController : ControllerBase

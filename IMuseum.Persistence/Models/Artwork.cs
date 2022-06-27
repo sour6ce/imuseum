@@ -70,7 +70,7 @@ public record Artwork : DatabaseModel
     public int? MuseumId { get; set; }
     public Museum? Museum { get; set; } = null;
 
-    public ICollection<Image> Images { get; set; }
+    public string Images { get; set; }
     public string Description { get; set; }
 
     /// <summary>

@@ -9,11 +9,13 @@ using IMuseum.Business.Dtos.Restorations;
 using IMuseum.Business.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using IMuseum.Auth.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMuseum.Business.Controllers;
 
 //GET /artworks
+[CatalogManager]
 [ApiController]
 [Route("artworks")]
 public class ArtworksController : ControllerBase
