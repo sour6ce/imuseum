@@ -3,6 +3,7 @@ using IMuseum.Persistence.Repositories.Artworks;
 using IMuseum.Persistence.Repositories.Paintings;
 using IMuseum.Persistence.Repositories.Sculptures;
 using IMuseum.Persistence.Repositories.Restorations;
+using IMuseum.Persistence.Repositories.Rooms;
 using IMuseum.Business.Dtos.Artworks;
 using IMuseum.Business.Dtos.Restorations;
 using IMuseum.Business.Dtos;
@@ -17,6 +18,7 @@ namespace IMuseum.Business.Controllers;
 [Route("artworks")]
 public class ArtworksController : ControllerBase
 {
+    private readonly IRoomsRepository roomsRepository;
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
     private readonly IArtworksRepository artRepository;
@@ -24,12 +26,14 @@ public class ArtworksController : ControllerBase
     private readonly ILogger<ArtworksController> logger;
 
     public ArtworksController(IArtworksRepository artworks, ISculpturesRepository sculptures,
+    IRoomsRepository rooms,
      IPaintingsRepository paints, IRestorationsRepository restorations, ILogger<ArtworksController> logger)
     {
         this.artRepository = artworks;
         this.sculpturesRepository = sculptures;
         this.paintsRepository = paints;
         this.restRepository = restorations;
+        this.roomsRepository = rooms;
         this.logger = logger;
     }
 
@@ -317,7 +321,7 @@ public class ArtworksController : ControllerBase
     //PUT /artwork/{id}
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult> UpdateArtwork(int id, ArtworkPutPostDto dto)
+    public async Task<ActionResult> UpdateArtworkAsync(int id, ArtworkPutPostDto dto)
     {
         var art = ArtworkFromDto(dto);
 
@@ -337,7 +341,7 @@ public class ArtworksController : ControllerBase
                 sc.Material = sculpturefound.Result?.Material;
 
                 await sculpturesRepository.UpdateObjectAsync(sc);
-                return AcceptedAtAction(nameof(UpdateArtwork), dto);
+                return AcceptedAtAction(nameof(UpdateArtworkAsync), dto);
 
             case ArtworkType.Painting:
                 if (await paintfound == null)
@@ -349,12 +353,75 @@ public class ArtworksController : ControllerBase
                 pnt.Media = paintfound.Result?.Media;
 
                 await paintsRepository.UpdateObjectAsync(art as Painting);
-                return AcceptedAtAction(nameof(UpdateArtwork), dto);
+                return AcceptedAtAction(nameof(UpdateArtworkAsync), dto);
             default:
                 if (await found == null)
                     return NotFound();
                 await artRepository.UpdateObjectAsync(art);
-                return AcceptedAtAction(nameof(UpdateArtwork), dto);
+                return AcceptedAtAction(nameof(UpdateArtworkAsync), dto);
         }
+    }
+
+    //POST /artwork/{id}/move
+    [HttpPost]
+    [Route("{id}/move-to-room")]
+    public async Task<ActionResult> MoveRoomAsync(int id, [FromQuery] int RoomId)
+    {
+        var room = await roomsRepository.GetObjectAsync(RoomId);
+
+        if (room == null)
+            return BadRequest();
+
+        return await artRepository.ExecuteOnDbAsync<ActionResult>(async (set, context) =>
+        {
+            var art = await set.FirstOrDefaultAsync((x) => id == x.Id);
+
+            if (art == null)
+                return NotFound();
+            else
+            {
+                if (
+                    art.CurrentSatus == Artwork.ArtworkStatus.OnLoan ||
+                    art.CurrentSatus == Artwork.ArtworkStatus.InRestoration
+                )
+                    return BadRequest("An artwork in restoration or loan can't be moved");
+
+                // TODO: Update on added state for external artwork
+                art.CurrentSatus = Artwork.ArtworkStatus.OnDisplay;
+                art.RoomId = RoomId;
+                await context.SaveChangesAsync();
+                return new OkResult();
+            }
+
+        });
+    }
+
+
+    //POST /artwork/{id}/move
+    [HttpPost]
+    [Route("{id}/move-to-storage")]
+    public async Task<ActionResult> MoveStorageAsync(int id)
+    {
+        return await artRepository.ExecuteOnDbAsync<ActionResult>(async (set, context) =>
+        {
+            var art = await set.FirstOrDefaultAsync((x) => id == x.Id);
+
+            if (art == null)
+                return NotFound();
+            else
+            {
+                if (
+                    art.CurrentSatus == Artwork.ArtworkStatus.OnLoan ||
+                    art.CurrentSatus == Artwork.ArtworkStatus.InRestoration
+                )
+                    return BadRequest("An artwork in restoration or loan can't be moved");
+
+                // TODO: Update on added state for external artwork
+                art.CurrentSatus = Artwork.ArtworkStatus.InStorage;
+                await context.SaveChangesAsync();
+                return new OkResult();
+            }
+
+        });
     }
 }
