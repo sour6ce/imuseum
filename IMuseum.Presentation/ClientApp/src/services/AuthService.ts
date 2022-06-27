@@ -23,24 +23,10 @@ export class AuthService{
     }
     return Promise.reject(error);
   }
+
+  static async login(username: string, password: string){
+    return axios.post('/api/login',{username,password})
+  }
 }
-
-
-//   static async login(usr:string,pass:string){
-//     return await AuthService.axios.post<{profile:User}>(
-//       'login/',{
-//         username: usr,
-//         password: pass,
-//       })
-//   }
-
-//   static async logout(){
-//     return await AuthService.axios.post('logout/')
-//   }
-
-//   static async getUsers(){
-//     return await AuthService.axios.get('users/')
-//   }
-// }
-
-// export default AuthService
+ 
+export default AuthService;
