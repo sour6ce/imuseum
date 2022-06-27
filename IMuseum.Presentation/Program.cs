@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 using IMuseum.Business;
-using IMuseum.Auth.Services;
+using IMuseum.Persistence.Services;
 using IMuseum.Auth.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
