@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace IMuseum.Auth.Authorization;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class AuthorizeAttribute : Attribute, IAuthorizationFilter
+public class DirecotrAttribute : Attribute, IAuthorizationFilter
 {
     public void OnAuthorization(AuthorizationFilterContext context)
     {
@@ -15,6 +15,14 @@ public class AuthorizeAttribute : Attribute, IAuthorizationFilter
             return;
 
         var user = (User)context.HttpContext.Items["User"];
+        if(user.Roles.Count>0){
+            foreach (var r in user.Roles){
+                if(r.Name == "Director"){
+                    return;
+                }
+            }
+            user = null;
+        }
         if (user == null)
         {
             // not logged in - return 401 unauthorized
