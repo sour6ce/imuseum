@@ -271,7 +271,7 @@ public class ArtworksController : ControllerBase
 
     //GET /artworks/{id}
     [HttpGet]
-    [Route("/artworks/{id}")]
+    [Route("{id}")]
     public async Task<ActionResult<ArtworkGeneralDto>> GetArtworkAsync(int id)
     {
         var ret = await artRepository.GetObjectAsync(id);
@@ -286,7 +286,7 @@ public class ArtworksController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("/artworks/{id}")]
+    [Route("{id}")]
     public async Task<ActionResult> DeleteArtwork(int id)
     {
         var success = await artRepository.RemoveAsync(id);
@@ -301,7 +301,7 @@ public class ArtworksController : ControllerBase
     }
 
     [HttpPut]
-    [Route("/artworks/{id}")]
+    [Route("{id}")]
     public async Task<ActionResult> UpdateArtwork(int id, ArtworkGeneralDto dto)
     {
         var art = ArtworkFromDto(dto); // TODO: Check Status workflow

@@ -4,6 +4,6 @@ namespace IMuseum.Business.Dtos.Rooms;
 
 public record RoomGetReturnDto
 {
-    public Room[] Rooms { get; set; }
+    public RoomDto[] Rooms { get; set; }
     public int Count { get; set; }
 }

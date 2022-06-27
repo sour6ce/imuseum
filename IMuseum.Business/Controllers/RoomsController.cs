@@ -19,6 +19,14 @@ public class RoomsController : ControllerBase
         this.roomsRepository = roomsRepository;
     }
 
+    internal async Task<RoomDto> RoomAsDto(Room room)
+    {
+        return new RoomDto(){
+            Name = room.Name
+        };
+    }
+
+
     //GET /rooms
     [HttpGet]
     public async Task<RoomGetReturnDto> GetRoomsAsync()
@@ -38,24 +46,44 @@ public class RoomsController : ControllerBase
         }));
         return new RoomGetReturnDto()
         {
-            Rooms = rooms.ToArray(),
+            Rooms = (rooms).Select((x) => this.RoomAsDto(x).Result).ToArray(),
             Count = (await count)
+        };
+    }
+    
+    //GET /museums
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<RoomDto> GetRoomAsync(int id)
+    {
+        var room = await roomsRepository.GetObjectAsync(id);
+
+        if(room is null)
+        {
+            return new RoomDto(){
+                Name = null
+            };
+        }
+
+        return new RoomDto()
+        {
+            Name = room.Name
         };
     }
 
     //POST /rooms
     [HttpPost]
-    public async Task<ActionResult<Room>> CreateRoomAsync(RoomParamDto roomDto)
+    public async Task<ActionResult<RoomDto>> CreateRoomAsync(RoomDto roomDto)
     {
         Room room = new Room(){
             Name = roomDto.Name
         };
         await roomsRepository.AddAsync(room);
-        return room;
+        return await RoomAsDto(room);
     }
 
     [HttpDelete]
-    [Route("/rooms/{id}")]
+    [Route("{id}")]
     public async Task<ActionResult> DeleteRoom(int id)
     {
         var success = await roomsRepository.RemoveAsync(id);
@@ -70,8 +98,8 @@ public class RoomsController : ControllerBase
     }
 
     [HttpPut]
-    [Route("/rooms/{id}")]
-    public async Task<ActionResult> UpdateRoom(int id, RoomParamDto dto)
+    [Route("{id}")]
+    public async Task<ActionResult> UpdateRoom(int id, RoomDto dto)
     {
         Room room = new Room(){
             Name = dto.Name
@@ -83,6 +111,6 @@ public class RoomsController : ControllerBase
             return NotFound();
         
         await roomsRepository.UpdateObjectAsync(room);
-        return AcceptedAtAction(nameof(UpdateRoom), room);
+        return AcceptedAtAction(nameof(UpdateRoom), dto);
     }
 }

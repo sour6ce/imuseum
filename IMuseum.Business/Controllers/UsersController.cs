@@ -62,17 +62,17 @@ public class UsersController : ControllerBase
 
     //POST /users
     [HttpPost]
-    public async Task<ActionResult<User>> CreateUserAsync(UserPostAndPutDto userDto)
+    public async Task<ActionResult<UserPostAndPutDto>> CreateUserAsync(UserPostAndPutDto userDto)
     {
         var user = UserFromDto(userDto);
         await usersRepository.AddAsync(user);
-        return CreatedAtAction(nameof(CreateUserAsync), new { Id = user.Id }, user);
+        return CreatedAtAction(nameof(CreateUserAsync), new { Id = user.Id }, userDto);
     }
 
     //PUT /users/[id]
     [HttpPut]
-    [Route("/users/{id}")]
-    public async Task<User> UpdateUserAsync(int id, UserPostAndPutDto dto)
+    [Route("{id}")]
+    public async Task<UserPostAndPutDto> UpdateUserAsync(int id, UserPostAndPutDto dto)
     {
         User user = await usersRepository.GetObjectAsync(id);
         if(user is null)
@@ -82,6 +82,6 @@ public class UsersController : ControllerBase
         user.Username = dto.FirstName + " " + dto.LastName;
         user.Email = dto.Email;
         await usersRepository.UpdateObjectAsync(user);
-        return user;
+        return dto;
     }
 }

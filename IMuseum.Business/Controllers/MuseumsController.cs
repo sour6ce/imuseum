@@ -19,6 +19,20 @@ public class MuseumsController : ControllerBase
         this.museumsRepository = museumsRepository;
     }
 
+    internal async Task<MuseumDto> MuseumAsDto(Museum museum)
+    {
+        return new MuseumDto(){
+            Name = museum.Name
+        };
+    }
+
+    internal async Task<Museum> MuseumFromDto(MuseumDto dto)
+    {
+        return new Museum(){
+            Name = dto.Name
+        };
+    }
+
     //GET /museums
     [HttpGet]
     public async Task<MuseumGetReturnDto> GetMuseumsAsync()
@@ -38,24 +52,44 @@ public class MuseumsController : ControllerBase
         }));
         return new MuseumGetReturnDto()
         {
-            Museums = museums.ToArray(),
+            Museums = (museums).Select((x) => this.MuseumAsDto(x).Result).ToArray(),
             Count = (await count)
+        };
+    }
+
+    //GET /museums
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<MuseumDto> GetMuseumAsync(int id)
+    {
+        var museum = await museumsRepository.GetObjectAsync(id);
+
+        if(museum is null)
+        {
+            return new MuseumDto(){
+                Name = null
+            };
+        }
+
+        return new MuseumDto()
+        {
+            Name = museum.Name
         };
     }
 
     //POST /museums
     [HttpPost]
-    public async Task<ActionResult<Museum>> CreateMuseumAsync(MuseumParamDto museumDto)
+    public async Task<ActionResult<MuseumDto>> CreateMuseumAsync(MuseumDto museumDto)
     {
         Museum museum = new Museum(){
             Name = museumDto.Name
         };
         await museumsRepository.AddAsync(museum);
-        return museum;
+        return museumDto;
     }
 
     [HttpDelete]
-    [Route("/museums/{id}")]
+    [Route("{id}")]
     public async Task<ActionResult> DeleteMuseum(int id)
     {
         var success = await museumsRepository.RemoveAsync(id);
@@ -70,8 +104,8 @@ public class MuseumsController : ControllerBase
     }
 
     [HttpPut]
-    [Route("/museums/{id}")]
-    public async Task<ActionResult> UpdateMuseum(int id, MuseumParamDto dto)
+    [Route("{id}")]
+    public async Task<ActionResult> UpdateMuseum(int id, MuseumDto dto)
     {
         Museum museum = new Museum(){
             Name = dto.Name
@@ -83,6 +117,6 @@ public class MuseumsController : ControllerBase
             return NotFound();
         
         await museumsRepository.UpdateObjectAsync(museum);
-        return AcceptedAtAction(nameof(UpdateMuseum), museum);
+        return AcceptedAtAction(nameof(UpdateMuseum), dto);
     }
 }
