@@ -15,15 +15,19 @@ public class RestauratorChiefAttribute : Attribute, IAuthorizationFilter
             return;
 
         var user = (User)context.HttpContext.Items["User"];
-        if(user.Roles.Count>0){
+        if(user!=null){
             foreach (var r in user.Roles){
                 if(r.Name == "Restaurator Sheef"){
                     return;
                 }
             }
-            user = null;
+            // not logged in - return 401 unauthorized
+            context.Result = new JsonResult(new { message = "Insufficient permission level to perform this action" }) { StatusCode = StatusCodes.Status401Unauthorized };
+
+            // set 'WWW-Authenticate' header to trigger login popup in browsers
+            context.HttpContext.Response.Headers["WWW-Authenticate"] = "Basic realm=\"\", charset=\"UTF-8\"";
         }
-        if (user == null)
+        else
         {
             // not logged in - return 401 unauthorized
             context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };

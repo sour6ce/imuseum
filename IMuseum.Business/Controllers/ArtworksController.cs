@@ -4,10 +4,12 @@ using IMuseum.Business.Dtos;
 using IMuseum.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using IMuseum.Auth.Authorization;
 
 namespace IMuseum.Business.Controllers;
 
 //GET /artworks
+[Admin]
 [ApiController]
 [Route("artworks")]
 public class ArtworksController : ControllerBase

@@ -1,10 +1,9 @@
-namespace IMuseum.Auth.Authorization;
-
-
 using System.Net.Http.Headers;
 using System.Text;
 using IMuseum.Persistence.Services;
 using Microsoft.AspNetCore.Http;
+
+namespace IMuseum.Auth.Authorization;
 
 public class BasicAuthMiddleware
 {
