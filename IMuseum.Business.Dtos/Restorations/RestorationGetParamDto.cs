@@ -7,7 +7,6 @@ public record RestorationGetParamDto
     public int Page { get; set; }
     public int PageSize { get; set; }
     public int[]? ArtworksIds { get; set; }
-    public RestorationStatus[]? Statuses { get; set; }
     public DateTime? StartDateA { get; set; }
     public DateTime? StartDateB { get; set; }
     public DateTime? EndDateA { get; set; }

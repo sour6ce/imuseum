@@ -29,7 +29,6 @@ public class RestorationsController : ControllerBase
             StartDate = restoration.StartDate,
             DueDate = restoration.EndDate,
             RestorationType = restoration.Type,
-            RestorationStatus = restoration.EndDate == null ? RestorationStatus.Opened : RestorationStatus.Closed
         };
         return dto;
     }
@@ -42,7 +41,6 @@ public class RestorationsController : ControllerBase
         {
             return
             all.Where((x) => args.ArtworksIds == null || args.ArtworksIds.Length == 0 || args.ArtworksIds.Contains(x.Artwork.Id))
-            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(RestorationStatus.Opened) || args.Statuses.Contains(RestorationStatus.Closed))
             .Where((x) => x.StartDate >= args.StartDateA && x.StartDate <= args.StartDateB)
             .Where((x) => (x.EndDate == null) || (x.EndDate >= args.EndDateA && x.EndDate <= args.EndDateB));
         };
