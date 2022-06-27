@@ -28,7 +28,7 @@
     {
       "label": "watch",
       "command": "dotnet",
-      "type": "process",
+      "type": "shell",
       "args": [
         "watch",
         "run",
@@ -38,9 +38,41 @@
       "problemMatcher": "$msCompile"
     },
     {
+      "label": "clean bd",
+      "command": "IF",
+      "type": "shell",
+      "args": [
+        "EXIST",
+        "${workspaceFolder}\\IMuseum.Db",
+        "RMDIR",
+        "/S",
+        "/Q",
+        "${workspaceFolder}\\IMuseum.Db"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "clean migrations",
+      "command": "IF",
+      "type": "shell",
+      "args": [
+        "EXIST",
+        "${workspaceFolder}\\IMuseum.Persistence\\Migrations",
+        "RMDIR",
+        "/S",
+        "/Q",
+        "${workspaceFolder}\\IMuseum.Persistence\\Migrations"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "migrate task",
       "command": "dotnet",
       "type": "process",
+      "dependsOn": [
+        "clean migrations",
+        "clean bd"
+      ],
       "args": [
         "ef",
         "migrations",
@@ -54,9 +86,10 @@
       "problemMatcher": []
     },
     {
-      "label": "datbase update task",
+      "label": "database update task",
       "command": "dotnet",
       "type": "process",
+      "dependsOn": "migrate task",
       "args": [
         "ef",
         "database",
