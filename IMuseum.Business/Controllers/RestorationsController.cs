@@ -24,7 +24,7 @@ public class RestorationsController : ControllerBase
         this.restRepository = restRepository;
     }
 
-    internal async Task<RestorationReturnDto> RestorationAsDto(Restoration restoration)
+    internal RestorationReturnDto RestorationAsDto(Restoration restoration)
     {
         var dto = new RestorationReturnDto()
         {
@@ -55,11 +55,11 @@ public class RestorationsController : ControllerBase
         {
             return
             filtered(all).Skip(args.PageSize * (args.Page - 1))
-            .Take(args.PageSize);
+            .Take(args.PageSize).ToArray();
         }));
         return new RestorationGetReturnDto()
         {
-            Restorations = (restorations).Select((x) => this.RestorationAsDto(x).Result).ToArray(),
+            Restorations = (restorations).Select((x) => this.RestorationAsDto(x)).ToArray(),
             Count = (await count)
         };
     }

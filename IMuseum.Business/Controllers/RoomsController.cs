@@ -20,9 +20,11 @@ public class RoomsController : ControllerBase
         this.roomsRepository = roomsRepository;
     }
 
-    internal async Task<RoomDto> RoomAsDto(Room room)
+    internal RoomGeneralDto RoomAsDto(Room room)
     {
-        return new RoomDto(){
+        return new RoomGeneralDto()
+        {
+            Id = room.Id,
             Name = room.Name
         };
     }
@@ -32,55 +34,42 @@ public class RoomsController : ControllerBase
     [HttpGet]
     public async Task<RoomGetReturnDto> GetRoomsAsync()
     {
-        var filtered = (DbSet<Room> all) =>
-        {
-            return all;
-        };
-        var count = (roomsRepository.ExecuteOnDbAsync(async (all) =>
-        {
-            return
-            await filtered(all).CountAsync();
-        }));
-        var rooms = (roomsRepository.ExecuteOnDb((all) =>
-        {
-            return all;
-        }));
         return new RoomGetReturnDto()
         {
-            Rooms = (rooms).Select((x) => this.RoomAsDto(x).Result).ToArray(),
-            Count = (await count)
+            Rooms = (await roomsRepository.GetObjectsAsync()).Select((x) => RoomAsDto(x)).ToArray(),
+            Count = roomsRepository.Count
         };
     }
-    
+
     //GET /museums
     [HttpGet]
     [Route("{id}")]
-    public async Task<RoomDto> GetRoomAsync(int id)
+    public async Task<ActionResult<RoomGeneralDto>> GetRoomAsync(int id)
     {
         var room = await roomsRepository.GetObjectAsync(id);
 
-        if(room is null)
+        if (room is null)
         {
-            return new RoomDto(){
-                Name = null
-            };
+            return NotFound();
         }
 
-        return new RoomDto()
+        return new RoomGeneralDto()
         {
+            Id = room.Id,
             Name = room.Name
         };
     }
 
     //POST /rooms
     [HttpPost]
-    public async Task<ActionResult<RoomDto>> CreateRoomAsync(RoomDto roomDto)
+    public async Task<ActionResult<RoomGeneralDto>> CreateRoomAsync(RoomPutPostDto roomDto)
     {
-        Room room = new Room(){
+        Room room = new Room()
+        {
             Name = roomDto.Name
         };
         await roomsRepository.AddAsync(room);
-        return await RoomAsDto(room);
+        return RoomAsDto(room);
     }
 
     [HttpDelete]
@@ -100,9 +89,10 @@ public class RoomsController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult> UpdateRoom(int id, RoomDto dto)
+    public async Task<ActionResult> UpdateRoom(int id, RoomPutPostDto dto)
     {
-        Room room = new Room(){
+        Room room = new Room()
+        {
             Name = dto.Name
         };
 
@@ -110,7 +100,7 @@ public class RoomsController : ControllerBase
 
         if (found == null)
             return NotFound();
-        
+
         await roomsRepository.UpdateObjectAsync(room);
         return AcceptedAtAction(nameof(UpdateRoom), dto);
     }
