@@ -66,6 +66,15 @@
       "problemMatcher": []
     },
     {
+      "label": "ensure bd dir",
+      "command": "mkdir",
+      "type": "shell",
+      "args": [
+        "${workspaceFolder}\\IMuseum.Db"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "migrate task",
       "command": "dotnet",
       "type": "process",
