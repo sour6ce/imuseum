@@ -154,6 +154,7 @@ public class ArtworksController : ControllerBase
     }
 
     //GET /artworks
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ArtworkGetReturnDto> GetArtworksAsync([FromQuery] ArtworkGetParamDto args)
     {
@@ -205,6 +206,7 @@ public class ArtworksController : ControllerBase
     }
 
     //GET /artworks/{id}
+    [AllowAnonymous]
     [HttpGet]
     [Route("{id}")]
     public async Task<ActionResult<ArtworkGeneralDto>> GetArtworkAsync(int id)

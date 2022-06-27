@@ -38,7 +38,20 @@ public class UsersController : ControllerBase
 
         if (user == null)
             return BadRequest(new { message = "Username or password is incorrect" });
+        
+        string role="";
+        if(user.RoleId==1)
+            role="Director";
+        if(user.RoleId==2)
+            role="Restaurator Chief";
+        if(user.RoleId==3)
+            role="Catalog Manager";
+        if(user.RoleId==4)
+            role="Administrator";
+        if(user.RoleId==5)
+            role="Visiter";
 
+        user.Role=new Role(){Name = role};
         return Ok(user);
     }
 

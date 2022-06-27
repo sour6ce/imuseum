@@ -26,6 +26,7 @@ public class ArtistsController : ControllerBase
     }
 
     //GET /artists
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ArtistGetReturnDto> GetArtistsAsync()
     {
