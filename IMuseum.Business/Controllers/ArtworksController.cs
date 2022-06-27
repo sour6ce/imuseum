@@ -9,7 +9,7 @@ using IMuseum.Auth.Authorization;
 namespace IMuseum.Business.Controllers;
 
 //GET /artworks
-[Admin]
+// [Admin]
 [ApiController]
 [Route("artworks")]
 public class ArtworksController : ControllerBase

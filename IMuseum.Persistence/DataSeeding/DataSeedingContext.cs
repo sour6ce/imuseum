@@ -241,222 +241,30 @@ public static class Seeding
                   Password = "manager.psw123//",
                   Email = "example@gmail.com"});
 
-
-
-        // modelBuilder.Entity<Painting>()
-        //         .HasData(
-        //         new Painting { 
-        //             Id = 15, 
-        //             Media = "address",
-        //             Title = "Monalisa",
-        //             Author = "Leonardo da Vinci",
-        //             CreationDate = new DateTime(1503,1,1),
-        //             IncorporatedDate = new DateTime(2002,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnDisplay,
-        //             MuseumId =  1,
-        //             Museum = null,
-        //             RoomId =  22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=,                  
-        //             },
-        //         new Painting { 
-        //             Id = 16, 
-        //             Media = "address",
-        //             Title = "School of Athens",
-        //             Author = "Raphael",
-        //             CreationDate = new DateTime(1500,1,1),
-        //             IncorporatedDate = new DateTime(2005,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnDisplay,
-        //             MuseumId = 1,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //             },
-        //         new Painting { 
-        //             Id = 17, 
-        //             Media = "address",                    
-        //             Title = "Night Watch",
-        //             Author = "Rembrandt",
-        //             CreationDate = new DateTime(1600,1,1),
-        //             IncorporatedDate = new DateTime(2004,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 9,
-        //             CurrentSatus = Artwork.Status.InRestoration,
-        //             MuseumId = 2,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //             },
-        //         new Painting { 
-        //             Id = 18, 
-        //             Media = "address",
-        //             Title = "Beheading of Saint John the Baptist",
-        //             Author = "Caravaggio",
-        //             CreationDate = new DateTime(1400,3,8),
-        //             IncorporatedDate = new DateTime(2002,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnDisplay,
-        //             MuseumId = 3,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //              },
-        //         new Painting { 
-        //             Id = 19, 
-        //             Media = "address",
-        //             Title = "The Last Supper",
-        //             Author = "Leonardo da Vinci",
-        //             CreationDate = new DateTime(1400,1,1),
-        //             IncorporatedDate = new DateTime(2002,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.InStorage,
-        //             MuseumId = 1,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //              },
-        //         new Painting { 
-        //             Id = 20, 
-        //             Media = "address",
-        //             Title = "The Starry Night",
-        //             Author = "Vincent van Gogh",
-        //             CreationDate = new DateTime(1889,1,1),
-        //             IncorporatedDate = new DateTime(2009,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnLoan,
-        //             MuseumId = 4,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //              },
-        //         new Painting { 
-        //             Id = 21, 
-        //             Media = "address",
-        //             Title = "The Scream",
-        //             Author = "Edvard Munch",
-        //             CreationDate = new DateTime(1893,1,1),
-        //             IncorporatedDate = new DateTime(2002,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnDisplay,
-        //             MuseumId = 5,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //              });
-        //
-        // modelBuilder.Entity<Sculpture>()
-        //         .HasData(
-        //         new Sculpture { 
-        //             Id = 15, 
-        //             Material = "Gold",
-        //             Style = "Style",
-        //             Title = "Monalisa",
-        //             Author = "Leonardo da Vinci",
-        //             CreationDate = new DateTime(1503,1,1),
-        //             IncorporatedDate = new DateTime(2002,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnDisplay,
-        //             MuseumId = 1,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=,                  
-        //             },
-        //         new Sculpture { 
-        //             Id = 16, 
-        //             Material = "Iron",
-        //             Style = "Style",
-        //             Title = "School of Athens",
-        //             Author = "Raphael",
-        //             CreationDate = new DateTime(1500,1,1),
-        //             IncorporatedDate = new DateTime(2005,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnDisplay,
-        //             MuseumId = 1,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //             },
-        //         new Sculpture { 
-        //             Id = 17, 
-        //             Material = "Wood",
-        //             Style = "Style",                    
-        //             Title = "Night Watch",
-        //             Author = "Rembrandt",
-        //             CreationDate = new DateTime(1600,1,1),
-        //             IncorporatedDate = new DateTime(2004,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 9,
-        //             CurrentSatus = Artwork.Status.InRestoration,
-        //             MuseumId = 2,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //             },
-        //         new Sculpture { 
-        //             Id = 18, 
-        //             Material = "Glass",
-        //             Style = "Style",
-        //             Title = "Beheading of Saint John the Baptist",
-        //             Author = "Caravaggio",
-        //             CreationDate = new DateTime(1400,3,8),
-        //             IncorporatedDate = new DateTime(2002,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.OnDisplay,
-        //             MuseumId = 3,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=, 
-        //              },
-        //         new Sculpture { 
-        //             Id = 19,
-        //             Style = "Style",
-        //             Material = "Ice",
-        //             Title = "The Last Supper",
-        //             Author = "Leonardo da Vinci",
-        //             CreationDate = new DateTime(1400,1,1),
-        //             IncorporatedDate = new DateTime(2002,3,4),
-        //             Period = "Renacence",
-        //             Assessment = 10,
-        //             CurrentSatus = Artwork.Status.InStorage,
-        //             MuseumId = 1,
-        //             Museum = null,
-        //             RoomId = 22,
-        //             //Room = ,
-        //             //Restorations=,
-        //             //LoanApplications=,  
-        //              });
+      modelBuilder.Entity<User>()
+            .HasMany(p => p.Roles)
+            .WithMany(p => p.RelatedUsers)
+            .UsingEntity(j => j.HasData(new { RelatedUsersId = 1, RolesId = 4 }));
+      modelBuilder.Entity<User>()
+            .HasMany(p => p.Roles)
+            .WithMany(p => p.RelatedUsers)
+            .UsingEntity(j => j.HasData(new { RelatedUsersId = 2, RolesId = 3 }));
+      modelBuilder.Entity<User>()
+            .HasMany(p => p.Roles)
+            .WithMany(p => p.RelatedUsers)
+            .UsingEntity(j => j.HasData(new { RelatedUsersId = 3, RolesId = 2 }));
+      modelBuilder.Entity<User>()
+            .HasMany(p => p.Roles)
+            .WithMany(p => p.RelatedUsers)
+            .UsingEntity(j => j.HasData(new { RelatedUsersId = 4, RolesId = 1 }));
+      modelBuilder.Entity<User>()
+            .HasMany(p => p.Roles)
+            .WithMany(p => p.RelatedUsers)
+            .UsingEntity(j => j.HasData(new { RelatedUsersId = 5, RolesId = 2 }));
+      modelBuilder.Entity<User>()
+            .HasMany(p => p.Roles)
+            .WithMany(p => p.RelatedUsers)
+            .UsingEntity(j => j.HasData(new { RelatedUsersId = 6, RolesId = 3 }));
         }
 
 }
