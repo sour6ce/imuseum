@@ -27,10 +27,19 @@ public class UsersController : ControllerBase
     internal User UserFromDto(UserPostAndPutDto dto)
     {
         return new User(){
-            Username = dto.FirstName + " " + dto.LastName,
+            Username = dto.Username,
             Email = dto.Email,
-            Roles = dto.Roles,
+            RoleId = dto.RoleId,
             Password = (new Guid()).ToString()
+        };
+    }
+
+    internal UserPostAndPutDto UserAsDto(User user)
+    {
+        return new UserPostAndPutDto(){
+            Username = user.Username,
+            Email = user.Email,
+            RoleId = user.RoleId
         };
     }
 
@@ -51,11 +60,11 @@ public class UsersController : ControllerBase
         {
             return
             filtered(all).Skip(args.PageSize * (args.Page - 1))
-            .Take(args.PageSize);
+            .Take(args.PageSize).ToArray();
         }));
         return new UserGetReturnDto()
         {
-            Users = users.ToArray(),
+            Users = (users).Select((x) => this.UserAsDto(x)).ToArray(),
             Count = (await count)
         };
     }
@@ -78,8 +87,8 @@ public class UsersController : ControllerBase
         if(user is null)
             return null;
         
-        user.Roles = dto.Roles;
-        user.Username = dto.FirstName + " " + dto.LastName;
+        user.RoleId = dto.RoleId;
+        user.Username = dto.Username;
         user.Email = dto.Email;
         await usersRepository.UpdateObjectAsync(user);
         return dto;

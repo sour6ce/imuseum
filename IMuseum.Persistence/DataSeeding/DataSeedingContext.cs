@@ -241,42 +241,48 @@ public static class Seeding
                   Id = 1,
                   Username = "Foreman Administrator",
                   Password = "admin.psw123//",
-                  Email = "example@gmail.com"
+                  Email = "example@gmail.com",
+                  RoleId = 4
               },
               new User
               {
                   Id = 2,
                   Username = "Lorena Manager",
                   Password = "manager.psw123//",
-                  Email = "example@gmail.com"
+                  Email = "example@gmail.com",
+                  RoleId = 3
               },
               new User
               {
                   Id = 3,
                   Username = "Juan Restaurator",
                   Password = "restaurator.psw123//",
-                  Email = "example@gmail.com"
+                  Email = "example@gmail.com",
+                  RoleId = 2
               },
               new User
               {
                   Id = 4,
                   Username = "Harvey Director",
                   Password = "director.psw123//",
-                  Email = "example@gmail.com"
+                  Email = "example@gmail.com",
+                  RoleId = 1
               },
               new User
               {
                   Id = 5,
                   Username = "Pablo Restaurator",
                   Password = "restaurator.psw123//",
-                  Email = "example@gmail.com"
+                  Email = "example@gmail.com",
+                  RoleId = 2
               },
               new User
               {
                   Id = 6,
                   Username = "Dorian Manager",
                   Password = "manager.psw123//",
-                  Email = "example@gmail.com"
+                  Email = "example@gmail.com",
+                  RoleId = 3
               });
     }
 }

@@ -24,7 +24,8 @@ public class DbUsersRepository : DbRepository<User>, IUsersRepository
             }
             //Code to change each field
             old.Password = item.Password;
-            old.Roles = item.Roles;
+            old.RoleId = item.RoleId;
+            old.Role = item.Role;
             old.Username = item.Username;
             old.Email = item.Email;
 
