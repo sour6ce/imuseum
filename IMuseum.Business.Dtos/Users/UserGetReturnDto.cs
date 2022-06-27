@@ -4,6 +4,6 @@ namespace IMuseum.Business.Dtos.Users;
 
 public record UserGetReturnDto
 {
-    public User[] Users { get; set; }
+    public UserPostAndPutDto[] Users { get; set; }
     public int Count { get; set; }
 }
