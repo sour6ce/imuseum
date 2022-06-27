@@ -48,14 +48,12 @@ public record LoanApplication : DatabaseModel
     /// artworks should be the museum taht owns the artwork and then
     /// march to the museum pointed in the Artwork data.
     /// </summary>
-    [ForeignKey("Museum")]
+    [ForeignKey("RelatedMuseum")]
     public int? MuseumId { get; set; } = 0;
     public Museum? RelatedMuseum { get; set; }
 
     /// <summary>
     /// Loan details. Null if they haven't been accepted. (Related from relation to Loans)
     /// </summary>
-    [ForeignKey("Loan")]
-    public int LoanId { get; set; }
     public Loan? LoanRelated { get; set; }
 }
