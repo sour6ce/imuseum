@@ -9,6 +9,7 @@ using IMuseum.Persistence.Repositories.Paintings;
 using IMuseum.Persistence.Repositories.Restorations;
 using IMuseum.Persistence.Repositories.Sculptures;
 using IMuseum.Persistence.Repositories.Users;
+using IMuseum.Persistence.Repositories.Rooms;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMuseum.Persistence;
@@ -32,5 +33,6 @@ public static class Extensions
         sc.AddSingleton<IRestorationsRepository, DbRestorationsRepository>();
         sc.AddSingleton<ISculpturesRepository, DbSculpturesRepository>();
         sc.AddSingleton<IUsersRepository, DbUsersRepository>();
+        sc.AddSingleton<IRoomsRepository, DbRoomsRepository>();
     }
 }
