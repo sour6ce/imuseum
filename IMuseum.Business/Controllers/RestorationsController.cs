@@ -8,9 +8,11 @@ using IMuseum.Business.Dtos.Artworks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using IMuseum.Auth.Authorization;
 
 namespace IMuseum.Business.Controllers;
 
+[RestauratorChief]
 [ApiController]
 [Route("restorations")]
 public class RestorationsController : ControllerBase

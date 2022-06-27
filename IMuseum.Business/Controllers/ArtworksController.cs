@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IMuseum.Business.Controllers;
 
 //GET /artworks
-[RestauratorChief]
+[CatalogManager]
 [ApiController]
 [Route("artworks")]
 public class ArtworksController : ControllerBase

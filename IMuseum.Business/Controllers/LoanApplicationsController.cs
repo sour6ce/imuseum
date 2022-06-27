@@ -6,10 +6,11 @@ using IMuseum.Business.Dtos.Loans;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-
+using IMuseum.Auth.Authorization;
 namespace IMuseum.Business.Controllers;
 
 //GET /loan-apps
+[Director]
 [ApiController]
 [Route("loan-apps")]
 public class LoanApplicationsController : ControllerBase

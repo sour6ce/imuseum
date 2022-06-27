@@ -16,6 +16,7 @@ using IMuseum.Auth.Authorization;
 namespace IMuseum.Business.Controllers;
 
 //GET /users
+[Admin]
 [ApiController]
 [Route("users")]
 public class UsersController : ControllerBase

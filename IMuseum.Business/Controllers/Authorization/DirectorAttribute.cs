@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace IMuseum.Auth.Authorization;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class DirecotrAttribute : Attribute, IAuthorizationFilter
+public class DirectorAttribute : Attribute, IAuthorizationFilter
 {
     public void OnAuthorization(AuthorizationFilterContext context)
     {

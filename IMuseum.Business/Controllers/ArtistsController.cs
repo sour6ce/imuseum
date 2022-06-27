@@ -9,10 +9,11 @@ using IMuseum.Business.Dtos.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-
+using IMuseum.Auth.Authorization;
 namespace IMuseum.Business.Controllers;
 
 //GET /artists
+[CatalogManager]
 [ApiController]
 [Route("artists")]
 public class ArtistsController : ControllerBase

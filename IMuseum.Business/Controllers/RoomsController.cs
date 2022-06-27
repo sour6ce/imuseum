@@ -4,9 +4,10 @@ using IMuseum.Business.Dtos.Rooms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-
+using IMuseum.Auth.Authorization;
 namespace IMuseum.Business.Controllers;
 
+[CatalogManager]
 //GET /rooms
 [ApiController]
 [Route("rooms")]
