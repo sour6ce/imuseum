@@ -4,6 +4,7 @@ using IMuseum.Persistence.Models;
 namespace IMuseum.Persistence;
 
 using IMuseum.Persistence.DataSeeding;
+
 public class IMuseumContext : DbContext
 {
     public string DbPath { get; }
@@ -18,6 +19,9 @@ public class IMuseumContext : DbContext
     //The following configures the model's inheritances and foreign relationships
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Painting>().ToTable("Paintings");
+        modelBuilder.Entity<Sculpture>().ToTable("Sculptures");
+
         //Artwork => Museum is a many to one relationship
         modelBuilder.Entity<Artwork>()
             .HasOne<Museum>(x => x.Museum)
@@ -57,7 +61,7 @@ public class IMuseumContext : DbContext
         modelBuilder.Entity<User>()
             .HasMany<Role>(x => x.Roles)
             .WithMany(x => x.RelatedUsers);
-        
+
         modelBuilder.DataSeeding();
     }
 
