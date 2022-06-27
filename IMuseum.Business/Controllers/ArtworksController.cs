@@ -222,16 +222,21 @@ public class ArtworksController : ControllerBase
             return NotFound();
         }
 
-        var resultArt = artRepository.ExecuteOnDbAsync(async (set, context) =>
+        var resultArt = artRepository.ExecuteOnDbAsync<ActionResult>(async (set, context) =>
         {
             var result = await set.FirstOrDefaultAsync((x) => x.Id == artId);
             if (result == null)
-                return false;
+                return NotFound();
             else
             {
+                // NOTE: Checking the state of the artwork
+                if (result.CurrentSatus == Artwork.ArtworkStatus.InRestoration)
+                    return BadRequest();
+                if (result.CurrentSatus == Artwork.ArtworkStatus.OnLoan)
+                    return BadRequest();
                 result.CurrentSatus = Artwork.ArtworkStatus.InRestoration;
                 await context.SaveChangesAsync();
-                return true;
+                return new OkResult();
             }
         });
 
@@ -243,7 +248,7 @@ public class ArtworksController : ControllerBase
             RestorationType = args.RestorationType
         };
         await restRepository.AddAsync(RestorationFromDto(returnRestoration));
-        return returnRestoration;
+        return (resultArt.Result.GetType() == typeof(OkResult)) ? returnRestoration : resultArt.Result;
     }
 
     //POST /artworks/{id}/end-restoration
@@ -267,6 +272,10 @@ public class ArtworksController : ControllerBase
             }
         });
 
+        if (!(await result))
+            return new BadRequestResult();
+
+
         var resultArt = artRepository.ExecuteOnDbAsync(async (set, context) =>
         {
             var result = await set.FirstOrDefaultAsync((x) => x.Id == artId);
@@ -281,7 +290,7 @@ public class ArtworksController : ControllerBase
         });
 
         await resultArt;
-        if (await result)
+        if (await resultArt)
             return new OkResult();
         else
             return new BadRequestResult();
