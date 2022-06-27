@@ -92,7 +92,7 @@ public class LoanApplicationsController : ControllerBase
             Application = await loanAppsRepository.GetObjectAsync(id)
         };
         await loansRepository.AddAsync(loan);
-        return CreatedAtAction(nameof(CreateLoanAsync), new Uri($"{Request.Path}/{loan.Id}"), (new LoanDto(){PaymentAmount = loan.PaymentAmount, LoanApplicationId = loan.LoanApplicationId} ));
+        return CreatedAtAction(nameof(CreateLoanAsync), new Uri($"{Request.Path}/{loan.Id}"), (new LoanGeneralDto(){PaymentAmount = loan.PaymentAmount, LoanApplicationId = loan.LoanApplicationId} ));
     }
 
      //POST /loan-apps/{id}/reject
