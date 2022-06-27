@@ -46,7 +46,7 @@ public class UsersController : ControllerBase
         return new User(){
             Username = dto.FirstName + " " + dto.LastName,
             Email = dto.Email,
-            Roles = dto.Roles,
+            RoleId = dto.RoleId,
             Password = (new Guid()).ToString()
         };
     }
@@ -95,7 +95,7 @@ public class UsersController : ControllerBase
         if(user is null)
             return null;
         
-        user.Roles = dto.Roles;
+        user.RoleId = dto.RoleId;
         user.Username = dto.FirstName + " " + dto.LastName;
         user.Email = dto.Email;
         await usersRepository.UpdateObjectAsync(user);

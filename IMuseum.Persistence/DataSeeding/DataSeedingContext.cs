@@ -115,6 +115,7 @@ public static class Seeding
                     Id = i,
                     Author = "Unknown",
                     Title = "The tapice " + i.ToString(),
+                    Images = "",
                     CreationDate = new DateTime(2022, 6, 23),
                     IncorporatedDate = new DateTime(2022, 6, 23),
                     Period = "ooold",
