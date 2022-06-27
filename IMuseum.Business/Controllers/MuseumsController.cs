@@ -22,17 +22,12 @@ public class MuseumsController : ControllerBase
         this.museumsRepository = museumsRepository;
     }
 
-    internal async Task<MuseumDto> MuseumAsDto(Museum museum)
+    internal MuseumGeneralDto MuseumAsDto(Museum museum)
     {
-        return new MuseumDto(){
+        return new MuseumGeneralDto()
+        {
+            Id = museum.Id,
             Name = museum.Name
-        };
-    }
-
-    internal async Task<Museum> MuseumFromDto(MuseumDto dto)
-    {
-        return new Museum(){
-            Name = dto.Name
         };
     }
 
@@ -40,51 +35,34 @@ public class MuseumsController : ControllerBase
     [HttpGet]
     public async Task<MuseumGetReturnDto> GetMuseumsAsync()
     {
-        var filtered = (DbSet<Museum> all) =>
-        {
-            return all;
-        };
-        var count = (museumsRepository.ExecuteOnDbAsync(async (all) =>
-        {
-            return
-            await filtered(all).CountAsync();
-        }));
-        var museums = (museumsRepository.ExecuteOnDb((all) =>
-        {
-            return all;
-        }));
         return new MuseumGetReturnDto()
         {
-            Museums = (museums).Select((x) => this.MuseumAsDto(x).Result).ToArray(),
-            Count = (await count)
+            Museums = (await museumsRepository.GetObjectsAsync()).Select((x) => MuseumAsDto(x)).ToArray(),
+            Count = museumsRepository.Count
         };
     }
 
     //GET /museums
     [HttpGet]
     [Route("{id}")]
-    public async Task<MuseumDto> GetMuseumAsync(int id)
+    public async Task<ActionResult<MuseumGeneralDto>> GetMuseumAsync(int id)
     {
         var museum = await museumsRepository.GetObjectAsync(id);
 
-        if(museum is null)
+        if (museum is null)
         {
-            return new MuseumDto(){
-                Name = null
-            };
+            return NotFound();
         }
 
-        return new MuseumDto()
-        {
-            Name = museum.Name
-        };
+        return MuseumAsDto(museum);
     }
 
     //POST /museums
     [HttpPost]
-    public async Task<ActionResult<MuseumDto>> CreateMuseumAsync(MuseumDto museumDto)
+    public async Task<ActionResult<MuseumPutPostDto>> CreateMuseumAsync(MuseumPutPostDto museumDto)
     {
-        Museum museum = new Museum(){
+        Museum museum = new Museum()
+        {
             Name = museumDto.Name
         };
         await museumsRepository.AddAsync(museum);
@@ -108,9 +86,10 @@ public class MuseumsController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult> UpdateMuseum(int id, MuseumDto dto)
+    public async Task<ActionResult> UpdateMuseum(int id, MuseumPutPostDto dto)
     {
-        Museum museum = new Museum(){
+        Museum museum = new Museum()
+        {
             Name = dto.Name
         };
 
@@ -118,7 +97,7 @@ public class MuseumsController : ControllerBase
 
         if (found == null)
             return NotFound();
-        
+
         await museumsRepository.UpdateObjectAsync(museum);
         return AcceptedAtAction(nameof(UpdateMuseum), dto);
     }
