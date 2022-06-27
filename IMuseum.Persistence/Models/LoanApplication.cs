@@ -11,7 +11,7 @@ public record LoanApplication : DatabaseModel
     /// <summary>
     /// Status of an loan application
     /// </summary>
-    public enum Status
+    public enum LoanApplicationStatus
     {
         /// <summary>
         /// The artwork was requested but not yet approved
@@ -37,9 +37,9 @@ public record LoanApplication : DatabaseModel
     /// </summary>
     public DateTime ApplicationDate { get; set; }
     public int Duration { get; set; }
-    public Status CurrentStatus { get; set; } = Status.OnWait;
+    public LoanApplicationStatus CurrentStatus { get; set; } = LoanApplicationStatus.OnWait;
     [ForeignKey("Artwork")]
-    public int ArtworkId { get; set;} = 0;
+    public int ArtworkId { get; set; } = 0;
     public Artwork? Artwork { get; set; }
 
     /// <summary>
@@ -48,14 +48,12 @@ public record LoanApplication : DatabaseModel
     /// artworks should be the museum taht owns the artwork and then
     /// march to the museum pointed in the Artwork data.
     /// </summary>
-    [ForeignKey("Museum")]
-    public int MuseumId{ get; set;} = 0;
+    [ForeignKey("RelatedMuseum")]
+    public int? MuseumId { get; set; } = 0;
     public Museum? RelatedMuseum { get; set; }
 
     /// <summary>
     /// Loan details. Null if they haven't been accepted. (Related from relation to Loans)
     /// </summary>
-    [ForeignKey("Loan")]
-    public int LoanId{get;set;}
     public Loan? LoanRelated { get; set; }
 }

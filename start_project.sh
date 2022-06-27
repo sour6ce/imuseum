@@ -13,7 +13,7 @@ while [$choice -ne 1 -a $choice -ne 2 -a $choice -ne 3 -a $choice -ne 4]
 if [ $choice -eq 1 ]
   then
     echo "Starting default"
-    cd ./IMuseum.Api
+    cd ./IMuseum.Presentation
     dotnet run Program.cs
 elif [ $choice -eq 2 ]
   then

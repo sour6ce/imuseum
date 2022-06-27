@@ -17,7 +17,7 @@ public record Loan : DatabaseModel
     /// <summary>
     /// Aplication related to this loan.
     /// </summary>
-    [ForeignKey("LoanApplication")]
-    public int LoanAplicationId { get; set;}
+    [ForeignKey("Application")]
+    public int LoanApplicationId { get; set; }
     public LoanApplication Application { get; set; }
 }
