@@ -150,7 +150,7 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
         using (var scope = this.serviceProvider.CreateScope())
         {
             var tempset = scope.ServiceProvider.GetRequiredService<IMuseumContext>().Set<T>();
-            return await tempset.FirstOrDefaultAsync();
+            return await tempset.FirstOrDefaultAsync((x) => x.Id == id);
         }
     }
 

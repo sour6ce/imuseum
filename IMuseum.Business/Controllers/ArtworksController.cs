@@ -200,15 +200,15 @@ public class ArtworksController : ControllerBase
             case ArtworkType.Sculpture:
                 var sc = (Sculpture)ArtworkFromDto(artworkDto);
                 await sculpturesRepository.AddAsync(sc);
-                return CreatedAtAction(nameof(CreateArtworkAsync), new Uri($"{Request.Path}/{sc.Id}"), artworkDto);
+                return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
             case ArtworkType.Painting:
                 var pnt = (Painting)ArtworkFromDto(artworkDto);
                 await paintsRepository.AddAsync(pnt);
-                return CreatedAtAction(nameof(CreateArtworkAsync), new Uri($"{Request.Path}/{pnt.Id}"), artworkDto);
+                return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
             default:
                 var art = ArtworkFromDto(artworkDto);
                 await artRepository.AddAsync(art);
-                return CreatedAtAction(nameof(CreateArtworkAsync), new Uri($"{Request.Path}/{art.Id}"), artworkDto);
+                return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
         }
     }
 
