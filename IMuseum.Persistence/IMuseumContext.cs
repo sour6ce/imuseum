@@ -19,6 +19,9 @@ public class IMuseumContext : DbContext
     //The following configures the model's inheritances and foreign relationships
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Painting>().ToTable("Paintings");
+        modelBuilder.Entity<Sculpture>().ToTable("Sculptures");
+
         //Artwork => Museum is a many to one relationship
         modelBuilder.Entity<Artwork>()
             .HasOne<Museum>(x => x.Museum)
