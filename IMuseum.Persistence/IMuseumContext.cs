@@ -59,7 +59,7 @@ public class IMuseumContext : DbContext
 
         //User
         modelBuilder.Entity<User>()
-            .HasMany<Role>(x => x.Roles)
+            .HasOne<Role>(x => x.Role)
             .WithMany(x => x.RelatedUsers);
 
         modelBuilder.DataSeeding();
