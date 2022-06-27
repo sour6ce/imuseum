@@ -118,6 +118,7 @@ public class ArtworksController : ControllerBase
                     Period = dto.Period,
                     Assessment = dto.Assessment,
                     Style = dto.Style,
+                    Image = dto.Image,
                     Material = dto.Material
                 };
                 return sc;
@@ -132,6 +133,7 @@ public class ArtworksController : ControllerBase
                     Period = dto.Period,
                     Assessment = dto.Assessment,
                     Style = dto.Style,
+                    Image = dto.Image,
                     Media = dto.Media
                 };
                 return pnt;
@@ -144,6 +146,7 @@ public class ArtworksController : ControllerBase
                     CreationDate = dto.CreationDate,
                     IncorporatedDate = dto.IncorporatedDate,
                     Period = dto.Period,
+                    Image = dto.Image,
                     Assessment = dto.Assessment
                 };
                 return art;

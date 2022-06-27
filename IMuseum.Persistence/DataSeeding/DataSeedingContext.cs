@@ -45,25 +45,29 @@ public static class Seeding
                 }
             );
 
-    modelBuilder.Entity<LoanApplication>()
-        .HasData(
-        new LoanApplication { 
-            Id = 1, 
-            ApplicationDate = new DateTime(2022,6,23),
-            Duration = 10,
-            CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
-            ArtworkId = 1,
-            MuseumId = 1},
-            new LoanApplication { 
-            Id = 2, 
-            ApplicationDate = new DateTime(2022,1,1),
-            Duration = 10,
-            CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
-            ArtworkId = 1,
-            MuseumId = 1}
-        );
+        modelBuilder.Entity<LoanApplication>()
+            .HasData(
+            new LoanApplication
+            {
+                Id = 1,
+                ApplicationDate = new DateTime(2022, 6, 23),
+                Duration = 10,
+                CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
+                ArtworkId = 1,
+                MuseumId = 1
+            },
+                new LoanApplication
+                {
+                    Id = 2,
+                    ApplicationDate = new DateTime(2022, 1, 1),
+                    Duration = 10,
+                    CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
+                    ArtworkId = 1,
+                    MuseumId = 1
+                }
+            );
 
-    string[] paintingsNames = {"The Great Bathers", "Vincent’s Bedroom in Arles",
+        string[] paintingsNames = {"The Great Bathers", "Vincent’s Bedroom in Arles",
                         "The Sea of Ice","Saturn Devouring His Son",
                         "Les Demoiselles d’Avignon","Dance at Moulin de la Galette",
                         "Time transfixed","Olympia, Musee d’Orsay, Paris",
@@ -73,7 +77,7 @@ public static class Seeding
                         "Night Watch","The Girl with a Pearl Earring",
                         "Three Musicians","The Scream","Starry-Night","Mona Lisa (La Gioconda)"};
 
-    string[] paintingImages = {"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:265/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Leonardo-Da-Vinci-Mona-Lisa.jpg",
+        string[] paintingImages = {"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:265/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Leonardo-Da-Vinci-Mona-Lisa.jpg",
 "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:500/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Vincent-Van-Gogh-Starry-Night.jpg",
 "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:316/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Edvard-Munch-The-Scream.jpg",
 "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:443/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/PabloPicasso-ThreeMusicians.jpg",
@@ -84,27 +88,29 @@ public static class Seeding
 "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:592/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Georges-Seurat-A-Sunday-Afternoon-on-the-Island-of-La-Grande-Jatte.jpg",
 "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:331/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Grant-Wood-American-Gothic.jpg"};
 
-    for(int i=19;i>=10;i--)
-    {
-        modelBuilder.Entity<Painting>()
-            .HasData(
-            new Painting{
-            Id = i, 
-            Media = "address",
-            Images = paintingImages[19-i],
-            Style = "Renacence",
-            Title = paintingsNames[i],
-            Author = "Author",
-            CreationDate = new DateTime(1503,1,1),
-            IncorporatedDate = new DateTime(2002,3,4),
-            Period = "Renacence",
-            Assessment = (i%10)+1,
-            CurrentSatus = Artwork.ArtworkStatus.OnDisplay,
-            MuseumId =  i%7 + 1,
-            Description = "Estalin Disima",
-            RoomId = (i%3)+1}
-        );
-    }
+        for (int i = 19; i >= 10; i--)
+        {
+            modelBuilder.Entity<Painting>()
+                .HasData(
+                new Painting
+                {
+                    Id = i,
+                    Media = "address",
+                    Image = paintingImages[19 - i],
+                    Style = "Renacence",
+                    Title = paintingsNames[i],
+                    Author = "Author",
+                    CreationDate = new DateTime(1503, 1, 1),
+                    IncorporatedDate = new DateTime(2002, 3, 4),
+                    Period = "Renacence",
+                    Assessment = (i % 10) + 1,
+                    CurrentSatus = Artwork.ArtworkStatus.OnDisplay,
+                    MuseumId = i % 7 + 1,
+                    Description = "Estalin Disima",
+                    RoomId = (i % 3) + 1
+                }
+            );
+        }
 
         for (int i = 1; i <= 7; i++)
         {
@@ -115,7 +121,7 @@ public static class Seeding
                     Id = i,
                     Author = "Unknown",
                     Title = "The tapice " + i.ToString(),
-                    Images = "",
+                    Image = "",
                     CreationDate = new DateTime(2022, 6, 23),
                     IncorporatedDate = new DateTime(2022, 6, 23),
                     Period = "ooold",
@@ -136,7 +142,7 @@ public static class Seeding
                 {
                     Id = i,
                     Material = "Gold",
-                    Images = "",
+                    Image = "",
                     Style = "Style",
                     Title = "Monalisa" + i.ToString(),
                     Author = "Leonardo da Vinci",
@@ -160,43 +166,55 @@ public static class Seeding
 
         modelBuilder.Entity<User>()
             .HasData(
-            new User { 
+            new User
+            {
                 Id = 1,
                 Username = "Foreman Administrator",
                 Password = "admin.psw123//",
                 Email = "example@gmail.com",
-                RoleId = 4},
-            new User { 
+                RoleId = 4
+            },
+            new User
+            {
                 Id = 2,
                 Username = "Lorena Manager",
                 Password = "manager.psw123//",
                 Email = "example@gmail.com",
-                RoleId = 3},
-            new User { 
-                Id = 3, 
+                RoleId = 3
+            },
+            new User
+            {
+                Id = 3,
                 Username = "Juan Restaurator",
                 Password = "restaurator.psw123//",
                 Email = "example@gmail.com",
-                RoleId = 2},
-            new User { 
-                Id = 4, 
+                RoleId = 2
+            },
+            new User
+            {
+                Id = 4,
                 Username = "Harvey Director",
                 Password = "director.psw123//",
                 Email = "example@gmail.com",
-                RoleId = 1},
-            new User { 
-                Id = 5, 
+                RoleId = 1
+            },
+            new User
+            {
+                Id = 5,
                 Username = "Pablo Restaurator",
                 Password = "restaurator.psw123//",
                 Email = "example@gmail.com",
-                RoleId = 2},
-            new User { 
-                Id = 6, 
+                RoleId = 2
+            },
+            new User
+            {
+                Id = 6,
                 Username = "Dorian Manager",
                 Password = "manager.psw123//",
                 Email = "example@gmail.com",
-                RoleId = 3});
+                RoleId = 3
+            });
 
-        }
+    }
 
 }
