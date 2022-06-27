@@ -9,7 +9,7 @@ public record RestorationReturnDto
     // dueDate: null
     // restorationStatus: status
 
-    public ArtworkIdDto? Artwork { get; set; }
+    public SimpleIdDto? Artwork { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? DueDate { get; set; } = null;
 

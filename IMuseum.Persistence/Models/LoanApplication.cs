@@ -39,7 +39,7 @@ public record LoanApplication : DatabaseModel
     public int Duration { get; set; }
     public LoanApplicationStatus CurrentStatus { get; set; } = LoanApplicationStatus.OnWait;
     [ForeignKey("Artwork")]
-    public int ArtworkId { get; set;} = 0;
+    public int ArtworkId { get; set; } = 0;
     public Artwork? Artwork { get; set; }
 
     /// <summary>
@@ -49,13 +49,13 @@ public record LoanApplication : DatabaseModel
     /// march to the museum pointed in the Artwork data.
     /// </summary>
     [ForeignKey("Museum")]
-    public int MuseumId{ get; set;} = 0;
+    public int? MuseumId { get; set; } = 0;
     public Museum? RelatedMuseum { get; set; }
 
     /// <summary>
     /// Loan details. Null if they haven't been accepted. (Related from relation to Loans)
     /// </summary>
     [ForeignKey("Loan")]
-    public int LoanId{get;set;}
+    public int LoanId { get; set; }
     public Loan? LoanRelated { get; set; }
 }
