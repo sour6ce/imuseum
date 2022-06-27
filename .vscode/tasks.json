@@ -44,7 +44,7 @@
       "args": [
         "EXIST",
         "${workspaceFolder}\\IMuseum.Db\\imuseum.db",
-        "RMDIR",
+        "DEL",
         "/S",
         "/Q",
         "${workspaceFolder}\\IMuseum.Db\\imuseum.db"
