@@ -67,7 +67,7 @@ public record Artwork : DatabaseModel
     /// field must be <c>null</c>.
     /// </summary>
     [ForeignKey("Museum")]
-    public int MuseumId{get; set;}
+    public int? MuseumId { get; set; }
     public Museum? Museum { get; set; } = null;
 
     public ICollection<Image> Images { get; set; }
@@ -77,7 +77,7 @@ public record Artwork : DatabaseModel
     /// Room in wich the Artwork is displayed. (Related from relation to Rooms)
     /// </summary>
     [ForeignKey("Room")]
-    public int RoomId{get;set;}
+    public int? RoomId { get; set; }
     public Room? Room { get; set; }
     /// <summary>
     /// All the restorations of the Artwork. (Related from relation to Restorations)

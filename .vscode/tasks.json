@@ -43,11 +43,11 @@
       "type": "shell",
       "args": [
         "EXIST",
-        "${workspaceFolder}\\IMuseum.Db",
+        "${workspaceFolder}\\IMuseum.Db\\imuseum.db",
         "RMDIR",
         "/S",
         "/Q",
-        "${workspaceFolder}\\IMuseum.Db"
+        "${workspaceFolder}\\IMuseum.Db\\imuseum.db"
       ],
       "problemMatcher": []
     },
@@ -62,15 +62,6 @@
         "/S",
         "/Q",
         "${workspaceFolder}\\IMuseum.Persistence\\Migrations"
-      ],
-      "problemMatcher": []
-    },
-    {
-      "label": "ensure bd dir",
-      "command": "mkdir",
-      "type": "shell",
-      "args": [
-        "${workspaceFolder}\\IMuseum.Db"
       ],
       "problemMatcher": []
     },
@@ -99,8 +90,7 @@
       "command": "dotnet",
       "type": "process",
       "dependsOn": [
-        "migrate task",
-        "ensure bd dir"
+        "migrate task"
       ],
       "args": [
         "ef",

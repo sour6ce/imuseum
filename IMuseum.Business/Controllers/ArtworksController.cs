@@ -176,11 +176,11 @@ public class ArtworksController : ControllerBase
         {
             return
             filtered(all).Skip(args.PageSize * (args.Page - 1))
-            .Take(args.PageSize);
+            .Take(args.PageSize).ToArray();
         }));
         return new ArtworkGetReturnDto()
         {
-            Artworks = (artworks).Select((x) => this.ArtworkAsDto(x).Result).ToArray(),
+            Artworks = (artworks).Select((x) => this.ArtworkAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
             Count = (await count)
         };
     }
@@ -195,15 +195,15 @@ public class ArtworksController : ControllerBase
             case ArtworkType.Sculpture:
                 var sc = (Sculpture)ArtworkFromDto(artworkDto);
                 await sculpturesRepository.AddAsync(sc);
-                return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = sc.Id }, sc);
+                return CreatedAtAction(nameof(CreateArtworkAsync), new Uri($"{Request.Path}/{sc.Id}"), artworkDto);
             case ArtworkType.Painting:
                 var pnt = (Painting)ArtworkFromDto(artworkDto);
                 await paintsRepository.AddAsync(pnt);
-                return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = pnt.Id }, pnt);
+                return CreatedAtAction(nameof(CreateArtworkAsync), new Uri($"{Request.Path}/{pnt.Id}"), artworkDto);
             default:
                 var art = ArtworkFromDto(artworkDto);
                 await artRepository.AddAsync(art);
-                return CreatedAtAction(nameof(CreateArtworkAsync), new { Id = art.Id }, art);
+                return CreatedAtAction(nameof(CreateArtworkAsync), new Uri($"{Request.Path}/{art.Id}"), artworkDto);
         }
     }
 
