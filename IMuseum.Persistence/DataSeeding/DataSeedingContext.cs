@@ -34,14 +34,14 @@ public static class Seeding
                   Id = 1,
                   StartDate = new DateTime(2022, 6, 23),
                   PaymentAmount = 10,
-                  LoanAplicationId = 1
+                  LoanApplicationId = 1
               },
               new Loan
               {
                   Id = 2,
                   StartDate = new DateTime(2022, 3, 29),
                   PaymentAmount = 20,
-                  LoanAplicationId = 2
+                  LoanApplicationId = 2
               }
               );
 
@@ -54,8 +54,7 @@ public static class Seeding
                   Duration = 10,
                   CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
                   ArtworkId = 1,
-                  MuseumId = 1,
-                  LoanId = 1
+                  MuseumId = 1
               },
               new LoanApplication
               {
@@ -64,8 +63,7 @@ public static class Seeding
                   Duration = 10,
                   CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
                   ArtworkId = 1,
-                  MuseumId = 1,
-                  LoanId = 2
+                  MuseumId = 1
               }
               );
 
