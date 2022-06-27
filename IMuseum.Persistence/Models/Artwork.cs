@@ -31,11 +31,6 @@ public record Artwork : DatabaseModel
         /// </summary>
         OnDisplay,
         /// <summary>
-        /// External artwork registered and meant to be in the
-        /// museum but has not arrived yet.
-        /// </summary>
-        OnWaitArrival,
-        /// <summary>
         /// Internal or external artwork that is out of the 
         /// museum and has no intentions to return to currently.
         /// </summary>
@@ -52,7 +47,7 @@ public record Artwork : DatabaseModel
     /// of an external artwork this can be the time it arrives to the museum.
     /// Has <c>null</c> if the artwork is registered but not yet in the museum.
     /// </summary>
-    public DateTime? IncorporatedDate { get; set; } = DateTime.Now;
+    public DateTime IncorporatedDate { get; set; } = DateTime.Now;
     /// <summary>
     /// Artistic period of the artwork.
     /// </summary>
