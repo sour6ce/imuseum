@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMuseum.Persistence.Migrations
 {
     [DbContext(typeof(IMuseumContext))]
-    [Migration("20220626173214_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220627035917_SecondSeedingMigration")]
+    partial class SecondSeedingMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,7 +85,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9183),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2704),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -101,7 +101,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9205),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2742),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -117,7 +117,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9219),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2770),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -133,7 +133,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9232),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2796),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -149,7 +149,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9290),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2821),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -165,7 +165,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9307),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2850),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -181,7 +181,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 7,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9321),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2878),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -244,7 +244,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5495),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2468),
                             ArtworkId = 3,
                             Bytes = new byte[] { 0 },
                             Deleted = false,
@@ -255,7 +255,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5513),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2475),
                             ArtworkId = 3,
                             Bytes = new byte[] { 0 },
                             Deleted = false,
@@ -266,7 +266,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5516),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2480),
                             ArtworkId = 3,
                             Bytes = new byte[] { 0 },
                             Deleted = false,
@@ -277,7 +277,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5518),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2484),
                             ArtworkId = 3,
                             Bytes = new byte[] { 0 },
                             Deleted = false,
@@ -288,7 +288,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5528),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2489),
                             ArtworkId = 3,
                             Bytes = new byte[] { 0 },
                             Deleted = false,
@@ -299,7 +299,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5530),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2494),
                             ArtworkId = 3,
                             Bytes = new byte[] { 0 },
                             Deleted = false,
@@ -310,7 +310,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 7,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5533),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2498),
                             ArtworkId = 3,
                             Bytes = new byte[] { 0 },
                             Deleted = false,
@@ -357,7 +357,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1372),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8758),
                             Deleted = false,
                             LoanAplicationId = 1,
                             PaymentAmount = 10m,
@@ -366,7 +366,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1379),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8766),
                             Deleted = false,
                             LoanAplicationId = 2,
                             PaymentAmount = 20m,
@@ -427,7 +427,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1395),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8786),
                             ApplicationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ArtworkId = 1,
                             CurrentStatus = 0,
@@ -439,7 +439,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1399),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8792),
                             ApplicationDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ArtworkId = 1,
                             CurrentStatus = 0,
@@ -482,49 +482,49 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1153),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8474),
                             Deleted = false,
                             Name = "Louvre Museum"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1198),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8508),
                             Deleted = false,
                             Name = "British Museum"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1200),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8511),
                             Deleted = false,
                             Name = "London Arqueology Museum"
                         },
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1202),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8513),
                             Deleted = false,
                             Name = "New York Museum"
                         },
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1205),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8515),
                             Deleted = false,
                             Name = "Vatican City Museum"
                         },
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1207),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8518),
                             Deleted = false,
                             Name = "Kiko's Gallery"
                         },
                         new
                         {
                             Id = 7,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1209),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8520),
                             Deleted = false,
                             Name = "LeTize Museum"
                         });
@@ -555,9 +555,8 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("Type")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("UpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
@@ -573,32 +572,32 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5454),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2421),
                             ArtworkId = 3,
                             Deleted = false,
                             EndDate = new DateTime(2012, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StartDate = new DateTime(2012, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "Type1"
+                            Type = 2
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5458),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2429),
                             ArtworkId = 4,
                             Deleted = false,
                             EndDate = new DateTime(2015, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StartDate = new DateTime(2014, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "Type1"
+                            Type = 2
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5461),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2435),
                             ArtworkId = 5,
                             Deleted = false,
                             EndDate = new DateTime(2011, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StartDate = new DateTime(2011, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "Type1"
+                            Type = 2
                         });
                 });
 
@@ -634,35 +633,35 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1342),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8657),
                             Deleted = false,
                             Name = "Director"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1345),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8666),
                             Deleted = false,
                             Name = "Restaurator Sheef"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1348),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8669),
                             Deleted = false,
                             Name = "Catalog Manager"
                         },
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1350),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8671),
                             Deleted = false,
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1352),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 395, DateTimeKind.Local).AddTicks(8673),
                             Deleted = false,
                             Name = "Visiter"
                         });
@@ -700,21 +699,21 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5397),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2376),
                             Deleted = false,
                             Name = "Davinci"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5400),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2383),
                             Deleted = false,
                             Name = "Gallery"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5403),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2387),
                             Deleted = false,
                             Name = "Galileo"
                         });
@@ -760,7 +759,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5561),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2544),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "admin.psw123//",
@@ -769,7 +768,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5597),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2551),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "manager.psw123//",
@@ -778,7 +777,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5600),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2555),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "restaurator.psw123//",
@@ -787,7 +786,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5602),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2560),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "director.psw123//",
@@ -796,7 +795,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5604),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2565),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "restaurator.psw123//",
@@ -805,7 +804,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5606),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2570),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "manager.psw123//",
@@ -846,7 +845,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 10,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(8982),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2233),
                             Assessment = 1m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -864,7 +863,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 11,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9047),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2426),
                             Assessment = 2m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -882,7 +881,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 12,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9065),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2468),
                             Assessment = 3m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -900,7 +899,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 13,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9079),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2497),
                             Assessment = 4m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -918,7 +917,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 14,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9092),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2524),
                             Assessment = 5m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -936,7 +935,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 15,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9108),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2558),
                             Assessment = 6m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -954,7 +953,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 16,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9122),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2587),
                             Assessment = 7m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -972,7 +971,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 17,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9136),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2614),
                             Assessment = 8m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -990,7 +989,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 18,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9149),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2640),
                             Assessment = 9m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1008,7 +1007,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 19,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9165),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 399, DateTimeKind.Local).AddTicks(2671),
                             Assessment = 10m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1043,7 +1042,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 20,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5169),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(1916),
                             Assessment = 1m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1061,7 +1060,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 21,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5222),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2012),
                             Assessment = 2m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1079,7 +1078,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 22,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5237),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2046),
                             Assessment = 3m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1097,7 +1096,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 23,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5250),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2072),
                             Assessment = 4m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1115,7 +1114,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 24,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5262),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2098),
                             Assessment = 5m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1133,7 +1132,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 25,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5325),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2130),
                             Assessment = 6m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1151,7 +1150,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 26,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5341),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2158),
                             Assessment = 7m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1169,7 +1168,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 27,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5354),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2187),
                             Assessment = 8m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1187,7 +1186,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 28,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5367),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2299),
                             Assessment = 9m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1205,7 +1204,7 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 29,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5381),
+                            AddTime = new DateTime(2022, 6, 26, 23, 59, 16, 402, DateTimeKind.Local).AddTicks(2345),
                             Assessment = 10m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
