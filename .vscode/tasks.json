@@ -98,7 +98,10 @@
       "label": "database update task",
       "command": "dotnet",
       "type": "process",
-      "dependsOn": "migrate task",
+      "dependsOn": [
+        "migrate task",
+        "ensure bd dir"
+      ],
       "args": [
         "ef",
         "database",
