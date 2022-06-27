@@ -11,6 +11,7 @@ public record ArtworkPutPostDto
     public DateTime? IncorporatedDate { get; set; }
     public string Period { get; set; }
     public decimal Assessment { get; set; }
+    public string Image { get; set; }
     public ArtworkType Type { get; set; }
     public string? Style { get; set; }
     public string? Media { get; set; }
