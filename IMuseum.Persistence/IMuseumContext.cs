@@ -48,19 +48,10 @@ public class IMuseumContext : DbContext
             .HasOne<Artwork>(la => la.Artwork)
             .WithMany(x => x.LoanApplications);
 
-        //Artwork => Image is a one to many relationship
-        modelBuilder.Entity<Artwork>()
-            .HasMany<Image>(i => i.Images)
-            .WithOne(x => x.Artwork);
-
         //User
         modelBuilder.Entity<User>()
-            .HasMany<Role>(x => x.Roles)
+            .HasOne<Role>(x => x.Role)
             .WithMany(x => x.RelatedUsers);
-
-        modelBuilder.Entity<Role>()
-            .HasMany<User>(x => x.RelatedUsers)
-            .WithMany(x => x.Roles);
         
         modelBuilder.DataSeeding();
     }

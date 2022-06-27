@@ -16,11 +16,9 @@ public class RestauratorChiefAttribute : Attribute, IAuthorizationFilter
 
         var user = (User)context.HttpContext.Items["User"];
         if(user!=null){
-            foreach (var r in user.Roles){
-                if(r.Name == "Restaurator Sheef"){
+                if(user.RoleId == 2|| user.RoleId == 4){
                     return;
                 }
-            }
             // not logged in - return 401 unauthorized
             context.Result = new JsonResult(new { message = "Insufficient permission level to perform this action" }) { StatusCode = StatusCodes.Status401Unauthorized };
 

@@ -61,27 +61,48 @@ public static class Seeding
             LoanId = 2 }
             );
       
+      string[] paintingsNames = {"The Great Bathers", "Vincent’s Bedroom in Arles",
+                        "The Sea of Ice","Saturn Devouring His Son",
+                        "Les Demoiselles d’Avignon","Dance at Moulin de la Galette",
+                        "Time transfixed","Olympia, Musee d’Orsay, Paris",
+                        "The Son of Man","Arrangement in Grey and Black. Portrait of the Painter’s Mother",
+                        "American Gothic","A Sunday Afternoon on the Island of La Grande Jatte",
+                        "Water Lilies","The Kiss (Bacio)",
+                        "Night Watch","The Girl with a Pearl Earring",
+                        "Three Musicians","The Scream","Starry-Night","Mona Lisa (La Gioconda)"};
 
-      for(int i=10;i<20;i++)
-        {
+      string[] paintingImages = {"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:265/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Leonardo-Da-Vinci-Mona-Lisa.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:500/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Vincent-Van-Gogh-Starry-Night.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:316/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Edvard-Munch-The-Scream.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:443/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/PabloPicasso-ThreeMusicians.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:347/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Jan-Vermeer-The-Girl-with-a-Pearl-Earring.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:492/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Rembrandt_Van_Rijn-Night_Watch_.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:398/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Gustav-Klimt-The-Kiss-Bacio-.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:413/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Claude-Monet-Water-Lilies.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:592/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Georges-Seurat-A-Sunday-Afternoon-on-the-Island-of-La-Grande-Jatte.jpg",
+"https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:331/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Grant-Wood-American-Gothic.jpg"};
+      
+      for(int i=19;i>=10;i--)
+      {
             modelBuilder.Entity<Painting>()
-            .HasData(
-            new Painting{
-                Id = i, 
-                Media = "address",
-                Style = "Renacence",
-                Title = "Monalisa"+i.ToString(),
-                Author = "Leonardo da Vinci",
-                CreationDate = new DateTime(1503,1,1),
-                IncorporatedDate = new DateTime(2002,3,4),
-                Period = "Renacence",
-                Assessment = (i%10)+1,
-                CurrentSatus = Artwork.Status.OnDisplay,
-                MuseumId =  i%7 + 1,
-                Description = "Estalin Disima",
-                RoomId = (i%3)+1}
+                  .HasData(
+                  new Painting{
+                  Id = i, 
+                  Media = "address",
+                  Images = paintingImages[19-i],
+                  Style = "Renacence",
+                  Title = paintingsNames[i],
+                  Author = "Author",
+                  CreationDate = new DateTime(1503,1,1),
+                  IncorporatedDate = new DateTime(2002,3,4),
+                  Period = "Renacence",
+                  Assessment = (i%10)+1,
+                  CurrentSatus = Artwork.Status.OnDisplay,
+                  MuseumId =  i%7 + 1,
+                  Description = "Estalin Disima",
+                  RoomId = (i%3)+1}
             );
-        }
+      }
 
       for(int i = 1; i<=7; i++)
       {
@@ -90,6 +111,7 @@ public static class Seeding
                   new Artwork { 
                   Id = i, 
                   Author = "Unknown",
+                  Images = "",
                   Title = "The tapice " + i.ToString(),
                   CreationDate = new DateTime(2022,6,23),
                   IncorporatedDate = new DateTime(2022,6,23),
@@ -109,6 +131,7 @@ public static class Seeding
             new Sculpture{
                 Id = i, 
                 Material = "Gold",
+                Images = "",
                 Style = "Style",
                 Title = "Monalisa"+i.ToString(),
                 Author = "Leonardo da Vinci",
@@ -151,62 +174,6 @@ public static class Seeding
                   ArtworkId = 5  
                   });
 
-      modelBuilder.Entity<Image>()
-            .HasData(
-            new Image { 
-                  Id = 1,
-                  Title = "Title",
-                  Bytes = new byte[1],
-                  FileExtension = "",
-                  Size = 3,
-                  ArtworkId = 3 },
-            new Image { 
-                  Id = 2,
-                  Title = "Title",
-                  Bytes = new byte[1],
-                  FileExtension = "",
-                  Size = 3,
-                  ArtworkId = 3},
-            new Image { 
-                  Id = 3, 
-                  Title = "Title",
-                  Bytes = new byte[1],
-                  FileExtension = "",
-                  Size = 3,
-                  ArtworkId = 3 
-                  },
-            new Image { 
-                  Id = 4, 
-                  Title = "Title",
-                  Bytes = new byte[1],
-                  FileExtension = "",
-                  Size = 3,
-                  ArtworkId = 3 
-                  },
-            new Image { 
-                  Id = 5, 
-                  Title = "Title",
-                  Bytes = new byte[1],
-                  FileExtension = "",
-                  Size = 3,
-                  ArtworkId = 3 
-                  },
-            new Image { 
-                  Id = 6, 
-                  Title = "Title",
-                  Bytes = new byte[1],
-                  FileExtension = "",
-                  Size = 3,
-                  ArtworkId = 3 
-                  },
-            new Image { 
-                  Id = 7, 
-                  Title = "Title",
-                  Bytes = new byte[1],
-                  FileExtension = "",
-                  Size = 3,
-                  ArtworkId = 3 
-                  });
       
       modelBuilder.Entity<User>()
             .HasData(
@@ -214,57 +181,39 @@ public static class Seeding
                   Id = 1,
                   Username = "Foreman Administrator",
                   Password = "admin.psw123//",
-                  Email = "example@gmail.com"},
+                  Email = "example@gmail.com",
+                  RoleId = 4},
             new User { 
                   Id = 2,
                   Username = "Lorena Manager",
                   Password = "manager.psw123//",
-                  Email = "example@gmail.com"},
+                  Email = "example@gmail.com",
+                  RoleId = 3},
             new User { 
                   Id = 3, 
                   Username = "Juan Restaurator",
                   Password = "restaurator.psw123//",
-                  Email = "example@gmail.com"},
+                  Email = "example@gmail.com",
+                  RoleId = 2},
             new User { 
                   Id = 4, 
                   Username = "Harvey Director",
                   Password = "director.psw123//",
-                  Email = "example@gmail.com"},
+                  Email = "example@gmail.com",
+                  RoleId = 1},
             new User { 
                   Id = 5, 
                   Username = "Pablo Restaurator",
                   Password = "restaurator.psw123//",
-                  Email = "example@gmail.com"},
+                  Email = "example@gmail.com",
+                  RoleId = 2},
             new User { 
                   Id = 6, 
                   Username = "Dorian Manager",
                   Password = "manager.psw123//",
-                  Email = "example@gmail.com"});
+                  Email = "example@gmail.com",
+                  RoleId = 3});
 
-      modelBuilder.Entity<User>()
-            .HasMany(p => p.Roles)
-            .WithMany(p => p.RelatedUsers)
-            .UsingEntity(j => j.HasData(new { RelatedUsersId = 1, RolesId = 4 }));
-      modelBuilder.Entity<User>()
-            .HasMany(p => p.Roles)
-            .WithMany(p => p.RelatedUsers)
-            .UsingEntity(j => j.HasData(new { RelatedUsersId = 2, RolesId = 3 }));
-      modelBuilder.Entity<User>()
-            .HasMany(p => p.Roles)
-            .WithMany(p => p.RelatedUsers)
-            .UsingEntity(j => j.HasData(new { RelatedUsersId = 3, RolesId = 2 }));
-      modelBuilder.Entity<User>()
-            .HasMany(p => p.Roles)
-            .WithMany(p => p.RelatedUsers)
-            .UsingEntity(j => j.HasData(new { RelatedUsersId = 4, RolesId = 1 }));
-      modelBuilder.Entity<User>()
-            .HasMany(p => p.Roles)
-            .WithMany(p => p.RelatedUsers)
-            .UsingEntity(j => j.HasData(new { RelatedUsersId = 5, RolesId = 2 }));
-      modelBuilder.Entity<User>()
-            .HasMany(p => p.Roles)
-            .WithMany(p => p.RelatedUsers)
-            .UsingEntity(j => j.HasData(new { RelatedUsersId = 6, RolesId = 3 }));
         }
 
 }
