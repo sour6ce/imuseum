@@ -17,4 +17,10 @@ public interface IConvertionService
 
     Restoration RestorationFromDto(RestorationReturnDto dto);
     Task<LoanApplicationGeneralDto> LoanAppAsDto(LoanApplication loanApp);
+
+    int? MuseumToId(string name);
+    string? MuseumFromId(int id);
+
+    int? RoomToId(string name);
+    string? RoomFromId(int id);
 }

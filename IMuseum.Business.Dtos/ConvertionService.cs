@@ -3,6 +3,8 @@ using IMuseum.Business.Dtos.Artworks;
 using IMuseum.Persistence.Models;
 using IMuseum.Persistence.Repositories.Paintings;
 using IMuseum.Persistence.Repositories.Sculptures;
+using IMuseum.Persistence.Repositories.Museums;
+using IMuseum.Persistence.Repositories.Rooms;
 using IMuseum.Business.Dtos.Restorations;
 using IMuseum.Business.Dtos.LoanApplications;
 
@@ -13,11 +15,22 @@ public class ConvertionService : IConvertionService
     private readonly IArtworksRepository artRepository;
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
-    public ConvertionService(IArtworksRepository artworks, ISculpturesRepository sculptures, IPaintingsRepository paints)
+    private readonly IRoomsRepository rooms;
+    private readonly IMuseumsRepository museums;
+
+    public ConvertionService(
+        IArtworksRepository artworks,
+        ISculpturesRepository sculptures,
+        IPaintingsRepository paints,
+        IRoomsRepository rooms,
+        IMuseumsRepository museums
+        )
     {
         this.artRepository = artworks;
         this.sculpturesRepository = sculptures;
         this.paintsRepository = paints;
+        this.rooms = rooms;
+        this.museums = museums;
     }
 
     public async Task<ArtworkGeneralDto> ArtworkAsDto(Artwork art)
@@ -36,6 +49,8 @@ public class ConvertionService : IConvertionService
             CreationDate = art.CreationDate,
             IncorporatedDate = art.IncorporatedDate,
             Period = art.Period,
+            Image = art.Image,
+            Room = (art.RoomId != null) ? RoomFromId(art.RoomId.Value) : (art.CurrentStatus == Artwork.ArtworkStatus.InStorage) ? "Storage" : "None",
             Assessment = art.Assessment,
             Status = Utils.ArtworkStatusNameMaps().Item2[art.CurrentStatus],
             Type = Utils.ArtworkTypeNameMaps().Item2[type.Value]
@@ -180,7 +195,31 @@ public class ConvertionService : IConvertionService
             LoanApplicationStatus = Utils.LoanAppStatusNameMap().Item2[loanApp.CurrentStatus],
             Artwork = await this.ArtworkAsDto(loanApp.Artwork),
             ArtworkId = loanApp.ArtworkId,
-            MuseumId = loanApp.MuseumId
+            Museum = MuseumFromId(loanApp.MuseumId)
         };
+    }
+
+    public int? MuseumToId(string name)
+    {
+        var r = museums.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault());
+        return r?.Id;
+    }
+
+    public string? MuseumFromId(int id)
+    {
+        var r = museums.GetObjectAsync(id).Result;
+        return r?.Name;
+    }
+
+    public int? RoomToId(string name)
+    {
+        var r = rooms.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault());
+        return r?.Id;
+    }
+
+    public string? RoomFromId(int id)
+    {
+        var r = rooms.GetObjectAsync(id).Result;
+        return r?.Name;
     }
 }
