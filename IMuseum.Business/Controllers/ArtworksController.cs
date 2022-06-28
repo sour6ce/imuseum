@@ -196,9 +196,22 @@ public class ArtworksController : ControllerBase
     //POST /artwork/{id}/move
     [HttpPost]
     [Route("{id}/move-to-room")]
-    public async Task<ActionResult> MoveRoomAsync(int id, [FromQuery] int RoomId)
+    public async Task<ActionResult> MoveRoomAsync(int id, [FromQuery] string Room)
     {
-        var room = await roomsRepository.GetObjectAsync(RoomId);
+        int? RoomId = null;
+        try
+        {
+            RoomId = int.Parse(Room);
+        }
+        catch
+        {
+            RoomId = convertionService.RoomToId(Room);
+        }
+
+        if (RoomId == null)
+            return BadRequest("The room given is not valid");
+
+        var room = await roomsRepository.GetObjectAsync(RoomId.Value);
 
         if (room == null)
             return BadRequest();
