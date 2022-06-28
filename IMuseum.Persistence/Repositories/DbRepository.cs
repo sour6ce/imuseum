@@ -80,7 +80,14 @@ public abstract class DbRepository<T> : IRepository<T> where T : DatabaseModel
         }
     }
 
-    public virtual async Task<int> GetCountAsync() => await GetCountAsync();
+    public virtual async Task<int> GetCountAsync()
+    {
+        using (var scope = this.serviceProvider.CreateScope())
+        {
+            var iMuseumDbContext = scope.ServiceProvider.GetRequiredService<IMuseumContext>();
+            return await iMuseumDbContext.Set<T>().CountAsync();
+        }
+    }
 
     public virtual void Add(T item)
     {
