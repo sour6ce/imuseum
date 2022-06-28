@@ -6,8 +6,8 @@ export interface LoanApplication{
   duration: number;
   artwork: Artwork;
   museum: string;
-  "id": 0,
-  "loanApplicationStatus": 0
+  "id": number,
+  "loanApplicationStatus": string
 }
 
 export interface LoanApplicationPayload{

@@ -14,7 +14,7 @@ const Loans = () => {
 
   return (
     <Card className="w-full">
-      <CardHeader title="Restoration">
+      <CardHeader title="Loans">
       <Popover
           render={({ open, close }) => (
             <div className="p-5">

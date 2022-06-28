@@ -11,6 +11,7 @@ import { AuthProvider } from './hooks/useAuth';
 import Catalog from './pages/Catalog';
 import Restoration from './pages/Restoration';
 import Loans from './pages/Loans';
+import LoansAplications from './pages/LoanAplication';
 
 
 const root = ReactDOM.createRoot(
@@ -45,7 +46,7 @@ root.render(
           {/* <Route path='loans/new' element={<BasicComponent text='Loans New'/>}/>
           <Route path='loans/:loanId/*' element={<BasicComponent text='Loan ID'/>}/> */}
 
-          <Route path='loan-applications' element={<BasicComponent text='Loan Apps'/>}/>
+          <Route path='loan-applications' element={<LoansAplications/>}/>
         </Route>
     </Routes>
     </SubheaderProvider>

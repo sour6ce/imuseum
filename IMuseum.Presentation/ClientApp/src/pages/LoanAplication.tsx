@@ -5,64 +5,88 @@ import { PaginationComponent } from "../ui-components/molecules/Pagination";
 import { Button } from "../ui-components/atoms/Button";
 import Icon from "../ui-components/atoms/Icon";
 import { selectStatusColor } from "../utils/selectStatusColor";
+import { useLoanAppsPaginated } from "../hooks/useLoanApps";
+import { LoanService } from "../services/LoanService";
+import { Popover } from "../ui-components/atoms/Popover";
+import Input from "../ui-components/atoms/Input";
+import { useState } from "react";
+import { LoanAppsFilterForm } from "../ui-components/organisms/LoanAppsFilterForm";
+
+const PopoverContent = ({ open, close, id,handleClick }) => {
+  const [value, setValue] = useState('')
+  return(
+  <div className="p-5 flex flex-row gap-2">
+    <Input
+      type="number"
+      placeholder="Payment"
+      onChange={(e)=>{setValue(e.target.value)}}
+    />
+    <Button
+      onClick={handleClick(id,value)}
+    >
+      Accept
+    </Button>
+  </div>
+)}
 
 const LoansAplications = () => {
   
-  const handleCancelLoad=()=>{
-
+  const handleCancelLoad=(id)=>{
+    LoanService.rejectLoanApp(id).then(()=>{
+      mutate()
+    })
   }
-  const handleOrderArtwork=()=>{
-
+  const handleOrderArtwork=(id,pay)=>{
+    LoanService.acceptLoanApp(id,pay).then(()=>{
+      mutate()
+    })
   }
 
-  const loans = [
-    {
-      status: "available",
-      artwork: "The joy of creation",
-      museum: "Louvre Museum - FR",
-      duration:"2 years",
-      author: "Miguel Angel",
-    },
-    {
-      status: "unavailable",
-      artwork: "The joy of creation",
-      museum: "Louvre Museum - FR",
-      duration:"2 years",
-      author: "Miguel Angel",
-    },
-    {
-      status: "canceled",
-      artwork: "The joy of creation",
-      museum: "Louvre Museum - FR",
-      duration:"2 years",
-      author: "Miguel Angel",
-    }
-  ];
+  const {
+    data,mutate,handleChangeFilters
+  } = useLoanAppsPaginated()
 
   return (
     <Card className="w-full">
-      <CardHeader title="Restoration" />
+      <CardHeader title="Loan Apps">
+        <Popover
+          render={({ open, close }) => (
+            <div className="p-5">
+              <LoanAppsFilterForm onSubmit={handleChangeFilters}/>
+            </div>
+          )}
+          buttonProps={{}}
+          position="right"
+        >
+          Filter
+        </Popover>
+      </CardHeader>
       <div>
         <Table
-          data={loans}
+          data={data?.loanApps ?? []}
           columns={[
             {
               name:"Actions",
               align:"center",
               render:(loan) =>(
                 <div className="flex gap-2 justify-center">
-                  {loan.status==="available"?
-                  <Button color="success" onClick={handleOrderArtwork}>
-                    {<Icon family="fontawesome" name="check" />}
-                  </Button>:<></>}
+                  {loan.loanApplicationStatus === 'on-wait'?
+                  <Popover
+                    render={({open,close})=><PopoverContent
+                      close={close}
+                      open={open}
+                      id={loan.id}
+                      handleClick={handleOrderArtwork}
+                    />}
+                    buttonProps={{color:'success'}}
+                    position="left"
+                  >
+                    <Icon family="fontawesome" name="check" />
+                  </Popover>:<></>}
 
-                  {(loan.status==="available" || loan.status==="unavailable" )?
-                  <Button  color="danger" onClick={handleCancelLoad}>
+                  <Button  color="danger" onClick={()=>handleCancelLoad(loan.id)}>
                     {<Icon family="fontawesome" name="circle-minus" />}
-                  </Button>:<></>}
-
-
-
+                  </Button>
                 </div>
               )
             },
@@ -71,9 +95,9 @@ const LoansAplications = () => {
               align: "center",
               render: (loan) => (
                 <Badge
-                  color={selectStatusColor(loan.status)}
+                  color={selectStatusColor(loan.loanApplicationStatus+"")}
                 >
-                  {loan.status}
+                  {loan.loanApplicationStatus}
                 </Badge>
               ),
             },
@@ -83,9 +107,9 @@ const LoansAplications = () => {
               render: (loan) => (
                 <div className="felx flex-col">
                   <span className="block text-xl font-semibold">
-                    {loan.artwork}
+                    {loan.artwork.title}
                   </span>
-                  <span className="uppercase text-gray-200">{loan.author}</span>
+                  <span className="uppercase text-gray-200">{loan.artwork.author}</span>
                 </div>
               ),
             },
