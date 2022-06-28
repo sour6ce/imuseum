@@ -1,4 +1,5 @@
 using IMuseum.Business.Dtos.Artworks;
+using IMuseum.Business.Dtos.LoanApplications;
 using IMuseum.Business.Dtos.Restorations;
 using IMuseum.Persistence.Models;
 
@@ -15,4 +16,5 @@ public interface IConvertionService
     Task<bool> IsPainting(int artId);
 
     Restoration RestorationFromDto(RestorationReturnDto dto);
+    Task<LoanApplicationGeneralDto> LoanAppAsDto(LoanApplication loanApp);
 }

@@ -4,6 +4,7 @@ using IMuseum.Persistence.Models;
 using IMuseum.Persistence.Repositories.Paintings;
 using IMuseum.Persistence.Repositories.Sculptures;
 using IMuseum.Business.Dtos.Restorations;
+using IMuseum.Business.Dtos.LoanApplications;
 
 namespace IMuseum.Business.Dtos;
 
@@ -145,5 +146,18 @@ public class ConvertionService : IConvertionService
         };
 
         return restoration;
+    }
+    public async Task<LoanApplicationGeneralDto> LoanAppAsDto(LoanApplication loanApp)
+    {
+        return new LoanApplicationGeneralDto()
+        {
+            Id = loanApp.Id,
+            ApplicationDate = loanApp.ApplicationDate,
+            Duration = loanApp.Duration,
+            LoanApplicationStatus = loanApp.CurrentStatus,
+            Artwork = await this.ArtworkAsDto(loanApp.Artwork),
+            ArtworkId = loanApp.ArtworkId,
+            MuseumId = loanApp.MuseumId
+        };
     }
 }
