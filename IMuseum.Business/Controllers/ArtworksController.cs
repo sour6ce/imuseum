@@ -229,7 +229,6 @@ public class ArtworksController : ControllerBase
                 )
                     return BadRequest("An artwork in restoration or loan can't be moved");
 
-                // TODO: Update on added state for external artwork
                 art.CurrentStatus = Artwork.ArtworkStatus.OnDisplay;
                 art.RoomId = RoomId;
                 await context.SaveChangesAsync();
@@ -259,7 +258,6 @@ public class ArtworksController : ControllerBase
                 )
                     return BadRequest("An artwork in restoration or loan can't be moved");
 
-                // TODO: Update on added state for external artwork
                 art.CurrentStatus = Artwork.ArtworkStatus.InStorage;
                 await context.SaveChangesAsync();
                 return new OkResult();

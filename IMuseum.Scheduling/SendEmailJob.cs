@@ -38,7 +38,7 @@ public class SendMailJob : IJob
 
         //If the is info related to restoration that is needed to be informed, then send the corresponding email to restorations chief
         string messageRestorationsChief = await GetMessageForRestorationsChief(artworksNeedRestoration);
-        if(messageRestorationsChief != "")
+        if (messageRestorationsChief != "")
         {
             User chiefRestorations = await GetUserByRoleName("Restoration Chief");
             //Sending email
@@ -47,7 +47,7 @@ public class SendMailJob : IJob
 
         //If the is info related to restoration that is needed to be informed, then send the corresponding email to the museum boss
         string messageMuseumBoss = await GetMessageForMuseumBoss(artworksMuseumLoanExpired, artworksFriendMuseumLoanExpired);
-        if(messageMuseumBoss != "")
+        if (messageMuseumBoss != "")
         {
             User museumBoss = await GetUserByRoleName("Museum Boss");
             //Sending email
@@ -96,10 +96,10 @@ public class SendMailJob : IJob
         IEnumerable<Artwork> artworks = await repository.GetObjectsAsync();
         List<Artwork> artworksToRestoration = new List<Artwork>();
 
-        foreach(Artwork artwork in artworks)
-            if(artwork.IncorporatedDate != null && (artwork.CurrentSatus is Artwork.ArtworkStatus.OnDisplay || artwork.CurrentSatus is Artwork.ArtworkStatus.InStorage) && (await DaysSinceLastRestoration(artwork)) >= 5*365)
+        foreach (Artwork artwork in artworks)
+            if (artwork.IncorporatedDate != null && (artwork.CurrentStatus is Artwork.ArtworkStatus.OnDisplay || artwork.CurrentStatus is Artwork.ArtworkStatus.InStorage) && (await DaysSinceLastRestoration(artwork)) >= 5 * 365)
                 artworksToRestoration.Add(artwork);
-        
+
         return artworksToRestoration;
     }
 
@@ -110,18 +110,18 @@ public class SendMailJob : IJob
         bool isInRestorations = false;
         DateTime? lastRestorationEndingDate = DateTime.MinValue;
 
-        foreach(Restoration restoration in restorations)
+        foreach (Restoration restoration in restorations)
         {
-            if(restoration.Artwork.Id == artwork.Id)
+            if (restoration.Artwork.Id == artwork.Id)
             {
-                if(!isInRestorations)
+                if (!isInRestorations)
                     isInRestorations = true;
-                if(restoration.EndDate != null && restoration.EndDate > lastRestorationEndingDate)
+                if (restoration.EndDate != null && restoration.EndDate > lastRestorationEndingDate)
                     lastRestorationEndingDate = restoration.EndDate;
             }
         }
 
-        if(!isInRestorations)
+        if (!isInRestorations)
             return (DateTime.UtcNow.Date - Convert.ToDateTime(artwork.IncorporatedDate).Date).Days;
         return (DateTime.UtcNow.Date - Convert.ToDateTime(lastRestorationEndingDate).Date).Days;
     }
@@ -132,10 +132,10 @@ public class SendMailJob : IJob
         IEnumerable<Loan> loans = await repository.GetObjectsAsync();
         List<Artwork> artworksToFinishLoan = new List<Artwork>();
 
-        foreach(Loan loan in loans)
-            if((DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentSatus is Artwork.ArtworkStatus.OnLoan)
+        foreach (Loan loan in loans)
+            if ((DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentStatus is Artwork.ArtworkStatus.OnLoan)
                 artworksToFinishLoan.Add(loan.Application.Artwork);
-        
+
         return artworksToFinishLoan;
     }
 
@@ -145,10 +145,10 @@ public class SendMailJob : IJob
         IEnumerable<Loan> loans = await repository.GetObjectsAsync();
         List<Artwork> artworksToFriendMuseum = new List<Artwork>();
 
-        foreach(Loan loan in loans)
-            if(loan.Application.Artwork.CurrentSatus == Artwork.ArtworkStatus.OnDisplay && (loan.Application.Artwork.Museum != null) && (DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentSatus is Artwork.ArtworkStatus.OnLoan)
+        foreach (Loan loan in loans)
+            if (loan.Application.Artwork.CurrentStatus == Artwork.ArtworkStatus.OnDisplay && (loan.Application.Artwork.Museum != null) && (DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentStatus is Artwork.ArtworkStatus.OnLoan)
                 artworksToFriendMuseum.Add(loan.Application.Artwork);
-        
+
         return artworksToFriendMuseum;
     }
 
@@ -156,10 +156,10 @@ public class SendMailJob : IJob
     {
         string message = "";
 
-        if(artworksNeedRestoration.Count > 0)
+        if (artworksNeedRestoration.Count > 0)
         {
             message = "List of artworks that need to init restoration process:\n";
-            foreach(Artwork artwork in artworksNeedRestoration)
+            foreach (Artwork artwork in artworksNeedRestoration)
                 message = message + "Artwork with id: " + artwork.Id + " and title: " + artwork.Title + "\n";
             message = message + "\n";
         }
@@ -171,18 +171,18 @@ public class SendMailJob : IJob
     {
         string message = "";
 
-        if(artworksMuseumLoanExpired.Count > 0)
+        if (artworksMuseumLoanExpired.Count > 0)
         {
             message = "List of artworks that finished its restoration process:\n";
-            foreach(Artwork artwork in artworksMuseumLoanExpired)
+            foreach (Artwork artwork in artworksMuseumLoanExpired)
                 message = message + "Artwork with id: " + artwork.Id + " and title: " + artwork.Title + "\n";
             message = message + "\n";
         }
 
-        if(artworksFriendMuseumLoanExpired.Count > 0)
+        if (artworksFriendMuseumLoanExpired.Count > 0)
         {
             message = "List of artworks that need to init restoration process:\n";
-            foreach(Artwork artwork in artworksFriendMuseumLoanExpired)
+            foreach (Artwork artwork in artworksFriendMuseumLoanExpired)
                 message = message + "Artwork with id: " + artwork.Id + " and title: " + artwork.Title + "\n";
             message = message + "\n";
         }
@@ -194,9 +194,9 @@ public class SendMailJob : IJob
     {
         DbRepository<User> repository = new DbUsersRepository(this.serviceProvider);
         IEnumerable<User> users = await repository.GetObjectsAsync();
-        foreach(User user in users)
-           if(user.Role.Name == roleUser)
-                    return user;
+        foreach (User user in users)
+            if (user.Role.Name == roleUser)
+                return user;
         return null;
     }
 }
