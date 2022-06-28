@@ -8,7 +8,7 @@ public record ArtworkPutPostDto
     public string Description { get; set; }
     public string Author { get; set; }
     public DateTime CreationDate { get; set; }
-    public DateTime? IncorporatedDate { get; set; }
+    public DateTime IncorporatedDate { get; set; }
     public string Period { get; set; }
     public decimal Assessment { get; set; }
     public string Image { get; set; }
