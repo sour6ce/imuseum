@@ -92,12 +92,12 @@ public class SendMailJob : IJob
 
     public async Task<ICollection<Artwork>> GetRestorationNeededArtworks()
     {
-        SqliteDbRepository<Artwork> repository = new SqliteDbArtworksRepository(this.serviceProvider);
+        DbRepository<Artwork> repository = new DbArtworksRepository(this.serviceProvider);
         IEnumerable<Artwork> artworks = await repository.GetObjectsAsync();
         List<Artwork> artworksToRestoration = new List<Artwork>();
 
         foreach(Artwork artwork in artworks)
-            if(artwork.IncorporatedDate != null && (artwork.Status is ArtworkStatus.OnDisplay || artwork.Status is ArtworkStatus.InStorage) && (await DaysSinceLastRestoration(artwork)) >= 5*365)
+            if(artwork.IncorporatedDate != null && (artwork.CurrentSatus is Artwork.ArtworkStatus.OnDisplay || artwork.CurrentSatus is Artwork.ArtworkStatus.InStorage) && (await DaysSinceLastRestoration(artwork)) >= 5*365)
                 artworksToRestoration.Add(artwork);
         
         return artworksToRestoration;
@@ -105,7 +105,7 @@ public class SendMailJob : IJob
 
     public async Task<int> DaysSinceLastRestoration(Artwork artwork)
     {
-        SqliteDbRepository<Restoration> repository = new SqliteDbRestorationsRepository(this.serviceProvider);
+        DbRepository<Restoration> repository = new DbRestorationsRepository(this.serviceProvider);
         IEnumerable<Restoration> restorations = await repository.GetObjectsAsync();
         bool isInRestorations = false;
         DateTime? lastRestorationEndingDate = DateTime.MinValue;
@@ -128,12 +128,12 @@ public class SendMailJob : IJob
 
     public async Task<ICollection<Artwork>> GetMuseumLoanExpiredArtworks()
     {
-        SqliteDbRepository<Loan> repository = new SqliteDbLoansRepository(this.serviceProvider);
+        DbRepository<Loan> repository = new DbLoansRepository(this.serviceProvider);
         IEnumerable<Loan> loans = await repository.GetObjectsAsync();
         List<Artwork> artworksToFinishLoan = new List<Artwork>();
 
         foreach(Loan loan in loans)
-            if((DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.Status is ArtworkStatus.OnLoan)
+            if((DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentSatus is Artwork.ArtworkStatus.OnLoan)
                 artworksToFinishLoan.Add(loan.Application.Artwork);
         
         return artworksToFinishLoan;
@@ -141,12 +141,12 @@ public class SendMailJob : IJob
 
     public async Task<ICollection<Artwork>> GetFriendMuseumsLoanExpiredArtworks()
     {
-        SqliteDbRepository<Loan> repository = new SqliteDbLoansRepository(this.serviceProvider);
+        DbRepository<Loan> repository = new DbLoansRepository(this.serviceProvider);
         IEnumerable<Loan> loans = await repository.GetObjectsAsync();
         List<Artwork> artworksToFriendMuseum = new List<Artwork>();
 
         foreach(Loan loan in loans)
-            if(loan.Application.Artwork.Status == ArtworkStatus.OnDisplay && (loan.Application.Artwork.Museum != null) && (DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.Status is ArtworkStatus.OnLoan)
+            if(loan.Application.Artwork.CurrentSatus == Artwork.ArtworkStatus.OnDisplay && (loan.Application.Artwork.Museum != null) && (DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentSatus is Artwork.ArtworkStatus.OnLoan)
                 artworksToFriendMuseum.Add(loan.Application.Artwork);
         
         return artworksToFriendMuseum;
@@ -192,11 +192,10 @@ public class SendMailJob : IJob
 
     public async Task<User> GetUserByRoleName(string roleUser)
     {
-        SqliteDbRepository<User> repository = new SqliteDbUsersRepository(this.serviceProvider);
+        DbRepository<User> repository = new DbUsersRepository(this.serviceProvider);
         IEnumerable<User> users = await repository.GetObjectsAsync();
         foreach(User user in users)
-            foreach(Role role in user.Roles)
-                if(role.Name == roleUser)
+           if(user.Role.Name == roleUser)
                     return user;
         return null;
     }
