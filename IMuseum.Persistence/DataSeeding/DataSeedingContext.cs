@@ -22,7 +22,7 @@ public static class Seeding
         modelBuilder.Entity<Role>()
             .HasData(
             new Role { Id = 1, Name = "Director" },
-            new Role { Id = 2, Name = "Restaurator Sheef" },
+            new Role { Id = 2, Name = "Restaurator Chief" },
             new Role { Id = 3, Name = "Catalog Manager" },
             new Role { Id = 4, Name = "Administrator" },
             new Role { Id = 5, Name = "Visiter" });
