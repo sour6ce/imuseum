@@ -1,8 +1,19 @@
 
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSession } from "../hooks/useSession";
 import { useTotals } from "../hooks/useTotals";
 
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+  const {
+    user
+  } = useSession()
+  useEffect(()=>{
+    if(!user){
+    navigate('/home')
+  }})
 
   const calculatePercent=(total:number, ammount:number):number=>{
     return  Math.trunc(100*ammount/total)
@@ -12,8 +23,6 @@ const Dashboard = () => {
     totals,
     loading,
   } = useTotals()
-  console.log(totals)
-  // console.log(SessionStore.load(SessionKey.Profile))
   return (
     <div>
       {loading ? <div>Loading...</div> : (

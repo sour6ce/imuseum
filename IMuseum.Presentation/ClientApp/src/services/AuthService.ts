@@ -1,6 +1,7 @@
 import { SessionKey, SessionStore } from "./SessionStore";
 import axios, { AxiosError } from 'axios';
 import { User } from "../types/User";
+import { Navigate } from "react-router-dom";
 
 
 export class AuthService{
@@ -20,7 +21,8 @@ export class AuthService{
     if (error?.response?.status === 401 || error?.response?.status === 403) {
       SessionStore.remove(SessionKey.EncodedToken);
       SessionStore.remove(SessionKey.Profile);
-      globalThis.history.pushState({},'','/home');
+      window.history.pushState({}, '', '/home');
+      window.location.reload();
     }
     return Promise.reject(error);
   }

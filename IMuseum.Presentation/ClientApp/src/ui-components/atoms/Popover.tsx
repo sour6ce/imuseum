@@ -21,7 +21,6 @@ export const Popover: React.FC<PopoverProps> = (props) => {
     textColor: buttonTextColor,
     ...resButtonProps
   } = props?.buttonProps
-  console.log(props.buttonProps)
   return (
     <P className="relative " as='div'>
       {({ open,close }:{open:boolean,close:()=>void}) => (
@@ -35,6 +34,7 @@ export const Popover: React.FC<PopoverProps> = (props) => {
           },buttonClassName ?? undefined)} 
           {...resButtonProps}
           as={Button}
+          role="button"
           >
             {props.children}
           </P.Button>

@@ -9,8 +9,10 @@ import { useLoanAppsPaginated } from "../hooks/useLoanApps";
 import { LoanService } from "../services/LoanService";
 import { Popover } from "../ui-components/atoms/Popover";
 import Input from "../ui-components/atoms/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoanAppsFilterForm } from "../ui-components/organisms/LoanAppsFilterForm";
+import { useNavigate } from "react-router-dom";
+import { useSession } from "../hooks/useSession";
 
 const PopoverContent = ({ open, close, id,handleClick }) => {
   const [value, setValue] = useState('')
@@ -30,6 +32,14 @@ const PopoverContent = ({ open, close, id,handleClick }) => {
 )}
 
 const LoansAplications = () => {
+  const navigate = useNavigate()
+  const {
+    user
+  } = useSession()
+  useEffect(()=>{
+    if(user.role !== 'Director'){
+    navigate('/home')
+  }})
   
   const handleCancelLoad=(id)=>{
     LoanService.rejectLoanApp(id).then(()=>{

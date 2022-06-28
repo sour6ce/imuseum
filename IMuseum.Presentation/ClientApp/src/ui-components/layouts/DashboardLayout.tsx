@@ -26,10 +26,9 @@ export const asideItems : {
 
 export const DashboardLayout : React.FC<DashboardLayoutProps> = (props)=>{
   const location = useLocation()
-  console.log(location)
   return (
       <div className="absolute inset-0 flex flex-row bg-gray-600 text-gray-100 overflow-hidden">
-        <AsideMenu active={asideItems.find(i => i.to === location.pathname).name} items={asideItems}
+        <AsideMenu active={asideItems.find(i => i.to === location.pathname)?.name} items={asideItems}
         />
         <div className="flex flex-col w-full flex-grow h-full overflow-hidden">
           <div className="w-full">

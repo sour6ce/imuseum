@@ -67,7 +67,6 @@ const loadState = (): AuthState => {
 };
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  console.log('a')
   const [state, dispatch] = useReducer(
     AuthReducer,
     loadState() ?? initialAuthState

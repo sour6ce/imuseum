@@ -57,6 +57,7 @@ export const Select = <
       ...styles,
       backgroundColor: "#18212F",
       border: 'none',
+      color: 'white',
       boxShadow: 'none',
       ':focus':{
         ...styles[':focus'],
@@ -64,6 +65,11 @@ export const Select = <
         boxShadow: 'none'
       },
     }),
+    input: (styles)=>({
+      ...styles,
+      color:'white'
+    }),
+
     dropdownIndicator: (styles)=>({
       ...styles,
       color: '#9BBFD1',
@@ -77,7 +83,7 @@ export const Select = <
     }),
     placeholder: (styles)=>({
       ...styles,
-      color: '#061B30',
+      color: 'white',
       opacity: '0.6',
       fontWeight: 500
     }),
@@ -89,7 +95,8 @@ export const Select = <
     }),
     multiValueLabel: (styles)=>({
       ...styles,
-      backgroundColor: '#9FBCD6'
+      backgroundColor: '#9FBCD6',
+      color:'white',
     }),
     multiValueRemove: (styles)=>({
       ...styles,
@@ -105,7 +112,29 @@ export const Select = <
       ':focus':{
         opacity: '1'
       }
-    })
+    }),
+    menu: (styles)=>({
+      ...styles,
+      backgroundColor: '#18212F',
+    }),
+    singleValue: (styles)=>({
+      ...styles,
+      color: 'white',
+    }),
+    menuList: (styles)=>({
+      ...styles,
+      ':hover':{
+        ...styles[':hover']??{},
+        backgroundColor: '#18212F',
+      }
+    }),
+    option:  (styles)=>({
+      ...styles,
+      ':hover':{
+        ...styles[':hover']??{},
+        backgroundColor: '#18212F',
+      }
+    }),
   }
   return (
     <div className={containerClassName}>

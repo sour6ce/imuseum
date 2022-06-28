@@ -18,8 +18,8 @@ const DashboardSubheader:React.FC<DashboardSubheaderProps> = (props)=>{
   } = useContext(SubheaderContext)
   const location = useLocation()
   useEffect(()=>{
-    const matching = asideItems.filter(i => location.pathname.match(i.to))
-    const breads : BreadcrumbItemProps[] = matching.map(i => ({
+    const matching = asideItems?.filter?.(i => location?.pathname?.match?.(i?.to))
+    const breads : BreadcrumbItemProps[] = matching?.map(i => ({
       path: i.to,
       name: i.name,
     }))

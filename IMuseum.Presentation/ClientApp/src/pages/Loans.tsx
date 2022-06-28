@@ -6,8 +6,19 @@ import { useLoansPaginated } from "../hooks/useLoans";
 import dayjs from "dayjs";
 import { Popover } from "../ui-components/atoms/Popover";
 import { LoanFilterForm } from "../ui-components/organisms/LoanFilterForm";
+import { useNavigate } from "react-router-dom";
+import { useSession } from "../hooks/useSession";
+import { useEffect } from "react";
 
 const Loans = () => {
+  const navigate = useNavigate()
+  const {
+    user
+  } = useSession()
+  useEffect(()=>{
+    if(user.role !== 'Director'){
+    navigate('/home')
+  }})
   const {
     data,handleChangeFilters
   } = useLoansPaginated()

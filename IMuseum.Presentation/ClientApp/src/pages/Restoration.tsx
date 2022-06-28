@@ -9,8 +9,21 @@ import dayjs from "dayjs";
 import { RestoreService } from "../services/RestoreService";
 import { Popover } from "../ui-components/atoms/Popover";
 import { RestorationFilterForm } from "../ui-components/organisms/RestorationFilterForm";
+import { useNavigate } from "react-router-dom";
+import { useSession } from "../hooks/useSession";
+import { useEffect } from "react";
 
 const Restoration = () => {
+  
+  const navigate = useNavigate()
+  const {
+    user
+  } = useSession()
+  useEffect(()=>{
+    if(user.role !== 'Restaurator Chief'){
+    navigate('/home')
+  }})
+  
   const {
     data,
     handleChangeFilters,

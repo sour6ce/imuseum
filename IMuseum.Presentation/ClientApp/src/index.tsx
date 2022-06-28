@@ -14,6 +14,7 @@ import Loans from './pages/Loans';
 import LoansAplications from './pages/LoanAplication';
 import Gallery from './pages/Gallery';
 import GalleryArtwork from './pages/GalleryArtwork';
+import { NewArtwork } from './pages/NewArtwork';
 
 
 const root = ReactDOM.createRoot(
@@ -37,8 +38,8 @@ root.render(
           <Route path='users/:userId/*' element={<BasicComponent text='User ID'/>}/> */}
 
           <Route path='catalog' element={<Catalog/>}/>
-          {/* <Route path='catalog/new' element={<BasicComponent text='Artwork New'/>}/>
-          <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/> */}
+          <Route path='catalog/new' element={<NewArtwork/>}/>
+          {/* <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/> */}
 
           <Route path='restoring' element={<Restoration/>}/>
           {/* <Route path='restoring/:restoreId/*' element={<BasicComponent text='Restoration ID'/>}/>
