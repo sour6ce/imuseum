@@ -45,7 +45,7 @@ public record LoanApplication : DatabaseModel
     /// <summary>
     /// Related museum to the loan. In case of internal artworks
     /// stores the museum that request the artwork. For external
-    /// artworks should be the museum taht owns the artwork and then
+    /// artworks should be the museum that owns the artwork and then
     /// march to the museum pointed in the Artwork data.
     /// </summary>
     [ForeignKey("RelatedMuseum")]
