@@ -26,6 +26,14 @@ export class StaticService{
   }
 
   static async getTotals(){
-    return ( await StaticService.axios.get<{totals:Totals}>('/totals')).data
+    return{ totals:{
+      "totalArtworks": 100,
+      "countOnLoan": 10,
+      "countInRestoration": 15,
+      "countInStorage": 5,
+      "countOnDisplay": 50,
+      "countLoanApplications": 10
+    }}
+    // }( await StaticService.axios.get<{totals:Totals}>('/totals')).data
   }
 }

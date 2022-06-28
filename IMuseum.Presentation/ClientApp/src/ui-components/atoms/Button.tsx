@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { Props } from "../../types/Props";
-import {Colors} from '../../utils/constants'
+import {Colors,bgColors,textColors} from '../../utils/constants'
 
 
 
@@ -15,11 +15,12 @@ HTMLButtonElement
 }
 
 export const Button : React.FC<ButtonProps> = ({onClick,color,textColor,className,children,...props})=>{
+  
   return (
     <button onClick={onClick} className={classNames({
       [`bg-${color}`]: color,
       [`text-${textColor}`]: textColor,
-      'bg-gray-950': !color,
+      'bg-primary-light': !color,
       'text-gray-50': !textColor,
       'px-3 py-1.5 rounded-sm': !className 
     },className)} {...props}>

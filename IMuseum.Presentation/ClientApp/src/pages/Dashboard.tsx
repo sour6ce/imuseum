@@ -1,5 +1,6 @@
 
 import { useTotals } from "../hooks/useTotals";
+import { SessionKey, SessionStore } from "../services/SessionStore";
 
 
 const Dashboard = () => {
@@ -12,7 +13,7 @@ const Dashboard = () => {
     totals,
     loading,
   } = useTotals()
-
+  // console.log(SessionStore.load(SessionKey.Profile))
   return (
     <div>
       {loading ? <div>Loading...</div> : (

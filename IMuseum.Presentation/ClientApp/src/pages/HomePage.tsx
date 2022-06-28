@@ -3,6 +3,9 @@ import classNames from 'classnames'
 import { StaticService } from "../services/StaticService"
 import { useAuth } from "../hooks/useAuth"
 import { useEffect } from "react"
+import { Popover } from "../ui-components/atoms/Popover"
+import { Button } from "../ui-components/atoms/Button"
+import { LoginForm } from "../ui-components/organisms/LoginForm"
 
 
 export const homeLinks = [
@@ -45,7 +48,17 @@ export const HomePage = () => {
           ))}
         </div>
         <div>
-          button
+          <Popover
+            render={({open,close})=>(
+              <div className="p-5 flex flex-col">
+                <LoginForm/>
+              </div>
+            )}
+            buttonProps={{}}
+            position="right"
+          >
+            Login
+          </Popover>
         </div>
       </div>
       <div className="flex flex-row">

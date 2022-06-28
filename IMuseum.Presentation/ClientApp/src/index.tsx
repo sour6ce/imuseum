@@ -7,6 +7,8 @@ import { DashboardLayout } from './ui-components/layouts/DashboardLayout';
 import { HomePage } from './pages/HomePage';
 import { SubheaderProvider } from './ui-components/layouts/SubheaderProvider';
 import Dashboard from './pages/Dashboard';
+import { AuthProvider } from './hooks/useAuth';
+import Catalog from './pages/Catalog';
 
 
 const root = ReactDOM.createRoot(
@@ -15,6 +17,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <BrowserRouter>
+    <AuthProvider>
     <SubheaderProvider>
     <Routes>
       <Route path='/home' element={<HomePage/>}/>
@@ -28,7 +31,7 @@ root.render(
           <Route path='users/new' element={<BasicComponent text='Users New'/>}/>
           <Route path='users/:userId/*' element={<BasicComponent text='User ID'/>}/> */}
 
-          <Route path='catalog' element={<BasicComponent text='Catalog'/>}/>
+          <Route path='catalog' element={<Catalog/>}/>
           <Route path='catalog/new' element={<BasicComponent text='Artwork New'/>}/>
           <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/>
 
@@ -44,6 +47,7 @@ root.render(
         </Route>
     </Routes>
     </SubheaderProvider>
+    </AuthProvider>
   </BrowserRouter>
 );
 

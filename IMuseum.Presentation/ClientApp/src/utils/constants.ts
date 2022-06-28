@@ -18,6 +18,7 @@ export type Colors =
 | 'info'
 | 'info-light'
 | 'info-accent'
+| 'gray-50'
 | 'gray-100'
 | 'gray-200'
 | 'gray-300'
@@ -81,6 +82,7 @@ export const textColors = {
   'text-info':'info',
   'text-info-light':'info-light',
   'text-info-accent':'info-accent',
+  'text-gray-50':'gray-50',
   'text-gray-100':'gray-100',
   'text-gray-200':'gray-200',
   'text-gray-300':'gray-300',

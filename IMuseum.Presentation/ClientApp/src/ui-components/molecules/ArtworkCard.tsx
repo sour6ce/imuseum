@@ -18,13 +18,12 @@ const ArtworkCard: React.FC<ArtworkCardProps> = (props) => {
   const editArtwork = () => {};
   const openInGallery = () => {};
 
-
   return (
-    <div className="flex gap-5 bg-gray-600 p-6 rounded-xl">
+    <div className="flex gap-5 w-full bg-gray-600 p-6 rounded-xl">
       <div className="w-60 bg-slate-400 rounded-md flex flex-shrink-0">
-        <img src={props.artwork.link} alt={props.artwork.name} />
+        <img src={props?.artwork?.link} alt={props.artwork.name} />
       </div>
-      <div>
+      <div className="flex-grow-1 w-full">
 
         <span className="text-2xl font-bold">{props.artwork.name}</span>
         <div className="flex gap-4 text-sm mb-3 uppercase">
