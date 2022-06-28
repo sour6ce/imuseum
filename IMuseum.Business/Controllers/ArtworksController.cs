@@ -153,19 +153,6 @@ public class ArtworksController : ControllerBase
         }
     }
 
-    internal Restoration RestorationFromDto(RestorationReturnDto dto)
-    {
-        Restoration restoration = new Restoration()
-        {
-            ArtworkId = dto.Artwork.Id,
-            StartDate = (DateTime)dto.StartDate,
-            EndDate = dto.DueDate,
-            Type = dto.RestorationType
-        };
-
-        return restoration;
-    }
-
     //GET /artworks
     [HttpGet]
     public async Task<ArtworkGetReturnDto> GetArtworksAsync([FromQuery] ArtworkGetParamDto args)
@@ -215,90 +202,6 @@ public class ArtworksController : ControllerBase
                 await artRepository.AddAsync(art);
                 return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
         }
-    }
-
-    //POST /artworks/{id}/start-restoration
-    [HttpPost("{id}/start-restoration")]
-    public async Task<ActionResult<RestorationReturnDto>> StartArtworkRestorationAsync(int artId, RestorationParamDto args)
-    {
-        Artwork? artwork = await artRepository.GetObjectAsync(artId);
-        if (artwork is null)
-        {
-            return NotFound();
-        }
-
-        var resultArt = artRepository.ExecuteOnDbAsync<ActionResult>(async (set, context) =>
-        {
-            var result = await set.FirstOrDefaultAsync((x) => x.Id == artId);
-            if (result == null)
-                return NotFound();
-            else
-            {
-                // NOTE: Checking the state of the artwork
-                if (result.CurrentSatus == Artwork.ArtworkStatus.InRestoration)
-                    return BadRequest();
-                if (result.CurrentSatus == Artwork.ArtworkStatus.OnLoan)
-                    return BadRequest();
-                result.CurrentSatus = Artwork.ArtworkStatus.InRestoration;
-                await context.SaveChangesAsync();
-                return new OkResult();
-            }
-        });
-
-        RestorationReturnDto returnRestoration = new RestorationReturnDto()
-        {
-            Artwork = new SimpleIdDto() { Id = artId },
-            StartDate = DateTime.UtcNow,
-            DueDate = null,
-            RestorationType = args.RestorationType
-        };
-        await restRepository.AddAsync(RestorationFromDto(returnRestoration));
-        return (resultArt.Result.GetType() == typeof(OkResult)) ? returnRestoration : resultArt.Result;
-    }
-
-    //POST /artworks/{id}/end-restoration
-    [HttpPost("{id}/end-restoration")]
-    public async Task<ActionResult<RestorationReturnDto>> EndArtworkRestorationAsync(int artId, RestorationParamDto args)
-    {
-        Artwork? artwork = await artRepository.GetObjectAsync(artId);
-        if (artwork is null)
-            return NotFound();
-
-        var result = restRepository.ExecuteOnDbAsync(async (set, context) =>
-        {
-            var result = await set.FirstOrDefaultAsync((x) => x.ArtworkId == artId);
-            if (result == null)
-                return false;
-            else
-            {
-                result.EndDate = DateTime.Now;
-                await context.SaveChangesAsync();
-                return true;
-            }
-        });
-
-        if (!(await result))
-            return new BadRequestResult();
-
-
-        var resultArt = artRepository.ExecuteOnDbAsync(async (set, context) =>
-        {
-            var result = await set.FirstOrDefaultAsync((x) => x.Id == artId);
-            if (result == null)
-                return false;
-            else
-            {
-                result.CurrentSatus = Artwork.ArtworkStatus.InStorage;
-                await context.SaveChangesAsync();
-                return true;
-            }
-        });
-
-        await resultArt;
-        if (await resultArt)
-            return new OkResult();
-        else
-            return new BadRequestResult();
     }
 
     //GET /artworks/{id}
@@ -437,5 +340,126 @@ public class ArtworksController : ControllerBase
             }
 
         });
+    }
+}
+
+[RestauratorChief]
+[ApiController]
+[Route("artworks")]
+public class ArtworkRestorationController : ControllerBase
+{
+    private readonly IArtworksRepository artRepository;
+    private readonly IRestorationsRepository restRepository;
+    private readonly ILogger<ArtworksController> logger;
+
+
+    public ArtworkRestorationController(
+        IArtworksRepository artworks,
+        IRestorationsRepository restorations,
+        ILogger<ArtworksController> logger
+        )
+    {
+        this.artRepository = artworks;
+        this.restRepository = restorations;
+        this.logger = logger;
+    }
+
+    internal Restoration RestorationFromDto(RestorationReturnDto dto)
+    {
+        Restoration restoration = new Restoration()
+        {
+            ArtworkId = dto.Artwork.Id,
+            StartDate = (DateTime)dto.StartDate,
+            EndDate = dto.DueDate,
+            Type = dto.RestorationType
+        };
+
+        return restoration;
+    }
+
+
+    //POST /artworks/{id}/end-restoration
+    [HttpPost("{id}/end-restoration")]
+    public async Task<ActionResult<RestorationReturnDto>> EndArtworkRestorationAsync(int id, RestorationParamDto args)
+    {
+        Artwork? artwork = await artRepository.GetObjectAsync(id);
+        if (artwork is null)
+            return NotFound();
+
+        var result = restRepository.ExecuteOnDbAsync(async (set, context) =>
+        {
+            var result = await set.FirstOrDefaultAsync((x) => x.ArtworkId == id);
+            if (result == null)
+                return false;
+            else
+            {
+                result.EndDate = DateTime.Now;
+                await context.SaveChangesAsync();
+                return true;
+            }
+        });
+
+        if (!(await result))
+            return new BadRequestResult();
+
+
+        var resultArt = artRepository.ExecuteOnDbAsync(async (set, context) =>
+        {
+            var result = await set.FirstOrDefaultAsync((x) => x.Id == id);
+            if (result == null)
+                return false;
+            else
+            {
+                result.CurrentSatus = Artwork.ArtworkStatus.InStorage;
+                await context.SaveChangesAsync();
+                return true;
+            }
+        });
+
+        await resultArt;
+        if (await resultArt)
+            return new OkResult();
+        else
+            return new BadRequestResult();
+    }
+
+
+    //POST /artworks/{id}/start-restoration
+    [HttpPost("{id}/start-restoration")]
+    public async Task<ActionResult<RestorationReturnDto>> StartArtworkRestorationAsync(int id, RestorationParamDto args)
+    {
+        Artwork? artwork = await artRepository.GetObjectAsync(id);
+        if (artwork is null)
+        {
+            return NotFound();
+        }
+
+        var resultArt = artRepository.ExecuteOnDbAsync<ActionResult>(async (set, context) =>
+        {
+            var result = await set.FirstOrDefaultAsync((x) => x.Id == id);
+            if (result == null)
+                return NotFound();
+            else
+            {
+                // NOTE: Checking the state of the artwork
+                if (result.CurrentSatus == Artwork.ArtworkStatus.InRestoration)
+                    return BadRequest();
+                if (result.CurrentSatus == Artwork.ArtworkStatus.OnLoan)
+                    return BadRequest();
+                result.CurrentSatus = Artwork.ArtworkStatus.InRestoration;
+                await context.SaveChangesAsync();
+                return new OkResult();
+            }
+        });
+
+        RestorationReturnDto returnRestoration = new RestorationReturnDto()
+        {
+            Artwork = new SimpleIdDto() { Id = id },
+            StartDate = DateTime.UtcNow,
+            DueDate = null,
+            RestorationType = args.RestorationType
+        };
+        await restRepository.AddAsync(RestorationFromDto(returnRestoration));
+        return (resultArt.Result.GetType() == typeof(OkResult)) ? returnRestoration : resultArt.Result;
     }
 }
