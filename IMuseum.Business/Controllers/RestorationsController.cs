@@ -35,7 +35,7 @@ public class RestorationsController : ControllerBase
             Artwork = await convertionService.ArtworkAsDto(restoration.Artwork),
             StartDate = restoration.StartDate,
             DueDate = restoration.EndDate,
-            RestorationType = Utils.RestorationTypeNameMap().Item2[restoration.Type.Value],
+            RestorationType = Utils.RestorationTypeNameMap().Item2[restoration.Type],
         };
         return dto;
     }
