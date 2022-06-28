@@ -52,8 +52,8 @@ public class ArtworksController : ControllerBase
         {
             return
             all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Contains(x.Author))
-            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(x.CurrentSatus))
-            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains(convertionService.ArtType(x.Id).Result.Value))
+            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(Utils.ArtworkStatusNameMaps().Item2[x.CurrentSatus]))
+            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains((Utils.ArtworkTypeNameMaps().Item2[convertionService.ArtType(x.Id).Result.Value])))
             .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
         };
         var count = (artRepository.ExecuteOnDbAsync(async (all) =>
@@ -78,7 +78,18 @@ public class ArtworksController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ArtworkGeneralDto>> CreateArtworkAsync(ArtworkPutPostDto artworkDto)
     {
-        switch (artworkDto.Type)
+        ArtworkType type;
+
+        try
+        {
+            type = (ArtworkType)(int.Parse(artworkDto.Type));
+        }
+        catch
+        {
+            type = Utils.ArtworkTypeNameMaps().Item1[artworkDto.Type];
+        }
+
+        switch (type)
         {
             case ArtworkType.Sculpture:
                 var sc = (Sculpture)convertionService.ArtworkFromDto(artworkDto);
@@ -138,7 +149,18 @@ public class ArtworksController : ControllerBase
         var sculpturefound = sculpturesRepository.GetObjectAsync(id);
         var paintfound = paintsRepository.GetObjectAsync(id);
 
-        switch (dto.Type)
+        ArtworkType type;
+
+        try
+        {
+            type = (ArtworkType)(int.Parse(dto.Type));
+        }
+        catch
+        {
+            type = Utils.ArtworkTypeNameMaps().Item1[dto.Type];
+        }
+
+        switch (type)
         {
             case ArtworkType.Sculpture:
                 if (await sculpturefound == null)

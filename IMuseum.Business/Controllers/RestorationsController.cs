@@ -22,7 +22,7 @@ public class RestorationsController : ControllerBase
     private readonly IRestorationsRepository restRepository;
 
     public RestorationsController(IArtworksRepository artworks, ISculpturesRepository sculptures,
-     IPaintingsRepository paints,IRestorationsRepository restRepository)
+     IPaintingsRepository paints, IRestorationsRepository restRepository)
     {
         this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.restRepository = restRepository;
@@ -35,7 +35,7 @@ public class RestorationsController : ControllerBase
             Artwork = await convertionService.ArtworkAsDto(restoration.Artwork),
             StartDate = restoration.StartDate,
             DueDate = restoration.EndDate,
-            RestorationType = restoration.Type,
+            RestorationType = Utils.RestorationTypeNameMap().Item2[restoration.Type.Value],
         };
         return dto;
     }

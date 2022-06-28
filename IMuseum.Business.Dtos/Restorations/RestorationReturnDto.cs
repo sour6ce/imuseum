@@ -13,5 +13,5 @@ public record RestorationReturnDto
     public DateTime? StartDate { get; set; }
     public DateTime? DueDate { get; set; } = null;
 
-    public IMuseum.Persistence.Models.Restoration.RestorationType? RestorationType { get; set; }
+    public string? RestorationType { get; set; }
 }

@@ -7,7 +7,7 @@ public record ArtworkGetParamDto
     public int Page { get; set; }
     public int PageSize { get; set; }
     public string[]? Author { get; set; }
-    public ArtworkType[]? Type { get; set; }
-    public Persistence.Models.Artwork.ArtworkStatus[]? Statuses { get; set; }
+    public string[]? Type { get; set; }
+    public string[]? Statuses { get; set; }
     public string? Search { get; set; }
 }

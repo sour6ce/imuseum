@@ -25,7 +25,7 @@ public class LoanApplicationsController : ControllerBase
     private readonly IConvertionService convertionService;
 
     public LoanApplicationsController(IArtworksRepository artworks, ISculpturesRepository sculptures,
-     IPaintingsRepository paints,ILoanApplicationsRepository loanAppsRepository, ILoansRepository loansRepository)
+     IPaintingsRepository paints, ILoanApplicationsRepository loanAppsRepository, ILoansRepository loansRepository)
     {
         this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.loansRepository = loansRepository;
@@ -39,7 +39,7 @@ public class LoanApplicationsController : ControllerBase
             Id = loanApp.Id,
             ApplicationDate = loanApp.ApplicationDate,
             Duration = loanApp.Duration,
-            LoanApplicationStatus = loanApp.CurrentStatus,
+            LoanApplicationStatus = Utils.LoanAppStatusNameMap().Item2[loanApp.CurrentStatus],
             Artwork = await convertionService.ArtworkAsDto(loanApp.Artwork),
             ArtworkId = loanApp.ArtworkId,
             MuseumId = loanApp.MuseumId
@@ -99,7 +99,7 @@ public class LoanApplicationsController : ControllerBase
             return
             all.Where((x) => args.ArtworkId == null || x.ArtworkId == args.ArtworkId)
             .Where((x) => args.MuseumId == null || args.MuseumId == x.MuseumId)
-            .Where((x) => args.Status == null || args.Status == x.CurrentStatus);
+            .Where((x) => args.Status == null || args.Status == Utils.LoanAppStatusNameMap().Item2[x.CurrentStatus]);
         };
         var count = (loanAppsRepository.ExecuteOnDbAsync(async (all) =>
         {

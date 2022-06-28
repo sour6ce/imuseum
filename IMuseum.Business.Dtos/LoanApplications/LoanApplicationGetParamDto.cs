@@ -8,5 +8,5 @@ public record LoanApplicationGetParamDto
     public int PageSize { get; set; }
     public int? ArtworkId { get; set; }
     public int? MuseumId { get; set; }
-    public LoanApplication.LoanApplicationStatus? Status { get; set; } 
+    public string? Status { get; set; }
 }
