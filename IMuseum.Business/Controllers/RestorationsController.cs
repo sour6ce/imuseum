@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using IMuseum.Auth.Authorization;
+using IMuseum.Business.Dtos;
 
 namespace IMuseum.Business.Controllers;
 
@@ -17,17 +18,21 @@ namespace IMuseum.Business.Controllers;
 [Route("restorations")]
 public class RestorationsController : ControllerBase
 {
+    private readonly IConvertionService convertionService;
     private readonly IRestorationsRepository restRepository;
 
-    public RestorationsController(IRestorationsRepository restRepository)
+    public RestorationsController(IArtworksRepository artworks, ISculpturesRepository sculptures,
+     IPaintingsRepository paints,IRestorationsRepository restRepository)
     {
+        this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.restRepository = restRepository;
     }
 
-    internal RestorationReturnDto RestorationAsDto(Restoration restoration)
+    internal async Task<RestorationReturnDto> RestorationAsDto(Restoration restoration)
     {
         var dto = new RestorationReturnDto()
         {
+            Artwork = await convertionService.ArtworkAsDto(restoration.Artwork),
             StartDate = restoration.StartDate,
             DueDate = restoration.EndDate,
             RestorationType = restoration.Type,
@@ -59,7 +64,7 @@ public class RestorationsController : ControllerBase
         }));
         return new RestorationGetReturnDto()
         {
-            Restorations = (restorations).Select((x) => this.RestorationAsDto(x)).ToArray(),
+            Restorations = (restorations).Select((x) => this.RestorationAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
             Count = (await count)
         };
     }

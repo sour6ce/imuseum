@@ -33,7 +33,7 @@ public class ArtworksController : ControllerBase
     IConvertionService convSer,
      IPaintingsRepository paints, IRestorationsRepository restorations, ILogger<ArtworksController> logger)
     {
-        convertionService = new ConvertionService(artworks, sculptures, paints);
+        this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.artRepository = artworks;
         this.sculpturesRepository = sculptures;
         this.paintsRepository = paints;
@@ -335,7 +335,7 @@ public class ArtworkRestorationController : ControllerBase
 
         RestorationReturnDto returnRestoration = new RestorationReturnDto()
         {
-            Artwork = new SimpleIdDto() { Id = id },
+            Artwork = await convertionService.ArtworkAsDto(artwork),
             StartDate = DateTime.UtcNow,
             DueDate = null,
             RestorationType = args.RestorationType
