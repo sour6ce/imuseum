@@ -201,8 +201,16 @@ public class ConvertionService : IConvertionService
 
     public int? MuseumToId(string name)
     {
-        var r = museums.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault());
-        return r?.Id;
+        int? id;
+        try
+        {
+            id = int.Parse(name);
+        }
+        catch
+        {
+            id = museums.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault())?.Id;
+        }
+        return id;
     }
 
     public string? MuseumFromId(int id)
@@ -213,8 +221,16 @@ public class ConvertionService : IConvertionService
 
     public int? RoomToId(string name)
     {
-        var r = rooms.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault());
-        return r?.Id;
+        int? id;
+        try
+        {
+            id = int.Parse(name);
+        }
+        catch
+        {
+            id = rooms.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault())?.Id;
+        }
+        return id;
     }
 
     public string? RoomFromId(int id)

@@ -53,6 +53,7 @@ public class ArtworksController : ControllerBase
             all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Contains(x.Author))
             .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(Utils.ArtworkStatusNameMaps().Item2[x.CurrentStatus]))
             .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains((Utils.ArtworkTypeNameMaps().Item2[convertionService.ArtType(x.Id).Result.Value])))
+            .Where((x) => args.Rooms == null || (args.Rooms.Count(y => convertionService.RoomToId(y) == x.RoomId && x.RoomId != null) > 1))
             .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
         };
         var count = (artRepository.ExecuteOnDbAsync(async (all) =>
