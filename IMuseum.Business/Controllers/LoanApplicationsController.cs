@@ -88,9 +88,9 @@ public class LoanApplicationsController : ControllerBase
         var filtered = (DbSet<LoanApplication> all) =>
         {
             return
-            all.Where((x) => x.ArtworkId == args.ArtworkId)
-            .Where((x) => args.MuseumId == x.MuseumId)
-            .Where((x) => args.Status == x.CurrentStatus);
+            all.Where((x) => args.ArtworkId == null || x.ArtworkId == args.ArtworkId)
+            .Where((x) => args.MuseumId == null || args.MuseumId == x.MuseumId)
+            .Where((x) => args.Status == null || args.Status == x.CurrentStatus);
         };
         var count = (loanAppsRepository.ExecuteOnDbAsync(async (all) =>
         {
