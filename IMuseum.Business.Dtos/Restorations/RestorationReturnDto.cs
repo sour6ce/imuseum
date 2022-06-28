@@ -9,9 +9,9 @@ public record RestorationReturnDto
     // dueDate: null
     // restorationStatus: status
 
-    public ArtworkGeneralDto? Artwork { get; set; }
-    public DateTime? StartDate { get; set; }
+    public ArtworkGeneralDto Artwork { get; set; }
+    public DateTime StartDate { get; set; }
     public DateTime? DueDate { get; set; } = null;
 
-    public string? RestorationType { get; set; }
+    public string RestorationType { get; set; }
 }

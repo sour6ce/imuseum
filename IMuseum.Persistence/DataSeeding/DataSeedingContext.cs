@@ -104,7 +104,7 @@ public static class Seeding
                     IncorporatedDate = new DateTime(2002, 3, 4),
                     Period = "Renacence",
                     Assessment = (i % 10) + 1,
-                    CurrentSatus = Artwork.ArtworkStatus.OnDisplay,
+                    CurrentStatus = Artwork.ArtworkStatus.OnDisplay,
                     MuseumId = i % 7 + 1,
                     Description = "Estalin Disima",
                     RoomId = (i % 3) + 1
@@ -126,7 +126,7 @@ public static class Seeding
                     IncorporatedDate = new DateTime(2022, 6, 23),
                     Period = "ooold",
                     Assessment = 10,
-                    CurrentSatus = (i > 2 || i < 6) ? Artwork.ArtworkStatus.InRestoration : Artwork.ArtworkStatus.OnDisplay,
+                    CurrentStatus = (i > 2 || i < 6) ? Artwork.ArtworkStatus.InRestoration : Artwork.ArtworkStatus.OnDisplay,
                     MuseumId = 1,
                     Description = "It is just biuriful.",
                     RoomId = i % 3 + 1
@@ -150,7 +150,7 @@ public static class Seeding
                     IncorporatedDate = new DateTime(2002, 3, 4),
                     Period = "Renacence",
                     Assessment = (i % 10) + 1,
-                    CurrentSatus = Artwork.ArtworkStatus.OnDisplay,
+                    CurrentStatus = Artwork.ArtworkStatus.OnDisplay,
                     MuseumId = 1,
                     Description = "Estalin Disima",
                     RoomId = (i % 3) + 1
@@ -166,25 +166,28 @@ public static class Seeding
 
         modelBuilder.Entity<Restoration>()
             .HasData(
-            new Restoration {
+            new Restoration
+            {
                 Id = 1,
                 Type = Restoration.RestorationType.AestheticFunctional,
-                StartDate = new DateTime(2022,6,28),
-                EndDate = new DateTime(2023,1,1),
+                StartDate = new DateTime(2022, 6, 28),
+                EndDate = new DateTime(2023, 1, 1),
                 ArtworkId = 10
             },
-            new Restoration {
+            new Restoration
+            {
                 Id = 2,
                 Type = Restoration.RestorationType.Scientific,
-                StartDate = new DateTime(2021,1,28),
-                EndDate = new DateTime(2022,1,1),
+                StartDate = new DateTime(2021, 1, 28),
+                EndDate = new DateTime(2022, 1, 1),
                 ArtworkId = 15
             },
-            new Restoration {
+            new Restoration
+            {
                 Id = 3,
                 Type = Restoration.RestorationType.Commercial,
-                StartDate = new DateTime(2020,5,27),
-                EndDate = new DateTime(2024,1,1),
+                StartDate = new DateTime(2020, 5, 27),
+                EndDate = new DateTime(2024, 1, 1),
                 ArtworkId = 2
             }
         );

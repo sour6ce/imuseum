@@ -37,7 +37,7 @@ public class ConvertionService : IConvertionService
             IncorporatedDate = art.IncorporatedDate,
             Period = art.Period,
             Assessment = art.Assessment,
-            Status = Utils.ArtworkStatusNameMaps().Item2[art.CurrentSatus],
+            Status = Utils.ArtworkStatusNameMaps().Item2[art.CurrentStatus],
             Type = Utils.ArtworkTypeNameMaps().Item2[type.Value]
         };
 

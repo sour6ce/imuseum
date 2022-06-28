@@ -9,5 +9,5 @@ public record LoanApplicationPutPostDto
     public int Duration { get; set; }
     public int ArtworkId { get; set; }
     public ArtworkGeneralDto Artwork { get; set; }
-    public int? MuseumId { get; set; }
+    public int MuseumId { get; set; }
 }

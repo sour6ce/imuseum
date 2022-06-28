@@ -52,7 +52,7 @@ public class ArtworksController : ControllerBase
         {
             return
             all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Contains(x.Author))
-            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(Utils.ArtworkStatusNameMaps().Item2[x.CurrentSatus]))
+            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(Utils.ArtworkStatusNameMaps().Item2[x.CurrentStatus]))
             .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains((Utils.ArtworkTypeNameMaps().Item2[convertionService.ArtType(x.Id).Result.Value])))
             .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
         };
@@ -212,13 +212,13 @@ public class ArtworksController : ControllerBase
             else
             {
                 if (
-                    art.CurrentSatus == Artwork.ArtworkStatus.OnLoan ||
-                    art.CurrentSatus == Artwork.ArtworkStatus.InRestoration
+                    art.CurrentStatus == Artwork.ArtworkStatus.OnLoan ||
+                    art.CurrentStatus == Artwork.ArtworkStatus.InRestoration
                 )
                     return BadRequest("An artwork in restoration or loan can't be moved");
 
                 // TODO: Update on added state for external artwork
-                art.CurrentSatus = Artwork.ArtworkStatus.OnDisplay;
+                art.CurrentStatus = Artwork.ArtworkStatus.OnDisplay;
                 art.RoomId = RoomId;
                 await context.SaveChangesAsync();
                 return new OkResult();
@@ -242,13 +242,13 @@ public class ArtworksController : ControllerBase
             else
             {
                 if (
-                    art.CurrentSatus == Artwork.ArtworkStatus.OnLoan ||
-                    art.CurrentSatus == Artwork.ArtworkStatus.InRestoration
+                    art.CurrentStatus == Artwork.ArtworkStatus.OnLoan ||
+                    art.CurrentStatus == Artwork.ArtworkStatus.InRestoration
                 )
                     return BadRequest("An artwork in restoration or loan can't be moved");
 
                 // TODO: Update on added state for external artwork
-                art.CurrentSatus = Artwork.ArtworkStatus.InStorage;
+                art.CurrentStatus = Artwork.ArtworkStatus.InStorage;
                 await context.SaveChangesAsync();
                 return new OkResult();
             }
@@ -313,7 +313,7 @@ public class ArtworkRestorationController : ControllerBase
                 return false;
             else
             {
-                result.CurrentSatus = Artwork.ArtworkStatus.InStorage;
+                result.CurrentStatus = Artwork.ArtworkStatus.InStorage;
                 await context.SaveChangesAsync();
                 return true;
             }
@@ -345,11 +345,11 @@ public class ArtworkRestorationController : ControllerBase
             else
             {
                 // NOTE: Checking the state of the artwork
-                if (result.CurrentSatus == Artwork.ArtworkStatus.InRestoration)
+                if (result.CurrentStatus == Artwork.ArtworkStatus.InRestoration)
                     return BadRequest();
-                if (result.CurrentSatus == Artwork.ArtworkStatus.OnLoan)
+                if (result.CurrentStatus == Artwork.ArtworkStatus.OnLoan)
                     return BadRequest();
-                result.CurrentSatus = Artwork.ArtworkStatus.InRestoration;
+                result.CurrentStatus = Artwork.ArtworkStatus.InRestoration;
                 await context.SaveChangesAsync();
                 return new OkResult();
             }
