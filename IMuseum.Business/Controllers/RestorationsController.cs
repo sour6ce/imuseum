@@ -22,9 +22,10 @@ public class RestorationsController : ControllerBase
     private readonly IRestorationsRepository restRepository;
 
     public RestorationsController(IArtworksRepository artworks, ISculpturesRepository sculptures,
+    IConvertionService convSer,
      IPaintingsRepository paints, IRestorationsRepository restRepository)
     {
-        this.convertionService = new ConvertionService(artworks, sculptures, paints);
+        this.convertionService = convSer;
         this.restRepository = restRepository;
     }
 
