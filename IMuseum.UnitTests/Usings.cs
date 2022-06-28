@@ -1,0 +1,16 @@
+global using Xunit;
+global using System;
+global using Moq;
+global using IMuseum.Persistence.Repositories.Artworks;
+global using IMuseum.Persistence.Repositories.Sculptures;
+global using IMuseum.Persistence.Repositories.Rooms;
+global using IMuseum.Persistence.Repositories.Paintings;
+global using IMuseum.Persistence.Repositories.Restorations;
+global using IMuseum.Persistence.Models;
+global using IMuseum.Business.Dtos.Artworks;
+global using IMuseum.Business.Controllers;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Threading.Tasks;
+global using FluentAssertions;
+global using IMuseum.Business.Dtos;
