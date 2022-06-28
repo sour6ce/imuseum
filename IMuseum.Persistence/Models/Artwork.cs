@@ -56,7 +56,7 @@ public record Artwork : DatabaseModel
     /// <summary>
     /// Status of the artwork inside or outside the museum.
     /// </summary>
-    public ArtworkStatus CurrentSatus { get; set; } = ArtworkStatus.InStorage;
+    public ArtworkStatus CurrentStatus { get; set; } = ArtworkStatus.InStorage;
     /// <summary>
     /// The museum owner of the artwork, in case of an internal artwork this
     /// field must be <c>null</c>.

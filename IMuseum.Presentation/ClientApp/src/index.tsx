@@ -6,6 +6,14 @@ import { BasicComponent } from './components/BasicComponents';
 import { DashboardLayout } from './ui-components/layouts/DashboardLayout';
 import { HomePage } from './pages/HomePage';
 import { SubheaderProvider } from './ui-components/layouts/SubheaderProvider';
+import Dashboard from './pages/Dashboard';
+import { AuthProvider } from './hooks/useAuth';
+import Catalog from './pages/Catalog';
+import Restoration from './pages/Restoration';
+import Loans from './pages/Loans';
+import LoansAplications from './pages/LoanAplication';
+import Gallery from './pages/Gallery';
+import GalleryArtwork from './pages/GalleryArtwork';
 
 
 const root = ReactDOM.createRoot(
@@ -14,35 +22,37 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <BrowserRouter>
+    <AuthProvider>
     <SubheaderProvider>
     <Routes>
       <Route path='/home' element={<HomePage/>}/>
       
-      <Route path='/gallery' element={<BasicComponent text='Gallery'/>}/>
-      <Route path='/gallery/:artworkId/*' element={<BasicComponent text='Artwork Gallery'/>}/>
+      <Route path='/gallery' element={<Gallery/>}/>
+      <Route path='/gallery/:artworkId/*' element={<GalleryArtwork/>}/>
         <Route path='/' element={<DashboardLayout/>}>
-          <Route path='dashboard' element={<BasicComponent text='Dashboard'/>}/>
+          <Route path='dashboard' element={<Dashboard/>}/>
           
-          <Route path='users' element={<BasicComponent text='Users'/>}/>
+          {/* <Route path='users' element={<BasicComponent text='Users'/>}/>
           <Route path='users/new' element={<BasicComponent text='Users New'/>}/>
-          <Route path='users/:userId/*' element={<BasicComponent text='User ID'/>}/>
+          <Route path='users/:userId/*' element={<BasicComponent text='User ID'/>}/> */}
 
-          <Route path='catalog' element={<BasicComponent text='Catalog'/>}/>
-          <Route path='catalog/new' element={<BasicComponent text='Artwork New'/>}/>
-          <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/>
+          <Route path='catalog' element={<Catalog/>}/>
+          {/* <Route path='catalog/new' element={<BasicComponent text='Artwork New'/>}/>
+          <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/> */}
 
-          <Route path='restoring' element={<BasicComponent text='Restorations'/>}/>
-          <Route path='restoring/:restoreId/*' element={<BasicComponent text='Restoration ID'/>}/>
-          <Route path='restoring/new' element={<BasicComponent text='Restorations'/>}/>
+          <Route path='restoring' element={<Restoration/>}/>
+          {/* <Route path='restoring/:restoreId/*' element={<BasicComponent text='Restoration ID'/>}/>
+          <Route path='restoring/new' element={<BasicComponent text='Restorations'/>}/> */}
 
-          <Route path='loans' element={<BasicComponent text='Loans'/>}/>
-          <Route path='loans/new' element={<BasicComponent text='Loans New'/>}/>
-          <Route path='loans/:loanId/*' element={<BasicComponent text='Loan ID'/>}/>
+          <Route path='loans' element={<Loans/>}/>
+          {/* <Route path='loans/new' element={<BasicComponent text='Loans New'/>}/>
+          <Route path='loans/:loanId/*' element={<BasicComponent text='Loan ID'/>}/> */}
 
-          <Route path='loan-applications' element={<BasicComponent text='Loan Apps'/>}/>
+          <Route path='loan-applications' element={<LoansAplications/>}/>
         </Route>
     </Routes>
     </SubheaderProvider>
+    </AuthProvider>
   </BrowserRouter>
 );
 

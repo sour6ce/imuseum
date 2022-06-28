@@ -3,7 +3,10 @@ using IMuseum.Business.Dtos.Artworks;
 using IMuseum.Persistence.Models;
 using IMuseum.Persistence.Repositories.Paintings;
 using IMuseum.Persistence.Repositories.Sculptures;
+using IMuseum.Persistence.Repositories.Museums;
+using IMuseum.Persistence.Repositories.Rooms;
 using IMuseum.Business.Dtos.Restorations;
+using IMuseum.Business.Dtos.LoanApplications;
 
 namespace IMuseum.Business.Dtos;
 
@@ -12,17 +15,30 @@ public class ConvertionService : IConvertionService
     private readonly IArtworksRepository artRepository;
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
-    public ConvertionService(IArtworksRepository artworks, ISculpturesRepository sculptures, IPaintingsRepository paints)
+    private readonly IRoomsRepository rooms;
+    private readonly IMuseumsRepository museums;
+
+    public ConvertionService(
+        IArtworksRepository artworks,
+        ISculpturesRepository sculptures,
+        IPaintingsRepository paints,
+        IRoomsRepository rooms,
+        IMuseumsRepository museums
+        )
     {
         this.artRepository = artworks;
         this.sculpturesRepository = sculptures;
         this.paintsRepository = paints;
+        this.rooms = rooms;
+        this.museums = museums;
     }
 
     public async Task<ArtworkGeneralDto> ArtworkAsDto(Artwork art)
     {
         var sc = sculpturesRepository.GetObjectAsync(art.Id);
         var pnt = paintsRepository.GetObjectAsync(art.Id);
+
+        var type = await ArtType(art.Id);
 
         var dto = new ArtworkGeneralDto()
         {
@@ -33,12 +49,14 @@ public class ConvertionService : IConvertionService
             CreationDate = art.CreationDate,
             IncorporatedDate = art.IncorporatedDate,
             Period = art.Period,
+            Image = art.Image,
+            Room = (art.RoomId != null) ? RoomFromId(art.RoomId.Value) : (art.CurrentStatus == Artwork.ArtworkStatus.InStorage) ? "Storage" : "None",
             Assessment = art.Assessment,
-            Status = art.CurrentSatus,
-            Type = ArtType(art.Id).Result.Value
+            Status = Utils.ArtworkStatusNameMaps().Item2[art.CurrentStatus],
+            Type = Utils.ArtworkTypeNameMaps().Item2[type.Value]
         };
 
-        switch (dto.Type)
+        switch (type)
         {
             case ArtworkType.Sculpture:
                 var tempsc = await sc;
@@ -58,8 +76,18 @@ public class ConvertionService : IConvertionService
 
     public Artwork ArtworkFromDto(ArtworkPutPostDto dto)
     {
+        ArtworkType type;
+        try
+        {
+            type = (ArtworkType)(int.Parse(dto.Type));
+        }
+        catch
+        {
+            type = Utils.ArtworkTypeNameMaps().Item1[dto.Type];
+        }
 
-        switch (dto.Type)
+
+        switch (type)
         {
             case ArtworkType.Sculpture:
                 var sc = new Sculpture()
@@ -128,7 +156,7 @@ public class ConvertionService : IConvertionService
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
             return null; //Isn't the Id of an artwork
-        // NOTE: Here goes analysis to get a string that identifies the type of the artwork
+                         // NOTE: Here goes analysis to get a string that identifies the type of the artwork
         return (await IsSculpture(artId)) ? ArtworkType.Sculpture :
                 (await IsPainting(artId)) ? ArtworkType.Painting :
                 ArtworkType.Other;
@@ -136,14 +164,62 @@ public class ConvertionService : IConvertionService
 
     public Restoration RestorationFromDto(RestorationReturnDto dto)
     {
+        Persistence.Models.Restoration.RestorationType type;
+
+        try
+        {
+            type = (Persistence.Models.Restoration.RestorationType)(int.Parse(dto.RestorationType));
+        }
+        catch
+        {
+            type = Utils.RestorationTypeNameMap().Item1[dto.RestorationType];
+        }
+
         Restoration restoration = new Restoration()
         {
             ArtworkId = dto.Artwork.Id,
             StartDate = (DateTime)dto.StartDate,
             EndDate = dto.DueDate,
-            Type = dto.RestorationType
+            Type = type
         };
 
         return restoration;
+    }
+    public async Task<LoanApplicationGeneralDto> LoanAppAsDto(LoanApplication loanApp)
+    {
+        return new LoanApplicationGeneralDto()
+        {
+            Id = loanApp.Id,
+            ApplicationDate = loanApp.ApplicationDate,
+            Duration = loanApp.Duration,
+            LoanApplicationStatus = Utils.LoanAppStatusNameMap().Item2[loanApp.CurrentStatus],
+            Artwork = await this.ArtworkAsDto(loanApp.Artwork),
+            ArtworkId = loanApp.ArtworkId,
+            Museum = MuseumFromId(loanApp.MuseumId)
+        };
+    }
+
+    public int? MuseumToId(string name)
+    {
+        var r = museums.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault());
+        return r?.Id;
+    }
+
+    public string? MuseumFromId(int id)
+    {
+        var r = museums.GetObjectAsync(id).Result;
+        return r?.Name;
+    }
+
+    public int? RoomToId(string name)
+    {
+        var r = rooms.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault());
+        return r?.Id;
+    }
+
+    public string? RoomFromId(int id)
+    {
+        var r = rooms.GetObjectAsync(id).Result;
+        return r?.Name;
     }
 }

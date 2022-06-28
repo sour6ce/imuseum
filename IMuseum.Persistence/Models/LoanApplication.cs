@@ -40,7 +40,7 @@ public record LoanApplication : DatabaseModel
     public LoanApplicationStatus CurrentStatus { get; set; } = LoanApplicationStatus.OnWait;
     [ForeignKey("Artwork")]
     public int ArtworkId { get; set; } = 0;
-    public Artwork? Artwork { get; set; }
+    public Artwork Artwork { get; set; }
 
     /// <summary>
     /// Related museum to the loan. In case of internal artworks
@@ -49,8 +49,8 @@ public record LoanApplication : DatabaseModel
     /// march to the museum pointed in the Artwork data.
     /// </summary>
     [ForeignKey("RelatedMuseum")]
-    public int? MuseumId { get; set; } = 0;
-    public Museum? RelatedMuseum { get; set; }
+    public int MuseumId { get; set; } = 0;
+    public Museum RelatedMuseum { get; set; }
 
     /// <summary>
     /// Loan details. Null if they haven't been accepted. (Related from relation to Loans)
