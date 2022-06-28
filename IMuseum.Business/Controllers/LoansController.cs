@@ -9,7 +9,7 @@ using IMuseum.Auth.Authorization;
 
 namespace IMuseum.Business.Controllers;
 
-//GET /loan-apps
+//GET /loans
 [Director]
 [ApiController]
 [Route("loans")]
@@ -22,15 +22,17 @@ public class LoanController : ControllerBase
         this.loansRepository = loansRepository;
     }
 
-    internal async Task<LoanGeneralDto> LoanAsDto(Loan loan)
+    internal LoanGeneralDto LoanAsDto(Loan loan)
     {
-        return new LoanGeneralDto(){
+        return new LoanGeneralDto()
+        {
             PaymentAmount = loan.PaymentAmount,
-            LoanApplicationId = loan.LoanApplicationId
+            LoanApplicationId = loan.LoanApplicationId,
+            StartDate = loan.StartDate
         };
     }
 
-    //GET /loan-apps
+    //GET /loans
     [HttpGet]
     public async Task<LoanGetReturnDto> GetLoanAppsAsync([FromQuery] LoanGetParamDto args)
     {
@@ -54,7 +56,7 @@ public class LoanController : ControllerBase
         }));
         return new LoanGetReturnDto()
         {
-            Loans = (loans).Select((x) => this.LoanAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
+            Loans = (loans).Select((x) => this.LoanAsDto(x)).ToArray(),
             Count = (await count)
         };
     }

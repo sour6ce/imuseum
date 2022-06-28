@@ -18,14 +18,16 @@ public class LoanApplicationsController : ControllerBase
     private readonly ILoanApplicationsRepository loanAppsRepository;
     private readonly ILoansRepository loansRepository;
 
-    public LoanApplicationsController(ILoanApplicationsRepository loanAppsRepository)
+    public LoanApplicationsController(ILoanApplicationsRepository loanAppsRepository, ILoansRepository loansRepository)
     {
+        this.loansRepository = loansRepository;
         this.loanAppsRepository = loanAppsRepository;
     }
 
-    internal async Task<LoanApplicationGeneralDto> LoanAppAsDto(LoanApplication loanApp)
+    internal LoanApplicationGeneralDto LoanAppAsDto(LoanApplication loanApp)
     {
-        return new LoanApplicationGeneralDto(){
+        return new LoanApplicationGeneralDto()
+        {
             Id = loanApp.Id,
             ApplicationDate = loanApp.ApplicationDate,
             Duration = loanApp.Duration,
@@ -103,7 +105,7 @@ public class LoanApplicationsController : ControllerBase
         }));
         return new LoanApplicationGetReturnDto()
         {
-            LoanApps = (loanApps).Select((x) => this.LoanAppAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
+            LoanApps = (loanApps).Select((x) => this.LoanAppAsDto(x)).ToArray(),
             Count = (await count)
         };
     }
@@ -111,55 +113,63 @@ public class LoanApplicationsController : ControllerBase
     //POST /loan-apps/{id}/accept
     [HttpPost]
     [Route("{id}/accept")]
-    public async Task<ActionResult<LoanApplicationGeneralDto>> CreateLoanAsync(int id,[FromQuery] decimal payment)
+    public async Task<ActionResult<LoanApplicationGeneralDto>> CreateLoanAsync(int id, [FromQuery] decimal payment)
     {
-        // TODO: Add update redirecting in case it exist
         var loanApp = await loanAppsRepository.GetObjectAsync(id);
-        if(loanApp is null)
-            return NoContent();
+        if (loanApp is null)
+            return NotFound();
 
-        var result=loanAppsRepository.ExecuteOnDbAsync(async (set,context)=>{
-            var result=await set.FirstOrDefaultAsync((x)=>x.Id==id);
-            if (result==null)
+        var result = loanAppsRepository.ExecuteOnDbAsync(async (set, context) =>
+        {
+            var result = await set.FirstOrDefaultAsync((x) => x.Id == id);
+            if (result == null)
                 return false;
-            else {
+            else
+            {
                 result.CurrentStatus = LoanApplication.LoanApplicationStatus.OnLoan;
                 await context.SaveChangesAsync();
                 return true;
             }
         });
 
-        var loan = new Loan(){
+        var loan = new Loan()
+        {
             StartDate = DateTime.UtcNow,
             PaymentAmount = payment,
             LoanApplicationId = id,
-            Application = await loanAppsRepository.GetObjectAsync(id)
         };
         await loansRepository.AddAsync(loan);
-        return CreatedAtAction(nameof(CreateLoanAsync), new Uri($"{Request.Path}/{loan.Id}"), (new LoanGeneralDto(){PaymentAmount = loan.PaymentAmount, LoanApplicationId = loan.LoanApplicationId} ));
+        return CreatedAtAction(nameof(CreateLoanAsync), null,
+         (new LoanGeneralDto()
+         {
+             PaymentAmount = loan.PaymentAmount,
+             LoanApplicationId = loan.LoanApplicationId,
+             StartDate = loan.StartDate
+         }));
     }
 
-     //POST /loan-apps/{id}/reject
+    //POST /loan-apps/{id}/reject
     [HttpPost]
     [Route("{id}/reject")]
     public async Task<ActionResult<LoanApplicationGeneralDto>> RejectLoanAsync(int id)
     {
-        // TODO: Add update redirecting in case it exist
         var loanApp = await loanAppsRepository.GetObjectAsync(id);
-        if(loanApp is null)
-            return NoContent();
+        if (loanApp is null)
+            return NotFound();
 
-        var result=loanAppsRepository.ExecuteOnDbAsync(async (set,context)=>{
-            var result=await set.FirstOrDefaultAsync((x)=>x.Id==id);
-            if (result==null)
+        var result = loanAppsRepository.ExecuteOnDbAsync(async (set, context) =>
+        {
+            var result = await set.FirstOrDefaultAsync((x) => x.Id == id);
+            if (result == null)
                 return false;
-            else {
+            else
+            {
                 result.CurrentStatus = LoanApplication.LoanApplicationStatus.Denied;
                 await context.SaveChangesAsync();
                 return true;
             }
         });
 
-        return CreatedAtAction(nameof(RejectLoanAsync), new Uri($"{Request.Path}/{loanApp.Id}"), loanApp);
+        return new OkResult();
     }
 }
