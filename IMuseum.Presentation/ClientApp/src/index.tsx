@@ -12,6 +12,8 @@ import Catalog from './pages/Catalog';
 import Restoration from './pages/Restoration';
 import Loans from './pages/Loans';
 import LoansAplications from './pages/LoanAplication';
+import Gallery from './pages/Gallery';
+import GalleryArtwork from './pages/GalleryArtwork';
 
 
 const root = ReactDOM.createRoot(
@@ -25,8 +27,8 @@ root.render(
     <Routes>
       <Route path='/home' element={<HomePage/>}/>
       
-      <Route path='/gallery' element={<BasicComponent text='Gallery'/>}/>
-      <Route path='/gallery/:artworkId/*' element={<BasicComponent text='Artwork Gallery'/>}/>
+      <Route path='/gallery' element={<Gallery/>}/>
+      <Route path='/gallery/:artworkId/*' element={<GalleryArtwork/>}/>
         <Route path='/' element={<DashboardLayout/>}>
           <Route path='dashboard' element={<Dashboard/>}/>
           

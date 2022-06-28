@@ -10,7 +10,7 @@ export const useTotals = () => {
   } = useSWR(['totals'],StaticService.getTotals)
 
   return {
-    totals: !isValidating ? data?.totals : undefined,
+    totals: !isValidating ? data.data : undefined,
     loading: isValidating || !data,
     mutate
   }

@@ -12,6 +12,7 @@ const Dashboard = () => {
     totals,
     loading,
   } = useTotals()
+  console.log(totals)
   // console.log(SessionStore.load(SessionKey.Profile))
   return (
     <div>

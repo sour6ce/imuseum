@@ -1,13 +1,13 @@
 import IconLogo from "../ui-components/atoms/IconLogo";
 import { Popover } from "../ui-components/atoms/Popover";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import classNames from 'classnames'
 import { Badge } from "../ui-components/atoms/Badge";
 import { useSession } from "../hooks/useSession";
 import { Button } from "../ui-components/atoms/Button";
-import { useArtworksPaginated } from "../hooks/useArtworks";
+import { useArtworkById, useArtworksPaginated } from "../hooks/useArtworks";
 
-interface GalleryProps {
+interface GalleryArtworkProps {
   user?: any;
 }
 export const homeLinks = [
@@ -25,21 +25,16 @@ export const homeLinks = [
   },
 ]
 
-const Gallery: React.FC<GalleryProps> = (props) => {
-
+const GalleryArtwork: React.FC<GalleryArtworkProps> = (props) => {
+  const location = useLocation()
   const {
     user,
     logout,
   } = useSession()
   const navigate = useNavigate()
-
   const {
-    data,handleChangeFilters
-  } = useArtworksPaginated({
-    pagination:{
-      pageSize:30,
-    }
-  })
+    data
+  } = useArtworkById(location.pathname.split('/')[2])
   
   return (
     <div className="absolute inset-0 flex flex-row bg-gray-600 text-gray-100 overflow-hidden">
@@ -102,16 +97,29 @@ const Gallery: React.FC<GalleryProps> = (props) => {
           </div>
         </div>
 
-        <div className="p-16 overflow-scroll grid grid-cols-3 gap-3 items-start">
-          {data?.artworks.map((artwork) => <>{artwork.image ? (
-            <img src={artwork.image} alt={artwork.title} className='w-full' onClick={()=>{
-              navigate(`/gallery/${artwork.id}`)
-            }}/>
-          ) : null}</>)}
+        <div className="p-16 overflow-auto relative grid grid-cols-3 gap-5 items-start">
+          <img src={data?.image} alt={data?.title} className='w-full'/>
+          <div className="col-span-2 flex flex-col">
+            <span className="text-4xl font-bold">{data?.title} <Badge
+              className="text-lg ml-5"
+            >
+              {data?.status}
+            </Badge></span>
+            
+            <div className="flex gap-4 text-lg mb-3 uppercase">
+              <span>{data?.author}</span>
+              <span className="text-primary-light">{data?.type}</span>
+              <span className="text-primary-light">{data?.period}</span>
+            </div>
+            <span className="text font-bold text-gray-200 mt-5">
+              Description
+            </span>
+            <span className="text-lg">{data?.description}</span>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Gallery;
+export default GalleryArtwork;
