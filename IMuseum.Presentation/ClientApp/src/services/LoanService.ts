@@ -1,5 +1,5 @@
 import { Loan } from "../types/Loan";
-import { LoanApplication } from "../types/LoanApplicacion";
+import { LoanApplicationPayload, LoanApplication } from "../types/LoanApplicacion";
 import { Pagination } from "../ui-components/molecules/Pagination";
 import AuthService from "./AuthService";
 import { GetLoanAppsFilters, GetLoansFilter } from "./LoanService.dto";
@@ -26,5 +26,21 @@ export class LoanService{
         ...pagination
       },
     })).data
+  }
+
+  static async acceptLoanApp(loanAppId: string,payment:number){
+    return (await LoanService.axios.post<LoanApplication>(`/loan-apps/${loanAppId}/accept`,{},{
+      params: {
+        payment
+      }
+    }))
+  }
+
+  static async rejectLoanApp(loanAppId: string){
+    return (await LoanService.axios.post<LoanApplication>(`/loan-apps/${loanAppId}/reject`))
+  }
+
+  static async newLoanApp(loanApp: LoanApplicationPayload){
+    return (await LoanService.axios.post<LoanApplication>("/loan-apps",loanApp))
   }
 }
