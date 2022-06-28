@@ -21,6 +21,7 @@ namespace IMuseum.Business.Controllers;
 public class ArtworksController : ControllerBase
 {
     private readonly IRoomsRepository roomsRepository;
+    private readonly IConvertionService convertionService;
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
     private readonly IArtworksRepository artRepository;
@@ -29,13 +30,16 @@ public class ArtworksController : ControllerBase
 
     public ArtworksController(IArtworksRepository artworks, ISculpturesRepository sculptures,
     IRoomsRepository rooms,
+    IConvertionService convSer,
      IPaintingsRepository paints, IRestorationsRepository restorations, ILogger<ArtworksController> logger)
     {
+        this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.artRepository = artworks;
         this.sculpturesRepository = sculptures;
         this.paintsRepository = paints;
         this.restRepository = restorations;
         this.roomsRepository = rooms;
+        this.convertionService = convSer;
         this.logger = logger;
     }
 
@@ -153,6 +157,7 @@ public class ArtworksController : ControllerBase
     }
 
     //GET /artworks
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ArtworkGetReturnDto> GetArtworksAsync([FromQuery] ArtworkGetParamDto args)
     {
@@ -161,7 +166,7 @@ public class ArtworksController : ControllerBase
             return
             all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Contains(x.Author))
             .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(x.CurrentSatus))
-            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains(ArtType(x.Id).Result.Value))
+            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains(convertionService.ArtType(x.Id).Result.Value))
             .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
         };
         var count = (artRepository.ExecuteOnDbAsync(async (all) =>
@@ -177,7 +182,7 @@ public class ArtworksController : ControllerBase
         }));
         return new ArtworkGetReturnDto()
         {
-            Artworks = (artworks).Select((x) => this.ArtworkAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
+            Artworks = (artworks).Select((x) => this.convertionService.ArtworkAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
             Count = (await count)
         };
     }
@@ -189,21 +194,22 @@ public class ArtworksController : ControllerBase
         switch (artworkDto.Type)
         {
             case ArtworkType.Sculpture:
-                var sc = (Sculpture)ArtworkFromDto(artworkDto);
+                var sc = (Sculpture)convertionService.ArtworkFromDto(artworkDto);
                 await sculpturesRepository.AddAsync(sc);
                 return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
             case ArtworkType.Painting:
-                var pnt = (Painting)ArtworkFromDto(artworkDto);
+                var pnt = (Painting)convertionService.ArtworkFromDto(artworkDto);
                 await paintsRepository.AddAsync(pnt);
                 return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
             default:
-                var art = ArtworkFromDto(artworkDto);
+                var art = convertionService.ArtworkFromDto(artworkDto);
                 await artRepository.AddAsync(art);
                 return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
         }
     }
 
     //GET /artworks/{id}
+    [AllowAnonymous]
     [HttpGet]
     [Route("{id}")]
     public async Task<ActionResult<ArtworkGeneralDto>> GetArtworkAsync(int id)
@@ -215,7 +221,7 @@ public class ArtworksController : ControllerBase
         }
         else
         {
-            return await ArtworkAsDto(ret);
+            return await convertionService.ArtworkAsDto(ret);
         }
     }
 
@@ -239,7 +245,7 @@ public class ArtworksController : ControllerBase
     [Route("{id}")]
     public async Task<ActionResult> UpdateArtworkAsync(int id, ArtworkPutPostDto dto)
     {
-        var art = ArtworkFromDto(dto);
+        var art = convertionService.ArtworkFromDto(dto);
 
         var found = artRepository.GetObjectAsync(id);
         var sculpturefound = sculpturesRepository.GetObjectAsync(id);
@@ -349,33 +355,22 @@ public class ArtworkRestorationController : ControllerBase
 {
     private readonly IArtworksRepository artRepository;
     private readonly IRestorationsRepository restRepository;
+    private readonly IConvertionService convertionService;
     private readonly ILogger<ArtworksController> logger;
 
 
     public ArtworkRestorationController(
         IArtworksRepository artworks,
         IRestorationsRepository restorations,
+        IConvertionService conVer,
         ILogger<ArtworksController> logger
         )
     {
         this.artRepository = artworks;
         this.restRepository = restorations;
+        this.convertionService = conVer;
         this.logger = logger;
     }
-
-    internal Restoration RestorationFromDto(RestorationReturnDto dto)
-    {
-        Restoration restoration = new Restoration()
-        {
-            ArtworkId = dto.Artwork.Id,
-            StartDate = (DateTime)dto.StartDate,
-            EndDate = dto.DueDate,
-            Type = dto.RestorationType
-        };
-
-        return restoration;
-    }
-
 
     //POST /artworks/{id}/end-restoration
     [HttpPost("{id}/end-restoration")]
@@ -453,12 +448,12 @@ public class ArtworkRestorationController : ControllerBase
 
         RestorationReturnDto returnRestoration = new RestorationReturnDto()
         {
-            Artwork = new SimpleIdDto() { Id = id },
+            Artwork = await convertionService.ArtworkAsDto(artwork),
             StartDate = DateTime.UtcNow,
             DueDate = null,
             RestorationType = args.RestorationType
         };
-        await restRepository.AddAsync(RestorationFromDto(returnRestoration));
+        await restRepository.AddAsync(convertionService.RestorationFromDto(returnRestoration));
         return (resultArt.Result.GetType() == typeof(OkResult)) ? returnRestoration : resultArt.Result;
     }
 }

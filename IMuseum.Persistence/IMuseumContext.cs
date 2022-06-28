@@ -19,6 +19,12 @@ public class IMuseumContext : DbContext
     //The following configures the model's inheritances and foreign relationships
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<User>().Navigation(x => x.Role).AutoInclude();
+        modelBuilder.Entity<Restoration>().Navigation(x => x.Artwork).AutoInclude();
+        modelBuilder.Entity<Loan>().Navigation(x => x.Application).AutoInclude();
+        modelBuilder.Entity<LoanApplication>().Navigation(x => x.Artwork).AutoInclude();
+        modelBuilder.Entity<LoanApplication>().Navigation(x => x.LoanRelated).AutoInclude();
+
         modelBuilder.Entity<Painting>().ToTable("Paintings");
         modelBuilder.Entity<Sculpture>().ToTable("Sculptures");
 

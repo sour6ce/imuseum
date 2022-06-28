@@ -39,9 +39,14 @@ public class LoanController : ControllerBase
         var filtered = (DbSet<Loan> all) =>
         {
             return
-            all.Where((x) => x.Application.ArtworkId == args.ArtworkId)
-            .Where((x) => args.MuseumId == x.Application.MuseumId)
-            .Where((x) => args.IncomeMin <= x.PaymentAmount && args.IncomeMax >= x.PaymentAmount);
+            all.Where((x) => args.ArtworkId == null || x.Application.ArtworkId == args.ArtworkId)
+            .Where((x) => args.ArtworkId == null || args.MuseumId == x.Application.MuseumId)
+            .Where((x) =>
+                (args.IncomeMin == null && args.IncomeMax == null) ||
+                (args.IncomeMin != null && args.IncomeMin <= x.PaymentAmount && args.IncomeMax == null) ||
+                (args.IncomeMax != null && args.IncomeMin == null && args.IncomeMax >= x.PaymentAmount) ||
+                (args.IncomeMin <= x.PaymentAmount && args.IncomeMax >= x.PaymentAmount)
+            );
         };
         var count = (loansRepository.ExecuteOnDbAsync(async (all) =>
         {

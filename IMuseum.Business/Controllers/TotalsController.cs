@@ -34,7 +34,6 @@ public class TotalsController : ControllerBase
         int totalArtworks = artRepository.Count;
         int countOnLoan = 0, countInRestoration = 0, countInStorage = 0, countOnDisplay = 0;
 
-
         foreach(Artwork art in artworks)
         {
             if(art.CurrentSatus == Artwork.ArtworkStatus.OnLoan)

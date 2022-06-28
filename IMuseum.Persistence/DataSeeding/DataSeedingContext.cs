@@ -164,6 +164,31 @@ public static class Seeding
             new Room { Id = 2, Name = "Gallery" },
             new Room { Id = 3, Name = "Galileo" });
 
+        modelBuilder.Entity<Restoration>()
+            .HasData(
+            new Restoration {
+                Id = 1,
+                Type = Restoration.RestorationType.AestheticFunctional,
+                StartDate = new DateTime(2022,6,28),
+                EndDate = new DateTime(2023,1,1),
+                ArtworkId = 10
+            },
+            new Restoration {
+                Id = 2,
+                Type = Restoration.RestorationType.Scientific,
+                StartDate = new DateTime(2021,1,28),
+                EndDate = new DateTime(2022,1,1),
+                ArtworkId = 15
+            },
+            new Restoration {
+                Id = 3,
+                Type = Restoration.RestorationType.Commercial,
+                StartDate = new DateTime(2020,5,27),
+                EndDate = new DateTime(2024,1,1),
+                ArtworkId = 2
+            }
+        );
+
         modelBuilder.Entity<User>()
             .HasData(
             new User
