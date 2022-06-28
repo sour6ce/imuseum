@@ -177,7 +177,7 @@ public class ConvertionService : IConvertionService
             Id = loanApp.Id,
             ApplicationDate = loanApp.ApplicationDate,
             Duration = loanApp.Duration,
-            LoanApplicationStatus = loanApp.CurrentStatus,
+            LoanApplicationStatus = Utils.LoanAppStatusNameMap().Item2[loanApp.CurrentStatus],
             Artwork = await this.ArtworkAsDto(loanApp.Artwork),
             ArtworkId = loanApp.ArtworkId,
             MuseumId = loanApp.MuseumId
