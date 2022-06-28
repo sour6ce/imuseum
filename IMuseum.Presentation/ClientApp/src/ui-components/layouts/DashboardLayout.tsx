@@ -18,7 +18,6 @@ export const asideItems : {
   {icon:"home", iconFamily:"fontawesome", name:"Home", to:"/home"},
   {icon:"grip", iconFamily:"fontawesome", name:"Dashboard", to:"/dashboard"},
   {icon:"image", iconFamily:"fontawesome", name:"Gallery", to:"/gallery"},
-  {icon:"user", iconFamily:"fontawesome", name:"Users", to:"/users"},
   {icon:"book", iconFamily:"fontawesome", name:"Catalog", to:"/catalog"},
   {icon:"gear", iconFamily:"fontawesome", name:"Restoration", to:"/restoring"},
   {icon:"handshake-angle", iconFamily:"fontawesome", name:"Loans ", to:"/loans"},

@@ -10,7 +10,7 @@ export interface PopoverProps extends Props {
       open:boolean,
       close:()=>void
     }) => React.ReactNode | string;
-  buttonProps: Omit<ButtonProps,'onClick'>;
+  buttonProps?: Omit<ButtonProps,'onClick'>;
   position: 'left'|'right'
 }
 
@@ -20,7 +20,8 @@ export const Popover: React.FC<PopoverProps> = (props) => {
     color: buttonColor,
     textColor: buttonTextColor,
     ...resButtonProps
-  } = props.buttonProps
+  } = props?.buttonProps
+  console.log(props.buttonProps)
   return (
     <P className="relative " as='div'>
       {({ open,close }:{open:boolean,close:()=>void}) => (
@@ -31,7 +32,7 @@ export const Popover: React.FC<PopoverProps> = (props) => {
             [`text-${buttonTextColor}`]: buttonTextColor,
             'bg-primary': !buttonColor,
             'text-gray-50': !buttonTextColor,
-          },buttonClassName)} 
+          },buttonClassName ?? undefined)} 
           {...resButtonProps}
           as={Button}
           >

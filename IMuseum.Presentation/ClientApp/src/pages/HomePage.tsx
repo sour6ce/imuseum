@@ -1,5 +1,11 @@
 import { NavLink } from "react-router-dom"
 import classNames from 'classnames'
+import { StaticService } from "../services/StaticService"
+import { useAuth } from "../hooks/useAuth"
+import { useEffect } from "react"
+import { Popover } from "../ui-components/atoms/Popover"
+import { Button } from "../ui-components/atoms/Button"
+import { LoginForm } from "../ui-components/organisms/LoginForm"
 
 
 export const homeLinks = [
@@ -18,6 +24,18 @@ export const homeLinks = [
 ]
 
 export const HomePage = () => {
+  const {
+    login,
+    state,
+  } = useAuth()
+  useEffect(()=>{
+    login({
+      username: "Foreman Administrator",
+      password: "admin.psw123//",
+    }).then(()=>{
+      StaticService.getArtists().then(artists=>{console.log(artists)})
+    })
+  },[])
   return (
     <div  className={`absolute flex flex-col inset-0 overflow-hidden text-gray-50 bg-no-repeat bg-top lg:bg-right bg-cover lg:bg-contain p-5 bg-[#0E151F] bg-[url(/static/media/mobile.png)] lg:bg-[#0E151F] lg:bg-[url(/static/media/desk.png)]`}>
       <div className="flex flex-row justify-end gap-24">
@@ -30,7 +48,17 @@ export const HomePage = () => {
           ))}
         </div>
         <div>
-          button
+          <Popover
+            render={({open,close})=>(
+              <div className="p-5 flex flex-col">
+                <LoginForm/>
+              </div>
+            )}
+            buttonProps={{}}
+            position="right"
+          >
+            Login
+          </Popover>
         </div>
       </div>
       <div className="flex flex-row">

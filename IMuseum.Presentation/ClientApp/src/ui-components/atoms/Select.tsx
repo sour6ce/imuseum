@@ -55,19 +55,18 @@ export const Select = <
   const selectStyles : StylesConfig<Option,IsMulti,Group> = {
     control: (styles)=>({
       ...styles,
-      backgroundColor: "#C0D6E5",
+      backgroundColor: "#18212F",
       border: 'none',
       boxShadow: 'none',
       ':focus':{
         ...styles[':focus'],
-        backgroundColor: '#9FBCD6',
         border: 'none',
         boxShadow: 'none'
       },
     }),
     dropdownIndicator: (styles)=>({
       ...styles,
-      color: '#061B30',
+      color: '#9BBFD1',
       opacity: '0.5',
       ':hover':{
         opacity: '0.7',

@@ -68,8 +68,8 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>(
             ref={ref}
             id={`label-${name}`}
             type={type}
-            className={classNames('form-input bg-side-dark text-gray-100 text-opacity-80 font-medium border-none rounded-md',
-            'focus:ring-0 focus:bg-side-darker',
+            className={classNames('form-input bg-gray-600 text-gray-100 text-opacity-80 font-medium border-none rounded-md',
+            'focus:ring-0',
             'placeholder:text-gray-100 placeholder:opacity-50 placeholder:font-medium',
             'invalid:ring-2 invalid:ring-danger invalid:ring-opacity-50',
             className, {

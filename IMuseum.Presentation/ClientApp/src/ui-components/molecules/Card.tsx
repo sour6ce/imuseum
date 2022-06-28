@@ -6,7 +6,7 @@ import { Props } from "../../types/Props";
 
 export const Card : React.FC<Props> = (props)=>{
   return (
-    <div className={classNames("bg-gray-700 w-full rounded-2xl ",props.className)}>
+    <div className={classNames("bg-gray-700 w-full rounded-2xl",props.className)}>
       {props.children}
     </div>
   )
