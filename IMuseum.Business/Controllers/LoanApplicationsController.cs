@@ -25,9 +25,10 @@ public class LoanApplicationsController : ControllerBase
     private readonly IConvertionService convertionService;
 
     public LoanApplicationsController(IArtworksRepository artworks, ISculpturesRepository sculptures,
+    IConvertionService convServ,
      IPaintingsRepository paints, ILoanApplicationsRepository loanAppsRepository, ILoansRepository loansRepository)
     {
-        this.convertionService = new ConvertionService(artworks, sculptures, paints);
+        this.convertionService = convServ;
         this.loansRepository = loansRepository;
         this.loanAppsRepository = loanAppsRepository;
     }

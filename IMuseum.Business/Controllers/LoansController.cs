@@ -23,7 +23,8 @@ public class LoanController : ControllerBase
     private readonly ILoansRepository loansRepository;
 
     public LoanController(IArtworksRepository artworks, ISculpturesRepository sculptures,
-     IPaintingsRepository paints,ILoansRepository loansRepository)
+    IConvertionService convServ,
+    IPaintingsRepository paints, ILoansRepository loansRepository)
     {
         this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.loansRepository = loansRepository;
