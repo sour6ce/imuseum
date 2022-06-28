@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using IMuseum.Auth.Authorization;
+using IMuseum.Business.Dtos;
+using IMuseum.Persistence.Repositories.Artworks;
+using IMuseum.Persistence.Repositories.Paintings;
+using IMuseum.Persistence.Repositories.Sculptures;
 
 namespace IMuseum.Business.Controllers;
 
@@ -15,19 +19,23 @@ namespace IMuseum.Business.Controllers;
 [Route("loans")]
 public class LoanController : ControllerBase
 {
+    private readonly IConvertionService convertionService;
     private readonly ILoansRepository loansRepository;
 
-    public LoanController(ILoansRepository loansRepository)
+    public LoanController(IArtworksRepository artworks, ISculpturesRepository sculptures,
+     IPaintingsRepository paints,ILoansRepository loansRepository)
     {
+        this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.loansRepository = loansRepository;
     }
 
-    internal LoanGeneralDto LoanAsDto(Loan loan)
+    internal async Task<LoanGeneralDto> LoanAsDto(Loan loan)
     {
         return new LoanGeneralDto()
         {
             PaymentAmount = loan.PaymentAmount,
             LoanApplicationId = loan.LoanApplicationId,
+            LoanApplication = await convertionService.LoanAppAsDto(loan.Application),
             StartDate = loan.StartDate
         };
     }
@@ -61,7 +69,7 @@ public class LoanController : ControllerBase
         }));
         return new LoanGetReturnDto()
         {
-            Loans = (loans).Select((x) => this.LoanAsDto(x)).ToArray(),
+            Loans = (loans).Select((x) => this.LoanAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
             Count = (await count)
         };
     }
