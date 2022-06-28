@@ -17,6 +17,6 @@ public record Restoration : DatabaseModel
     public DateTime? EndDate { get; set; }
 
     [ForeignKey("Artwork")]
-    public int ArtworkId { get; set;}
+    public int ArtworkId { get; set; }
     public Artwork Artwork { get; set; }
 }

@@ -25,6 +25,8 @@ public class ConvertionService : IConvertionService
         var sc = sculpturesRepository.GetObjectAsync(art.Id);
         var pnt = paintsRepository.GetObjectAsync(art.Id);
 
+        var type = await ArtType(art.Id);
+
         var dto = new ArtworkGeneralDto()
         {
             Id = art.Id.GetHashCode(),
@@ -35,11 +37,11 @@ public class ConvertionService : IConvertionService
             IncorporatedDate = art.IncorporatedDate,
             Period = art.Period,
             Assessment = art.Assessment,
-            Status = art.CurrentSatus,
-            Type = ArtType(art.Id).Result.Value
+            Status = Utils.ArtworkStatusNameMaps().Item2[art.CurrentSatus],
+            Type = Utils.ArtworkTypeNameMaps().Item2[type.Value]
         };
 
-        switch (dto.Type)
+        switch (type)
         {
             case ArtworkType.Sculpture:
                 var tempsc = await sc;
@@ -59,8 +61,18 @@ public class ConvertionService : IConvertionService
 
     public Artwork ArtworkFromDto(ArtworkPutPostDto dto)
     {
+        ArtworkType type;
+        try
+        {
+            type = (ArtworkType)(int.Parse(dto.Type));
+        }
+        catch
+        {
+            type = Utils.ArtworkTypeNameMaps().Item1[dto.Type];
+        }
 
-        switch (dto.Type)
+
+        switch (type)
         {
             case ArtworkType.Sculpture:
                 var sc = new Sculpture()
@@ -129,7 +141,7 @@ public class ConvertionService : IConvertionService
         bool isArt = await this.artRepository.ContainsAsync(artId);
         if (!isArt)
             return null; //Isn't the Id of an artwork
-        // NOTE: Here goes analysis to get a string that identifies the type of the artwork
+                         // NOTE: Here goes analysis to get a string that identifies the type of the artwork
         return (await IsSculpture(artId)) ? ArtworkType.Sculpture :
                 (await IsPainting(artId)) ? ArtworkType.Painting :
                 ArtworkType.Other;
@@ -137,12 +149,23 @@ public class ConvertionService : IConvertionService
 
     public Restoration RestorationFromDto(RestorationReturnDto dto)
     {
+        Persistence.Models.Restoration.RestorationType type;
+
+        try
+        {
+            type = (Persistence.Models.Restoration.RestorationType)(int.Parse(dto.RestorationType));
+        }
+        catch
+        {
+            type = Utils.RestorationTypeNameMap().Item1[dto.RestorationType];
+        }
+
         Restoration restoration = new Restoration()
         {
             ArtworkId = dto.Artwork.Id,
             StartDate = (DateTime)dto.StartDate,
             EndDate = dto.DueDate,
-            Type = dto.RestorationType
+            Type = type
         };
 
         return restoration;

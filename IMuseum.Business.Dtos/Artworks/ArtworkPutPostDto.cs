@@ -12,7 +12,7 @@ public record ArtworkPutPostDto
     public string Period { get; set; }
     public decimal Assessment { get; set; }
     public string Image { get; set; }
-    public ArtworkType Type { get; set; }
+    public string Type { get; set; }
     public string? Style { get; set; }
     public string? Media { get; set; }
     public string? Material { get; set; }
