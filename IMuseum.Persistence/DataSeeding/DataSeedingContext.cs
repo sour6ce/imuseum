@@ -148,7 +148,7 @@ public static class Seeding
                     Author = "Leonardo da Vinci",
                     CreationDate = new DateTime(1503, 1, 1),
                     IncorporatedDate = new DateTime(2002, 3, 4),
-                    Period = "Renacence",
+                    Period = "Renaissance",
                     Assessment = (i % 10) + 1,
                     CurrentStatus = Artwork.ArtworkStatus.OnDisplay,
                     MuseumId = 1,
