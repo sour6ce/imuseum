@@ -21,6 +21,7 @@ namespace IMuseum.Business.Controllers;
 public class ArtworksController : ControllerBase
 {
     private readonly IRoomsRepository roomsRepository;
+    private IConvertionService convertionService;
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
     private readonly IArtworksRepository artRepository;
@@ -29,6 +30,7 @@ public class ArtworksController : ControllerBase
 
     public ArtworksController(IArtworksRepository artworks, ISculpturesRepository sculptures,
     IRoomsRepository rooms,
+    IConvertionService convSer,
      IPaintingsRepository paints, IRestorationsRepository restorations, ILogger<ArtworksController> logger)
     {
         this.artRepository = artworks;
@@ -36,6 +38,7 @@ public class ArtworksController : ControllerBase
         this.paintsRepository = paints;
         this.restRepository = restorations;
         this.roomsRepository = rooms;
+        this.convertionService = convSer;
         this.logger = logger;
     }
 

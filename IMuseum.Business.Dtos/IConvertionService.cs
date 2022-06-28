@@ -1,6 +1,8 @@
 using IMuseum.Business.Dtos.Artworks;
 using IMuseum.Persistence.Models;
 
+namespace IMuseum.Business.Dtos;
+
 public interface IConvertionService
 {
     Artwork ArtworkFromDto(ArtworkPutPostDto dto);
