@@ -43,8 +43,16 @@ public class RestorationsController : ControllerBase
         {
             return
             all.Where((x) => args.ArtworksIds == null || args.ArtworksIds.Length == 0 || args.ArtworksIds.Contains(x.Artwork.Id))
-            .Where((x) => x.StartDate >= args.StartDateA && x.StartDate <= args.StartDateB)
-            .Where((x) => (x.EndDate == null) || (x.EndDate >= args.EndDateA && x.EndDate <= args.EndDateB));
+            .Where((x) =>
+                (args.StartDateA == null && args.StartDateB == null) ||
+                (args.StartDateA != null && x.StartDate >= args.StartDateA && args.StartDateB == null) ||
+                (args.StartDateB != null && x.StartDate == null && x.StartDate <= args.StartDateB) ||
+                (x.StartDate >= args.StartDateA && x.StartDate <= args.StartDateB))
+            .Where((x) =>
+                (args.EndDateA == null && args.EndDateB == null) ||
+                (args.EndDateA != null && x.EndDate >= args.EndDateA && args.EndDateB == null) ||
+                (args.EndDateB != null && x.EndDate == null && x.EndDate <= args.EndDateB) ||
+                (x.EndDate >= args.EndDateA && x.EndDate <= args.EndDateB));
         };
         var count = (restRepository.ExecuteOnDbAsync(async (all) =>
         {
