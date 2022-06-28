@@ -21,7 +21,7 @@ namespace IMuseum.Business.Controllers;
 public class ArtworksController : ControllerBase
 {
     private readonly IRoomsRepository roomsRepository;
-    private IConvertionService convertionService;
+    private readonly IConvertionService convertionService;
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
     private readonly IArtworksRepository artRepository;
@@ -355,33 +355,22 @@ public class ArtworkRestorationController : ControllerBase
 {
     private readonly IArtworksRepository artRepository;
     private readonly IRestorationsRepository restRepository;
+    private readonly IConvertionService convertionService;
     private readonly ILogger<ArtworksController> logger;
 
 
     public ArtworkRestorationController(
         IArtworksRepository artworks,
         IRestorationsRepository restorations,
+        IConvertionService conVer,
         ILogger<ArtworksController> logger
         )
     {
         this.artRepository = artworks;
         this.restRepository = restorations;
+        this.convertionService = conVer;
         this.logger = logger;
     }
-
-    internal Restoration RestorationFromDto(RestorationReturnDto dto)
-    {
-        Restoration restoration = new Restoration()
-        {
-            ArtworkId = dto.Artwork.Id,
-            StartDate = (DateTime)dto.StartDate,
-            EndDate = dto.DueDate,
-            Type = dto.RestorationType
-        };
-
-        return restoration;
-    }
-
 
     //POST /artworks/{id}/end-restoration
     [HttpPost("{id}/end-restoration")]
@@ -464,7 +453,7 @@ public class ArtworkRestorationController : ControllerBase
             DueDate = null,
             RestorationType = args.RestorationType
         };
-        await restRepository.AddAsync(RestorationFromDto(returnRestoration));
+        await restRepository.AddAsync(convertionService.RestorationFromDto(returnRestoration));
         return (resultArt.Result.GetType() == typeof(OkResult)) ? returnRestoration : resultArt.Result;
     }
 }

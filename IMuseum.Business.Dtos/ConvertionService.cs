@@ -3,6 +3,7 @@ using IMuseum.Business.Dtos.Artworks;
 using IMuseum.Persistence.Models;
 using IMuseum.Persistence.Repositories.Paintings;
 using IMuseum.Persistence.Repositories.Sculptures;
+using IMuseum.Business.Dtos.Restorations;
 
 namespace IMuseum.Business.Dtos;
 
@@ -131,5 +132,18 @@ public class ConvertionService : IConvertionService
         return (await IsSculpture(artId)) ? ArtworkType.Sculpture :
                 (await IsPainting(artId)) ? ArtworkType.Painting :
                 ArtworkType.Other;
+    }
+
+    public Restoration RestorationFromDto(RestorationReturnDto dto)
+    {
+        Restoration restoration = new Restoration()
+        {
+            ArtworkId = dto.Artwork.Id,
+            StartDate = (DateTime)dto.StartDate,
+            EndDate = dto.DueDate,
+            Type = dto.RestorationType
+        };
+
+        return restoration;
     }
 }
