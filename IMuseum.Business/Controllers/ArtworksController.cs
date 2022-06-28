@@ -365,6 +365,8 @@ public class ArtworkRestorationController : ControllerBase
                 return new OkResult();
             }
         });
+        if (resultArt.Result.GetType() != typeof(OkResult))
+            return resultArt.Result;
 
         RestorationReturnDto returnRestoration = new RestorationReturnDto()
         {
