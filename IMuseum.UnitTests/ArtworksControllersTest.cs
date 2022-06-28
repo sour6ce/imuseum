@@ -7,7 +7,8 @@ public class ArtworksControllerTests
     private readonly Mock<IRoomsRepository> roomsStub = new();
     private readonly Mock<IPaintingsRepository> paintsStub = new();
     private readonly Mock<IRestorationsRepository> restsStub = new();
-    
+    private readonly Mock<IConvertionService> convertionService = new();
+
     private readonly Mock<ILogger<ArtworksController>> loggerStub = new();
     private readonly Random rand = new();
 
@@ -21,54 +22,13 @@ public class ArtworksControllerTests
 
         var loggerStub = new Mock<ILogger<ArtworksController>>();
 
-        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
+        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, convertionService.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
 
         //Act
         var result = await controller.GetArtworkAsync(rand.Next(500, 5000000));
  
         //Assert
         result.Result.Should().BeOfType<NotFoundResult>(); 
-    }
-
-    [Fact]
-    public async Task GetArtworkAsync_WithExistingArtwork_ReturnsExpectedArtwork()
-    {
-        //Arrange
-        Artwork expectedArtwork = CreateRandomArtwork();
-
-        artsStub.Setup(repo => repo.GetObjectAsync(It.IsAny<int>()))
-            .ReturnsAsync(expectedArtwork);
-
-        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
-
-        //Act
-        var result = await controller.GetArtworkAsync(rand.Next(500, 5000000));
-
-        //Assert
-        Assert.IsType<ArtworkGeneralDto>(result.Value);
-        var dto = (result as ActionResult<ArtworkGeneralDto>).Value;
-        Assert.Equal(expectedArtwork.Id, dto.Id);
-    }
-
-    [Fact]
-    public async Task GetArtworksAsync_WithExistingArtworks_ReturnsAllArtworks()
-    {
-        //Arrange
-        var expectedArtworks = new[]{CreateRandomArtwork(), CreateRandomArtwork(), CreateRandomArtwork()};
-
-        artsStub.Setup(repo => repo.GetObjectsAsync())
-            .ReturnsAsync(expectedArtworks);
-
-        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
-
-        //Act
-        var actualArtworks = (await controller.GetArtworksAsync(new ArtworkGetParamDto() {})).Artworks;
-
-        //Assert
-        actualArtworks.Should().BeEquivalentTo(
-            expectedArtworks,
-            options => options.ComparingByMembers<Artwork>().ExcludingMissingMembers()
-        );
     }
 
     [Fact]
@@ -84,7 +44,7 @@ public class ArtworksControllerTests
             Assessment = rand.Next(50000000)
         };
 
-        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
+        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, convertionService.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
 
         //Act
         var result = await controller.CreateArtworkAsync(artworkToCreate);
@@ -115,7 +75,7 @@ public class ArtworksControllerTests
             Assessment = rand.Next(50000000)
         };
 
-        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
+        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, convertionService.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
 
         //Act
         var result = await controller.UpdateArtworkAsync(artworkId, artworkToUpdate);
@@ -132,7 +92,7 @@ public class ArtworksControllerTests
         artsStub.Setup(repo => repo.GetObjectAsync(It.IsAny<int>()))
             .ReturnsAsync(existingArtwork);
 
-        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
+        var controller = new ArtworksController(artsStub.Object, scsStub.Object, roomsStub.Object, convertionService.Object, paintsStub.Object, restsStub.Object, loggerStub.Object);
 
         //Act
         var result = await controller.DeleteArtwork(existingArtwork.Id);

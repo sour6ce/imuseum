@@ -13,3 +13,4 @@ global using Microsoft.Extensions.Logging;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Threading.Tasks;
 global using FluentAssertions;
+global using IMuseum.Business.Dtos;
