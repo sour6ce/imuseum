@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+
 export enum SessionKey {
   Profile = 'profile',
   EncodedToken = 'et',

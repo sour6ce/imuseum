@@ -1,7 +1,7 @@
-import { User } from '../../types/User';
 import React, { createContext, Dispatch, useReducer } from 'react';
 import { SessionKey, SessionStore } from '../../services/SessionStore';
 import { Props } from '../../types/Props';
+import { User } from '../../types/User';
 
 export const AUTH_STATE_STORAGE_KEY = 'auth' as const;
 

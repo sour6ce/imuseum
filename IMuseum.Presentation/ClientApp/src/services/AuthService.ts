@@ -1,11 +1,12 @@
 import { SessionKey, SessionStore } from "./SessionStore";
 import axios, { AxiosError } from 'axios';
+import { User } from "../types/User";
 
 
 export class AuthService{
   static get axios(){
     const instance = axios.create({
-      baseURL: '/api',
+      baseURL: 'https://localhost:7001/',
       ...(SessionStore.load(SessionKey.EncodedToken) ? {
         headers:{
           Authorization: `Basic ${SessionStore.load(SessionKey.EncodedToken)}`,
@@ -25,7 +26,7 @@ export class AuthService{
   }
 
   static async login(username: string, password: string){
-    return axios.post('/api/login',{username,password})
+    return AuthService.axios.post<User>('users/login',{username,password})
   }
 }
  

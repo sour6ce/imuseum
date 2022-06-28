@@ -23,9 +23,9 @@ root.render(
         <Route path='/' element={<DashboardLayout/>}>
           <Route path='dashboard' element={<BasicComponent text='Dashboard'/>}/>
           
-          <Route path='users' element={<BasicComponent text='Users'/>}/>
+          {/* <Route path='users' element={<BasicComponent text='Users'/>}/>
           <Route path='users/new' element={<BasicComponent text='Users New'/>}/>
-          <Route path='users/:userId/*' element={<BasicComponent text='User ID'/>}/>
+          <Route path='users/:userId/*' element={<BasicComponent text='User ID'/>}/> */}
 
           <Route path='catalog' element={<BasicComponent text='Catalog'/>}/>
           <Route path='catalog/new' element={<BasicComponent text='Artwork New'/>}/>
