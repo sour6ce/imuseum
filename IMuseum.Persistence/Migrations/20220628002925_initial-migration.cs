@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IMuseum.Persistence.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -95,12 +95,12 @@ namespace IMuseum.Persistence.Migrations
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Author = table.Column<string>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IncorporatedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IncorporatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Period = table.Column<string>(type: "TEXT", nullable: false),
                     Assessment = table.Column<decimal>(type: "TEXT", nullable: false),
                     CurrentSatus = table.Column<int>(type: "INTEGER", nullable: false),
                     MuseumId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Images = table.Column<string>(type: "TEXT", nullable: false),
+                    Image = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     RoomId = table.Column<int>(type: "INTEGER", nullable: true),
                     AddTime = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -249,252 +249,252 @@ namespace IMuseum.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Museums",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 1, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7473), false, null, "Louvre Museum" });
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3233), false, null, "Louvre Museum" });
 
             migrationBuilder.InsertData(
                 table: "Museums",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 2, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7518), false, null, "British Museum" });
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3280), false, null, "British Museum" });
 
             migrationBuilder.InsertData(
                 table: "Museums",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 3, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7521), false, null, "London Arqueology Museum" });
+                values: new object[] { 3, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3283), false, null, "London Arqueology Museum" });
 
             migrationBuilder.InsertData(
                 table: "Museums",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 4, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7522), false, null, "New York Museum" });
+                values: new object[] { 4, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3285), false, null, "New York Museum" });
 
             migrationBuilder.InsertData(
                 table: "Museums",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 5, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7524), false, null, "Vatican City Museum" });
+                values: new object[] { 5, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3288), false, null, "Vatican City Museum" });
 
             migrationBuilder.InsertData(
                 table: "Museums",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 6, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7526), false, null, "Kiko's Gallery" });
+                values: new object[] { 6, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3290), false, null, "Kiko's Gallery" });
 
             migrationBuilder.InsertData(
                 table: "Museums",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 7, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7528), false, null, "LeTize Museum" });
+                values: new object[] { 7, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3292), false, null, "LeTize Museum" });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 1, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7658), false, null, "Director" });
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3433), false, null, "Director" });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 2, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7662), false, null, "Restaurator Sheef" });
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3437), false, null, "Restaurator Sheef" });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 3, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7664), false, null, "Catalog Manager" });
+                values: new object[] { 3, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3440), false, null, "Catalog Manager" });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 4, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7666), false, null, "Administrator" });
+                values: new object[] { 4, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3442), false, null, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 5, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7668), false, null, "Visiter" });
+                values: new object[] { 5, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3444), false, null, "Visiter" });
 
             migrationBuilder.InsertData(
                 table: "Rooms",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 1, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8211), false, null, "Davinci" });
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3989), false, null, "Davinci" });
 
             migrationBuilder.InsertData(
                 table: "Rooms",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 2, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8213), false, null, "Gallery" });
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3993), false, null, "Gallery" });
 
             migrationBuilder.InsertData(
                 table: "Rooms",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Name" },
-                values: new object[] { 3, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8215), false, null, "Galileo" });
+                values: new object[] { 3, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3996), false, null, "Galileo" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 1, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7944), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 2, "The tapice 1" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3700), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 2, "The tapice 1" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 2, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7973), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 3, "The tapice 2" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3729), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 3, "The tapice 2" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 3, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7986), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 1, "The tapice 3" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 3, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3743), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 1, "The tapice 3" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 4, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7999), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 2, "The tapice 4" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 4, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3756), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 2, "The tapice 4" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 5, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8011), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 3, "The tapice 5" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 5, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3769), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 3, "The tapice 5" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 6, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8024), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 1, "The tapice 6" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 6, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3783), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 1, "The tapice 6" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 7, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8035), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 2, "The tapice 7" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 7, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3831), 10m, "Unknown", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, null, "It is just biuriful.", "", new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "ooold", 2, "The tapice 7" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 10, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7929), 1m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:331/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Grant-Wood-American-Gothic.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Renacence", 2, "American Gothic" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 10, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3684), 1m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:331/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Grant-Wood-American-Gothic.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Renacence", 2, "American Gothic" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 11, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7914), 2m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:592/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Georges-Seurat-A-Sunday-Afternoon-on-the-Island-of-La-Grande-Jatte.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Renacence", 3, "A Sunday Afternoon on the Island of La Grande Jatte" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 11, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3671), 2m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:592/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Georges-Seurat-A-Sunday-Afternoon-on-the-Island-of-La-Grande-Jatte.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Renacence", 3, "A Sunday Afternoon on the Island of La Grande Jatte" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 12, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7833), 3m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:413/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Claude-Monet-Water-Lilies.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Renacence", 1, "Water Lilies" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 12, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3658), 3m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:413/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Claude-Monet-Water-Lilies.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Renacence", 1, "Water Lilies" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 13, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7822), 4m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:398/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Gustav-Klimt-The-Kiss-Bacio-.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, "Renacence", 2, "The Kiss (Bacio)" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 13, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3646), 4m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:398/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Gustav-Klimt-The-Kiss-Bacio-.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, "Renacence", 2, "The Kiss (Bacio)" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 14, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7811), 5m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:492/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Rembrandt_Van_Rijn-Night_Watch_.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Night Watch" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 14, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3634), 5m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:492/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Rembrandt_Van_Rijn-Night_Watch_.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Night Watch" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 15, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7799), 6m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:347/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Jan-Vermeer-The-Girl-with-a-Pearl-Earring.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Renacence", 1, "The Girl with a Pearl Earring" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 15, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3620), 6m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:347/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Jan-Vermeer-The-Girl-with-a-Pearl-Earring.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Renacence", 1, "The Girl with a Pearl Earring" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 16, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7787), 7m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:443/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/PabloPicasso-ThreeMusicians.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Renacence", 2, "Three Musicians" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 16, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3608), 7m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:443/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/PabloPicasso-ThreeMusicians.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Renacence", 2, "Three Musicians" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 17, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7776), 8m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:316/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Edvard-Munch-The-Scream.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Renacence", 3, "The Scream" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 17, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3596), 8m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:316/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Edvard-Munch-The-Scream.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Renacence", 3, "The Scream" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 18, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7764), 9m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:500/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Vincent-Van-Gogh-Starry-Night.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Renacence", 1, "Starry-Night" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 18, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3583), 9m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:500/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Vincent-Van-Gogh-Starry-Night.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Renacence", 1, "Starry-Night" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 19, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7745), 10m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:265/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Leonardo-Da-Vinci-Mona-Lisa.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Renacence", 2, "Mona Lisa (La Gioconda)" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 19, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3560), 10m, "Author", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:265/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Leonardo-Da-Vinci-Mona-Lisa.jpg", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Renacence", 2, "Mona Lisa (La Gioconda)" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 20, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8051), 1m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa20" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 20, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3849), 1m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa20" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 21, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8067), 2m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 1, "Monalisa21" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 21, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3868), 2m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 1, "Monalisa21" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 22, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8079), 3m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 2, "Monalisa22" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 22, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3881), 3m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 2, "Monalisa22" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 23, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8091), 4m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa23" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 23, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3895), 4m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa23" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 24, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8102), 5m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 1, "Monalisa24" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 24, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3908), 5m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 1, "Monalisa24" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 25, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8115), 6m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 2, "Monalisa25" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 25, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3922), 6m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 2, "Monalisa25" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 26, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8126), 7m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa26" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 26, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3935), 7m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa26" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 27, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8173), 8m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 1, "Monalisa27" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 27, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3947), 8m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 1, "Monalisa27" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 28, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8186), 9m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 2, "Monalisa28" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 28, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3960), 9m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 2, "Monalisa28" });
 
             migrationBuilder.InsertData(
                 table: "Artworks",
-                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Images", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
-                values: new object[] { 29, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8199), 10m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa29" });
+                columns: new[] { "Id", "AddTime", "Assessment", "Author", "CreationDate", "CurrentSatus", "Deleted", "DeletedTime", "Description", "Image", "IncorporatedDate", "MuseumId", "Period", "RoomId", "Title" },
+                values: new object[] { 29, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3974), 10m, "Leonardo da Vinci", new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, null, "Estalin Disima", "", new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Renacence", 3, "Monalisa29" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 1, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8227), false, null, "example@gmail.com", "admin.psw123//", 4, "Foreman Administrator" });
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4036), false, null, "example@gmail.com", "admin.psw123//", 4, "Foreman Administrator" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 2, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8230), false, null, "example@gmail.com", "manager.psw123//", 3, "Lorena Manager" });
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4040), false, null, "example@gmail.com", "manager.psw123//", 3, "Lorena Manager" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 3, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8233), false, null, "example@gmail.com", "restaurator.psw123//", 2, "Juan Restaurator" });
+                values: new object[] { 3, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4043), false, null, "example@gmail.com", "restaurator.psw123//", 2, "Juan Restaurator" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 4, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8235), false, null, "example@gmail.com", "director.psw123//", 1, "Harvey Director" });
+                values: new object[] { 4, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4045), false, null, "example@gmail.com", "director.psw123//", 1, "Harvey Director" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 5, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8237), false, null, "example@gmail.com", "restaurator.psw123//", 2, "Pablo Restaurator" });
+                values: new object[] { 5, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4048), false, null, "example@gmail.com", "restaurator.psw123//", 2, "Pablo Restaurator" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "Email", "Password", "RoleId", "Username" },
-                values: new object[] { 6, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8239), false, null, "example@gmail.com", "manager.psw123//", 3, "Dorian Manager" });
+                values: new object[] { 6, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4050), false, null, "example@gmail.com", "manager.psw123//", 3, "Dorian Manager" });
 
             migrationBuilder.InsertData(
                 table: "LoanApplications",
                 columns: new[] { "Id", "AddTime", "ApplicationDate", "ArtworkId", "CurrentStatus", "Deleted", "DeletedTime", "Duration", "MuseumId" },
-                values: new object[] { 1, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7708), new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0, false, null, 10, 1 });
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3529), new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0, false, null, 10, 1 });
 
             migrationBuilder.InsertData(
                 table: "LoanApplications",
                 columns: new[] { "Id", "AddTime", "ApplicationDate", "ArtworkId", "CurrentStatus", "Deleted", "DeletedTime", "Duration", "MuseumId" },
-                values: new object[] { 2, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7712), new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0, false, null, 10, 1 });
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3533), new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0, false, null, 10, 1 });
 
             migrationBuilder.InsertData(
                 table: "Paintings",
@@ -545,6 +545,21 @@ namespace IMuseum.Persistence.Migrations
                 table: "Paintings",
                 columns: new[] { "Id", "Media", "Style" },
                 values: new object[] { 19, "address", "Renacence" });
+
+            migrationBuilder.InsertData(
+                table: "Restorations",
+                columns: new[] { "Id", "AddTime", "ArtworkId", "Deleted", "DeletedTime", "EndDate", "StartDate", "Type" },
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4010), 10, false, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
+
+            migrationBuilder.InsertData(
+                table: "Restorations",
+                columns: new[] { "Id", "AddTime", "ArtworkId", "Deleted", "DeletedTime", "EndDate", "StartDate", "Type" },
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4017), 15, false, null, new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 0 });
+
+            migrationBuilder.InsertData(
+                table: "Restorations",
+                columns: new[] { "Id", "AddTime", "ArtworkId", "Deleted", "DeletedTime", "EndDate", "StartDate", "Type" },
+                values: new object[] { 3, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(4020), 2, false, null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
 
             migrationBuilder.InsertData(
                 table: "Sculptures",
@@ -599,12 +614,12 @@ namespace IMuseum.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Loans",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "LoanApplicationId", "PaymentAmount", "StartDate" },
-                values: new object[] { 1, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7685), false, null, 1, 10m, new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3462), false, null, 1, 10m, new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Loans",
                 columns: new[] { "Id", "AddTime", "Deleted", "DeletedTime", "LoanApplicationId", "PaymentAmount", "StartDate" },
-                values: new object[] { 2, new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7691), false, null, 2, 20m, new DateTime(2022, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 2, new DateTime(2022, 6, 28, 2, 29, 25, 215, DateTimeKind.Local).AddTicks(3469), false, null, 2, 20m, new DateTime(2022, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Artworks_MuseumId",

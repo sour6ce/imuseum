@@ -26,6 +26,8 @@ public class StylesController : ControllerBase
     }
 
     //GET /artists
+    
+    [AllowAnonymous]
     [HttpGet]
     public async Task<StyleGetReturnDto> GetArtistsAsync()
     {

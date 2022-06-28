@@ -32,14 +32,15 @@ public class UsersController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public async Task<IActionResult> Authenticate([FromBody]AuthenticateModel model)
+    public async Task<ActionResult<UserPostAndPutDto>> Authenticate([FromBody]AuthenticateModel model)
     {
         var user = await _userService.Authenticate(model.Username, model.Password);
 
         if (user == null)
             return BadRequest(new { message = "Username or password is incorrect" });
+        
 
-        return Ok(user);
+        return UserAsDto(user);
     }
 
     internal User UserFromDto(UserPostAndPutDto dto)
@@ -57,7 +58,8 @@ public class UsersController : ControllerBase
         return new UserPostAndPutDto(){
             Username = user.Username,
             Email = user.Email,
-            RoleId = user.RoleId
+            RoleId = user.RoleId,
+            Role = user.Role.Name
         };
     }
 

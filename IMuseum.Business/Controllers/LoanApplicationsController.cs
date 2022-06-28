@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using IMuseum.Auth.Authorization;
+using IMuseum.Business.Dtos;
+using IMuseum.Persistence.Repositories.Artworks;
+using IMuseum.Persistence.Repositories.Sculptures;
+using IMuseum.Persistence.Repositories.Paintings;
+
 namespace IMuseum.Business.Controllers;
 
 //GET /loan-apps
@@ -17,36 +22,46 @@ public class LoanApplicationsController : ControllerBase
 {
     private readonly ILoanApplicationsRepository loanAppsRepository;
     private readonly ILoansRepository loansRepository;
+    private readonly IConvertionService convertionService;
 
-    public LoanApplicationsController(ILoanApplicationsRepository loanAppsRepository, ILoansRepository loansRepository)
+    public LoanApplicationsController(IArtworksRepository artworks, ISculpturesRepository sculptures,
+    IConvertionService convServ,
+     IPaintingsRepository paints, ILoanApplicationsRepository loanAppsRepository, ILoansRepository loansRepository)
     {
+        this.convertionService = convServ;
         this.loansRepository = loansRepository;
         this.loanAppsRepository = loanAppsRepository;
     }
 
-    internal LoanApplicationGeneralDto LoanAppAsDto(LoanApplication loanApp)
+    internal async Task<LoanApplicationGeneralDto> LoanAppAsDto(LoanApplication loanApp)
     {
         return new LoanApplicationGeneralDto()
         {
             Id = loanApp.Id,
             ApplicationDate = loanApp.ApplicationDate,
             Duration = loanApp.Duration,
-            LoanApplicationStatus = loanApp.CurrentStatus,
+            LoanApplicationStatus = Utils.LoanAppStatusNameMap().Item2[loanApp.CurrentStatus],
+            Artwork = await convertionService.ArtworkAsDto(loanApp.Artwork),
             ArtworkId = loanApp.ArtworkId,
-            MuseumId = loanApp.MuseumId
+            Museum = convertionService.MuseumFromId(loanApp.MuseumId) ?? "Unknown"
         };
     }
 
-    internal LoanApplication LoanAppFromDto(LoanApplicationPutPostDto dto)
+    internal LoanApplication? LoanAppFromDto(LoanApplicationPutPostDto dto)
     {
-        LoanApplication loanApp = new LoanApplication()
+        var museum_id = convertionService.MuseumToId(dto.Museum);
+        if (museum_id == null)
         {
-            ArtworkId = dto.ArtworkId,
-            Duration = dto.Duration,
+            return null;
+        }
+        var loanApp = new LoanApplication()
+        {
             ApplicationDate = dto.ApplicationDate,
-            MuseumId = dto.MuseumId
+            Duration = dto.Duration,
+            CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
+            ArtworkId = dto.ArtworkId,
+            MuseumId = museum_id.Value
         };
-
         return loanApp;
     }
 
@@ -54,14 +69,11 @@ public class LoanApplicationsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<LoanApplicationGeneralDto>> CreateLoanAppAsync(LoanApplicationPutPostDto dto)
     {
-        var loanApp = new LoanApplication()
+        var loanApp = LoanAppFromDto(dto);
+        if (loanApp == null)
         {
-            ApplicationDate = dto.ApplicationDate,
-            Duration = dto.Duration,
-            CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
-            ArtworkId = dto.ArtworkId,
-            MuseumId = dto.MuseumId
-        };
+            return BadRequest("A museum with that name doesn't exist");
+        }
         await loanAppsRepository.AddAsync(loanApp);
         return CreatedAtAction(nameof(CreateLoanAsync), null, dto);
     }
@@ -88,9 +100,9 @@ public class LoanApplicationsController : ControllerBase
         var filtered = (DbSet<LoanApplication> all) =>
         {
             return
-            all.Where((x) => x.ArtworkId == args.ArtworkId)
-            .Where((x) => args.MuseumId == x.MuseumId)
-            .Where((x) => args.Status == x.CurrentStatus);
+            all.Where((x) => args.ArtworkId == null || x.ArtworkId == args.ArtworkId)
+            .Where((x) => args.MuseumId == null || args.MuseumId == x.MuseumId)
+            .Where((x) => args.Status == null || args.Status == Utils.LoanAppStatusNameMap().Item2[x.CurrentStatus]);
         };
         var count = (loanAppsRepository.ExecuteOnDbAsync(async (all) =>
         {
@@ -105,7 +117,7 @@ public class LoanApplicationsController : ControllerBase
         }));
         return new LoanApplicationGetReturnDto()
         {
-            LoanApps = (loanApps).Select((x) => this.LoanAppAsDto(x)).ToArray(),
+            LoanApps = (loanApps).Select((x) => this.LoanAppAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
             Count = (await count)
         };
     }

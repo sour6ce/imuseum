@@ -34,16 +34,15 @@ public class TotalsController : ControllerBase
         int totalArtworks = artRepository.Count;
         int countOnLoan = 0, countInRestoration = 0, countInStorage = 0, countOnDisplay = 0;
 
-
-        foreach(Artwork art in artworks)
+        foreach (Artwork art in artworks)
         {
-            if(art.CurrentSatus == Artwork.ArtworkStatus.OnLoan)
+            if (art.CurrentStatus == Artwork.ArtworkStatus.OnLoan)
                 countOnLoan++;
-            else if(art.CurrentSatus == Artwork.ArtworkStatus.InRestoration)
+            else if (art.CurrentStatus == Artwork.ArtworkStatus.InRestoration)
                 countInRestoration++;
-            else if(art.CurrentSatus == Artwork.ArtworkStatus.InStorage)
+            else if (art.CurrentStatus == Artwork.ArtworkStatus.InStorage)
                 countInStorage++;
-            else if(art.CurrentSatus == Artwork.ArtworkStatus.OnDisplay)
+            else if (art.CurrentStatus == Artwork.ArtworkStatus.OnDisplay)
                 countOnDisplay++;
         }
 

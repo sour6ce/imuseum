@@ -21,6 +21,7 @@ namespace IMuseum.Business.Controllers;
 public class ArtworksController : ControllerBase
 {
     private readonly IRoomsRepository roomsRepository;
+    private readonly IConvertionService convertionService;
     private readonly ISculpturesRepository sculpturesRepository;
     private readonly IPaintingsRepository paintsRepository;
     private readonly IArtworksRepository artRepository;
@@ -29,6 +30,7 @@ public class ArtworksController : ControllerBase
 
     public ArtworksController(IArtworksRepository artworks, ISculpturesRepository sculptures,
     IRoomsRepository rooms,
+    IConvertionService convSer,
      IPaintingsRepository paints, IRestorationsRepository restorations, ILogger<ArtworksController> logger)
     {
         this.artRepository = artworks;
@@ -36,124 +38,12 @@ public class ArtworksController : ControllerBase
         this.paintsRepository = paints;
         this.restRepository = restorations;
         this.roomsRepository = rooms;
+        this.convertionService = convSer;
         this.logger = logger;
     }
 
-    internal async Task<bool> IsSculpture(int artId)
-    {
-        bool isArt = await this.artRepository.ContainsAsync(artId);
-        if (!isArt)
-            return false;
-        return await this.sculpturesRepository.ContainsAsync(artId);
-    }
-    internal async Task<bool> IsPainting(int artId)
-    {
-        bool isArt = await this.artRepository.ContainsAsync(artId);
-        if (!isArt)
-            return false;
-        return await this.paintsRepository.ContainsAsync(artId);
-    }
-
-    internal async Task<ArtworkType?> ArtType(int artId)
-    {
-        bool isArt = await this.artRepository.ContainsAsync(artId);
-        if (!isArt)
-            return null; //Isn't the Id of an artwork
-        // NOTE: Here goes analysis to get a string that identifies the type of the artwork
-        return (await IsSculpture(artId)) ? ArtworkType.Sculpture :
-                (await IsPainting(artId)) ? ArtworkType.Painting :
-                ArtworkType.Other;
-    }
-
-    internal async Task<ArtworkGeneralDto> ArtworkAsDto(Artwork art)
-    {
-        var sc = sculpturesRepository.GetObjectAsync(art.Id);
-        var pnt = paintsRepository.GetObjectAsync(art.Id);
-
-        var dto = new ArtworkGeneralDto()
-        {
-            Id = art.Id.GetHashCode(),
-            Title = art.Title,
-            Description = art.Description,
-            Author = art.Author,
-            CreationDate = art.CreationDate,
-            IncorporatedDate = art.IncorporatedDate,
-            Period = art.Period,
-            Assessment = art.Assessment,
-            Status = art.CurrentSatus,
-            Type = ArtType(art.Id).Result.Value
-        };
-
-        switch (dto.Type)
-        {
-            case ArtworkType.Sculpture:
-                var tempsc = await sc;
-                dto.Style = tempsc?.Style;
-                dto.Material = tempsc?.Material;
-                break;
-            case ArtworkType.Painting:
-                var temppnt = await pnt;
-                dto.Style = temppnt?.Style;
-                dto.Media = temppnt?.Media;
-                break;
-            default:
-                break;
-        }
-        return dto;
-    }
-
-    internal Artwork ArtworkFromDto(ArtworkPutPostDto dto)
-    {
-
-        switch (dto.Type)
-        {
-            case ArtworkType.Sculpture:
-                var sc = new Sculpture()
-                {
-                    Title = dto.Title,
-                    Author = dto.Author,
-                    Description = dto.Description,
-                    CreationDate = dto.CreationDate,
-                    IncorporatedDate = dto.IncorporatedDate,
-                    Period = dto.Period,
-                    Assessment = dto.Assessment,
-                    Style = dto.Style,
-                    Image = dto.Image,
-                    Material = dto.Material
-                };
-                return sc;
-            case ArtworkType.Painting:
-                var pnt = new Painting()
-                {
-                    Title = dto.Title,
-                    Author = dto.Author,
-                    Description = dto.Description,
-                    CreationDate = dto.CreationDate,
-                    IncorporatedDate = dto.IncorporatedDate,
-                    Period = dto.Period,
-                    Assessment = dto.Assessment,
-                    Style = dto.Style,
-                    Image = dto.Image,
-                    Media = dto.Media
-                };
-                return pnt;
-            default:
-                var art = new Artwork()
-                {
-                    Title = dto.Title,
-                    Author = dto.Author,
-                    Description = dto.Description,
-                    CreationDate = dto.CreationDate,
-                    IncorporatedDate = dto.IncorporatedDate,
-                    Period = dto.Period,
-                    Image = dto.Image,
-                    Assessment = dto.Assessment
-                };
-                return art;
-        }
-    }
-
     //GET /artworks
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ArtworkGetReturnDto> GetArtworksAsync([FromQuery] ArtworkGetParamDto args)
     {
@@ -161,8 +51,8 @@ public class ArtworksController : ControllerBase
         {
             return
             all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Contains(x.Author))
-            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(x.CurrentSatus))
-            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains(ArtType(x.Id).Result.Value))
+            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(Utils.ArtworkStatusNameMaps().Item2[x.CurrentStatus]))
+            .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains((Utils.ArtworkTypeNameMaps().Item2[convertionService.ArtType(x.Id).Result.Value])))
             .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
         };
         var count = (artRepository.ExecuteOnDbAsync(async (all) =>
@@ -178,7 +68,7 @@ public class ArtworksController : ControllerBase
         }));
         return new ArtworkGetReturnDto()
         {
-            Artworks = (artworks).Select((x) => this.ArtworkAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
+            Artworks = (artworks).Select((x) => this.convertionService.ArtworkAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
             Count = (await count)
         };
     }
@@ -187,24 +77,36 @@ public class ArtworksController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ArtworkGeneralDto>> CreateArtworkAsync(ArtworkPutPostDto artworkDto)
     {
-        switch (artworkDto.Type)
+        ArtworkType type;
+
+        try
+        {
+            type = (ArtworkType)(int.Parse(artworkDto.Type));
+        }
+        catch
+        {
+            type = Utils.ArtworkTypeNameMaps().Item1[artworkDto.Type];
+        }
+
+        switch (type)
         {
             case ArtworkType.Sculpture:
-                var sc = (Sculpture)ArtworkFromDto(artworkDto);
+                var sc = (Sculpture)convertionService.ArtworkFromDto(artworkDto);
                 await sculpturesRepository.AddAsync(sc);
                 return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
             case ArtworkType.Painting:
-                var pnt = (Painting)ArtworkFromDto(artworkDto);
+                var pnt = (Painting)convertionService.ArtworkFromDto(artworkDto);
                 await paintsRepository.AddAsync(pnt);
                 return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
             default:
-                var art = ArtworkFromDto(artworkDto);
+                var art = convertionService.ArtworkFromDto(artworkDto);
                 await artRepository.AddAsync(art);
                 return CreatedAtAction(nameof(CreateArtworkAsync), null, artworkDto);
         }
     }
 
     //GET /artworks/{id}
+    [AllowAnonymous]
     [HttpGet]
     [Route("{id}")]
     public async Task<ActionResult<ArtworkGeneralDto>> GetArtworkAsync(int id)
@@ -216,7 +118,7 @@ public class ArtworksController : ControllerBase
         }
         else
         {
-            return await ArtworkAsDto(ret);
+            return await convertionService.ArtworkAsDto(ret);
         }
     }
 
@@ -240,13 +142,24 @@ public class ArtworksController : ControllerBase
     [Route("{id}")]
     public async Task<ActionResult> UpdateArtworkAsync(int id, ArtworkPutPostDto dto)
     {
-        var art = ArtworkFromDto(dto);
+        var art = convertionService.ArtworkFromDto(dto);
 
         var found = artRepository.GetObjectAsync(id);
         var sculpturefound = sculpturesRepository.GetObjectAsync(id);
         var paintfound = paintsRepository.GetObjectAsync(id);
 
-        switch (dto.Type)
+        ArtworkType type;
+
+        try
+        {
+            type = (ArtworkType)(int.Parse(dto.Type));
+        }
+        catch
+        {
+            type = Utils.ArtworkTypeNameMaps().Item1[dto.Type];
+        }
+
+        switch (type)
         {
             case ArtworkType.Sculpture:
                 if (await sculpturefound == null)
@@ -282,9 +195,22 @@ public class ArtworksController : ControllerBase
     //POST /artwork/{id}/move
     [HttpPost]
     [Route("{id}/move-to-room")]
-    public async Task<ActionResult> MoveRoomAsync(int id, [FromQuery] int RoomId)
+    public async Task<ActionResult> MoveRoomAsync(int id, [FromQuery] string Room)
     {
-        var room = await roomsRepository.GetObjectAsync(RoomId);
+        int? RoomId = null;
+        try
+        {
+            RoomId = int.Parse(Room);
+        }
+        catch
+        {
+            RoomId = convertionService.RoomToId(Room);
+        }
+
+        if (RoomId == null)
+            return BadRequest("The room given is not valid");
+
+        var room = await roomsRepository.GetObjectAsync(RoomId.Value);
 
         if (room == null)
             return BadRequest();
@@ -298,13 +224,13 @@ public class ArtworksController : ControllerBase
             else
             {
                 if (
-                    art.CurrentSatus == Artwork.ArtworkStatus.OnLoan ||
-                    art.CurrentSatus == Artwork.ArtworkStatus.InRestoration
+                    art.CurrentStatus == Artwork.ArtworkStatus.OnLoan ||
+                    art.CurrentStatus == Artwork.ArtworkStatus.InRestoration
                 )
                     return BadRequest("An artwork in restoration or loan can't be moved");
 
                 // TODO: Update on added state for external artwork
-                art.CurrentSatus = Artwork.ArtworkStatus.OnDisplay;
+                art.CurrentStatus = Artwork.ArtworkStatus.OnDisplay;
                 art.RoomId = RoomId;
                 await context.SaveChangesAsync();
                 return new OkResult();
@@ -328,13 +254,13 @@ public class ArtworksController : ControllerBase
             else
             {
                 if (
-                    art.CurrentSatus == Artwork.ArtworkStatus.OnLoan ||
-                    art.CurrentSatus == Artwork.ArtworkStatus.InRestoration
+                    art.CurrentStatus == Artwork.ArtworkStatus.OnLoan ||
+                    art.CurrentStatus == Artwork.ArtworkStatus.InRestoration
                 )
                     return BadRequest("An artwork in restoration or loan can't be moved");
 
                 // TODO: Update on added state for external artwork
-                art.CurrentSatus = Artwork.ArtworkStatus.InStorage;
+                art.CurrentStatus = Artwork.ArtworkStatus.InStorage;
                 await context.SaveChangesAsync();
                 return new OkResult();
             }
@@ -350,33 +276,22 @@ public class ArtworkRestorationController : ControllerBase
 {
     private readonly IArtworksRepository artRepository;
     private readonly IRestorationsRepository restRepository;
+    private readonly IConvertionService convertionService;
     private readonly ILogger<ArtworksController> logger;
 
 
     public ArtworkRestorationController(
         IArtworksRepository artworks,
         IRestorationsRepository restorations,
+        IConvertionService conVer,
         ILogger<ArtworksController> logger
         )
     {
         this.artRepository = artworks;
         this.restRepository = restorations;
+        this.convertionService = conVer;
         this.logger = logger;
     }
-
-    internal Restoration RestorationFromDto(RestorationReturnDto dto)
-    {
-        Restoration restoration = new Restoration()
-        {
-            ArtworkId = dto.Artwork.Id,
-            StartDate = (DateTime)dto.StartDate,
-            EndDate = dto.DueDate,
-            Type = dto.RestorationType
-        };
-
-        return restoration;
-    }
-
 
     //POST /artworks/{id}/end-restoration
     [HttpPost("{id}/end-restoration")]
@@ -410,7 +325,7 @@ public class ArtworkRestorationController : ControllerBase
                 return false;
             else
             {
-                result.CurrentSatus = Artwork.ArtworkStatus.InStorage;
+                result.CurrentStatus = Artwork.ArtworkStatus.InStorage;
                 await context.SaveChangesAsync();
                 return true;
             }
@@ -442,11 +357,11 @@ public class ArtworkRestorationController : ControllerBase
             else
             {
                 // NOTE: Checking the state of the artwork
-                if (result.CurrentSatus == Artwork.ArtworkStatus.InRestoration)
+                if (result.CurrentStatus == Artwork.ArtworkStatus.InRestoration)
                     return BadRequest();
-                if (result.CurrentSatus == Artwork.ArtworkStatus.OnLoan)
+                if (result.CurrentStatus == Artwork.ArtworkStatus.OnLoan)
                     return BadRequest();
-                result.CurrentSatus = Artwork.ArtworkStatus.InRestoration;
+                result.CurrentStatus = Artwork.ArtworkStatus.InRestoration;
                 await context.SaveChangesAsync();
                 return new OkResult();
             }
@@ -454,12 +369,12 @@ public class ArtworkRestorationController : ControllerBase
 
         RestorationReturnDto returnRestoration = new RestorationReturnDto()
         {
-            Artwork = new SimpleIdDto() { Id = id },
+            Artwork = await convertionService.ArtworkAsDto(artwork),
             StartDate = DateTime.UtcNow,
             DueDate = null,
             RestorationType = args.RestorationType
         };
-        await restRepository.AddAsync(RestorationFromDto(returnRestoration));
+        await restRepository.AddAsync(convertionService.RestorationFromDto(returnRestoration));
         return (resultArt.Result.GetType() == typeof(OkResult)) ? returnRestoration : resultArt.Result;
     }
 }

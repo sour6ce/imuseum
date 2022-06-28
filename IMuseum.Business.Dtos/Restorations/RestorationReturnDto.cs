@@ -9,9 +9,9 @@ public record RestorationReturnDto
     // dueDate: null
     // restorationStatus: status
 
-    public SimpleIdDto? Artwork { get; set; }
-    public DateTime? StartDate { get; set; }
+    public ArtworkGeneralDto Artwork { get; set; }
+    public DateTime StartDate { get; set; }
     public DateTime? DueDate { get; set; } = null;
 
-    public IMuseum.Persistence.Models.Restoration.RestorationType? RestorationType { get; set; }
+    public string RestorationType { get; set; }
 }
