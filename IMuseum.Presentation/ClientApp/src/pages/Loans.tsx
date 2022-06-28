@@ -2,41 +2,34 @@ import { Card, CardFooter, CardHeader } from "../ui-components/molecules/Card";
 import { Table } from "../ui-components/organisms/Table";
 import { Badge } from "../ui-components/atoms/Badge";
 import { PaginationComponent } from "../ui-components/molecules/Pagination";
+import { useLoansPaginated } from "../hooks/useLoans";
+import dayjs from "dayjs";
+import { Popover } from "../ui-components/atoms/Popover";
+import { LoanFilterForm } from "../ui-components/organisms/LoanFilterForm";
 
 const Loans = () => {
-  const loans = [
-    {
-      status: "Loaned",
-      artwork: "The joy of creation",
-      museum: "Louvre Museum - FR",
-      daterange:
-      {
-        dateStart:"27 oct 2021",
-        dateEnd:"5 oct 2025"
-      },
-      income: "$ 1,300,000",
-      author: "Miguel Angel",
-    },
-    {
-      status: "Expired",
-      artwork: "The joy of creation",
-      museum: "Louvre Museum - FR",
-      daterange:
-      {
-        dateStart:"27 oct 2021",
-        dateEnd:"5 oct 2025"
-      },
-      income: "$ 1,300,000",
-      author: "Miguel Angel",
-    }
-  ];
+  const {
+    data,handleChangeFilters
+  } = useLoansPaginated()
 
   return (
     <Card className="w-full">
-      <CardHeader title="Restoration" />
+      <CardHeader title="Restoration">
+      <Popover
+          render={({ open, close }) => (
+            <div className="p-5">
+              <LoanFilterForm onSubmit={handleChangeFilters}/>
+            </div>
+          )}
+          buttonProps={{}}
+          position="right"
+        >
+          Filter
+        </Popover>
+      </CardHeader>
       <div>
         <Table
-          data={loans}
+          data={data?.loans ?? []}
           columns={[
             {
               name: "Status",
@@ -44,13 +37,13 @@ const Loans = () => {
               render: (loan) => (
                 <Badge
                   color={
-                    loan.status === "Expired" ? "danger-light" : "success-light"
+                    dayjs(loan.startDate).add(loan.loanApplication.duration,'months').isBefore(dayjs()) ? "danger-light" : "success-light"
                   }
                   textColor={
-                    loan.status === "Expired" ? "danger-accent" : "success-dark"
+                    dayjs(loan.startDate).add(loan.loanApplication.duration,'months').isBefore(dayjs()) ? "danger-accent" : "success-dark"
                   }
                 >
-                  {loan.status}
+                  { dayjs(loan.startDate).add(loan.loanApplication.duration,'months').isBefore(dayjs()) ? 'Expired' : 'Loaned'}
                 </Badge>
               ),
             },
@@ -60,16 +53,16 @@ const Loans = () => {
               render: (loan) => (
                 <div className="felx flex-col">
                   <span className="block text-xl font-semibold">
-                    {loan.artwork}
+                    {loan.loanApplication.artwork.title}
                   </span>
-                  <span className="uppercase text-gray-200">{loan.author}</span>
+                  <span className="uppercase text-gray-200">{loan.loanApplication.artwork.author}</span>
                 </div>
               ),
             },
             {
               name: "Museum",
               align: "center",
-              render: (loan) => <div>{loan.museum}</div>,
+              render: (loan) => <div>{loan.loanApplication.museum}</div>,
             },
             {
               name: "Daterange",
@@ -78,12 +71,12 @@ const Loans = () => {
                 <div className="flex flex-col gap-2">
                   <div>
                     <Badge>
-                      {loan.daterange.dateStart}
+                      {dayjs(loan.startDate).format("DD MMM YYYY")}
                     </Badge>
                   </div>
                   <div>
                     <Badge>
-                      {loan.daterange.dateEnd}
+                      {dayjs(loan.startDate).add(loan.loanApplication.duration,'months').format('DD MMM YYYY')}
                     </Badge>
                   </div>
                 </div>
@@ -94,7 +87,7 @@ const Loans = () => {
               align: "center",
               render: (loan) => (
                 <div>
-                  {loan.income}
+                  {loan.paymentAmount}
                 </div>
               ),
             },

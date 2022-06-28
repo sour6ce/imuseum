@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import { AuthProvider } from './hooks/useAuth';
 import Catalog from './pages/Catalog';
 import Restoration from './pages/Restoration';
+import Loans from './pages/Loans';
 
 
 const root = ReactDOM.createRoot(
@@ -37,12 +38,12 @@ root.render(
           <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/> */}
 
           <Route path='restoring' element={<Restoration/>}/>
-          <Route path='restoring/:restoreId/*' element={<BasicComponent text='Restoration ID'/>}/>
-          <Route path='restoring/new' element={<BasicComponent text='Restorations'/>}/>
+          {/* <Route path='restoring/:restoreId/*' element={<BasicComponent text='Restoration ID'/>}/>
+          <Route path='restoring/new' element={<BasicComponent text='Restorations'/>}/> */}
 
-          <Route path='loans' element={<BasicComponent text='Loans'/>}/>
-          <Route path='loans/new' element={<BasicComponent text='Loans New'/>}/>
-          <Route path='loans/:loanId/*' element={<BasicComponent text='Loan ID'/>}/>
+          <Route path='loans' element={<Loans/>}/>
+          {/* <Route path='loans/new' element={<BasicComponent text='Loans New'/>}/>
+          <Route path='loans/:loanId/*' element={<BasicComponent text='Loan ID'/>}/> */}
 
           <Route path='loan-applications' element={<BasicComponent text='Loan Apps'/>}/>
         </Route>
