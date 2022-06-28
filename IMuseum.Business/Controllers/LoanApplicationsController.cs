@@ -138,11 +138,25 @@ public class LoanApplicationsController : ControllerBase
                 return false;
             else
             {
+                if (result.CurrentStatus != LoanApplication.LoanApplicationStatus.OnWait)
+                {
+                    return false;
+                }
+                if (result.Artwork.CurrentStatus != Artwork.ArtworkStatus.OnDisplay &&
+                result.Artwork.CurrentStatus != Artwork.ArtworkStatus.InStorage)
+                {
+                    return false;
+                }
                 result.CurrentStatus = LoanApplication.LoanApplicationStatus.OnLoan;
+                result.Artwork.CurrentStatus = Artwork.ArtworkStatus.OnLoan;
+                result.Artwork.RoomId = null;
                 await context.SaveChangesAsync();
                 return true;
             }
         });
+
+        if (!(await result))
+            return BadRequest();
 
         var loan = new Loan()
         {
@@ -182,6 +196,6 @@ public class LoanApplicationsController : ControllerBase
             }
         });
 
-        return new OkResult();
+        return (await result) ? new OkResult() : BadRequest();
     }
 }
