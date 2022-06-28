@@ -122,8 +122,8 @@ public class SendMailJob : IJob
         }
 
         if (!isInRestorations)
-            return (DateTime.UtcNow.Date - Convert.ToDateTime(artwork.IncorporatedDate).Date).Days;
-        return (DateTime.UtcNow.Date - Convert.ToDateTime(lastRestorationEndingDate).Date).Days;
+            return (DateTime.Now.Date - Convert.ToDateTime(artwork.IncorporatedDate).Date).Days;
+        return (DateTime.Now.Date - Convert.ToDateTime(lastRestorationEndingDate).Date).Days;
     }
 
     public async Task<ICollection<Artwork>> GetMuseumLoanExpiredArtworks()
@@ -133,7 +133,7 @@ public class SendMailJob : IJob
         List<Artwork> artworksToFinishLoan = new List<Artwork>();
 
         foreach (Loan loan in loans)
-            if ((DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentStatus is Artwork.ArtworkStatus.OnLoan)
+            if ((DateTime.Now.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentStatus is Artwork.ArtworkStatus.OnLoan)
                 artworksToFinishLoan.Add(loan.Application.Artwork);
 
         return artworksToFinishLoan;
@@ -146,7 +146,7 @@ public class SendMailJob : IJob
         List<Artwork> artworksToFriendMuseum = new List<Artwork>();
 
         foreach (Loan loan in loans)
-            if (loan.Application.Artwork.CurrentStatus == Artwork.ArtworkStatus.OnDisplay && (loan.Application.Artwork.Museum != null) && (DateTime.UtcNow.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentStatus is Artwork.ArtworkStatus.OnLoan)
+            if (loan.Application.Artwork.CurrentStatus == Artwork.ArtworkStatus.OnDisplay && (loan.Application.Artwork.Museum != null) && (DateTime.Now.Date - loan.StartDate.Date).Days >= loan.Application.Duration && loan.Application.Artwork.CurrentStatus is Artwork.ArtworkStatus.OnLoan)
                 artworksToFriendMuseum.Add(loan.Application.Artwork);
 
         return artworksToFriendMuseum;

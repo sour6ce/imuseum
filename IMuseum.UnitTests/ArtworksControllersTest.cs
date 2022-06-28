@@ -26,20 +26,21 @@ public class ArtworksControllerTests
 
         //Act
         var result = await controller.GetArtworkAsync(rand.Next(500, 5000000));
- 
+
         //Assert
-        result.Result.Should().BeOfType<NotFoundResult>(); 
+        result.Result.Should().BeOfType<NotFoundResult>();
     }
 
     [Fact]
     public async Task CreateArtworkAsync_WithArtworkToCreate_ReturnsCreatedArtwork()
     {
         //Arrange
-        var artworkToCreate = new ArtworkPutPostDto(){
+        var artworkToCreate = new ArtworkPutPostDto()
+        {
             Title = Guid.NewGuid().ToString(),
             Author = Guid.NewGuid().ToString(),
-            CreationDate = DateTime.UtcNow,
-            IncorporatedDate = DateTime.UtcNow,
+            CreationDate = DateTime.Now,
+            IncorporatedDate = DateTime.Now,
             Period = Guid.NewGuid().ToString(),
             Assessment = rand.Next(50000000)
         };
@@ -66,11 +67,12 @@ public class ArtworksControllerTests
             .ReturnsAsync(existingArtwork);
 
         var artworkId = existingArtwork.Id;
-        var artworkToUpdate = new ArtworkPutPostDto(){
+        var artworkToUpdate = new ArtworkPutPostDto()
+        {
             Title = Guid.NewGuid().ToString(),
             Author = Guid.NewGuid().ToString(),
-            CreationDate = DateTime.UtcNow,
-            IncorporatedDate = DateTime.UtcNow,
+            CreationDate = DateTime.Now,
+            IncorporatedDate = DateTime.Now,
             Period = Guid.NewGuid().ToString(),
             Assessment = rand.Next(50000000)
         };
@@ -98,18 +100,18 @@ public class ArtworksControllerTests
         var result = await controller.DeleteArtwork(existingArtwork.Id);
 
         //Assert
-        result.Should().BeOfType<NotFoundResult>(); 
+        result.Should().BeOfType<NotFoundResult>();
     }
 
     private Artwork CreateRandomArtwork()
     {
-        return new ()
+        return new()
         {
             Id = rand.Next(500, 5000000),
             Title = Guid.NewGuid().ToString(),
             Author = Guid.NewGuid().ToString(),
-            CreationDate = DateTime.UtcNow,
-            IncorporatedDate = DateTime.UtcNow,
+            CreationDate = DateTime.Now,
+            IncorporatedDate = DateTime.Now,
             Period = Guid.NewGuid().ToString(),
             Assessment = rand.Next(500, 50000000)
         };

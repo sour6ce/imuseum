@@ -371,7 +371,7 @@ public class ArtworkRestorationController : ControllerBase
         RestorationReturnDto returnRestoration = new RestorationReturnDto()
         {
             Artwork = await convertionService.ArtworkAsDto(artwork),
-            StartDate = DateTime.UtcNow,
+            StartDate = DateTime.Now,
             DueDate = null,
             RestorationType = args.RestorationType
         };

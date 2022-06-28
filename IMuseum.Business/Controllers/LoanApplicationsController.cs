@@ -146,7 +146,7 @@ public class LoanApplicationsController : ControllerBase
 
         var loan = new Loan()
         {
-            StartDate = DateTime.UtcNow,
+            StartDate = DateTime.Now,
             PaymentAmount = payment,
             LoanApplicationId = id,
         };
