@@ -6,6 +6,7 @@ import { BasicComponent } from './components/BasicComponents';
 import { DashboardLayout } from './ui-components/layouts/DashboardLayout';
 import { HomePage } from './pages/HomePage';
 import { SubheaderProvider } from './ui-components/layouts/SubheaderProvider';
+import Dashboard from './pages/Dashboard';
 
 
 const root = ReactDOM.createRoot(
@@ -21,7 +22,7 @@ root.render(
       <Route path='/gallery' element={<BasicComponent text='Gallery'/>}/>
       <Route path='/gallery/:artworkId/*' element={<BasicComponent text='Artwork Gallery'/>}/>
         <Route path='/' element={<DashboardLayout/>}>
-          <Route path='dashboard' element={<BasicComponent text='Dashboard'/>}/>
+          <Route path='dashboard' element={<Dashboard/>}/>
           
           {/* <Route path='users' element={<BasicComponent text='Users'/>}/>
           <Route path='users/new' element={<BasicComponent text='Users New'/>}/>
