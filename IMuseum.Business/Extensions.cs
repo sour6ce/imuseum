@@ -19,5 +19,7 @@ public static class Extensions
         // NOTE: Any Dependency related to controllers goes here
         sc.AddControllers();
         sc.AddControllersWithViews();
+
+        sc.AddSingleton<IConvertionService, ConvertionService>();
     }
 }
