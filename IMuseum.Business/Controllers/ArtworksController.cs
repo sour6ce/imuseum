@@ -33,7 +33,6 @@ public class ArtworksController : ControllerBase
     IConvertionService convSer,
      IPaintingsRepository paints, IRestorationsRepository restorations, ILogger<ArtworksController> logger)
     {
-        this.convertionService = new ConvertionService(artworks, sculptures, paints);
         this.artRepository = artworks;
         this.sculpturesRepository = sculptures;
         this.paintsRepository = paints;

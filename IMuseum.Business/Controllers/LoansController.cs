@@ -26,7 +26,7 @@ public class LoanController : ControllerBase
     IConvertionService convServ,
     IPaintingsRepository paints, ILoansRepository loansRepository)
     {
-        this.convertionService = new ConvertionService(artworks, sculptures, paints);
+        this.convertionService = convServ;
         this.loansRepository = loansRepository;
     }
 

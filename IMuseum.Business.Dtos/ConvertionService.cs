@@ -49,6 +49,8 @@ public class ConvertionService : IConvertionService
             CreationDate = art.CreationDate,
             IncorporatedDate = art.IncorporatedDate,
             Period = art.Period,
+            Image = art.Image,
+            Room = (art.RoomId != null) ? RoomFromId(art.RoomId.Value) : (art.CurrentStatus == Artwork.ArtworkStatus.InStorage) ? "Storage" : "None",
             Assessment = art.Assessment,
             Status = Utils.ArtworkStatusNameMaps().Item2[art.CurrentStatus],
             Type = Utils.ArtworkTypeNameMaps().Item2[type.Value]
@@ -193,7 +195,7 @@ public class ConvertionService : IConvertionService
             LoanApplicationStatus = Utils.LoanAppStatusNameMap().Item2[loanApp.CurrentStatus],
             Artwork = await this.ArtworkAsDto(loanApp.Artwork),
             ArtworkId = loanApp.ArtworkId,
-            MuseumId = loanApp.MuseumId
+            Museum = MuseumFromId(loanApp.MuseumId)
         };
     }
 

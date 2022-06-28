@@ -43,20 +43,25 @@ public class LoanApplicationsController : ControllerBase
             LoanApplicationStatus = Utils.LoanAppStatusNameMap().Item2[loanApp.CurrentStatus],
             Artwork = await convertionService.ArtworkAsDto(loanApp.Artwork),
             ArtworkId = loanApp.ArtworkId,
-            MuseumId = loanApp.MuseumId
+            Museum = convertionService.MuseumFromId(loanApp.MuseumId) ?? "Unknown"
         };
     }
 
-    internal LoanApplication LoanAppFromDto(LoanApplicationPutPostDto dto)
+    internal LoanApplication? LoanAppFromDto(LoanApplicationPutPostDto dto)
     {
-        LoanApplication loanApp = new LoanApplication()
+        var museum_id = convertionService.MuseumToId(dto.Museum);
+        if (museum_id == null)
         {
-            ArtworkId = dto.ArtworkId,
-            Duration = dto.Duration,
+            return null;
+        }
+        var loanApp = new LoanApplication()
+        {
             ApplicationDate = dto.ApplicationDate,
-            MuseumId = dto.MuseumId
+            Duration = dto.Duration,
+            CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
+            ArtworkId = dto.ArtworkId,
+            MuseumId = museum_id.Value
         };
-
         return loanApp;
     }
 
@@ -64,14 +69,11 @@ public class LoanApplicationsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<LoanApplicationGeneralDto>> CreateLoanAppAsync(LoanApplicationPutPostDto dto)
     {
-        var loanApp = new LoanApplication()
+        var loanApp = LoanAppFromDto(dto);
+        if (loanApp == null)
         {
-            ApplicationDate = dto.ApplicationDate,
-            Duration = dto.Duration,
-            CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
-            ArtworkId = dto.ArtworkId,
-            MuseumId = dto.MuseumId
-        };
+            return BadRequest("A museum with that name doesn't exist");
+        }
         await loanAppsRepository.AddAsync(loanApp);
         return CreatedAtAction(nameof(CreateLoanAsync), null, dto);
     }
