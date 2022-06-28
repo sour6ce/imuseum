@@ -19,18 +19,7 @@ public static class Extensions
         // NOTE: Any Dependency related to controllers goes here
         sc.AddControllers();
         sc.AddControllersWithViews();
-    }
-    public static InternalArtworkDto AsDto(this Artwork artwork)
-    {
-        return new InternalArtworkDto
-        {
-            Id = artwork.Id,
-            Title = artwork.Title,
-            Author = artwork.Author,
-            CreationDate = artwork.CreationDate,
-            IncorporatedDate = artwork.IncorporatedDate,
-            Period = artwork.Period,
-            Assessment = artwork.Assessment
-        };
+
+        sc.AddSingleton<IConvertionService, ConvertionService>();
     }
 }

@@ -9,17 +9,51 @@ namespace IMuseum.Persistence.Models;
 public record LoanApplication : DatabaseModel
 {
     /// <summary>
+    /// Status of an loan application
+    /// </summary>
+    public enum LoanApplicationStatus
+    {
+        /// <summary>
+        /// The artwork was requested but not yet approved
+        /// </summary>
+        OnWait,
+        /// <summary>
+        /// The loan was approved and the artwork is curently
+        /// on loan
+        /// </summary>
+        OnLoan,
+        /// <summary>
+        /// The application was approved and the loan time 
+        /// finished
+        /// </summary>
+        Finished,
+        /// <summary>
+        /// The application was denied.
+        /// </summary>
+        Denied,
+    }
+    /// <summary>
     /// Date the application for a loan was sended.
     /// </summary>
     public DateTime ApplicationDate { get; set; }
     public int Duration { get; set; }
-    public LoanStatus Status { get; set; } = LoanStatus.OnWait;
-    public Artwork Artwork { get; set; }
+    public LoanApplicationStatus CurrentStatus { get; set; } = LoanApplicationStatus.OnWait;
+    [ForeignKey("Artwork")]
+    public int ArtworkId { get; set; } = 0;
+    public Artwork? Artwork { get; set; }
+
     /// <summary>
     /// Related museum to the loan. In case of internal artworks
     /// stores the museum that request the artwork. For external
     /// artworks should be the museum that owns the artwork and then
     /// march to the museum pointed in the Artwork data.
     /// </summary>
-    public Museum RelatedMuseum { get; set; }
+    [ForeignKey("RelatedMuseum")]
+    public int? MuseumId { get; set; } = 0;
+    public Museum? RelatedMuseum { get; set; }
+
+    /// <summary>
+    /// Loan details. Null if they haven't been accepted. (Related from relation to Loans)
+    /// </summary>
+    public Loan? LoanRelated { get; set; }
 }

@@ -5,7 +5,7 @@ namespace IMuseum.Persistence.Models;
 
 public record DatabaseModel
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime AddTime { get; set; } = DateTime.Now;
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

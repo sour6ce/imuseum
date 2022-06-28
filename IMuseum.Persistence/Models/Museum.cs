@@ -10,4 +10,12 @@ namespace IMuseum.Persistence.Models;
 public record Museum : DatabaseModel
 {
     public string Name { get; set; }
+    /// <summary>
+    /// Artworks of this museum. (Related from relation to Artworks)
+    /// </summary>
+    public ICollection<Artwork> Artworks { get; set; }
+    /// <summary>
+    /// All loan applications of this museum. (Related from relation to Loan Applications)
+    /// </summary>
+    public ICollection<LoanApplication> LoanApplications { get; set; }
 }

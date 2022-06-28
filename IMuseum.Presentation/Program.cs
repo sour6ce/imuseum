@@ -1,9 +1,21 @@
 using Microsoft.OpenApi.Models;
 using IMuseum.Business;
+using IMuseum.Persistence.Services;
+using IMuseum.Auth.Authorization;
 using Quartz;
 using IMuseum.Scheduling;
- 
+
 var builder = WebApplication.CreateBuilder(args);
+
+// add services to DI container
+{
+    var services = builder.Services;
+    services.AddCors();
+    services.AddControllers();
+
+    // configure DI for application services
+    services.AddScoped<IUserService, UserService>();
+}
 
 //Add sublayers dependencies
 builder.Services.AddPersistence(builder.Configuration);
@@ -22,6 +34,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddCors();
 
 var app = builder.Build();
+
+// configure HTTP request pipeline
+{
+    // global cors policy
+    app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+
+    // custom basic auth middleware
+    app.UseMiddleware<BasicAuthMiddleware>();
+
+    app.MapControllers();
+}
 
 app.UseCors(x => x
     .AllowAnyMethod()
