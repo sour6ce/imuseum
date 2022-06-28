@@ -69,10 +69,10 @@ public class ArtworksController : ControllerBase
     {
         var sc = sculpturesRepository.GetObjectAsync(art.Id);
         var pnt = paintsRepository.GetObjectAsync(art.Id);
-
+        
         var dto = new ArtworkGeneralDto()
         {
-            Id = art.Id.GetHashCode(),
+            Id = art.Id,
             Title = art.Title,
             Description = art.Description,
             Author = art.Author,
@@ -81,9 +81,8 @@ public class ArtworksController : ControllerBase
             Period = art.Period,
             Assessment = art.Assessment,
             Status = art.CurrentSatus,
-            Type = ArtType(art.Id).Result.Value
+            //Type = ArtType(art.Id).Result.Value
         };
-
         switch (dto.Type)
         {
             case ArtworkType.Sculpture:
