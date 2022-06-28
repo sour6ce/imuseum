@@ -31,11 +31,6 @@ public record Artwork : DatabaseModel
         /// </summary>
         OnDisplay,
         /// <summary>
-        /// External artwork registered and meant to be in the
-        /// museum but has not arrived yet.
-        /// </summary>
-        OnWaitArrival,
-        /// <summary>
         /// Internal or external artwork that is out of the 
         /// museum and has no intentions to return to currently.
         /// </summary>
