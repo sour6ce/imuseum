@@ -2,8 +2,10 @@ import { Badge } from "../atoms/Badge";
 import { Button } from "../atoms/Button";
 import { selectStatusColor } from "../../utils/selectStatusColor";
 import Icon from "../atoms/Icon";
+import { useNavigate } from "react-router-dom";
 interface ArtworkCardProps {
   artwork: {
+    id: number;
     link: string;
     name: string;
     author: string;
@@ -15,8 +17,8 @@ interface ArtworkCardProps {
 }
 
 const ArtworkCard: React.FC<ArtworkCardProps> = (props) => {
-  const editArtwork = () => {};
-  const openInGallery = () => {};
+  const nav = useNavigate()
+  const openInGallery = () => {nav('/gallery/'+props.artwork.id)};
 
   return (
     <div className="flex gap-5 w-full bg-gray-600 p-6 rounded-xl">
@@ -45,14 +47,7 @@ const ArtworkCard: React.FC<ArtworkCardProps> = (props) => {
           </Badge>
         </div>
         
-        <div className="flex h-full items-end pb-5 gap-3 text-sm flex-shrink-0">
-          <Button color="success" onClick={editArtwork}>
-            <div className="flex items-center gap-1">
-              Edit
-              {<Icon family="fontawesome" name="gear"/>}
-            </div>
-            
-          </Button>
+        <div className="flex h-full items-end pb-5 gap-3 text-sm flex-shrink-0 ml-10">
           <Button color="primary" onClick={openInGallery}>
             <div className="flex items-center gap-1">
               Gallery

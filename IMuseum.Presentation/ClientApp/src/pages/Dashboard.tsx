@@ -1,6 +1,5 @@
 
 import { useTotals } from "../hooks/useTotals";
-import { SessionKey, SessionStore } from "../services/SessionStore";
 
 
 const Dashboard = () => {

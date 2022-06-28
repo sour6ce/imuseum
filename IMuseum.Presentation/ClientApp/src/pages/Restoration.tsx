@@ -4,41 +4,47 @@ import { Table } from "../ui-components/organisms/Table";
 import Icon from "../ui-components/atoms/Icon";
 import { Badge } from "../ui-components/atoms/Badge";
 import { PaginationComponent } from "../ui-components/molecules/Pagination";
+import { useRestorationsPaginated } from "../hooks/useRestorations";
+import dayjs from "dayjs";
+import { RestoreService } from "../services/RestoreService";
+import { Popover } from "../ui-components/atoms/Popover";
+import { RestorationFilterForm } from "../ui-components/organisms/RestorationFilterForm";
 
 const Restoration = () => {
-  const restorations = [
-    {
-      onClick: () => {},
-      status: "in progress",
-      artwork: "The Creation",
-      author: "Miguel Angel",
-      type: "standard",
-      startDate: "4/5/12",
-      endDate: "-",
-    },
-    {
-      onClick: () => {},
-      status: "finished",
-      artwork: "The Creation",
-      author: "Miguel Angel",
-      type: "standard",
-      startDate: "4/5/12",
-      endDate: "-",
-    },
-  ];
+  const {
+    data,
+    handleChangeFilters,
+    mutate
+  } = useRestorationsPaginated()
   return (
     <Card className="w-full">
-      <CardHeader title="Restoration" />
+      <CardHeader title="Restoration">
+        <Popover
+          render={({ open, close }) => (
+            <div className="p-5">
+              <RestorationFilterForm onSubmit={handleChangeFilters}/>
+            </div>
+          )}
+          buttonProps={{}}
+          position="right"
+        >
+          Filter
+        </Popover>
+      </CardHeader>
       <div>
         <Table
-          data={restorations}
+          data={data?.restorations ?? []}
           columns={[
             {
               name: "Actions",
               align: "center",
               render: (restoration) =>
-                restoration.status === "in progress" ? (
-                  <Button color="success">
+                !restoration.dueDate || dayjs().isBefore(restoration.dueDate) ? (
+                  <Button color="success" onClick={()=>{
+                    RestoreService.endRestoration(restoration.artwork.id+"",{
+                      restorationType: 'standard'
+                    }).then(()=>mutate())
+                  }}>
                     {<Icon family="fontawesome" name="check" />}
                   </Button>
                 ) : (
@@ -52,17 +58,18 @@ const Restoration = () => {
                 <Badge
                   className="uppercase font-semibold"
                   color={
-                    restoration.status === "in progress"
+                    !restoration.dueDate || dayjs().isBefore(restoration.dueDate) 
                       ? "success-light"
                       : "primary-dark"
                   }
                   textColor={
-                    restoration.status === "in progress"
+                    !restoration.dueDate || dayjs().isBefore(restoration.dueDate)
                       ? "success-dark"
                       : "gray-100"
                   }
                 >
-                  {restoration.status}
+                  {
+                    !restoration.dueDate || dayjs().isBefore(restoration.dueDate) ? 'In Progress' : 'Finished'}
                 </Badge>
               ),
             },
@@ -72,18 +79,13 @@ const Restoration = () => {
               render: (restoration) => (
                 <div className="felx flex-col">
                   <span className="block text-xl font-semibold">
-                    {restoration.artwork}
+                    {restoration.artwork.title}
                   </span>
                   <span className="uppercase text-gray-200">
-                    {restoration.author}
+                    {restoration.artwork.author}
                   </span>
                 </div>
               ),
-            },
-            {
-              name: "Type",
-              align: "center",
-              render: (restoration) => <div>{restoration.type}</div>,
             },
             {
               name: "Start Date",
@@ -93,7 +95,7 @@ const Restoration = () => {
             {
               name: "End Date",
               align: "center",
-              render: (restoration) => <div>{restoration.endDate}</div>,
+              render: (restoration) => <div>{restoration.dueDate ?? '-'}</div>,
             },
           ]}
         />

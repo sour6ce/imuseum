@@ -2,20 +2,19 @@ import { useArtworksPaginated } from "../hooks/useArtworks";
 import { Popover } from "../ui-components/atoms/Popover";
 import ArtworkCard from "../ui-components/molecules/ArtworkCard"
 import { Card, CardHeader } from "../ui-components/molecules/Card";
+import { CatalogForm } from "../ui-components/organisms/ArtworkFilterForm";
 
 const Catalog =()=>{
   const {
-    data,filters,handleChangeFilters,handleChangePagination,pagination
+    data,handleChangeFilters
   } = useArtworksPaginated()
   return(
-    
-    <div>
-      <Card className="">
+      <Card className="w-full">
         <CardHeader title="Catalog">
           <Popover
             render={({ open, close }) => (
               <div className="p-5">
-
+                <CatalogForm onSubmit={handleChangeFilters}/>
               </div>
             )}
             buttonProps={{}}
@@ -34,15 +33,14 @@ const Catalog =()=>{
                 description: a.description,
                 link: a.image,
                 period: a.period,
-                status: a.status+""
+                status: a.status+"",
+                id: a.id
               }}/>
             </div>
             
           ))}
         </div>
       </Card>
-      
-    </div>
   )
 }
 export default Catalog;

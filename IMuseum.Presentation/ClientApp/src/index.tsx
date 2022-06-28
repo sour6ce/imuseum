@@ -9,6 +9,7 @@ import { SubheaderProvider } from './ui-components/layouts/SubheaderProvider';
 import Dashboard from './pages/Dashboard';
 import { AuthProvider } from './hooks/useAuth';
 import Catalog from './pages/Catalog';
+import Restoration from './pages/Restoration';
 
 
 const root = ReactDOM.createRoot(
@@ -32,10 +33,10 @@ root.render(
           <Route path='users/:userId/*' element={<BasicComponent text='User ID'/>}/> */}
 
           <Route path='catalog' element={<Catalog/>}/>
-          <Route path='catalog/new' element={<BasicComponent text='Artwork New'/>}/>
-          <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/>
+          {/* <Route path='catalog/new' element={<BasicComponent text='Artwork New'/>}/>
+          <Route path='catalog/:artworkId/*' element={<BasicComponent text='Artwork ID'/>}/> */}
 
-          <Route path='restoring' element={<BasicComponent text='Restorations'/>}/>
+          <Route path='restoring' element={<Restoration/>}/>
           <Route path='restoring/:restoreId/*' element={<BasicComponent text='Restoration ID'/>}/>
           <Route path='restoring/new' element={<BasicComponent text='Restorations'/>}/>
 
