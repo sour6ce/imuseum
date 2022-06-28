@@ -11,7 +11,7 @@ using IMuseum.Auth.Authorization;
 namespace IMuseum.Business.Controllers;
 
 //GET /totals
-[Admin]
+[Authorize]
 [ApiController]
 [Route("totals")]
 public class TotalsController : ControllerBase
