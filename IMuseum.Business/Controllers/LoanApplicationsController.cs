@@ -52,13 +52,13 @@ public class LoanApplicationsController : ControllerBase
 
     //POST /loan-apps
     [HttpPost]
-    public async Task<ActionResult<LoanApplicationGeneralDto>> CreateLoanAppAsync(LoanApplicationGeneralDto dto)
+    public async Task<ActionResult<LoanApplicationGeneralDto>> CreateLoanAppAsync(LoanApplicationPutPostDto dto)
     {
-        var loanApp = new LoanApplication(){
-            Id = dto.Id,
+        var loanApp = new LoanApplication()
+        {
             ApplicationDate = dto.ApplicationDate,
             Duration = dto.Duration,
-            CurrentStatus = dto.LoanApplicationStatus,
+            CurrentStatus = LoanApplication.LoanApplicationStatus.OnWait,
             ArtworkId = dto.ArtworkId,
             MuseumId = dto.MuseumId
         };
@@ -73,7 +73,7 @@ public class LoanApplicationsController : ControllerBase
     {
         var loanApp = LoanAppFromDto(dto);
         var found = loanAppsRepository.GetObjectAsync(id);
-        if(await found==null)
+        if (await found == null)
             return NotFound();
 
 
