@@ -26,8 +26,8 @@ public class DbArtworksRepository : DbRepository<Artwork>, IArtworksRepository
             oldArtwork.IncorporatedDate = artwork.IncorporatedDate;
             oldArtwork.Period = artwork.Period;
             oldArtwork.Assessment = artwork.Assessment;
+            oldArtwork.Image = artwork.Image;
             oldArtwork.Description = artwork.Description;
-            oldArtwork.CurrentSatus = artwork.CurrentSatus;
 
             await iMuseumDbContext.SaveChangesAsync();
         }

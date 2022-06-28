@@ -14,5 +14,7 @@ public record User : DatabaseModel
     /// </summary>
     public string Password { get; set; }
     public string Email { get; set; }
-    public ICollection<Role> Roles { get; set; }
+    [ForeignKey("Role")]
+    public int RoleId { get; set; }
+    public Role Role { get; set; }
 }

@@ -30,6 +30,7 @@ public class DbSculpturesRepository : DbRepository<Sculpture>, ISculpturesReposi
             old.Period = item.Period;
             old.Assessment = item.Assessment;
             old.Style = item.Style;
+            old.Image = item.Image;
             old.Material = item.Material;
 
             //Save changes

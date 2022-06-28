@@ -30,6 +30,7 @@ public class DbPaintingsRepository : DbRepository<Painting>, IPaintingsRepositor
             old.Period = item.Period;
             old.Assessment = item.Assessment;
             old.Media = item.Media;
+            old.Image = item.Image;
             old.Style = item.Style;
 
             //Save changes

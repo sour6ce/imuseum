@@ -50,17 +50,21 @@ namespace IMuseum.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Images")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("IncorporatedDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("MuseumId")
+                    b.Property<int?>("MuseumId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Period")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int?>("RoomId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
@@ -83,13 +87,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9183),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7944),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 1,
                             Deleted = false,
                             Description = "It is just biuriful.",
+                            Images = "",
                             IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "ooold",
@@ -99,13 +104,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9205),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7973),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 1,
                             Deleted = false,
                             Description = "It is just biuriful.",
+                            Images = "",
                             IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "ooold",
@@ -115,13 +121,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9219),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7986),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 1,
                             Deleted = false,
                             Description = "It is just biuriful.",
+                            Images = "",
                             IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "ooold",
@@ -131,13 +138,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9232),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7999),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 1,
                             Deleted = false,
                             Description = "It is just biuriful.",
+                            Images = "",
                             IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "ooold",
@@ -147,13 +155,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9290),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8011),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 1,
                             Deleted = false,
                             Description = "It is just biuriful.",
+                            Images = "",
                             IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "ooold",
@@ -163,13 +172,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9307),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8024),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 1,
                             Deleted = false,
                             Description = "It is just biuriful.",
+                            Images = "",
                             IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "ooold",
@@ -179,142 +189,19 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 7,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9321),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8035),
                             Assessment = 10m,
                             Author = "Unknown",
                             CreationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 1,
                             Deleted = false,
                             Description = "It is just biuriful.",
+                            Images = "",
                             IncorporatedDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "ooold",
                             RoomId = 2,
                             Title = "The tapice 7"
-                        });
-                });
-
-            modelBuilder.Entity("IMuseum.Persistence.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("AddTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ArtworkId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte[]>("Bytes")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FileExtension")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("Size")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArtworkId");
-
-                    b.ToTable("Image");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5495),
-                            ArtworkId = 3,
-                            Bytes = new byte[] { 0 },
-                            Deleted = false,
-                            FileExtension = "",
-                            Size = 3L,
-                            Title = "Title"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5513),
-                            ArtworkId = 3,
-                            Bytes = new byte[] { 0 },
-                            Deleted = false,
-                            FileExtension = "",
-                            Size = 3L,
-                            Title = "Title"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5516),
-                            ArtworkId = 3,
-                            Bytes = new byte[] { 0 },
-                            Deleted = false,
-                            FileExtension = "",
-                            Size = 3L,
-                            Title = "Title"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5518),
-                            ArtworkId = 3,
-                            Bytes = new byte[] { 0 },
-                            Deleted = false,
-                            FileExtension = "",
-                            Size = 3L,
-                            Title = "Title"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5528),
-                            ArtworkId = 3,
-                            Bytes = new byte[] { 0 },
-                            Deleted = false,
-                            FileExtension = "",
-                            Size = 3L,
-                            Title = "Title"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5530),
-                            ArtworkId = 3,
-                            Bytes = new byte[] { 0 },
-                            Deleted = false,
-                            FileExtension = "",
-                            Size = 3L,
-                            Title = "Title"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5533),
-                            ArtworkId = 3,
-                            Bytes = new byte[] { 0 },
-                            Deleted = false,
-                            FileExtension = "",
-                            Size = 3L,
-                            Title = "Title"
                         });
                 });
 
@@ -334,7 +221,7 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LoanAplicationId")
+                    b.Property<int>("LoanApplicationId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("PaymentAmount")
@@ -349,24 +236,27 @@ namespace IMuseum.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LoanApplicationId")
+                        .IsUnique();
+
                     b.ToTable("Loans");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1372),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7685),
                             Deleted = false,
-                            LoanAplicationId = 1,
+                            LoanApplicationId = 1,
                             PaymentAmount = 10m,
                             StartDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1379),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7691),
                             Deleted = false,
-                            LoanAplicationId = 2,
+                            LoanApplicationId = 2,
                             PaymentAmount = 20m,
                             StartDate = new DateTime(2022, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -400,10 +290,7 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("LoanId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MuseumId")
+                    b.Property<int?>("MuseumId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -414,9 +301,6 @@ namespace IMuseum.Persistence.Migrations
 
                     b.HasIndex("ArtworkId");
 
-                    b.HasIndex("LoanId")
-                        .IsUnique();
-
                     b.HasIndex("MuseumId");
 
                     b.ToTable("LoanApplications");
@@ -425,25 +309,23 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1395),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7708),
                             ApplicationDate = new DateTime(2022, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ArtworkId = 1,
                             CurrentStatus = 0,
                             Deleted = false,
                             Duration = 10,
-                            LoanId = 1,
                             MuseumId = 1
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1399),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7712),
                             ApplicationDate = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ArtworkId = 1,
                             CurrentStatus = 0,
                             Deleted = false,
                             Duration = 10,
-                            LoanId = 2,
                             MuseumId = 1
                         });
                 });
@@ -480,49 +362,49 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1153),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7473),
                             Deleted = false,
                             Name = "Louvre Museum"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1198),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7518),
                             Deleted = false,
                             Name = "British Museum"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1200),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7521),
                             Deleted = false,
                             Name = "London Arqueology Museum"
                         },
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1202),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7522),
                             Deleted = false,
                             Name = "New York Museum"
                         },
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1205),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7524),
                             Deleted = false,
                             Name = "Vatican City Museum"
                         },
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1207),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7526),
                             Deleted = false,
                             Name = "Kiko's Gallery"
                         },
                         new
                         {
                             Id = 7,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1209),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7528),
                             Deleted = false,
                             Name = "LeTize Museum"
                         });
@@ -553,9 +435,8 @@ namespace IMuseum.Persistence.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("Type")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("UpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
@@ -566,38 +447,6 @@ namespace IMuseum.Persistence.Migrations
                     b.HasIndex("ArtworkId");
 
                     b.ToTable("Restorations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5454),
-                            ArtworkId = 3,
-                            Deleted = false,
-                            EndDate = new DateTime(2012, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2012, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "Type1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5458),
-                            ArtworkId = 4,
-                            Deleted = false,
-                            EndDate = new DateTime(2015, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2014, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "Type1"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5461),
-                            ArtworkId = 5,
-                            Deleted = false,
-                            EndDate = new DateTime(2011, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2011, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Type = "Type1"
-                        });
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Role", b =>
@@ -632,35 +481,35 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1342),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7658),
                             Deleted = false,
                             Name = "Director"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1345),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7662),
                             Deleted = false,
                             Name = "Restaurator Sheef"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1348),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7664),
                             Deleted = false,
                             Name = "Catalog Manager"
                         },
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1350),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7666),
                             Deleted = false,
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 112, DateTimeKind.Local).AddTicks(1352),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7668),
                             Deleted = false,
                             Name = "Visiter"
                         });
@@ -698,21 +547,21 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5397),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8211),
                             Deleted = false,
                             Name = "Davinci"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5400),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8213),
                             Deleted = false,
                             Name = "Gallery"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5403),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8215),
                             Deleted = false,
                             Name = "Galileo"
                         });
@@ -742,6 +591,9 @@ namespace IMuseum.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime?>("UpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT");
@@ -752,78 +604,71 @@ namespace IMuseum.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("User");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5561),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8227),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "admin.psw123//",
+                            RoleId = 4,
                             Username = "Foreman Administrator"
                         },
                         new
                         {
                             Id = 2,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5597),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8230),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "manager.psw123//",
+                            RoleId = 3,
                             Username = "Lorena Manager"
                         },
                         new
                         {
                             Id = 3,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5600),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8233),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "restaurator.psw123//",
+                            RoleId = 2,
                             Username = "Juan Restaurator"
                         },
                         new
                         {
                             Id = 4,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5602),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8235),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "director.psw123//",
+                            RoleId = 1,
                             Username = "Harvey Director"
                         },
                         new
                         {
                             Id = 5,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5604),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8237),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "restaurator.psw123//",
+                            RoleId = 2,
                             Username = "Pablo Restaurator"
                         },
                         new
                         {
                             Id = 6,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5606),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8239),
                             Deleted = false,
                             Email = "example@gmail.com",
                             Password = "manager.psw123//",
+                            RoleId = 3,
                             Username = "Dorian Manager"
                         });
-                });
-
-            modelBuilder.Entity("RoleUser", b =>
-                {
-                    b.Property<int>("RelatedUsersId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("RolesId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("RelatedUsersId", "RolesId");
-
-                    b.HasIndex("RolesId");
-
-                    b.ToTable("RoleUser");
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Painting", b =>
@@ -838,186 +683,196 @@ namespace IMuseum.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.ToTable("Paintings");
+                    b.ToTable("Paintings", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = 10,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(8982),
-                            Assessment = 1m,
-                            Author = "Leonardo da Vinci",
+                            Id = 19,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7745),
+                            Assessment = 10m,
+                            Author = "Author",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
-                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 4,
-                            Period = "Renacence",
-                            RoomId = 2,
-                            Title = "Monalisa10",
-                            Media = "address",
-                            Style = "Renacence"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9047),
-                            Assessment = 2m,
-                            Author = "Leonardo da Vinci",
-                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "Estalin Disima",
-                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 5,
-                            Period = "Renacence",
-                            RoomId = 3,
-                            Title = "Monalisa11",
-                            Media = "address",
-                            Style = "Renacence"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9065),
-                            Assessment = 3m,
-                            Author = "Leonardo da Vinci",
-                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:265/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Leonardo-Da-Vinci-Mona-Lisa.jpg",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 6,
                             Period = "Renacence",
-                            RoomId = 1,
-                            Title = "Monalisa12",
-                            Media = "address",
-                            Style = "Renacence"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9079),
-                            Assessment = 4m,
-                            Author = "Leonardo da Vinci",
-                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "Estalin Disima",
-                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 7,
-                            Period = "Renacence",
                             RoomId = 2,
-                            Title = "Monalisa13",
-                            Media = "address",
-                            Style = "Renacence"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9092),
-                            Assessment = 5m,
-                            Author = "Leonardo da Vinci",
-                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "Estalin Disima",
-                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 1,
-                            Period = "Renacence",
-                            RoomId = 3,
-                            Title = "Monalisa14",
-                            Media = "address",
-                            Style = "Renacence"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9108),
-                            Assessment = 6m,
-                            Author = "Leonardo da Vinci",
-                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "Estalin Disima",
-                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 2,
-                            Period = "Renacence",
-                            RoomId = 1,
-                            Title = "Monalisa15",
-                            Media = "address",
-                            Style = "Renacence"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9122),
-                            Assessment = 7m,
-                            Author = "Leonardo da Vinci",
-                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "Estalin Disima",
-                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 3,
-                            Period = "Renacence",
-                            RoomId = 2,
-                            Title = "Monalisa16",
-                            Media = "address",
-                            Style = "Renacence"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9136),
-                            Assessment = 8m,
-                            Author = "Leonardo da Vinci",
-                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentSatus = 3,
-                            Deleted = false,
-                            Description = "Estalin Disima",
-                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MuseumId = 4,
-                            Period = "Renacence",
-                            RoomId = 3,
-                            Title = "Monalisa17",
+                            Title = "Mona Lisa (La Gioconda)",
                             Media = "address",
                             Style = "Renacence"
                         },
                         new
                         {
                             Id = 18,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9149),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7764),
                             Assessment = 9m,
-                            Author = "Leonardo da Vinci",
+                            Author = "Author",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:500/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Vincent-Van-Gogh-Starry-Night.jpg",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 5,
                             Period = "Renacence",
                             RoomId = 1,
-                            Title = "Monalisa18",
+                            Title = "Starry-Night",
                             Media = "address",
                             Style = "Renacence"
                         },
                         new
                         {
-                            Id = 19,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 113, DateTimeKind.Local).AddTicks(9165),
-                            Assessment = 10m,
-                            Author = "Leonardo da Vinci",
+                            Id = 17,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7776),
+                            Assessment = 8m,
+                            Author = "Author",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:316/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Edvard-Munch-The-Scream.jpg",
+                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MuseumId = 4,
+                            Period = "Renacence",
+                            RoomId = 3,
+                            Title = "The Scream",
+                            Media = "address",
+                            Style = "Renacence"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7787),
+                            Assessment = 7m,
+                            Author = "Author",
+                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentSatus = 3,
+                            Deleted = false,
+                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:443/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/PabloPicasso-ThreeMusicians.jpg",
+                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MuseumId = 3,
+                            Period = "Renacence",
+                            RoomId = 2,
+                            Title = "Three Musicians",
+                            Media = "address",
+                            Style = "Renacence"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7799),
+                            Assessment = 6m,
+                            Author = "Author",
+                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentSatus = 3,
+                            Deleted = false,
+                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:347/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Jan-Vermeer-The-Girl-with-a-Pearl-Earring.jpg",
+                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MuseumId = 2,
+                            Period = "Renacence",
+                            RoomId = 1,
+                            Title = "The Girl with a Pearl Earring",
+                            Media = "address",
+                            Style = "Renacence"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7811),
+                            Assessment = 5m,
+                            Author = "Author",
+                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentSatus = 3,
+                            Deleted = false,
+                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:492/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Rembrandt_Van_Rijn-Night_Watch_.jpg",
+                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MuseumId = 1,
+                            Period = "Renacence",
+                            RoomId = 3,
+                            Title = "Night Watch",
+                            Media = "address",
+                            Style = "Renacence"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7822),
+                            Assessment = 4m,
+                            Author = "Author",
+                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentSatus = 3,
+                            Deleted = false,
+                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:398/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Gustav-Klimt-The-Kiss-Bacio-.jpg",
+                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MuseumId = 7,
+                            Period = "Renacence",
+                            RoomId = 2,
+                            Title = "The Kiss (Bacio)",
+                            Media = "address",
+                            Style = "Renacence"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7833),
+                            Assessment = 3m,
+                            Author = "Author",
+                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentSatus = 3,
+                            Deleted = false,
+                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:413/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Claude-Monet-Water-Lilies.jpg",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 6,
                             Period = "Renacence",
+                            RoomId = 1,
+                            Title = "Water Lilies",
+                            Media = "address",
+                            Style = "Renacence"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7914),
+                            Assessment = 2m,
+                            Author = "Author",
+                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentSatus = 3,
+                            Deleted = false,
+                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:592/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Georges-Seurat-A-Sunday-Afternoon-on-the-Island-of-La-Grande-Jatte.jpg",
+                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MuseumId = 5,
+                            Period = "Renacence",
+                            RoomId = 3,
+                            Title = "A Sunday Afternoon on the Island of La Grande Jatte",
+                            Media = "address",
+                            Style = "Renacence"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(7929),
+                            Assessment = 1m,
+                            Author = "Author",
+                            CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentSatus = 3,
+                            Deleted = false,
+                            Description = "Estalin Disima",
+                            Images = "https://mljecheddetu.i.optimole.com/r7ifq_I.35uE~1b08/w:331/h:400/q:mauto/https://www.justincanvas.com/wp-content/uploads/2020/03/Grant-Wood-American-Gothic.jpg",
+                            IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MuseumId = 4,
+                            Period = "Renacence",
                             RoomId = 2,
-                            Title = "Monalisa19",
+                            Title = "American Gothic",
                             Media = "address",
                             Style = "Renacence"
                         });
@@ -1035,19 +890,20 @@ namespace IMuseum.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.ToTable("Sculpture");
+                    b.ToTable("Sculptures", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 20,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5169),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8051),
                             Assessment = 1m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1059,13 +915,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 21,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5222),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8067),
                             Assessment = 2m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1077,13 +934,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 22,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5237),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8079),
                             Assessment = 3m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1095,13 +953,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 23,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5250),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8091),
                             Assessment = 4m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1113,13 +972,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 24,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5262),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8102),
                             Assessment = 5m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1131,13 +991,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 25,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5325),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8115),
                             Assessment = 6m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1149,13 +1010,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 26,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5341),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8126),
                             Assessment = 7m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1167,13 +1029,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 27,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5354),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8173),
                             Assessment = 8m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1185,13 +1048,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 28,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5367),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8186),
                             Assessment = 9m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1203,13 +1067,14 @@ namespace IMuseum.Persistence.Migrations
                         new
                         {
                             Id = 29,
-                            AddTime = new DateTime(2022, 6, 26, 13, 32, 14, 115, DateTimeKind.Local).AddTicks(5381),
+                            AddTime = new DateTime(2022, 6, 27, 16, 23, 28, 614, DateTimeKind.Local).AddTicks(8199),
                             Assessment = 10m,
                             Author = "Leonardo da Vinci",
                             CreationDate = new DateTime(1503, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CurrentSatus = 3,
                             Deleted = false,
                             Description = "Estalin Disima",
+                            Images = "",
                             IncorporatedDate = new DateTime(2002, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MuseumId = 1,
                             Period = "Renacence",
@@ -1224,30 +1089,26 @@ namespace IMuseum.Persistence.Migrations
                 {
                     b.HasOne("IMuseum.Persistence.Models.Museum", "Museum")
                         .WithMany("Artworks")
-                        .HasForeignKey("MuseumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MuseumId");
 
                     b.HasOne("IMuseum.Persistence.Models.Room", "Room")
                         .WithMany("Artworks")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomId");
 
                     b.Navigation("Museum");
 
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("IMuseum.Persistence.Models.Image", b =>
+            modelBuilder.Entity("IMuseum.Persistence.Models.Loan", b =>
                 {
-                    b.HasOne("IMuseum.Persistence.Models.Artwork", "Artwork")
-                        .WithMany("Images")
-                        .HasForeignKey("ArtworkId")
+                    b.HasOne("IMuseum.Persistence.Models.LoanApplication", "Application")
+                        .WithOne("LoanRelated")
+                        .HasForeignKey("IMuseum.Persistence.Models.Loan", "LoanApplicationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Artwork");
+                    b.Navigation("Application");
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.LoanApplication", b =>
@@ -1258,21 +1119,11 @@ namespace IMuseum.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IMuseum.Persistence.Models.Loan", "LoanRelated")
-                        .WithOne("Application")
-                        .HasForeignKey("IMuseum.Persistence.Models.LoanApplication", "LoanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("IMuseum.Persistence.Models.Museum", "RelatedMuseum")
                         .WithMany("LoanApplications")
-                        .HasForeignKey("MuseumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MuseumId");
 
                     b.Navigation("Artwork");
-
-                    b.Navigation("LoanRelated");
 
                     b.Navigation("RelatedMuseum");
                 });
@@ -1288,19 +1139,15 @@ namespace IMuseum.Persistence.Migrations
                     b.Navigation("Artwork");
                 });
 
-            modelBuilder.Entity("RoleUser", b =>
+            modelBuilder.Entity("IMuseum.Persistence.Models.User", b =>
                 {
-                    b.HasOne("IMuseum.Persistence.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("RelatedUsersId")
+                    b.HasOne("IMuseum.Persistence.Models.Role", "Role")
+                        .WithMany("RelatedUsers")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IMuseum.Persistence.Models.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Painting", b =>
@@ -1323,17 +1170,14 @@ namespace IMuseum.Persistence.Migrations
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Artwork", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("LoanApplications");
 
                     b.Navigation("Restorations");
                 });
 
-            modelBuilder.Entity("IMuseum.Persistence.Models.Loan", b =>
+            modelBuilder.Entity("IMuseum.Persistence.Models.LoanApplication", b =>
                 {
-                    b.Navigation("Application")
-                        .IsRequired();
+                    b.Navigation("LoanRelated");
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Museum", b =>
@@ -1341,6 +1185,11 @@ namespace IMuseum.Persistence.Migrations
                     b.Navigation("Artworks");
 
                     b.Navigation("LoanApplications");
+                });
+
+            modelBuilder.Entity("IMuseum.Persistence.Models.Role", b =>
+                {
+                    b.Navigation("RelatedUsers");
                 });
 
             modelBuilder.Entity("IMuseum.Persistence.Models.Room", b =>

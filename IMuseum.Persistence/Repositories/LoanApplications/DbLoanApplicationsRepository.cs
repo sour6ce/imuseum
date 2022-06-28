@@ -27,7 +27,6 @@ public class DbLoanApplicationsRepository : DbRepository<LoanApplication>, ILoan
             old.Artwork = item.Artwork;
             old.Duration = item.Duration;
             old.RelatedMuseum = item.RelatedMuseum;
-            old.CurrentStatus = item.CurrentStatus;
 
             //Save changes
             await iMuseumDbContext.SaveChangesAsync();
