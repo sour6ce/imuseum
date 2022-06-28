@@ -35,6 +35,50 @@ public class LoanApplicationsController : ControllerBase
         };
     }
 
+    internal LoanApplication LoanAppFromDto(LoanApplicationPutPostDto dto)
+    {
+        LoanApplication loanApp = new LoanApplication()
+        {
+            ArtworkId = dto.ArtworkId,
+            Duration = dto.Duration,
+            ApplicationDate = dto.ApplicationDate,
+            MuseumId = dto.MuseumId
+        };
+
+        return loanApp;
+    }
+
+    //POST /loan-apps
+    [HttpPost]
+    public async Task<ActionResult<LoanApplicationGeneralDto>> CreateLoanAppAsync(LoanApplicationGeneralDto dto)
+    {
+        var loanApp = new LoanApplication(){
+            Id = dto.Id,
+            ApplicationDate = dto.ApplicationDate,
+            Duration = dto.Duration,
+            CurrentStatus = dto.LoanApplicationStatus,
+            ArtworkId = dto.ArtworkId,
+            MuseumId = dto.MuseumId
+        };
+        await loanAppsRepository.AddAsync(loanApp);
+        return CreatedAtAction(nameof(CreateLoanAsync), null, dto);
+    }
+
+    //PUT /loan-apps/{id}
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<ActionResult> UpdateArtworkAsync(int id, LoanApplicationPutPostDto dto)
+    {
+        var loanApp = LoanAppFromDto(dto);
+        var found = loanAppsRepository.GetObjectAsync(id);
+        if(await found==null)
+            return NotFound();
+
+
+        await loanAppsRepository.UpdateObjectAsync(loanApp);
+        return AcceptedAtAction(nameof(UpdateArtworkAsync), dto);
+    }
+
     //GET /loan-apps
     [HttpGet]
     public async Task<LoanApplicationGetReturnDto> GetLoanAppsAsync([FromQuery] LoanApplicationGetParamDto args)
