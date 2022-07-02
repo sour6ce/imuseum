@@ -3,6 +3,7 @@ using IMuseum.Persistence.Repositories.Museums;
 using IMuseum.Business.Dtos.Museums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using IMuseum.Business.Dtos;
 using Microsoft.EntityFrameworkCore;
 using IMuseum.Auth.Authorization;
 
@@ -22,9 +23,9 @@ public class MuseumsController : ControllerBase
         this.museumsRepository = museumsRepository;
     }
 
-    internal MuseumGeneralDto MuseumAsDto(Museum museum)
+    internal SimpleDto MuseumAsDto(Museum museum)
     {
-        return new MuseumGeneralDto()
+        return new SimpleDto()
         {
             Id = museum.Id,
             Name = museum.Name
@@ -52,7 +53,7 @@ public class MuseumsController : ControllerBase
     //GET /museums
     [HttpGet]
     [Route("{id}")]
-    public async Task<ActionResult<MuseumGeneralDto>> GetMuseumAsync(int id)
+    public async Task<ActionResult<SimpleDto>> GetMuseumAsync(int id)
     {
         var museum = await museumsRepository.GetObjectAsync(id);
 
@@ -66,7 +67,7 @@ public class MuseumsController : ControllerBase
 
     //POST /museums
     [HttpPost]
-    public async Task<ActionResult<MuseumPutPostDto>> CreateMuseumAsync(MuseumPutPostDto museumDto)
+    public async Task<ActionResult<SimpleNameDto>> CreateMuseumAsync(SimpleNameDto museumDto)
     {
         Museum museum = new Museum()
         {
@@ -93,7 +94,7 @@ public class MuseumsController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult> UpdateMuseum(int id, MuseumPutPostDto dto)
+    public async Task<ActionResult> UpdateMuseum(int id, SimpleNameDto dto)
     {
         Museum museum = new Museum()
         {

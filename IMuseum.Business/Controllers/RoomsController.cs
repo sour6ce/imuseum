@@ -3,6 +3,7 @@ using IMuseum.Persistence.Repositories.Rooms;
 using IMuseum.Business.Dtos.Rooms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using IMuseum.Business.Dtos;
 using Microsoft.EntityFrameworkCore;
 using IMuseum.Auth.Authorization;
 namespace IMuseum.Business.Controllers;
@@ -20,9 +21,9 @@ public class RoomsController : ControllerBase
         this.roomsRepository = roomsRepository;
     }
 
-    internal RoomGeneralDto RoomAsDto(Room room)
+    internal SimpleDto RoomAsDto(Room room)
     {
-        return new RoomGeneralDto()
+        return new SimpleDto()
         {
             Id = room.Id,
             Name = room.Name
@@ -51,10 +52,10 @@ public class RoomsController : ControllerBase
         };
     }
 
-    //GET /museums
+    //GET /rooms/{id}
     [HttpGet]
     [Route("{id}")]
-    public async Task<ActionResult<RoomGeneralDto>> GetRoomAsync(int id)
+    public async Task<ActionResult<SimpleDto>> GetRoomAsync(int id)
     {
         var room = await roomsRepository.GetObjectAsync(id);
 
@@ -63,7 +64,7 @@ public class RoomsController : ControllerBase
             return NotFound();
         }
 
-        return new RoomGeneralDto()
+        return new SimpleDto()
         {
             Id = room.Id,
             Name = room.Name
@@ -72,7 +73,7 @@ public class RoomsController : ControllerBase
 
     //POST /rooms
     [HttpPost]
-    public async Task<ActionResult<RoomGeneralDto>> CreateRoomAsync(RoomPutPostDto roomDto)
+    public async Task<ActionResult<SimpleDto>> CreateRoomAsync(SimpleNameDto roomDto)
     {
         Room room = new Room()
         {
@@ -99,7 +100,7 @@ public class RoomsController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult> UpdateRoom(int id, RoomPutPostDto dto)
+    public async Task<ActionResult> UpdateRoom(int id, SimpleNameDto dto)
     {
         Room room = new Room()
         {
