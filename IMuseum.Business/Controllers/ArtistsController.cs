@@ -28,21 +28,22 @@ public class ArtistsController : ControllerBase
     //GET /artists
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ArtistGetReturnDto> GetArtistsAsync()
+    public async Task<ArtistGetReturnDto> GetArtistsAsync([FromQuery] string search = "")
     {
-        IEnumerable<Artwork> artworks = await artRepository.GetObjectsAsync();
-        List<string> artists = new List<string>();
+        var filter = (DbSet<Artwork> x) => x.Where(y => y.Author.ToLower().Contains(search.ToLower()));
 
-        foreach(Artwork art in artworks)
-        {
-            if(!artists.Contains(art.Author))
-                artists.Add(art.Author);
-        }
+        var artists = artRepository.ExecuteOnDbAsync(
+            async x => await filter(x).Select(y => y.Author).Distinct().ToArrayAsync()
+        );
+
+        var count = artRepository.ExecuteOnDbAsync(
+            async x => await filter(x).CountAsync()
+        );
 
         return new ArtistGetReturnDto()
         {
-            Artists = artists.ToArray(),
-            Count = artists.Count
+            Artists = await artists,
+            Count = await count
         };
     }
 }
