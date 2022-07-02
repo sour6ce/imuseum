@@ -32,12 +32,22 @@ public class RoomsController : ControllerBase
 
     //GET /rooms
     [HttpGet]
-    public async Task<RoomGetReturnDto> GetRoomsAsync()
+    public async Task<RoomGetReturnDto> GetRoomsAsync([FromQuery] string search = "")
     {
+        var filter = (DbSet<Room> x) => x.Where(y => y.Name.ToLower().Contains(search.ToLower()));
+
+        var rooms = roomsRepository.ExecuteOnDbAsync(
+            async x => await filter(x).Select(y => RoomAsDto(y)).ToArrayAsync()
+        );
+
+        var count = roomsRepository.ExecuteOnDbAsync(
+            async x => await filter(x).CountAsync()
+        );
+
         return new RoomGetReturnDto()
         {
-            Rooms = (await roomsRepository.GetObjectsAsync()).Select((x) => RoomAsDto(x)).ToArray(),
-            Count = roomsRepository.Count
+            Rooms = await rooms,
+            Count = await count
         };
     }
 
