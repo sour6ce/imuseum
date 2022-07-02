@@ -208,7 +208,7 @@ public class ConvertionService : IConvertionService
         }
         catch
         {
-            id = museums.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault())?.Id;
+            id = museums.ExecuteOnDb(x => x.Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault())?.Id;
         }
         return id;
     }
@@ -228,7 +228,7 @@ public class ConvertionService : IConvertionService
         }
         catch
         {
-            id = rooms.ExecuteOnDb(x => x.Where(x => x.Name == name).FirstOrDefault())?.Id;
+            id = rooms.ExecuteOnDb(x => x.Where(x => x.Name.ToLower() == name.ToLower()).FirstOrDefault())?.Id;
         }
         return id;
     }
