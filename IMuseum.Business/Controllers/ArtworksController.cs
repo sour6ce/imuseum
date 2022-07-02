@@ -54,7 +54,7 @@ public class ArtworksController : ControllerBase
             .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(Utils.ArtworkStatusNameMaps().Item2[x.CurrentStatus]))
             .Where((x) => args.Type == null || args.Type.Length == 0 || args.Type.Contains((Utils.ArtworkTypeNameMaps().Item2[convertionService.ArtType(x.Id).Result.Value])))
             .Where((x) => args.Rooms == null || (args.Rooms.Count(y => convertionService.RoomToId(y) == x.RoomId && x.RoomId != null) > 1))
-            .Where((x) => args.Search == null || args.Search == "" || x.Title.Contains(args.Search));
+            .Where((x) => args.Search == null || args.Search == "" || x.Title.ToLower().Contains(args.Search.ToLower()));
         };
         var count = (artRepository.ExecuteOnDbAsync(async (all) =>
         {
