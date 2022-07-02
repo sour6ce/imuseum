@@ -63,7 +63,11 @@ public class IMuseumContext : DbContext
             .HasOne<Role>(x => x.Role)
             .WithMany(x => x.RelatedUsers);
 
+        //Seeding Reference
         modelBuilder.DataSeeding();
+
+        //Global Query Filters for Soft-Delete
+        modelBuilder.Entity<DatabaseModel>().HasQueryFilter(x => !x.Deleted);
     }
 
     // The following configures EF to create a Sqlite database file in the
