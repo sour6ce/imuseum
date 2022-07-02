@@ -35,13 +35,17 @@ public class MuseumsController : ControllerBase
     [HttpGet]
     public async Task<MuseumGetReturnDto> GetMuseumsAsync([FromQuery] string search = "")
     {
+        var filter = (DbSet<Museum> x) => x.Where(y => y.Name.ToLower().Contains(search.ToLower()));
         return new MuseumGetReturnDto()
         {
-            Museums = (await museumsRepository.ExecuteOnDbAsync(
-                async x => await x.Where(y => y.Name.ToLower().Contains(search.ToLower()))
-                .Select(y => MuseumAsDto(y)).ToArrayAsync())
-                ),
-            Count = museumsRepository.Count
+            Museums = await museumsRepository.ExecuteOnDbAsync(
+                async x => await filter(x)
+                .Select(y => MuseumAsDto(y)).ToArrayAsync()
+            ),
+            Count = await museumsRepository.ExecuteOnDbAsync(
+                async x => await filter(x)
+                .CountAsync()
+            )
         };
     }
 
