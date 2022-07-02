@@ -201,24 +201,24 @@ public class ArtworksController : ControllerBase
     //POST /artwork/{id}/move
     [HttpPost]
     [Route("{id}/move-to-room")]
-    public async Task<ActionResult> MoveRoomAsync(int id, [FromQuery] string Room)
+    public async Task<ActionResult> MoveRoomAsync(int id, string room)
     {
         int? RoomId = null;
         try
         {
-            RoomId = int.Parse(Room);
+            RoomId = int.Parse(room);
         }
         catch
         {
-            RoomId = convertionService.RoomToId(Room);
+            RoomId = convertionService.RoomToId(room);
         }
 
         if (RoomId == null)
             return BadRequest("The room given is not valid");
 
-        var room = await roomsRepository.GetObjectAsync(RoomId.Value);
+        var room_db = await roomsRepository.GetObjectAsync(RoomId.Value);
 
-        if (room == null)
+        if (room_db == null)
             return BadRequest();
 
         return await artRepository.ExecuteOnDbAsync<ActionResult>(async (set, context) =>
