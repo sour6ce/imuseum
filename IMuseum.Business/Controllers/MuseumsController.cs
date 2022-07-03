@@ -34,8 +34,10 @@ public class MuseumsController : ControllerBase
 
     //GET /museums
     [HttpGet]
-    public async Task<MuseumGetReturnDto> GetMuseumsAsync([FromQuery] string search = "")
+    public async Task<MuseumGetReturnDto> GetMuseumsAsync([FromQuery] string? search = "")
     {
+        search = search ?? "";
+
         var filter = (DbSet<Museum> x) => x.Where(y => y.Name.ToLower().Contains(search.ToLower()));
         return new MuseumGetReturnDto()
         {

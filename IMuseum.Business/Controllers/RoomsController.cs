@@ -33,8 +33,10 @@ public class RoomsController : ControllerBase
 
     //GET /rooms
     [HttpGet]
-    public async Task<RoomGetReturnDto> GetRoomsAsync([FromQuery] string search = "")
+    public async Task<RoomGetReturnDto> GetRoomsAsync([FromQuery] string? search = "")
     {
+        search = search ?? "";
+
         var filter = (DbSet<Room> x) => x.Where(y => y.Name.ToLower().Contains(search.ToLower()));
 
         var rooms = roomsRepository.ExecuteOnDbAsync(
