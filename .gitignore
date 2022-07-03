@@ -237,3 +237,6 @@ _Pvt_Extensions
 *.db*
 !*.db*/
 !*.db
+
+IMuseum.Db/*
+IMuseum.Persistence/Migrations/*
