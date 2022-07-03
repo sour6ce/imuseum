@@ -67,7 +67,14 @@ public class IMuseumContext : DbContext
         modelBuilder.DataSeeding();
 
         //Global Query Filters for Soft-Delete
-        modelBuilder.Entity<DatabaseModel>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.Artwork>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.Loan>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.LoanApplication>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.Museum>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.Restoration>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.Role>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.Room>().HasQueryFilter(x => !x.Deleted);
+        modelBuilder.Entity<Persistence.Models.User>().HasQueryFilter(x => !x.Deleted);
     }
 
     // The following configures EF to create a Sqlite database file in the
