@@ -23,7 +23,7 @@ public class MuseumsController : ControllerBase
         this.museumsRepository = museumsRepository;
     }
 
-    internal SimpleDto MuseumAsDto(Museum museum)
+    internal static SimpleDto MuseumAsDto(Museum museum)
     {
         return new SimpleDto()
         {
