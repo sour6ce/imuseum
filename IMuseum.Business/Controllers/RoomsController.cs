@@ -21,7 +21,7 @@ public class RoomsController : ControllerBase
         this.roomsRepository = roomsRepository;
     }
 
-    internal SimpleDto RoomAsDto(Room room)
+    internal static SimpleDto RoomAsDto(Room room)
     {
         return new SimpleDto()
         {
