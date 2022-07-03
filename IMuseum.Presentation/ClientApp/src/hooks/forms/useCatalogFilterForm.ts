@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { SelectOption } from '../../types/SelectOption'
 
 const schema = yup.object({
-  Author: yup.string(),
-  Type: yup.string(),
-  Statuses: yup.string(),
+  Author: yup.mixed<SelectOption<string>[]>().required(),
+  Type: yup.mixed<SelectOption<string>[]>().required(),
+  Statuses: yup.mixed<SelectOption<string>[]>().required(),
   Search: yup.string()
 }).required()
 

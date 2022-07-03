@@ -25,7 +25,7 @@ export const NewArtwork = ()=>{
   const [defaultOp, setDefaultOp] = useState<string[]>()
   useEffect(()=>{
     (StaticService.getArtists()).then((res)=>{
-      setDefaultOp(res.artists)
+      setDefaultOp(res)
     })
   },[])
 

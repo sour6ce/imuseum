@@ -9,8 +9,12 @@ export class StaticService{
     return AuthService.axios
   }
 
-  static async getArtists(){
-    return (await StaticService.axios.get<{artists:string[],count:number}>('/artists')).data
+  static async getArtists(search?:string){
+    return (await StaticService.axios.get<{artists:string[],count:number}>('/artists',{
+      params:{
+        search
+      }
+    })).data.artists
   }
 
   static async getStyles(){
@@ -27,5 +31,9 @@ export class StaticService{
 
   static async getTotals(){
     return ( await StaticService.axios.get<Totals>('/totals'))
+  }
+
+  static async getArtworkTypes(){
+    return (await StaticService.axios.get<string[]>('/artwork-types')).data
   }
 }

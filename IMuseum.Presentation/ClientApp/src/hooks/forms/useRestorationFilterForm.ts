@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { Artwork } from '../../types/Artwork'
 
 const schema = yup.object({
-  ArtworksIds: yup.string(),
+  ArtworksIds: yup.mixed<Artwork[]>().required(),
   StartDateA: yup.string(),
   EndDateA: yup.string(),
   StartDateB: yup.string(),
