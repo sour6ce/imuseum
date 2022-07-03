@@ -28,8 +28,10 @@ public class ArtistsController : ControllerBase
     //GET /artists
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ArtistGetReturnDto> GetArtistsAsync([FromQuery] string search = "")
+    public async Task<ArtistGetReturnDto> GetArtistsAsync([FromQuery] string? search = "")
     {
+        search = search ?? "";
+
         var filter = (DbSet<Artwork> x) => x.Where(y => y.Author.ToLower().Contains(search.ToLower()));
 
         var artists = artRepository.ExecuteOnDbAsync(
