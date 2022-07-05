@@ -49,14 +49,22 @@ public class ArtworksController : ControllerBase
     {
         var filtered = (DbSet<Artwork> all) =>
         {
+            var types = args.Type?
+            .Where(x => Utils.ArtworkTypeNameMaps().Item1.ContainsKey(x.ToLower()))?
+            .Select(x => (int)Utils.ArtworkTypeNameMaps().Item1[x.ToLower()]).ToArray();
+
+            var statuses = args.Statuses?
+            .Where(x => Utils.ArtworkStatusNameMaps().Item1.ContainsKey(x.ToLower()))?
+            .Select(x => (int)Utils.ArtworkStatusNameMaps().Item1[x.ToLower()]).ToArray();
+
             return
             all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Select(x => x.ToLower()).Contains(x.Author.ToLower()))
-            .Where((x) => args.Statuses == null || args.Statuses.Length == 0 || args.Statuses.Contains(Utils.ArtworkStatusNameMaps().Item2[x.CurrentStatus]))
+            .Where((x) => statuses == null || statuses.Length == 0 || statuses.Contains((int)x.CurrentStatus))
             .Where((x) =>
-                args.Type == null ||
-                args.Type.Length == 0 ||
-                convertionService.ArtType(x.Id).Result != null ||
-                args.Type.Contains((Utils.ArtworkTypeNameMaps().Item2[convertionService.ArtType(x.Id).Result.Value]))
+                types == null ||
+                types.Length == 0 ||
+                (convertionService.ArtType(x.Id).Result != null &&
+                types.Contains((int)convertionService.ArtType(x.Id).Result.Value))
             )
             .Where((x) => args.Rooms == null || (args.Rooms.Count(y => convertionService.RoomToId(y) == x.RoomId && x.RoomId != null) > 1))
             .Where((x) => args.Search == null || args.Search == "" || x.Title.ToLower().Contains(args.Search.ToLower()));
