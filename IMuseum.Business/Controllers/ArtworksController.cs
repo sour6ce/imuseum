@@ -47,12 +47,8 @@ public class ArtworksController : ControllerBase
     [HttpGet]
     public async Task<ArtworkGetReturnDto> GetArtworksAsync([FromQuery] ArtworkGetParamDto args)
     {
-        var filtered = (DbSet<Artwork> all) =>
+        var pre_filtered = (DbSet<Artwork> all) =>
         {
-            var types = args.Type?
-            .Where(x => Utils.ArtworkTypeNameMaps().Item1.ContainsKey(x.ToLower()))?
-            .Select(x => (int)Utils.ArtworkTypeNameMaps().Item1[x.ToLower()]).ToArray();
-
             var statuses = args.Statuses?
             .Where(x => Utils.ArtworkStatusNameMaps().Item1.ContainsKey(x.ToLower()))?
             .Select(x => (int)Utils.ArtworkStatusNameMaps().Item1[x.ToLower()]).ToArray();
@@ -60,30 +56,38 @@ public class ArtworksController : ControllerBase
             return
             all.Where((x) => args.Author == null || args.Author.Length == 0 || args.Author.Select(x => x.ToLower()).Contains(x.Author.ToLower()))
             .Where((x) => statuses == null || statuses.Length == 0 || statuses.Contains((int)x.CurrentStatus))
+            .Where((x) => args.Rooms == null || (args.Rooms.Count(y => convertionService.RoomToId(y) == x.RoomId && x.RoomId != null) > 1))
+            .Where((x) => args.Search == null || args.Search == "" || x.Title.ToLower().Contains(args.Search.ToLower()));
+        };
+        var post_filtered = (IEnumerable<Artwork> all) =>
+        {
+            var types = args.Type?
+            .Where(x => Utils.ArtworkTypeNameMaps().Item1.ContainsKey(x.ToLower()))?
+            .Select(x => (int)Utils.ArtworkTypeNameMaps().Item1[x.ToLower()]).ToArray();
+
+            return all
             .Where((x) =>
                 types == null ||
                 types.Length == 0 ||
                 (convertionService.ArtType(x.Id).Result != null &&
                 types.Contains((int)convertionService.ArtType(x.Id).Result.Value))
-            )
-            .Where((x) => args.Rooms == null || (args.Rooms.Count(y => convertionService.RoomToId(y) == x.RoomId && x.RoomId != null) > 1))
-            .Where((x) => args.Search == null || args.Search == "" || x.Title.ToLower().Contains(args.Search.ToLower()));
+            );
         };
         var count = (artRepository.ExecuteOnDbAsync(async (all) =>
         {
             return
-            await filtered(all).CountAsync();
+            await pre_filtered(all).ToArrayAsync();
         }));
         var artworks = (artRepository.ExecuteOnDb((all) =>
         {
             return
-            filtered(all).Skip(args.PageSize * (args.Page - 1))
+            post_filtered(pre_filtered(all).ToArrayAsync().Result).Skip(args.PageSize * (args.Page - 1))
             .Take(args.PageSize).ToArray();
         }));
         return new ArtworkGetReturnDto()
         {
             Artworks = (artworks).Select((x) => this.convertionService.ArtworkAsDto(x)).ToArray().Select((x) => x.Result).ToArray(),
-            Count = (await count)
+            Count = (await count).Count()
         };
     }
 
