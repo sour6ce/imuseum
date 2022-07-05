@@ -6,6 +6,9 @@ import { Badge } from "../ui-components/atoms/Badge";
 import { useSession } from "../hooks/useSession";
 import { Button } from "../ui-components/atoms/Button";
 import { useArtworksPaginated } from "../hooks/useArtworks";
+import { Roles } from "../types/Roles";
+import { Permission } from "../ui-components/atoms/Permission";
+import { LoginForm } from "../ui-components/organisms/LoginForm";
 
 interface GalleryProps {
   user?: any;
@@ -13,15 +16,18 @@ interface GalleryProps {
 export const homeLinks = [
   {
     label: 'Home',
-    to: '/home'
+    to: '/home',
+    roles: [Roles.Visiter]
   },
   {
     label: 'Gallery',
-    to: '/gallery'
+    to: '/gallery',
+    roles: [Roles.Visiter]
   },
   {
     label: 'Dashboard',
-    to: '/dashboard'
+    to: '/dashboard',
+    roles: [Roles.Director,Roles.Manager,Roles.Restaurator]
   },
 ]
 
@@ -49,10 +55,13 @@ const Gallery: React.FC<GalleryProps> = (props) => {
           <div className="flex flex-row justify-end gap-24">
         <div className="flex gap-8">
           {homeLinks.map((l)=>(
-            <NavLink to={l.to} className={({isActive})=>classNames('text-xl hover:text-primary-lighter ',{
-              'font-black': isActive,
-              'font-semibold': !isActive
-            })}>{l.label}</NavLink>
+            <Permission
+            roles={l.roles}>
+              <NavLink to={l.to} className={({isActive})=>classNames('text-xl hover:text-primary-lighter ',{
+                'font-black': isActive,
+                'font-semibold': !isActive
+              })}>{l.label}</NavLink>
+            </Permission>
           ))}
         </div>
       </div>
@@ -60,45 +69,60 @@ const Gallery: React.FC<GalleryProps> = (props) => {
           <div>
             <IconLogo height={50} width={150} />
           </div>
-
-          <div className="flex gap-x-3 flex-row items-center text-lg alig">
-          <span className="mr-3">
-          Welcome, <span className="font-bold">{`${user?.username ?? 'John'}`} </span>
-        </span>
-        <Popover
-          buttonProps={{
-            color:"gray-400",
-            textColor:"primary-light",
-            className: 'rounded-md px-4 py-2'
-          }}
-          render={({open,close})=>(
-            <div className="flex flex-col justify-between p-5">
-              <span className="text-2xl font-bold">{user?.username}</span>
-              <span className="text-lg text-gray-200">{user?.email}</span>
-              <div>
-                <Badge textColor="gray-50" color="primary-lighter" >
-                  {user?.role}
-                </Badge>
-              </div>
-              <div className="mt-5">
-                <Button
-                  onClick={()=>{
-                    logout()
-                    navigate('/home')
+          <div className="flex gap-x-3 flex-row items-center text-lg">
+            {user ? (
+              <>
+                <span className="mr-3">
+                  Welcome, <span className="font-bold">{`${user?.username ?? 'John'}`} </span>
+                </span>
+                <Popover
+                  buttonProps={{
+                    color:"gray-400",
+                    textColor:"primary-light",
+                    className: 'rounded-md px-4 py-2'
                   }}
-                  color='primary-light'
+                  render={({open,close})=>(
+                    <div className="flex flex-col justify-between p-5">
+                      <span className="text-2xl font-bold">{user?.username}</span>
+                      <span className="text-lg text-gray-200">{user?.email}</span>
+                      <div>
+                        <Badge textColor="gray-50" color="primary-lighter" >
+                          {user?.role}
+                        </Badge>
+                      </div>
+                      <div className="mt-5">
+                        <Button
+                          onClick={()=>{
+                            logout()
+                            navigate('/home')
+                          }}
+                          color='primary-light'
+                        >
+                          Logout
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                  position="right"
                 >
-                  Logout
-                </Button>
-              </div>
-            </div>
-          )}
-          position="right"
-        >
-          <span className="font-extrabold text-xl text-primary-light px-0.5">
-          {user?.username?.[0].toUpperCase() ?? 'J'}
-          </span>
-        </Popover>
+                  <span className="font-extrabold text-xl text-primary-light px-0.5">
+                  {user?.username?.[0].toUpperCase() ?? 'J'}
+                  </span>
+                </Popover>
+              </>
+            ) : (
+              <Popover
+                render={({open,close})=>(
+                  <div className="p-5 flex flex-col">
+                    <LoginForm/>
+                  </div>
+                )}
+                buttonProps={{}}
+                position="right"
+              >
+                Login
+              </Popover>
+            )}
           </div>
         </div>
 

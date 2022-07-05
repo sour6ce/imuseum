@@ -89,9 +89,8 @@ export const Select = <
     }),
     indicatorSeparator: (styles)=>({
       ...styles,
-      color: '#061B30',
-      backgroundColor: '#061B30',
-      opacity: '0.5'
+      color: '#9BBFD1',
+      opacity: '0.5',
     }),
     multiValueLabel: (styles)=>({
       ...styles,
@@ -104,7 +103,7 @@ export const Select = <
     }),
     clearIndicator: (styles)=>({
       ...styles,
-      color: '#061B30',
+      color: '#9BBFD1',
       opacity: '0.5',
       ':hover':{
         opacity: '0.7',

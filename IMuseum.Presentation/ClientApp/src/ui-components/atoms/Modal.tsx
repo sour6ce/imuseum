@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Fragment } from 'react'
 import { Props } from '../../types/Props'
 
+const modalSizes = ['max-w-sm','max-w-md', 'max-w-lg', 'max-w-xl', 'max-w-2xl', 'max-w-3xl']
 
 export interface ModalProps extends Props {
   isOpen?: boolean,
@@ -39,7 +40,7 @@ export const Modal : React.FC<ModalProps>  = (props) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel 
-                className={classNames("w-full transform overflow-hidden rounded-lg bg-gray-700 p-6 text-left align-middle shadow-xl transition-all",{
+                className={classNames("w-full transform rounded-lg bg-gray-700 p-6 text-left align-middle shadow-xl transition-all",{
                   [`max-w-${props.size}`]: props.size,
                   'max-w-md': !props.size,
                 },props.className)}>

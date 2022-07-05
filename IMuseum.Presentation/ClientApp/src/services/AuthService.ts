@@ -3,6 +3,22 @@ import axios, { AxiosError } from 'axios';
 import { User } from "../types/User";
 import { Navigate } from "react-router-dom";
 
+const transformRequestOptions = params => {
+  console.log(params)
+  let options = '';
+  for (const key in params) {
+  if (typeof params[key] !== 'object' && params[key]) {
+    options += `${key}=${params[key]}&`;
+  } else if (typeof params[key] === 'object' && params[key] && params[key].length) {
+      // eslint-disable-next-line no-loop-func
+      params[key].forEach(el => {
+          options += `${key}=${el}&`;
+   });
+  }
+}
+return options ? options.slice(0, -1) : options;
+};
+
 
 export class AuthService{
   static get axios(){
@@ -12,7 +28,8 @@ export class AuthService{
         headers:{
           Authorization: `Basic ${SessionStore.load(SessionKey.EncodedToken)}`,
         }
-      } : null)
+      } : null),
+      paramsSerializer: params => transformRequestOptions(params)
     })
     instance.interceptors.response.use((res)=>res,(err)=>AuthService.refreshInterceptor(err))
     return instance

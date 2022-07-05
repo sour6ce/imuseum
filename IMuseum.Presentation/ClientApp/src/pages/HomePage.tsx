@@ -6,20 +6,25 @@ import { useEffect } from "react"
 import { Popover } from "../ui-components/atoms/Popover"
 import { Button } from "../ui-components/atoms/Button"
 import { LoginForm } from "../ui-components/organisms/LoginForm"
+import { Roles } from "../types/Roles"
+import { Permission } from "../ui-components/atoms/Permission"
 
 
 export const homeLinks = [
   {
     label: 'Home',
-    to: '/home'
+    to: '/home',
+    roles: [Roles.Visiter]
   },
   {
     label: 'Gallery',
-    to: '/gallery'
+    to: '/gallery',
+    roles: [Roles.Visiter]
   },
   {
     label: 'Dashboard',
-    to: '/dashboard'
+    to: '/dashboard',
+    roles: [Roles.Director,Roles.Manager,Roles.Restaurator]
   },
 ]
 
@@ -33,10 +38,14 @@ export const HomePage = () => {
       <div className="flex flex-row justify-end gap-24">
         <div className="flex gap-8">
           {homeLinks.map((l)=>(
-            <NavLink to={l.to} className={({isActive})=>classNames('text-2xl hover:text-primary-lighter uppercase',{
-              'font-black': isActive,
-              'font-semibold': !isActive
-            })}>{l.label}</NavLink>
+            <Permission
+              roles={l.roles}
+            >
+              <NavLink to={l.to} className={({isActive})=>classNames('text-2xl hover:text-primary-lighter uppercase',{
+                'font-black': isActive,
+                'font-semibold': !isActive
+              })}>{l.label}</NavLink>
+            </Permission>
           ))}
         </div>
         <div>

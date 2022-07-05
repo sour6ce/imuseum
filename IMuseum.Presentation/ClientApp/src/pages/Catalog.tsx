@@ -19,7 +19,8 @@ const Catalog =()=>{
     navigate('/home')
   }})
   const {
-    data,handleChangeFilters
+    data,handleChangeFilters,
+    mutate
   } = useArtworksPaginated()
   return(
       <Card className="w-full">
@@ -56,8 +57,10 @@ const Catalog =()=>{
                 link: a.image,
                 period: a.period,
                 status: a.status+"",
-                id: a.id
-              }}/>
+                id: a.id,
+                room: a.room
+              }}
+              mutate={mutate}/>
             </div>
             
           ))}

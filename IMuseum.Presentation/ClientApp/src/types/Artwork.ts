@@ -12,5 +12,6 @@ export interface Artwork{
   "style": string,
   "media": string,
   "material": string,
-  "status": number
+  "status": number,
+  "room": string,
 }

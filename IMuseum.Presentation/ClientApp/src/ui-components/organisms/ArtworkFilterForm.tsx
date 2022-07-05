@@ -23,10 +23,10 @@ export const CatalogForm: React.FC<CatalogFormProps> = (props) => {
     <Form
       methods={methods}
       onSubmit={(data)=>{props.onSubmit({
-        Author: data.Author?.map(a=>a.value),
+        Author: data?.Author?.map(a=>a.value),
         Search: data.Search,
-        Statuses: data.Statuses?.map(s=>s.value),
-        Type: data.Type?.map(t=>t.value),
+        Statuses: data?.Statuses?.map(s=>s.value),
+        Type: data?.Type?.map(t=>t.value),
       })}}
       className="flex flex-col items-center justify-center p-5"
     >
@@ -48,32 +48,59 @@ export const CatalogForm: React.FC<CatalogFormProps> = (props) => {
       </div>
       <div className=' w-full grid grid-cols-1 py-2'>
         <ControlledInput
+          isMulti
+          isClearable
           type='select'
           name='Type'
           placeholder='Type'
           label='Type'
           options={[
             {
-              label: 'Pintura',
+              label: 'Painting',
               value: 'painting'
             },
             {
-              label:'Escultura',
+              label:'Sculpture',
               value:'sculpture'
             },
             {
-              label: 'Otro',
-              
+              label: 'Other',
+              value:'other'
             }
           ]}
           className='w-full'
         />
       </div>
       <div className=' w-full grid grid-cols-1 py-2'>
-        <ControlledInput
-          type='text'
+      <ControlledInput
+          isMulti
+          isClearable
+          type='select'
           name='Statuses'
           placeholder='Statuses'
+          label='Statuses'
+          options={[
+            {
+              label: 'On Loan',
+              value: 'on-loan'
+            },
+            {
+              label:'In Restoration',
+              value:'in-restoration'
+            },
+            {
+              label: "In Storage",
+              value:"in-storage"
+            },
+            {
+              label: "On Display",
+              value:"on-display"
+            },
+            {
+              label: 'Out',
+              value:'out'
+            }
+          ]}
           className='w-full'
         />
       </div>

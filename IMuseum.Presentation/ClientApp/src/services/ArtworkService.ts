@@ -23,8 +23,12 @@ export class ArtworkService{
     })).data
   }
 
-  static async moveToRoom(artworkId: string, roomId: string){
-    return (await ArtworkService.axios.post<never>(`/artworks/${artworkId}/move-to-room`, {roomId})).data
+  static async moveToRoom(artworkId: string, roomId: number){
+    return (await ArtworkService.axios.post<never>(`/artworks/${artworkId}/move-to-room`,{}, {
+      params:{
+      room:roomId
+      }
+    })).data
   }
 
   static async moveToStorage(artworkId: string){

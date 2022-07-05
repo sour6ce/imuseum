@@ -1,15 +1,15 @@
 import { Colors } from "./constants";
 export const selectStatusColor = (status: string): Colors => {
   switch (status) {
-    case "exposed":
+    case "on-display":
       return "success";
     case "available":
       return "success-dark";
     case "unavailable":
       return "warn-accent";
-    case "restoring":
+    case "in-restoration":
       return "warn-accent";
-    case "loan":
+    case "on-loan":
       return "info";
     case "canceled":
       return "danger"

@@ -4,9 +4,9 @@ import * as yup from 'yup'
 import { SelectOption } from '../../types/SelectOption'
 
 const schema = yup.object({
-  Author: yup.mixed<SelectOption<string>[]>().required(),
-  Type: yup.mixed<SelectOption<string>[]>().required(),
-  Statuses: yup.mixed<SelectOption<string>[]>().required(),
+  Author: yup.mixed<SelectOption<string>[]>(),
+  Type: yup.mixed<SelectOption<string>[]>(),
+  Statuses: yup.mixed<SelectOption<string>[]>(),
   Search: yup.string()
 }).required()
 

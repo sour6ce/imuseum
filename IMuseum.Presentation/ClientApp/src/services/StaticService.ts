@@ -25,8 +25,12 @@ export class StaticService{
     return ( await StaticService.axios.get<{museums:Museum[],count:number}>('/museums')).data
   }
 
-  static async getRooms(){
-    return ( await StaticService.axios.get<{rooms:Room[],count:number}>('/rooms')).data
+  static async getRooms(params?:{search?:string}){
+    return ( await StaticService.axios.get<{rooms:Room[],count:number}>('/rooms',{
+      params:{
+        ...params
+      }
+    })).data?.rooms
   }
 
   static async getTotals(){

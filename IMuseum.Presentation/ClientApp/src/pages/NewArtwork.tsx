@@ -36,7 +36,8 @@ export const NewArtwork = ()=>{
         onSubmit={data=>{
           ArtworkService.createArtwork({
             ...data,
-            author: data.author.value,
+            author: data.author?.value,
+            type: data.type?.value
           })
         }}
         className=" gap-3 grid grid-cols-2"
@@ -89,10 +90,25 @@ export const NewArtwork = ()=>{
           label="assessment"
         />
         <ControlledInput
-          name="type"
-          type="text"
-          placeholder="type"
-          label="type"
+          type='select'
+          name='type'
+          placeholder='Type'
+          label='Type'
+          options={[
+            {
+              label: 'Painting',
+              value: 'painting'
+            },
+            {
+              label:'Sculpture',
+              value:'sculpture'
+            },
+            {
+              label: 'Other',
+              value:'other'
+            }
+          ]}
+          className='w-full'
         />
         <ControlledInput
           name="image"
